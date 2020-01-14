@@ -22,6 +22,9 @@ public class Pila<E>
     public E push(E element)
     {
 
+        if (isFull())
+            throw new PilaLLenaException();
+
         top = element;
         elementos[size++] = element;
 
@@ -50,6 +53,16 @@ public class Pila<E>
 
     }
 
+    public E top()
+    {
+
+        if (estaVacia())
+            throw new PilaVaciaException();
+
+        return top;
+
+    }
+
     public int size()
     {
         return size;
@@ -58,6 +71,11 @@ public class Pila<E>
     public boolean estaVacia()
     {
         return top == null;
+    }
+
+    public boolean isFull()
+    {
+        return size == elementos.length;
     }
 
     @Override
