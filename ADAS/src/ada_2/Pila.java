@@ -53,16 +53,6 @@ public class Pila<E>
 
     }
 
-    public E top()
-    {
-
-        if (estaVacia())
-            throw new PilaVaciaException();
-
-        return top;
-
-    }
-
     public int size()
     {
         return size;
