@@ -10,23 +10,50 @@ public class PruebaPila
     public static void main(String[] args)
     {
 
-        Pila<String> pila = new Pila<>(10);
+        try
+        {
 
-        pila.push("Javier");
+            System.out.println(new PruebaPila().estaBalanceado(""));
 
-        System.out.println(pila);
+        } catch (ExpresionNoEvaluableException ex)
+        {
+            System.out.println(ex.getMessage());;
+        }
 
-        pila.push("Nicolás");
+    }
 
-        System.out.println(pila);
+    public boolean estaBalanceado(String cadena)
+    {
 
-        System.out.println(pila.pop());
+        int contador = 0;
+        String[] parentesis = cadena.split("");
 
-        System.out.println(pila.peek());
+        if (parentesis.length > 10)
+            throw new ExpresionNoEvaluableException();
 
-        pila.pop();
+        Pila<String> pila = new Pila(cadena.length());
 
-        System.out.println(pila);
+        while (contador < parentesis.length)
+        {
+
+            try
+            {
+
+                if (parentesis[contador].equals("("))
+                    pila.push("(");
+                else if (parentesis[contador].equals(")"))
+                    pila.pop();
+
+            } catch (PilaVaciaException ex)
+            {
+                return false;
+            }
+
+            contador++;
+
+        }
+
+        return pila.isEmpty();
 
     }
 

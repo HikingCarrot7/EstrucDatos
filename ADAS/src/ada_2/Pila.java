@@ -35,7 +35,7 @@ public class Pila<E>
     public E pop()
     {
 
-        if (estaVacia())
+        if (isEmpty())
             throw new PilaVaciaException();
 
         E element = elementos[--size];
@@ -49,7 +49,7 @@ public class Pila<E>
     public E peek()
     {
 
-        if (estaVacia())
+        if (isEmpty())
             throw new PilaVaciaException();
 
         return top;
@@ -61,7 +61,7 @@ public class Pila<E>
         return size;
     }
 
-    public boolean estaVacia()
+    public boolean isEmpty()
     {
         return top == null;
     }
