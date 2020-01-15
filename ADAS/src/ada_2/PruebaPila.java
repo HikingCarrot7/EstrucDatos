@@ -13,7 +13,7 @@ public class PruebaPila
         try
         {
 
-            System.out.println(new PruebaPila().estaBalanceado("()"));
+            System.out.println(new PruebaPila().estaBalanceado("()()()"));
 
         } catch (ExpresionNoEvaluableException ex)
         {
@@ -25,19 +25,17 @@ public class PruebaPila
     public boolean estaBalanceado(String cadena)
     {
 
-        int contador = 0;
         String[] signos = cadena.split("");
         Pila<String> pila = new Pila();
 
-        while (contador < signos.length)
-        {
-
+        for (String signo : signos)
             try
             {
 
-                if (signos[contador].equals("("))
+                if (signo.equals("("))
                     pila.push("(");
-                else if (signos[contador].equals(")"))
+
+                else if (signo.equals(")"))
                     pila.pop();
 
             } catch (PilaVaciaException ex)
@@ -48,10 +46,6 @@ public class PruebaPila
             {
                 throw new ExpresionNoEvaluableException();
             }
-
-            contador++;
-
-        }
 
         return pila.isEmpty();
 
