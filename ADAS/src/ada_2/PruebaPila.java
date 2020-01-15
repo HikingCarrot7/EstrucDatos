@@ -13,16 +13,18 @@ public class PruebaPila
         Pila<String> pila = new Pila<>(10);
 
         pila.push("Javier");
-        pila.push("Nicolás");
-        pila.push("Nicolás");
-        pila.push("Nicolás");
-        pila.push("Nicolás");
-        pila.push("Nicolás");
-        pila.push("Guillermo");
-        pila.push("Guillermo");
-        pila.push("Guillermo");
 
         System.out.println(pila);
+
+        pila.push("Nicolás");
+
+        System.out.println(pila);
+
+        System.out.println(pila.pop());
+
+        System.out.println(pila.peek());
+
+        pila.pop();
 
         System.out.println(pila);
 

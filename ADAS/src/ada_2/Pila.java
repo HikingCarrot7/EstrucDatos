@@ -35,8 +35,11 @@ public class Pila<E>
     public E pop()
     {
 
-        E element = elementos[size - 1];
-        top = elementos[--size];
+        if (estaVacia())
+            throw new PilaVaciaException();
+
+        E element = elementos[--size];
+        top = size == 0 ? null : elementos[size - 1];
         elementos[size] = null;
 
         return element;
