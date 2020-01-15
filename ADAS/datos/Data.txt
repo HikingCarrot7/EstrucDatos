@@ -1,0 +1,59 @@
+package ada_2;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+
+/**
+ *
+ * @author HikingCarrot7
+ */
+public class Data
+{
+
+    public static final String RUTA_FICHERO = "datos\\Fichero.java";
+    private File file;
+
+    public Data() throws FileNotFoundException
+    {
+
+        file = new File(RUTA_FICHERO);
+
+        if (!file.exists())
+            throw new FileNotFoundException("No se puede encontrar el archivo.");
+
+    }
+
+    public boolean llavesValidas()
+    {
+
+        Pila pila = new Pila(50);
+
+        try (Scanner in = new Scanner(file))
+        {
+
+            while (in.hasNext())
+            {
+
+                Object[] caracteres = Arrays.asList(in.nextLine().split(""))
+                        .stream()
+                        .filter(x -> !x.equals(" "))
+                        .collect(Collectors.toList())
+                        .toArray();
+
+                System.out.println(Arrays.toString(caracteres));
+
+            }
+
+        } catch (FileNotFoundException ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+
+        return pila.isEmpty();
+
+    }
+
+}

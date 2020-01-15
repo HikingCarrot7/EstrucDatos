@@ -1,5 +1,7 @@
 package ada_2;
 
+import java.io.FileNotFoundException;
+
 /**
  *
  * @author A15001169
@@ -15,7 +17,10 @@ public class PruebaPila
 
             System.out.println(new PruebaPila().estaBalanceado("()()()"));
 
-        } catch (ExpresionNoEvaluableException ex)
+            System.out.println(new Fichero().llavesValidas());
+            new Fichero().contarPalabras();
+
+        } catch (ExpresionNoEvaluableException | FileNotFoundException ex)
         {
             System.out.println(ex.getMessage());
         }
