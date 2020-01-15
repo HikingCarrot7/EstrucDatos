@@ -13,11 +13,11 @@ public class PruebaPila
         try
         {
 
-            System.out.println(new PruebaPila().estaBalanceado(""));
+            System.out.println(new PruebaPila().estaBalanceado("((((((((((((()"));
 
         } catch (ExpresionNoEvaluableException ex)
         {
-            System.out.println(ex.getMessage());;
+            System.out.println(ex.getMessage());
         }
 
     }
@@ -26,22 +26,22 @@ public class PruebaPila
     {
 
         int contador = 0;
-        String[] parentesis = cadena.split("");
+        String[] signos = cadena.split("");
 
-        if (parentesis.length > 10)
+        if (!expresionValida(signos))
             throw new ExpresionNoEvaluableException();
 
         Pila<String> pila = new Pila(cadena.length());
 
-        while (contador < parentesis.length)
+        while (contador < signos.length)
         {
 
             try
             {
 
-                if (parentesis[contador].equals("("))
+                if (signos[contador].equals("("))
                     pila.push("(");
-                else if (parentesis[contador].equals(")"))
+                else if (signos[contador].equals(")"))
                     pila.pop();
 
             } catch (PilaVaciaException ex)
@@ -54,6 +54,31 @@ public class PruebaPila
         }
 
         return pila.isEmpty();
+
+    }
+
+    private boolean expresionValida(String[] parentesis)
+    {
+
+        if (parentesis[0].equals(")"))
+            throw new PilaVaciaException();
+
+        int contador = 0;
+
+        for (String signo : parentesis)
+            if (signo.equals("("))
+                contador++;
+            else if (signo.equals(")"))
+            {
+
+                if (contador > 10)
+                    return false;
+
+                contador = 0;
+
+            }
+
+        return true;
 
     }
 
