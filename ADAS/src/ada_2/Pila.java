@@ -19,6 +19,11 @@ public class Pila<E>
         elementos = (E[]) new Object[elementosMaximos];
     }
 
+    public Pila()
+    {
+        elementos = (E[]) new Object[10];
+    }
+
     public E push(E element)
     {
 
