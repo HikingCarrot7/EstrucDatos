@@ -84,7 +84,8 @@ public class Fichero
             palabras.entrySet()
                     .stream()
                     .collect(Collectors.groupingBy(entry -> entry.getKey().equals("") ? ' ' : entry.getKey().charAt(0), TreeMap::new, Collectors.toList()))
-                    .forEach((letter, words) ->
+                    .forEach((letter, words)
+                            ->
                     {
                         System.out.printf("%n%C%n", letter);
                         words.forEach(palabra -> System.out.printf("%13s: %d%n", palabra.getKey(), palabra.getValue()));

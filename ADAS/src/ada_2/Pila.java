@@ -28,7 +28,7 @@ public class Pila<E>
     {
 
         if (isFull())
-            throw new PilaLLenaException();
+            throw new PilaLlenaException();
 
         top = element;
         elementos[size++] = element;

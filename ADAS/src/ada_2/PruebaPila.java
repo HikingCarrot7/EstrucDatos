@@ -1,6 +1,6 @@
 package ada_2;
 
-import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 /**
  *
@@ -12,15 +12,14 @@ public class PruebaPila
     public static void main(String[] args)
     {
 
+        String expresion = new Scanner(System.in).nextLine();
+
         try
         {
 
-            System.out.println(new PruebaPila().estaBalanceado("()()()"));
+            System.out.println("La expresión" + (new PruebaPila().estaBalanceado(expresion) ? "" : " no") + " está balanceada.");
 
-            System.out.println(new Fichero().llavesValidas());
-            new Fichero().contarPalabras();
-
-        } catch (ExpresionNoEvaluableException | FileNotFoundException ex)
+        } catch (ExpresionNoEvaluableException ex)
         {
             System.out.println(ex.getMessage());
         }
@@ -47,7 +46,7 @@ public class PruebaPila
             {
                 return false;
 
-            } catch (PilaLLenaException ex)
+            } catch (PilaLlenaException ex)
             {
                 throw new ExpresionNoEvaluableException();
             }

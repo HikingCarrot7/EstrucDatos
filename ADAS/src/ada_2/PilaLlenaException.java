@@ -4,10 +4,10 @@ package ada_2;
  *
  * @author A15001169
  */
-public class PilaLLenaException extends RuntimeException
+public class PilaLlenaException extends RuntimeException
 {
 
-    public PilaLLenaException()
+    public PilaLlenaException()
     {
         super("La pila está llena.");
     }
