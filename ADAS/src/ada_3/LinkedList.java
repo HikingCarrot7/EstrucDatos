@@ -63,7 +63,7 @@ public class LinkedList<E>
     public String toString()
     {
 
-        if (first == null)
+        if (isEmpty())
             return "La lista está vacía.";
 
         ListNode<E> nodo = first;
