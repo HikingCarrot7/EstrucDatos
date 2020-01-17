@@ -14,15 +14,15 @@ public class PruebaLinkedList
 
         System.out.println(lista);
 
-        lista.insertarInicio(5);
+        lista.insertarAlInicio(5);
 
         System.out.println(lista);
 
-        lista.insertarInicio(10);
+        lista.insertarAlInicio(10);
 
         System.out.println(lista);
 
-        lista.insertarInicio(15);
+        lista.insertarAlInicio(15);
 
         System.out.println(lista);
 
@@ -30,7 +30,7 @@ public class PruebaLinkedList
 
         System.out.println(lista);
 
-        lista.insertarInicio(30);
+        lista.insertarAlInicio(30);
 
         System.out.println(lista);
 

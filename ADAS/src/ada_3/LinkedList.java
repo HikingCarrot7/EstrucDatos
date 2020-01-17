@@ -17,7 +17,7 @@ public class LinkedList<E>
         first = null;
     }
 
-    public void insertarInicio(E elemento)
+    public void insertarAlInicio(E elemento)
     {
 
         if (isEmpty())
@@ -54,11 +54,6 @@ public class LinkedList<E>
 
     }
 
-    public boolean isEmpty()
-    {
-        return first == null;
-    }
-
     @Override
     public String toString()
     {
@@ -77,6 +72,11 @@ public class LinkedList<E>
 
         return result;
 
+    }
+
+    public boolean isEmpty()
+    {
+        return first == null;
     }
 
     public int size()

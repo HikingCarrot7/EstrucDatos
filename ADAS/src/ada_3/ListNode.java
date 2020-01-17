@@ -3,6 +3,7 @@ package ada_3;
 /**
  *
  * @author A15001169
+ * @param <E>
  */
 public class ListNode<E>
 {
