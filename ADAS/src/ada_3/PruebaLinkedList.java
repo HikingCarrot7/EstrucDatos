@@ -30,6 +30,10 @@ public class PruebaLinkedList
 
         System.out.println(lista);
 
+        lista.insertarInicio(30);
+
+        System.out.println(lista);
+
     }
 
 }

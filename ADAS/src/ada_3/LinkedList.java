@@ -62,12 +62,12 @@ public class LinkedList<E>
     @Override
     public String toString()
     {
-        ListNode<E> nodo = first;
 
-        if (nodo == null)
+        if (first == null)
             return "La lista está vacía.";
 
-        String result = first.getDato().toString();
+        ListNode<E> nodo = first;
+        String result = nodo.getDato().toString();
 
         while (nodo.getNext() != null)
         {
