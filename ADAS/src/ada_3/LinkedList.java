@@ -1,9 +1,8 @@
 package ada_3;
 
 /**
- *
- * @author A15001169
  * @param <E>
+ * @author A15001169
  */
 public class LinkedList<E>
 {
@@ -17,47 +16,64 @@ public class LinkedList<E>
         first = null;
     }
 
-    public void insertarAlInicio(E elemento)
+    public E insertarAlInicio(E elemento)
     {
-
         if (isEmpty())
             first = new ListNode<>(elemento);
-
         else
-        {
-            ListNode<E> nuevoNodo = new ListNode<>(elemento, first);
-            first = nuevoNodo;
-        }
+            first = new ListNode<>(elemento, first);
 
         size++;
-
+        return elemento;
     }
 
-    public void insertarAlFinal(E elemento)
+    public E insertarAlFinal(E elemento)
     {
-
         if (isEmpty())
             first = new ListNode<>(elemento);
 
         else
-        {
-
-            ListNode<E> nodo = first;
-
-            while (nodo.getNext() != null)
-                nodo = nodo.getNext();
-
-            nodo.setNext(new ListNode<>(elemento));
-        }
+            getLastNode().setNext(new ListNode<>(elemento));
 
         size++;
+        return elemento;
+    }
 
+    public E removeFirst()
+    {
+        if (isEmpty())
+            return null;
+
+        E element = first.getDato();
+        first = first.getNext();
+
+        size--;
+        return element;
+    }
+
+    public E removeLast()
+    {
+        if (isEmpty())
+            return null;
+
+        E element = getLastNode().getDato();
+        ListNode<E> node = first;
+
+        for (int i = 0; i < size - 2; i++)
+            node = node.getNext();
+
+        if (node.getNext() != null)
+            node.setNext(null);
+        else
+            first = null;
+
+        size--;
+        return element;
     }
 
     @Override
     public String toString()
     {
-
         if (isEmpty())
             return "La lista está vacía.";
 
@@ -71,7 +87,16 @@ public class LinkedList<E>
         }
 
         return result;
+    }
 
+    private ListNode<E> getLastNode()
+    {
+        ListNode<E> nodo = first;
+
+        while (nodo.getNext() != null)
+            nodo = nodo.getNext();
+
+        return nodo;
     }
 
     public boolean isEmpty()

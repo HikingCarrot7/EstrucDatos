@@ -77,15 +77,15 @@ public class Fichero
         {
 
             Map<String, Long> palabras = Files.lines(Paths.get(RUTA_FICHERO))
-                    .flatMap(line -> Arrays.asList(line.split("[((.)+)|\\s+]")).stream())
+                    .map(line -> line.split("[((.)+)|\\s+]"))
+                    .flatMap(Arrays::stream)
                     .filter(x -> !x.equals(" "))
                     .collect(Collectors.groupingBy(String::toLowerCase, TreeMap::new, Collectors.counting()));
 
             palabras.entrySet()
                     .stream()
                     .collect(Collectors.groupingBy(entry -> entry.getKey().equals("") ? ' ' : entry.getKey().charAt(0), TreeMap::new, Collectors.toList()))
-                    .forEach((letter, words)
-                            ->
+                    .forEach((letter, words) ->
                     {
                         System.out.printf("%n%C%n", letter);
                         words.forEach(palabra -> System.out.printf("%13s: %d%n", palabra.getKey(), palabra.getValue()));
