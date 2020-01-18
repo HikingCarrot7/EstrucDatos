@@ -1,4 +1,4 @@
-package ejercicios;
+package doublylinkedlist;
 
 public class PruebaDoublyLinkedList
 {

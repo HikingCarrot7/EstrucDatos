@@ -12,7 +12,8 @@ public class PruebaPila
     public static void main(String[] args)
     {
 
-        String expresion = new Scanner(System.in).nextLine();
+        @SuppressWarnings("resource")
+		String expresion = new Scanner(System.in).nextLine();
 
         try
         {
@@ -30,7 +31,7 @@ public class PruebaPila
     {
 
         String[] signos = cadena.split("");
-        Pila<String> pila = new Pila();
+        Pila<String> pila = new Pila<>();
 
         for (String signo : signos)
             try

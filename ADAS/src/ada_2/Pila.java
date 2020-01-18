@@ -3,9 +3,8 @@ package ada_2;
 import java.util.Arrays;
 
 /**
- *
- * @author A15001169
  * @param <E>
+ * @author A15001169
  */
 public class Pila<E>
 {
@@ -13,13 +12,16 @@ public class Pila<E>
     private E top;
     private int size;
     private E[] elementos;
-
+    
+    @SuppressWarnings("unchecked")
     public Pila(int elementosMaximos)
     {
         elementos = (E[]) new Object[elementosMaximos];
     }
 
-    public Pila()
+
+    @SuppressWarnings("unchecked")
+	public Pila()
     {
         elementos = (E[]) new Object[10];
     }

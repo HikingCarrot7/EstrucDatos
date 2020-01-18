@@ -38,7 +38,7 @@ public class Fichero
     public boolean llavesValidas()
     {
 
-        Pila<String> pila = new Pila(50);
+        Pila<String> pila = new Pila<>(50);
 
         try (Scanner in = new Scanner(file))
         {

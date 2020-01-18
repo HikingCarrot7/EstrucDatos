@@ -1,4 +1,4 @@
-package ejercicios;
+package doublylinkedlist;
 
 public class DoublyLinkedList<E>
 {
@@ -18,15 +18,13 @@ public class DoublyLinkedList<E>
 
         else
         {
-            DoublyLinkedNode<E> nodo = getLast();
-
+            DoublyLinkedNode<E> nodo = getLastNode();
             DoublyLinkedNode<E> nuevoNodo = new DoublyLinkedNode<>(element);
             nodo.setNext(nuevoNodo);
             nuevoNodo.setPrev(nodo);
         }
 
         size++;
-
         return element;
     }
 
@@ -43,7 +41,6 @@ public class DoublyLinkedList<E>
         }
 
         size++;
-
         return element;
     }
 
@@ -67,7 +64,7 @@ public class DoublyLinkedList<E>
         if (isEmpty())
             return null;
 
-        DoublyLinkedNode<E> lastNode = getLast();
+        DoublyLinkedNode<E> lastNode = getLastNode();
         E element = lastNode.getDato();
 
         if (lastNode.getPrev() != null)
@@ -102,7 +99,7 @@ public class DoublyLinkedList<E>
         if (isEmpty())
             return "La lista está vacía.";
 
-        DoublyLinkedNode<E> nodo = getLast();
+        DoublyLinkedNode<E> nodo = getLastNode();
         String result = nodo.getDato().toString();
 
         while (nodo.getPrev() != null)
@@ -114,7 +111,7 @@ public class DoublyLinkedList<E>
         return result;
     }
 
-    private DoublyLinkedNode<E> getLast()
+    private DoublyLinkedNode<E> getLastNode()
     {
         if (isEmpty())
             return null;
