@@ -1,5 +1,7 @@
 package queue;
 
+import java.util.Arrays;
+
 public class ArrayQueue<E> implements Queue<E>
 {
 
@@ -12,6 +14,7 @@ public class ArrayQueue<E> implements Queue<E>
     {
         elements = (E[]) new Object[10];
         size = 0;
+        front = 0;
     }
 
     @SuppressWarnings("unchecked")
@@ -19,18 +22,30 @@ public class ArrayQueue<E> implements Queue<E>
     {
         elements = (E[]) new Object[elementosMaximos];
         size = 0;
+        front = 0;
     }
 
     @Override
     public E enqueue(E element)
     {
-        return null;
+        if (isFull())
+            return null;
+
+        elements[(front + size++) % elements.length] = element;
+        return element;
     }
 
     @Override
     public E dequeue()
     {
-        return null;
+        if (isEmpty())
+            return null;
+
+        E element = elements[front];
+        elements[front] = null;
+        front = (front + 1) % elements.length;
+        size--;
+        return element;
     }
 
     @Override
@@ -45,10 +60,21 @@ public class ArrayQueue<E> implements Queue<E>
         return size == 0;
     }
 
+    public boolean isFull()
+    {
+        return size == elements.length;
+    }
+
     @Override
     public int size()
     {
         return size;
+    }
+
+    @Override
+    public String toString()
+    {
+        return Arrays.asList(elements).toString();
     }
 
 }
