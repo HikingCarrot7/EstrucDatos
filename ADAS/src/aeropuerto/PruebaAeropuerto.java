@@ -1,22 +1,20 @@
 package aeropuerto;
 
+import java.awt.EventQueue;
+
 public class PruebaAeropuerto
 {
+
     public static void main(String[] args)
     {
-        Aeropuerto aeropuerto = new Aeropuerto();
-
-        aeropuerto.generarVuelos(20);
-
-        aeropuerto.imprimirColaVuelos();
-
-        aeropuerto.eliminarVueloAt(0);
-
-        aeropuerto.imprimirColaVuelos();
-
-        aeropuerto.eliminarSiguienteVuelo();
-
-        aeropuerto.imprimirColaVuelos();
+        EventQueue.invokeLater(() ->
+        {
+            Vista vista = new Vista();
+            vista.setLocationRelativeTo(null);
+            vista.setVisible(true);
+            new Controlador(vista);
+        });
 
     }
+
 }

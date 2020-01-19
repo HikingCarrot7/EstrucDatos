@@ -1,10 +1,12 @@
 package aeropuerto;
 
+import deque.DequeEmptyException;
 import deque.DequeList;
 import dequestack.DequeStack;
 
 public class Aeropuerto
 {
+
     private DequeList<Vuelo> vuelos;
 
     public Aeropuerto()
@@ -50,7 +52,7 @@ public class Aeropuerto
 
     }
 
-    public void eliminarVueloAt(int index)
+    public void eliminarVueloAt(int index) throws DequeEmptyException
     {
 
         DequeStack<Vuelo> pilaTemporal = new DequeStack<>();
@@ -68,18 +70,18 @@ public class Aeropuerto
                 vuelos.insertFirst(pilaTemporal.pop());
 
         } else
-            System.out.println("El vuelo no es válido o no hay vuelos disponibles.");
+            throw new DequeEmptyException("El vuelo no es válido o no hay vuelos disponibles.");
 
     }
 
-    public Vuelo eliminarSiguienteVuelo()
+    public Vuelo eliminarSiguienteVuelo() throws DequeEmptyException
     {
         Vuelo siguienteVuelo = null;
 
         if (existenVuelosEnCola())
             siguienteVuelo = vuelos.removeFirst();
         else
-            System.out.println("No hay más vuelos.");
+            throw new DequeEmptyException("No hay más vuelos.");
 
         return siguienteVuelo;
     }
@@ -95,17 +97,7 @@ public class Aeropuerto
         return false;
     }
 
-    public boolean existenVuelosEnCola()
-    {
-        return vuelos.size() > 0;
-    }
-
-    public boolean esVueloValido(int index)
-    {
-        return index >= 0 && index < vuelos.size();
-    }
-
-    private DequeList<Vuelo> obtenerCopiaVuelos()
+    public DequeList<Vuelo> obtenerCopiaVuelos()
     {
         int numeroVuelos = vuelos.size();
         DequeStack<Vuelo> pilaTemporal = new DequeStack<>();
@@ -122,7 +114,21 @@ public class Aeropuerto
         }
 
         return copiaDeLosVuelos;
+    }
 
+    public boolean existenVuelosEnCola()
+    {
+        return vuelos.size() > 0;
+    }
+
+    public boolean esVueloValido(int index)
+    {
+        return index >= 0 && index < vuelos.size();
+    }
+
+    public int vuelosDisponibles()
+    {
+        return vuelos.size();
     }
 
 }
