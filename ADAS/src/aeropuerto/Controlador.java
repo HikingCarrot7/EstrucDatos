@@ -14,10 +14,10 @@ import javax.swing.*;
 public class Controlador implements ActionListener
 {
 
-    private Vista vista;
+    private Interfaz vista;
     private Aeropuerto aeropuerto;
 
-    public Controlador(Vista vista)
+    public Controlador(Interfaz vista)
     {
         this.vista = vista;
         aeropuerto = new Aeropuerto();
@@ -58,7 +58,7 @@ public class Controlador implements ActionListener
                 case "eliminarUnVuelo":
                     int indiceVuelo = pedirEntrada("Índice del vuelo:", "^[0-9]+$") - 1;
 
-                    if (indiceVuelo < 0 || indiceVuelo > aeropuerto.vuelosDisponibles())
+                    if (!aeropuerto.esVueloValido(indiceVuelo))
                         throw new InputMismatchException("No existe tal vuelo.");
 
                     aeropuerto.eliminarVueloAt(indiceVuelo);

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package aeropuerto;
 
 import javax.swing.JButton;
@@ -13,13 +8,10 @@ import javax.swing.JInternalFrame;
  *
  * @author HikingCarrot7
  */
-public class Vista extends javax.swing.JFrame
+public class Interfaz extends javax.swing.JFrame
 {
 
-    /**
-     * Creates new form Vista2
-     */
-    public Vista()
+    public Interfaz()
     {
         initWindow();
         initComponents();
@@ -81,7 +73,6 @@ public class Vista extends javax.swing.JFrame
         panel.setMaximumSize(new java.awt.Dimension(545, 545));
         panel.setMinimumSize(new java.awt.Dimension(545, 545));
         panel.setPreferredSize(new java.awt.Dimension(545, 545));
-        panel.setRequestFocusEnabled(false);
 
         panelEsquema.setTitle("Representación de los vuelos.");
         panelEsquema.setToolTipText("");
