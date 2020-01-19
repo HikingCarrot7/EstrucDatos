@@ -10,11 +10,9 @@ public class DequeList<E> implements Deque<E>
     public E insertFirst(E element)
     {
         if (isEmpty())
-        {
             first = last = new DequeListNode<>(element);
-            last.setPrev(first);
 
-        } else
+        else
         {
             DequeListNode<E> firstNode = new DequeListNode<>(element, first);
             first.setPrev(firstNode);
@@ -29,11 +27,9 @@ public class DequeList<E> implements Deque<E>
     public E insertLast(E element)
     {
         if (isEmpty())
-        {
             first = last = new DequeListNode<>(element);
-            last.setPrev(first);
 
-        } else
+        else
         {
             DequeListNode<E> lastNode = new DequeListNode<>(element);
             last.setNext(lastNode);
@@ -54,12 +50,9 @@ public class DequeList<E> implements Deque<E>
         E element = first.getElement();
         first = first.getNext();
 
-        if (isEmpty())
-        {
-            first = null;
+        if (first == null)
             last = null;
-
-        } else
+        else
             first.setPrev(null);
 
         size--;
@@ -75,12 +68,9 @@ public class DequeList<E> implements Deque<E>
         E element = last.getElement();
         last = last.getPrev();
 
-        if (size == 1)
-        {
+        if (last == null)
             first = null;
-            last = null;
-
-        } else
+        else
             last.setNext(null);
 
         size--;
@@ -91,7 +81,7 @@ public class DequeList<E> implements Deque<E>
     public String toString()
     {
         if (isEmpty())
-            return "La lista está vacía.";
+            return "La cola está vacía.";
 
         DequeListNode<E> nodo = first;
         String result = nodo.getElement().toString();
@@ -108,7 +98,7 @@ public class DequeList<E> implements Deque<E>
     public String reversed()
     {
         if (isEmpty())
-            return "La lista está vacía.";
+            return "La cola está vacía.";
 
         if (size == 1)
             return first.getElement().toString();
@@ -120,10 +110,6 @@ public class DequeList<E> implements Deque<E>
         {
             nodo = nodo.getPrev();
             result += " <- " + nodo.getElement().toString();
-
-            if (nodo == first)
-                break;
-
         }
 
         return result;
@@ -132,12 +118,18 @@ public class DequeList<E> implements Deque<E>
     @Override
     public E first() throws DequeEmptyException
     {
+        if (isEmpty())
+            throw new DequeEmptyException();
+
         return first.getElement();
     }
 
     @Override
     public E last() throws DequeEmptyException
     {
+        if (isEmpty())
+            throw new DequeEmptyException();
+
         return last.getElement();
     }
 
