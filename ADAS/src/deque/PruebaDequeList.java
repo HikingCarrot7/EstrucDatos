@@ -7,7 +7,8 @@ public class PruebaDequeList
         DequeList<String> lista = new DequeList<>();
 
         lista.insertFirst("Javier");
-        lista.removeLast();
+        lista.insertLast("Nicolás");
+        lista.removeFirst();
 
         System.out.println(lista.reversed());
 

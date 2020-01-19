@@ -12,7 +12,6 @@ import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 /**
- *
  * @author HikingCarrot7
  */
 public class Fichero
@@ -32,13 +31,12 @@ public class Fichero
     }
 
     /**
-     *
      * @return Ajax no lo veas ploxx xxdjsjsjssjs
      */
     public boolean llavesValidas()
     {
 
-        Pila<String> pila = new Pila<>(50);
+        ArrayStack<String> pila = new ArrayStack<>(50);
 
         try (Scanner in = new Scanner(file))
         {

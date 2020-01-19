@@ -100,9 +100,6 @@ public class DequeList<E> implements Deque<E>
         if (isEmpty())
             return "La cola está vacía.";
 
-        if (size == 1)
-            return first.getElement().toString();
-
         DequeListNode<E> nodo = last;
         String result = nodo.getElement().toString();
 

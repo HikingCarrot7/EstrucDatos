@@ -6,26 +6,26 @@ import java.util.Arrays;
  * @param <E>
  * @author A15001169
  */
-public class Pila<E>
+public class ArrayStack<E> implements Stack<E>
 {
 
     private E top;
     private int size;
     private E[] elementos;
-    
+
     @SuppressWarnings("unchecked")
-    public Pila(int elementosMaximos)
+    public ArrayStack(int elementosMaximos)
     {
         elementos = (E[]) new Object[elementosMaximos];
     }
 
-
     @SuppressWarnings("unchecked")
-	public Pila()
+    public ArrayStack()
     {
         elementos = (E[]) new Object[10];
     }
 
+    @Override
     public E push(E element)
     {
 
@@ -39,6 +39,7 @@ public class Pila<E>
 
     }
 
+    @Override
     public E pop()
     {
 
@@ -53,6 +54,7 @@ public class Pila<E>
 
     }
 
+    @Override
     public E peek()
     {
 
@@ -63,11 +65,13 @@ public class Pila<E>
 
     }
 
+    @Override
     public int size()
     {
         return size;
     }
 
+    @Override
     public boolean isEmpty()
     {
         return top == null;

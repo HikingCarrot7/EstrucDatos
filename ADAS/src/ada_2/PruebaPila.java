@@ -3,7 +3,6 @@ package ada_2;
 import java.util.Scanner;
 
 /**
- *
  * @author A15001169
  */
 public class PruebaPila
@@ -13,7 +12,7 @@ public class PruebaPila
     {
 
         @SuppressWarnings("resource")
-		String expresion = new Scanner(System.in).nextLine();
+        String expresion = new Scanner(System.in).nextLine();
 
         try
         {
@@ -31,7 +30,7 @@ public class PruebaPila
     {
 
         String[] signos = cadena.split("");
-        Pila<String> pila = new Pila<>();
+        ArrayStack<String> pila = new ArrayStack<>();
 
         for (String signo : signos)
             try
