@@ -60,6 +60,8 @@ public class Vista extends javax.swing.JFrame
         siguienteVuelo = new javax.swing.JButton();
         panel = new javax.swing.JDesktopPane();
         panelEsquema = new javax.swing.JInternalFrame();
+        generarVuelos = new javax.swing.JButton();
+        eliminarUnVuelo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(700, 600));
@@ -73,20 +75,21 @@ public class Vista extends javax.swing.JFrame
         siguienteVuelo.setMaximumSize(new java.awt.Dimension(120, 30));
         siguienteVuelo.setMinimumSize(new java.awt.Dimension(120, 30));
         siguienteVuelo.setPreferredSize(new java.awt.Dimension(120, 30));
-        getContentPane().add(siguienteVuelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 10, -1, -1));
+        getContentPane().add(siguienteVuelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 50, -1, -1));
 
         panel.setEnabled(false);
-        panel.setMaximumSize(new java.awt.Dimension(550, 550));
-        panel.setMinimumSize(new java.awt.Dimension(550, 550));
-        panel.setPreferredSize(new java.awt.Dimension(550, 550));
+        panel.setMaximumSize(new java.awt.Dimension(545, 545));
+        panel.setMinimumSize(new java.awt.Dimension(545, 545));
+        panel.setPreferredSize(new java.awt.Dimension(545, 545));
+        panel.setRequestFocusEnabled(false);
 
         panelEsquema.setTitle("Representación de los vuelos.");
         panelEsquema.setToolTipText("");
         panelEsquema.setEnabled(false);
-        panelEsquema.setMaximumSize(new java.awt.Dimension(550, 550));
-        panelEsquema.setMinimumSize(new java.awt.Dimension(550, 550));
-        panelEsquema.setNormalBounds(new java.awt.Rectangle(550, 550, 550, 550));
-        panelEsquema.setPreferredSize(new java.awt.Dimension(550, 550));
+        panelEsquema.setMaximumSize(new java.awt.Dimension(545, 545));
+        panelEsquema.setMinimumSize(new java.awt.Dimension(545, 545));
+        panelEsquema.setNormalBounds(new java.awt.Rectangle(545, 545, 545, 545));
+        panelEsquema.setPreferredSize(new java.awt.Dimension(545, 545));
         try
         {
             panelEsquema.setSelected(true);
@@ -100,11 +103,11 @@ public class Vista extends javax.swing.JFrame
         panelEsquema.getContentPane().setLayout(panelEsquemaLayout);
         panelEsquemaLayout.setHorizontalGroup(
             panelEsquemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 534, Short.MAX_VALUE)
+            .addGap(0, 529, Short.MAX_VALUE)
         );
         panelEsquemaLayout.setVerticalGroup(
             panelEsquemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 521, Short.MAX_VALUE)
+            .addGap(0, 516, Short.MAX_VALUE)
         );
 
         panel.setLayer(panelEsquema, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -123,6 +126,22 @@ public class Vista extends javax.swing.JFrame
         );
 
         getContentPane().add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 5, -1, -1));
+
+        generarVuelos.setText("Generar vuelos");
+        generarVuelos.setToolTipText("Genera los vuelos.");
+        generarVuelos.setActionCommand("generarVuelos");
+        generarVuelos.setMaximumSize(new java.awt.Dimension(120, 30));
+        generarVuelos.setMinimumSize(new java.awt.Dimension(120, 30));
+        generarVuelos.setPreferredSize(new java.awt.Dimension(120, 30));
+        getContentPane().add(generarVuelos, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 10, -1, -1));
+
+        eliminarUnVuelo.setText("Eliminar vuelo");
+        eliminarUnVuelo.setToolTipText("Elimina un vuelo en un índice especificado.");
+        eliminarUnVuelo.setActionCommand("eliminarUnVuelo");
+        eliminarUnVuelo.setMaximumSize(new java.awt.Dimension(120, 30));
+        eliminarUnVuelo.setMinimumSize(new java.awt.Dimension(120, 30));
+        eliminarUnVuelo.setPreferredSize(new java.awt.Dimension(120, 30));
+        getContentPane().add(eliminarUnVuelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 90, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -147,7 +166,19 @@ public class Vista extends javax.swing.JFrame
         return siguienteVuelo;
     }
 
+    public JButton getGenerarVuelos()
+    {
+        return generarVuelos;
+    }
+
+    public JButton getEliminarUnVuelo()
+    {
+        return eliminarUnVuelo;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton eliminarUnVuelo;
+    private javax.swing.JButton generarVuelos;
     private javax.swing.JDesktopPane panel;
     private javax.swing.JInternalFrame panelEsquema;
     private javax.swing.JButton siguienteVuelo;

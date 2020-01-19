@@ -5,6 +5,7 @@ import deque.DequeEmptyException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.InputMismatchException;
 import javax.swing.*;
 
 /**
@@ -20,12 +21,17 @@ public class Controlador implements ActionListener
     {
         this.vista = vista;
         aeropuerto = new Aeropuerto();
-        aeropuerto.generarVuelos(50);
 
         vista.getPanelEsquema().setEnabled(false);
         vista.getPanelEsquema().setVisible(true);
 
         vista.getSiguienteVuelo().addActionListener(this);
+        vista.getGenerarVuelos().addActionListener(this);
+        vista.getEliminarUnVuelo().addActionListener(this);
+
+        vista.getSiguienteVuelo().setEnabled(false);
+        vista.getEliminarUnVuelo().setEnabled(false);
+
         repintar();
     }
 
@@ -33,23 +39,62 @@ public class Controlador implements ActionListener
     public void actionPerformed(@NotNull ActionEvent e)
     {
 
-        switch (e.getActionCommand())
+        try
         {
-            case "siguienteVuelo":
-                try
-                {
-                    aeropuerto.eliminarSiguienteVuelo();
+            switch (e.getActionCommand())
+            {
+                case "generarVuelos":
+                    int numeroVuelos = pedirEntrada("Número de vuelos.", "^[0-9]+$");
+                    aeropuerto.generarVuelos(numeroVuelos);
+                    vista.getGenerarVuelos().setEnabled(false);
+                    vista.getSiguienteVuelo().setEnabled(true);
+                    vista.getEliminarUnVuelo().setEnabled(true);
+                    break;
 
-                } catch (DequeEmptyException ex)
-                {
-                    System.out.println(ex.getMessage()); // JOptionPane.
-                }
-                break;
-            default:
-                throw new AssertionError();
+                case "siguienteVuelo":
+                    aeropuerto.eliminarSiguienteVuelo();
+                    break;
+
+                case "eliminarUnVuelo":
+                    int indiceVuelo = pedirEntrada("Índice del vuelo:", "^[0-9]+$") - 1;
+
+                    if (indiceVuelo < 0 || indiceVuelo > aeropuerto.vuelosDisponibles())
+                        throw new InputMismatchException("No existe tal vuelo.");
+
+                    aeropuerto.eliminarVueloAt(indiceVuelo);
+                    break;
+
+            }
+
+        } catch (InputMismatchException | DequeEmptyException ex)
+        {
+            JOptionPane.showMessageDialog(vista, ex.getMessage(), "Error.", JOptionPane.ERROR_MESSAGE);
+
+        } catch (NullPointerException exc)
+        {
         }
 
         repintar();
+    }
+
+    private int pedirEntrada(String mensaje, String regex)
+    {
+
+        String entrada = JOptionPane.showInputDialog(vista, mensaje);
+
+        if (entrada == null)
+            throw new NullPointerException();
+
+        if (entradaValida(entrada, regex))
+            return Integer.parseInt(entrada);
+
+        throw new InputMismatchException("La entrada no es válida.");
+
+    }
+
+    public boolean entradaValida(String text, String regex)
+    {
+        return text.matches(regex);
     }
 
     private void repintar()
@@ -58,8 +103,8 @@ public class Controlador implements ActionListener
         vista.getPanel().removeAll();
         vista.setPanelEsquema(new JInternalFrame("Representación de los vuelos.", true));
         vista.getPanel().add(vista.getPanelEsquema(), JLayeredPane.DEFAULT_LAYER);
-        vista.getPanelEsquema().setVisible(true);
         vista.getPanelEsquema().setBounds(tamanio);
+        vista.getPanelEsquema().setVisible(true);
         vista.getPanelEsquema().setEnabled(false);
         vista.getPanelEsquema().add(new Esquema(aeropuerto), BorderLayout.CENTER);
     }
