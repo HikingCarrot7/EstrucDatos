@@ -38,7 +38,6 @@ public class Controlador implements ActionListener
     @Override
     public void actionPerformed(@NotNull ActionEvent e)
     {
-
         try
         {
             switch (e.getActionCommand())
@@ -56,6 +55,10 @@ public class Controlador implements ActionListener
                     break;
 
                 case "eliminarUnVuelo":
+
+                    if (!aeropuerto.existenVuelosEnCola())
+                        throw new DequeEmptyException("No hay más vuelos.");
+
                     int indiceVuelo = pedirEntrada("Índice del vuelo:", "^[0-9]+$") - 1;
 
                     if (!aeropuerto.esVueloValido(indiceVuelo))

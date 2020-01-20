@@ -1,8 +1,8 @@
 package ada_3;
 
 /**
- * @param <E>
  * @author A15001169
+ * @param <E>
  */
 public class LinkedList<E>
 {
@@ -75,7 +75,7 @@ public class LinkedList<E>
     public String toString()
     {
         if (isEmpty())
-            return "La lista está vacía.";
+            return "";
 
         ListNode<E> nodo = first;
         String result = nodo.getDato().toString();

@@ -8,44 +8,25 @@ public class PruebaLinkedList
 
     public static void main(String[] args)
     {
-
         LinkedList<Integer> lista = new LinkedList<>();
 
         System.out.println(lista);
 
-        lista.insertarAlInicio(5);
+        lista.insertarAlInicio(1);
 
         System.out.println(lista);
 
-        lista.insertarAlInicio(10);
+        lista.insertarAlFinal(2);
 
         System.out.println(lista);
 
-        lista.insertarAlInicio(15);
+        lista.insertarAlFinal(3);
 
         System.out.println(lista);
 
-        lista.insertarAlFinal(20);
+        lista.insertarAlInicio(0);
 
         System.out.println(lista);
-
-        lista.insertarAlInicio(30);
-
-        System.out.println(lista);
-
-        lista.removeLast();
-
-        System.out.println(lista);
-
-        lista.removeFirst();
-
-        System.out.println(lista);
-
-        lista.removeLast();
-
-        System.out.println(lista);
-        System.out.println(lista.size());
-
     }
 
 }
