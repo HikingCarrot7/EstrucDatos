@@ -1,10 +1,11 @@
 package ada_4;
 
+import ada_3.LinkedList;
 import excepciones.ListaVaciaException;
 import interfaces.List;
 import nodos.DoublyLinkedNode;
 
-public class DoublyLinkedList<E> implements List<E>
+public class DoublyLinkedList<E> extends LinkedList<E> implements List<E>
 {
 
     private DoublyLinkedNode<E> first;

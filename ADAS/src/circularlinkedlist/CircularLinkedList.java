@@ -1,7 +1,8 @@
 package circularlinkedlist;
 
-import interfaces.List;
+import ada_4.DoublyLinkedList;
 import excepciones.ListaVaciaException;
+import interfaces.List;
 import nodos.ListNode;
 
 /**
@@ -9,7 +10,7 @@ import nodos.ListNode;
  * @author HikingC7
  * @param <E>
  */
-public class CircularLinkedList<E> implements List<E>
+public class CircularLinkedList<E> extends DoublyLinkedList<E> implements List<E>
 {
 
     private ListNode<E> first;
