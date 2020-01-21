@@ -22,10 +22,10 @@ public class DoublyLinkedList<E> extends LinkedList<E>
 
         else
         {
-            DoublyLinkedNode<E> nodo = getLastNode();
+            DoublyLinkedNode<E> lastNode = getLastNode();
             DoublyLinkedNode<E> nuevoNodo = new DoublyLinkedNode<>(element);
-            nodo.setNext(nuevoNodo);
-            nuevoNodo.setPrev(nodo);
+            lastNode.setNext(nuevoNodo);
+            nuevoNodo.setPrev(lastNode);
         }
 
         size++;
