@@ -1,12 +1,13 @@
 package circularlinkedlist;
 
-import ada_3.List;
-import ada_3.ListNode;
-import ada_3.ListaVaciaException;
+import interfaces.List;
+import excepciones.ListaVaciaException;
+import nodos.ListNode;
 
 /**
  *
  * @author HikingC7
+ * @param <E>
  */
 public class CircularLinkedList<E> implements List<E>
 {
@@ -29,7 +30,7 @@ public class CircularLinkedList<E> implements List<E>
 
         } else
         {
-            ListNode<E> firstNode = new ListNode<>(element, first);
+            ListNode<E> firstNode = new ListNode<>(first, element);
             getLastNode().setNext(firstNode);
             first = firstNode;
         }
@@ -47,7 +48,7 @@ public class CircularLinkedList<E> implements List<E>
             first.setNext(first);
 
         } else
-            getLastNode().setNext(new ListNode<>(element, first));
+            getLastNode().setNext(new ListNode<>(first, element));
 
         size++;
         return element;
@@ -61,8 +62,16 @@ public class CircularLinkedList<E> implements List<E>
 
         E element = first.getDato();
         ListNode<E> lastNode = getLastNode();
-        first = first.getNext();
-        lastNode.setNext(first);
+
+        if (lastNode == first)
+            first = null;
+
+        else
+        {
+            first = first.getNext();
+            lastNode.setNext(first);
+        }
+
         size--;
         return element;
     }
@@ -79,7 +88,11 @@ public class CircularLinkedList<E> implements List<E>
         for (int i = 0; i < size - 2; i++)
             node = node.getNext();
 
-        node.setNext(first);
+        if (node == first)
+            first = null;
+        else
+            node.setNext(first);
+
         size--;
         return element;
     }
@@ -100,17 +113,23 @@ public class CircularLinkedList<E> implements List<E>
         if (isEmpty())
             return "";
 
+        int contador = 0;
         ListNode<E> nodo = first;
-        String result = nodo.getDato().toString();
+        String result = "->" + nodo.getDato().toString();
 
         while (nodo.getNext() != first)
         {
-            System.out.println(nodo);
             nodo = nodo.getNext();
             result += "->" + nodo.getDato().toString();
+            contador += nodo.getDato().toString().length() + 2;
         }
 
-        return result + "->";
+        result += "-\n|";
+
+        for (int i = 0; i < contador + 8; i++)
+            result += "_";
+
+        return result + "|\n";
     }
 
     @Override

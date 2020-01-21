@@ -21,6 +21,14 @@ public class PruebaCircularLinkedList
         lista.removeLast();
 
         System.out.println(lista);
+        lista.removeFirst();
+
+        System.out.println(lista);
+
+        lista.removeFirst();
+        lista.removeLast();
+
+        System.out.println(lista);
     }
 
 }

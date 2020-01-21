@@ -1,4 +1,4 @@
-package ada_3;
+package interfaces;
 
 /**
  *

@@ -1,4 +1,4 @@
-package queue;
+package interfaces;
 
 public interface Queue<E>
 {

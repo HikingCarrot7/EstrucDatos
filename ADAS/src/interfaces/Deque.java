@@ -1,4 +1,6 @@
-package deque;
+package interfaces;
+
+import deque.DequeEmptyException;
 
 public interface Deque<E>
 {

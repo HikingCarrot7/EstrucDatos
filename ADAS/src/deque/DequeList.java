@@ -1,5 +1,7 @@
 package deque;
 
+import interfaces.Deque;
+
 public class DequeList<E> implements Deque<E>
 {
 

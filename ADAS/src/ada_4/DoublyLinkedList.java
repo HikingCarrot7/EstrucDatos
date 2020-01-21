@@ -1,6 +1,8 @@
-package doublylinkedlist;
+package ada_4;
 
-import ada_3.List;
+import interfaces.List;
+import excepciones.ListaVaciaException;
+import nodos.DoublyLinkedNode;
 
 public class DoublyLinkedList<E> implements List<E>
 {
@@ -52,7 +54,7 @@ public class DoublyLinkedList<E> implements List<E>
     public E removeFirst()
     {
         if (isEmpty())
-            return null;
+            throw new ListaVaciaException();
 
         E element = first.getDato();
         first = first.getNext();
@@ -68,7 +70,7 @@ public class DoublyLinkedList<E> implements List<E>
     public E removeLast()
     {
         if (isEmpty())
-            return null;
+            throw new ListaVaciaException();
 
         DoublyLinkedNode<E> lastNode = getLastNode();
         E element = lastNode.getDato();
@@ -86,7 +88,7 @@ public class DoublyLinkedList<E> implements List<E>
     public String toString()
     {
         if (isEmpty())
-            return "La lista está vacía.";
+            return "";
 
         DoublyLinkedNode<E> nodo = first;
         String result = nodo.getDato().toString();
@@ -94,7 +96,7 @@ public class DoublyLinkedList<E> implements List<E>
         while (nodo.getNext() != null)
         {
             nodo = nodo.getNext();
-            result += " -> " + nodo.getDato().toString();
+            result += " = " + nodo.getDato().toString();
         }
 
         return result;
@@ -103,7 +105,7 @@ public class DoublyLinkedList<E> implements List<E>
     public String reversed()
     {
         if (isEmpty())
-            return "La lista está vacía.";
+            return "";
 
         DoublyLinkedNode<E> nodo = getLastNode();
         String result = nodo.getDato().toString();
@@ -111,7 +113,7 @@ public class DoublyLinkedList<E> implements List<E>
         while (nodo.getPrev() != null)
         {
             nodo = nodo.getPrev();
-            result += " <- " + nodo.getDato().toString();
+            result += " = " + nodo.getDato().toString();
         }
 
         return result;
@@ -120,7 +122,7 @@ public class DoublyLinkedList<E> implements List<E>
     private DoublyLinkedNode<E> getLastNode()
     {
         if (isEmpty())
-            return null;
+            throw new ListaVaciaException();
 
         DoublyLinkedNode<E> nodo = first;
 

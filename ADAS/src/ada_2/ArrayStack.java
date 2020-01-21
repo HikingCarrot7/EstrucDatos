@@ -1,5 +1,8 @@
 package ada_2;
 
+import excepciones.PilaVaciaException;
+import excepciones.PilaLlenaException;
+import interfaces.Stack;
 import java.util.Arrays;
 
 /**

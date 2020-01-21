@@ -1,30 +1,36 @@
-package doublylinkedlist;
+package nodos;
 
-public class DoublyLinkedNode<E>
+import interfaces.RecorridoBidireccional;
+
+/**
+ *
+ * @author A15001169
+ */
+public class DoublyLinkedNode<E> extends Node<E> implements RecorridoBidireccional<E>
 {
 
     private DoublyLinkedNode<E> next;
     private DoublyLinkedNode<E> prev;
-    private E dato;
 
     public DoublyLinkedNode(E dato)
     {
-        this.dato = dato;
+        super(dato);
     }
 
     public DoublyLinkedNode(DoublyLinkedNode<E> next, E dato)
     {
+        super(dato);
         this.next = next;
-        this.dato = dato;
     }
 
     public DoublyLinkedNode(DoublyLinkedNode<E> next, DoublyLinkedNode<E> prev, E dato)
     {
+        super(dato);
         this.next = next;
         this.prev = prev;
-        this.dato = dato;
     }
 
+    @Override
     public DoublyLinkedNode<E> getNext()
     {
         return next;
@@ -35,6 +41,7 @@ public class DoublyLinkedNode<E>
         this.next = next;
     }
 
+    @Override
     public DoublyLinkedNode<E> getPrev()
     {
         return prev;
@@ -43,16 +50,6 @@ public class DoublyLinkedNode<E>
     public void setPrev(DoublyLinkedNode<E> prev)
     {
         this.prev = prev;
-    }
-
-    public E getDato()
-    {
-        return dato;
-    }
-
-    public void setDato(E dato)
-    {
-        this.dato = dato;
     }
 
 }

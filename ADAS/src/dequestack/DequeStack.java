@@ -1,7 +1,8 @@
 package dequestack;
 
-import ada_2.Stack;
 import deque.DequeList;
+import excepciones.PilaVaciaException;
+import interfaces.Stack;
 
 public class DequeStack<E> implements Stack<E>
 {
@@ -20,19 +21,19 @@ public class DequeStack<E> implements Stack<E>
     }
 
     @Override
-    public E pop() throws StackEmptyException
+    public E pop() throws PilaVaciaException
     {
         if (isEmpty())
-            throw new StackEmptyException();
+            throw new PilaVaciaException();
 
         return list.removeLast();
     }
 
     @Override
-    public E peek() throws StackEmptyException
+    public E peek() throws PilaVaciaException
     {
         if (isEmpty())
-            throw new StackEmptyException();
+            throw new PilaVaciaException();
 
         return list.last();
     }
@@ -52,9 +53,6 @@ public class DequeStack<E> implements Stack<E>
     @Override
     public String toString()
     {
-        if (isEmpty())
-            throw new StackEmptyException();
-
         return list.toString();
     }
 }

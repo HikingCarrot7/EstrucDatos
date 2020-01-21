@@ -1,5 +1,7 @@
 package ada_2;
 
+import excepciones.PilaVaciaException;
+import excepciones.PilaLlenaException;
 import java.util.Scanner;
 
 /**

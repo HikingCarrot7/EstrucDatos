@@ -1,5 +1,8 @@
 package queue;
 
+import excepciones.ColaLlenaException;
+import excepciones.ColaVaciaException;
+import interfaces.Queue;
 import java.util.Arrays;
 
 public class ArrayQueue<E> implements Queue<E>
@@ -29,7 +32,7 @@ public class ArrayQueue<E> implements Queue<E>
     public E enqueue(E element)
     {
         if (isFull())
-            return null;
+            throw new ColaLlenaException();
 
         elements[(front + size++) % elements.length] = element;
         return element;
@@ -39,7 +42,7 @@ public class ArrayQueue<E> implements Queue<E>
     public E dequeue()
     {
         if (isEmpty())
-            return null;
+            throw new ColaVaciaException();
 
         E element = elements[front];
         elements[front] = null;

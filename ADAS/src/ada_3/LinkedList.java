@@ -1,5 +1,8 @@
 package ada_3;
 
+import interfaces.List;
+import nodos.ListNode;
+
 /**
  * @author A15001169
  * @param <E>
@@ -22,7 +25,7 @@ public class LinkedList<E> implements List<E>
         if (isEmpty())
             front = new ListNode<>(elemento);
         else
-            front = new ListNode<>(elemento, front);
+            front = new ListNode<>(front, elemento);
 
         size++;
         return elemento;

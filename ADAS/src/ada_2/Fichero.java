@@ -1,5 +1,6 @@
 package ada_2;
 
+import excepciones.PilaVaciaException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
