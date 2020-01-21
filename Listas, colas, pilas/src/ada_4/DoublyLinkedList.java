@@ -131,11 +131,6 @@ public class DoublyLinkedList<E> extends LinkedList<E>
         return nodo;
     }
 
-    public E getFirst()
-    {
-        return first.getDato();
-    }
-
     @Override
     public boolean isEmpty()
     {
