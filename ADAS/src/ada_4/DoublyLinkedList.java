@@ -1,7 +1,7 @@
 package ada_4;
 
-import interfaces.List;
 import excepciones.ListaVaciaException;
+import interfaces.List;
 import nodos.DoublyLinkedNode;
 
 public class DoublyLinkedList<E> implements List<E>
@@ -96,7 +96,7 @@ public class DoublyLinkedList<E> implements List<E>
         while (nodo.getNext() != null)
         {
             nodo = nodo.getNext();
-            result += " = " + nodo.getDato().toString();
+            result += " <=> " + nodo.getDato().toString();
         }
 
         return result;
@@ -113,7 +113,7 @@ public class DoublyLinkedList<E> implements List<E>
         while (nodo.getPrev() != null)
         {
             nodo = nodo.getPrev();
-            result += " = " + nodo.getDato().toString();
+            result += " <=> " + nodo.getDato().toString();
         }
 
         return result;
