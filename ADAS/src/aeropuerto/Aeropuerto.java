@@ -16,12 +16,10 @@ public class Aeropuerto
 
     public void generarVuelos(int numeroVuelos)
     {
-
         int clave = 0;
 
         for (int i = 0; i < numeroVuelos; i++)
         {
-
             do
                 clave = (int) (Math.random() * numeroVuelos * 100);
             while (existeClaveVuelo(clave));
@@ -49,12 +47,10 @@ public class Aeropuerto
             System.out.printf("%-8s", vuelosTemporales.removeFirst().getClave());
 
         System.out.println("\n\n");
-
     }
 
     public void eliminarVueloAt(int index) throws DequeEmptyException
     {
-
         DequeStack<Vuelo> pilaTemporal = new DequeStack<>();
         int numeroVuelos = vuelos.size();
 

@@ -2,6 +2,7 @@ package queue;
 
 public interface Queue<E>
 {
+
     public E enqueue(E element);
 
     public E dequeue();

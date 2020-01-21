@@ -2,6 +2,7 @@ package aeropuerto;
 
 public class Vuelo
 {
+
     private int clave;
 
     public Vuelo(int clave)

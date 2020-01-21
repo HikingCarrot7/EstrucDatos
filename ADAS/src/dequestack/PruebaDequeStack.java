@@ -2,6 +2,7 @@ package dequestack;
 
 public class PruebaDequeStack
 {
+
     public static void main(String[] args)
     {
         DequeStack<String> pila = new DequeStack<>();

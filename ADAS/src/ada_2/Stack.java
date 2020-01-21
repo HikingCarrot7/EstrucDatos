@@ -4,6 +4,7 @@ import dequestack.StackEmptyException;
 
 public interface Stack<E>
 {
+
     public E push(E element);
 
     public E pop() throws StackEmptyException;

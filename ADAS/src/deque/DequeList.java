@@ -2,6 +2,7 @@ package deque;
 
 public class DequeList<E> implements Deque<E>
 {
+
     private DequeListNode<E> first;
     private DequeListNode<E> last;
     private int size;

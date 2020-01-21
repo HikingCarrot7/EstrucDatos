@@ -2,6 +2,7 @@ package queue;
 
 public class PruebaArrayQueue
 {
+
     public static void main(String[] args)
     {
         ArrayQueue<String> lista = new ArrayQueue<>();

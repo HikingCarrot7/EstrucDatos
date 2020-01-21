@@ -77,12 +77,18 @@ public class Controlador implements ActionListener
         {
         }
 
+        if (!aeropuerto.existenVuelosEnCola())
+        {
+            vista.getGenerarVuelos().setEnabled(true);
+            vista.getSiguienteVuelo().setEnabled(false);
+            vista.getEliminarUnVuelo().setEnabled(false);
+        }
+
         repintar();
     }
 
     private int pedirEntrada(String mensaje, String regex)
     {
-
         String entrada = JOptionPane.showInputDialog(vista, mensaje);
 
         if (entrada == null)
@@ -92,7 +98,6 @@ public class Controlador implements ActionListener
             return Integer.parseInt(entrada);
 
         throw new InputMismatchException("La entrada no es válida.");
-
     }
 
     public boolean entradaValida(String text, String regex)

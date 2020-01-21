@@ -2,6 +2,7 @@ package deque;
 
 public class DequeListNode<E>
 {
+
     private E element;
     private DequeListNode<E> next;
     private DequeListNode<E> prev;

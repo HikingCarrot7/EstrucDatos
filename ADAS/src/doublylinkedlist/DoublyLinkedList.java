@@ -1,6 +1,8 @@
 package doublylinkedlist;
 
-public class DoublyLinkedList<E>
+import ada_3.List;
+
+public class DoublyLinkedList<E> implements List<E>
 {
 
     private DoublyLinkedNode<E> first;
@@ -11,6 +13,7 @@ public class DoublyLinkedList<E>
         size = 0;
     }
 
+    @Override
     public E addLast(E element)
     {
         if (isEmpty())
@@ -28,6 +31,7 @@ public class DoublyLinkedList<E>
         return element;
     }
 
+    @Override
     public E addFirst(E element)
     {
         if (isEmpty())
@@ -44,6 +48,7 @@ public class DoublyLinkedList<E>
         return element;
     }
 
+    @Override
     public E removeFirst()
     {
         if (isEmpty())
@@ -59,6 +64,7 @@ public class DoublyLinkedList<E>
         return element;
     }
 
+    @Override
     public E removeLast()
     {
         if (isEmpty())
@@ -129,6 +135,7 @@ public class DoublyLinkedList<E>
         return first.getDato();
     }
 
+    @Override
     public boolean isEmpty()
     {
         return first == null;

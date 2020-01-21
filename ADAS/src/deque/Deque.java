@@ -2,6 +2,7 @@ package deque;
 
 public interface Deque<E>
 {
+
     public E first() throws DequeEmptyException;
 
     public E last() throws DequeEmptyException;

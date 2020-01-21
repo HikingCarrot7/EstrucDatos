@@ -68,7 +68,7 @@ public final class Esquema extends JPanel
                 } else
                 {
                     g.drawLine(x + RECT_WIDTH, y + RECT_HEIGHT / 2, x + RECT_WIDTH + FLY_TO_FLY, y + RECT_HEIGHT / 2);
-                    drawTiangle(g, x + RECT_WIDTH + FLY_TO_FLY, y + RECT_HEIGHT / 2, LADO_TRIANGULO);
+                    drawTriangle(g, x + RECT_WIDTH + FLY_TO_FLY, y + RECT_HEIGHT / 2, LADO_TRIANGULO);
                 }
 
         }
@@ -86,7 +86,7 @@ public final class Esquema extends JPanel
         g.drawRect(x, y, RECT_WIDTH, RECT_HEIGHT);
     }
 
-    private void drawTiangle(Graphics2D g, int x, int y, int lenght)
+    private void drawTriangle(Graphics2D g, int x, int y, int lenght)
     {
         int offset = (int) Math.sqrt(Math.pow(lenght, 2) - Math.pow((lenght / 2), 2));
 
@@ -118,7 +118,7 @@ public final class Esquema extends JPanel
         g.drawLine(x + FLY_TO_FLY, y + RECT_HEIGHT, OFFSET_X - OFFSET_X / 2, y + RECT_HEIGHT);
         g.drawLine(OFFSET_X - OFFSET_X / 2, y + RECT_HEIGHT, OFFSET_X - OFFSET_X / 2, y + SEPARACION_POR_LINEA + RECT_HEIGHT);
         g.drawLine(OFFSET_X - OFFSET_X / 2, y + SEPARACION_POR_LINEA + RECT_HEIGHT, OFFSET_X, y + SEPARACION_POR_LINEA + RECT_HEIGHT);
-        drawTiangle(g, OFFSET_X, y + SEPARACION_POR_LINEA + RECT_HEIGHT, LADO_TRIANGULO);
+        drawTriangle(g, OFFSET_X, y + SEPARACION_POR_LINEA + RECT_HEIGHT, LADO_TRIANGULO);
     }
 
 }
