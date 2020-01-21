@@ -22,11 +22,7 @@ public class LinkedList<E> implements List<E>
     @Override
     public E addFirst(E elemento)
     {
-        if (isEmpty())
-            first = new ListNode<>(elemento);
-        else
-            first = new ListNode<>(first, elemento);
-
+        first = new ListNode<>(isEmpty() ? null : first, elemento);
         size++;
         return elemento;
     }
@@ -81,7 +77,7 @@ public class LinkedList<E> implements List<E>
     public static <T extends Comparable<T>> LinkedList<T> mergeLists(LinkedList<T> lista1, LinkedList<T> lista2)
     {
         LinkedList<T> mergedList = new LinkedList<>();
-        mergedList.setFront(mergeListsHelper(lista1.head(), lista2.head()));
+        mergedList.setFront(mergeListsHelper(lista1.first, lista2.first));
         return mergedList;
     }
 
@@ -132,11 +128,6 @@ public class LinkedList<E> implements List<E>
             nodo = nodo.getNext();
 
         return nodo;
-    }
-
-    public ListNode<E> head()
-    {
-        return first;
     }
 
     public void setFront(ListNode<E> front)
