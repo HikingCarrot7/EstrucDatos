@@ -1,23 +1,24 @@
 package deque;
 
+import ada_4.DoublyLinkedList;
+import excepciones.DequeEmptyException;
 import interfaces.Deque;
+import nodos.DoublyLinkedNode;
 
-public class DequeList<E> implements Deque<E>
+public class DequeList<E> extends DoublyLinkedList<E> implements Deque<E>
 {
 
-    private DequeListNode<E> first;
-    private DequeListNode<E> last;
-    private int size;
+    private DoublyLinkedNode<E> last;
 
     @Override
     public E insertFirst(E element)
     {
         if (isEmpty())
-            first = last = new DequeListNode<>(element);
+            first = last = new DoublyLinkedNode<>(element);
 
         else
         {
-            DequeListNode<E> firstNode = new DequeListNode<>(element, first);
+            DoublyLinkedNode<E> firstNode = new DoublyLinkedNode<>(first, element);
             first.setPrev(firstNode);
             first = firstNode;
         }
@@ -30,11 +31,11 @@ public class DequeList<E> implements Deque<E>
     public E insertLast(E element)
     {
         if (isEmpty())
-            first = last = new DequeListNode<>(element);
+            first = last = new DoublyLinkedNode<>(element);
 
         else
         {
-            DequeListNode<E> lastNode = new DequeListNode<>(element);
+            DoublyLinkedNode<E> lastNode = new DoublyLinkedNode<>(element);
             last.setNext(lastNode);
             lastNode.setPrev(last);
             last = lastNode;
@@ -50,7 +51,7 @@ public class DequeList<E> implements Deque<E>
         if (isEmpty())
             throw new DequeEmptyException();
 
-        E element = first.getElement();
+        E element = first.getDato();
         first = first.getNext();
 
         if (first == null)
@@ -68,7 +69,7 @@ public class DequeList<E> implements Deque<E>
         if (isEmpty())
             throw new DequeEmptyException();
 
-        E element = last.getElement();
+        E element = last.getDato();
         last = last.getPrev();
 
         if (last == null)
@@ -86,30 +87,31 @@ public class DequeList<E> implements Deque<E>
         if (isEmpty())
             return "La cola está vacía.";
 
-        DequeListNode<E> nodo = first;
-        String result = nodo.getElement().toString();
+        DoublyLinkedNode<E> nodo = first;
+        String result = nodo.getDato().toString();
 
         while (nodo.getNext() != null)
         {
             nodo = nodo.getNext();
-            result += " -> " + nodo.getElement().toString();
+            result += " -> " + nodo.getDato().toString();
         }
 
         return result;
     }
 
+    @Override
     public String reversed()
     {
         if (isEmpty())
             return "La cola está vacía.";
 
-        DequeListNode<E> nodo = last;
-        String result = nodo.getElement().toString();
+        DoublyLinkedNode<E> nodo = last;
+        String result = nodo.getDato().toString();
 
         while (nodo.getPrev() != null)
         {
             nodo = nodo.getPrev();
-            result += " <- " + nodo.getElement().toString();
+            result += " <- " + nodo.getDato().toString();
         }
 
         return result;
@@ -121,7 +123,7 @@ public class DequeList<E> implements Deque<E>
         if (isEmpty())
             throw new DequeEmptyException();
 
-        return first.getElement();
+        return first.getDato();
     }
 
     @Override
@@ -130,19 +132,7 @@ public class DequeList<E> implements Deque<E>
         if (isEmpty())
             throw new DequeEmptyException();
 
-        return last.getElement();
-    }
-
-    @Override
-    public boolean isEmpty()
-    {
-        return size == 0;
-    }
-
-    @Override
-    public int size()
-    {
-        return size;
+        return last.getDato();
     }
 
 }

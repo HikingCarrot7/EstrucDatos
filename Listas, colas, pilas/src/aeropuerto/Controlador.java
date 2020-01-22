@@ -1,7 +1,7 @@
 package aeropuerto;
 
 import com.sun.istack.internal.NotNull;
-import deque.DequeEmptyException;
+import excepciones.DequeEmptyException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

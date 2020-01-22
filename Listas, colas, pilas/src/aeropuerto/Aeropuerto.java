@@ -1,6 +1,6 @@
 package aeropuerto;
 
-import deque.DequeEmptyException;
+import excepciones.DequeEmptyException;
 import deque.DequeList;
 import dequestack.DequeStack;
 

@@ -7,7 +7,7 @@ import nodos.DoublyLinkedNode;
 public class DoublyLinkedList<E> extends LinkedList<E>
 {
 
-    private DoublyLinkedNode<E> first;
+    protected DoublyLinkedNode<E> first;
 
     public DoublyLinkedList()
     {

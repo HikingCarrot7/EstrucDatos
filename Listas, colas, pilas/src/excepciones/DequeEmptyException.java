@@ -1,4 +1,4 @@
-package deque;
+package excepciones;
 
 public class DequeEmptyException extends RuntimeException
 {
