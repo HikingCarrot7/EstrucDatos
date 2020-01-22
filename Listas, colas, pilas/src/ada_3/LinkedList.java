@@ -77,7 +77,7 @@ public class LinkedList<E> implements List<E>
     public static <T extends Comparable<T>> LinkedList<T> mergeLists(LinkedList<T> lista1, LinkedList<T> lista2)
     {
         LinkedList<T> mergedList = new LinkedList<>();
-        mergedList.setFront(mergeListsHelper(lista1.first, lista2.first));
+        mergedList.setFirst(mergeListsHelper(lista1.first, lista2.first));
         return mergedList;
     }
 
@@ -130,9 +130,14 @@ public class LinkedList<E> implements List<E>
         return nodo;
     }
 
-    public void setFront(ListNode<E> front)
+    public E first()
     {
-        this.first = front;
+        return first.getDato();
+    }
+
+    public void setFirst(ListNode<E> first)
+    {
+        this.first = first;
     }
 
     @Override
