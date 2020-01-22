@@ -1,4 +1,4 @@
-package ada_2;
+package excepciones;
 
 /**
  *

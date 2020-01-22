@@ -1,5 +1,6 @@
 package ada_2;
 
+import excepciones.ExpresionNoEvaluableException;
 import excepciones.PilaVaciaException;
 import excepciones.PilaLlenaException;
 import java.util.Scanner;
