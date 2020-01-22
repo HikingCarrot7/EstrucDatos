@@ -141,6 +141,7 @@ public class LinkedList<E> implements List<E>
         return first == null;
     }
 
+    @Override
     public int size()
     {
         return size;

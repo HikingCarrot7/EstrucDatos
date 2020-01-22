@@ -17,6 +17,8 @@ public interface List<E>
 
     public boolean isEmpty();
 
+    public int size();
+
     @Override
     public String toString();
 
