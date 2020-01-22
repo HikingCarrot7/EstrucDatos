@@ -31,9 +31,6 @@ public class Fichero
 
     }
 
-    /**
-     * @return Ajax no lo veas ploxx xxdjsjsjssjs
-     */
     public boolean llavesValidas()
     {
 

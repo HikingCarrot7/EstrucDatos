@@ -1,10 +1,10 @@
 package dequestack;
 
+import ada_5.LinkedStack;
 import deque.DequeList;
 import excepciones.PilaVaciaException;
-import interfaces.Stack;
 
-public class DequeStack<E> implements Stack<E>
+public class DequeStack<E> extends LinkedStack<E>
 {
 
     private DequeList<E> list;

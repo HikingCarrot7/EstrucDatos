@@ -1,7 +1,7 @@
 package ada_2;
 
-import excepciones.PilaVaciaException;
 import excepciones.PilaLlenaException;
+import excepciones.PilaVaciaException;
 import interfaces.Stack;
 import java.util.Arrays;
 
@@ -14,18 +14,18 @@ public class ArrayStack<E> implements Stack<E>
 
     private E top;
     private int size;
-    private E[] elementos;
+    private final E[] ELEMENTOS;
 
     @SuppressWarnings("unchecked")
     public ArrayStack(int elementosMaximos)
     {
-        elementos = (E[]) new Object[elementosMaximos];
+        ELEMENTOS = (E[]) new Object[elementosMaximos];
     }
 
     @SuppressWarnings("unchecked")
     public ArrayStack()
     {
-        elementos = (E[]) new Object[10];
+        ELEMENTOS = (E[]) new Object[10];
     }
 
     @Override
@@ -36,7 +36,7 @@ public class ArrayStack<E> implements Stack<E>
             throw new PilaLlenaException();
 
         top = element;
-        elementos[size++] = element;
+        ELEMENTOS[size++] = element;
 
         return element;
 
@@ -49,9 +49,9 @@ public class ArrayStack<E> implements Stack<E>
         if (isEmpty())
             throw new PilaVaciaException();
 
-        E element = elementos[--size];
-        top = size == 0 ? null : elementos[size - 1];
-        elementos[size] = null;
+        E element = ELEMENTOS[--size];
+        top = size == 0 ? null : ELEMENTOS[size - 1];
+        ELEMENTOS[size] = null;
 
         return element;
 
@@ -82,13 +82,13 @@ public class ArrayStack<E> implements Stack<E>
 
     public boolean isFull()
     {
-        return size == elementos.length;
+        return size == ELEMENTOS.length;
     }
 
     @Override
     public String toString()
     {
-        return Arrays.asList(elementos).toString();
+        return Arrays.asList(ELEMENTOS).toString();
     }
 
 }
