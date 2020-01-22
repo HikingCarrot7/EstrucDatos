@@ -1,8 +1,9 @@
 package ada_2;
 
+import ada_5.LinkedStack;
 import excepciones.ExpresionNoEvaluableException;
-import excepciones.PilaVaciaException;
 import excepciones.PilaLlenaException;
+import excepciones.PilaVaciaException;
 import java.util.Scanner;
 
 /**
@@ -33,7 +34,7 @@ public class PruebaPila
     {
 
         String[] signos = cadena.split("");
-        ArrayStack<String> pila = new ArrayStack<>();
+        LinkedStack<String> pila = new LinkedStack<>();
 
         for (String signo : signos)
             try
