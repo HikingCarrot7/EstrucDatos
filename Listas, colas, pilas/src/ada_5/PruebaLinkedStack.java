@@ -19,9 +19,7 @@ public class PruebaLinkedStack
         pila.push(50);
 
         System.out.println(pila);
-
-        pila.pop();
-
+        System.out.println(pila.pop());
         System.out.println(pila);
 
     }

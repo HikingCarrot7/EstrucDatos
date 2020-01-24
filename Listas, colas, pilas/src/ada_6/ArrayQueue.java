@@ -28,7 +28,7 @@ public class ArrayQueue<E> implements Queue<E>
     }
 
     @Override
-    public E enqueue(E element)
+    public E enqueue(E element) throws ColaLlenaException
     {
         if (isFull())
             throw new ColaLlenaException();
@@ -38,7 +38,7 @@ public class ArrayQueue<E> implements Queue<E>
     }
 
     @Override
-    public E dequeue()
+    public E dequeue() throws ColaVaciaException
     {
         if (isEmpty())
             throw new ColaVaciaException();
@@ -51,7 +51,7 @@ public class ArrayQueue<E> implements Queue<E>
     }
 
     @Override
-    public E front()
+    public E front() throws ColaVaciaException
     {
         return elements[front];
     }
@@ -79,12 +79,10 @@ public class ArrayQueue<E> implements Queue<E>
         if (isEmpty())
             return "";
 
-        String result = "";
+        String result = elements[front].toString();
 
-        int temp;
-
-        for (int i = front; i < front + size; i++)
-            result += elements[front].toString() + "<-";
+        for (int i = (front + 1) % elements.length, j = 1; j < size; i = (i + 1) % elements.length, j++)
+            result += " <- " + elements[i].toString();
 
         return result;
     }
