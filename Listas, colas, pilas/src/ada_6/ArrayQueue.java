@@ -1,9 +1,8 @@
-package queue;
+package ada_6;
 
 import excepciones.ColaLlenaException;
 import excepciones.ColaVaciaException;
 import interfaces.Queue;
-import java.util.Arrays;
 
 public class ArrayQueue<E> implements Queue<E>
 {
@@ -77,7 +76,17 @@ public class ArrayQueue<E> implements Queue<E>
     @Override
     public String toString()
     {
-        return Arrays.asList(elements).toString();
+        if (isEmpty())
+            return "";
+
+        String result = "";
+
+        int temp;
+
+        for (int i = front; i < front + size; i++)
+            result += elements[front].toString() + "<-";
+
+        return result;
     }
 
 }

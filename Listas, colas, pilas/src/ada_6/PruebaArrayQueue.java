@@ -1,4 +1,4 @@
-package queue;
+package ada_6;
 
 public class PruebaArrayQueue
 {
