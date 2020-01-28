@@ -50,7 +50,7 @@ public final class Esquema extends JPanel
     private void dibujarVuelosDisponibles(Graphics2D g, FontMetrics fm)
     {
 
-        DequeList<Vuelo> vuelos = aeropuerto.obtenerCopiaVuelos();
+        DequeList<Vuelo> vuelos = aeropuerto.obtenerVuelos();
         int y = OFFSET_Y;
 
         for (int i = 0, x = OFFSET_X; i < aeropuerto.vuelosDisponibles(); i++, x += FLY_TO_FLY + RECT_WIDTH)

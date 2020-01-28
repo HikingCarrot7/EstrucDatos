@@ -93,7 +93,7 @@ public class Aeropuerto
         return false;
     }
 
-    public DequeList<Vuelo> obtenerCopiaVuelos()
+    private DequeList<Vuelo> obtenerCopiaVuelos()
     {
         int numeroVuelos = vuelos.size();
         DequeStack<Vuelo> pilaTemporal = new DequeStack<>();
@@ -125,6 +125,11 @@ public class Aeropuerto
     public int vuelosDisponibles()
     {
         return vuelos.size();
+    }
+
+    public DequeList<Vuelo> obtenerVuelos()
+    {
+        return obtenerCopiaVuelos();
     }
 
 }
