@@ -3,12 +3,11 @@ package aeropuerto;
 import deque.DequeList;
 import java.awt.*;
 import java.awt.geom.GeneralPath;
-import javax.swing.*;
 
 /**
  * @author HikingCarrot7
  */
-public final class Esquema extends JPanel
+public final class Esquema extends Canvas
 {
 
     private final int ESQUEMA_WIDTH = 550;

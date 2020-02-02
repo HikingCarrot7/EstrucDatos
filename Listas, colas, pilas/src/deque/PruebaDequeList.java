@@ -11,8 +11,6 @@ public class PruebaDequeList
         lista.insertLast("Nicolás");
         lista.removeFirst();
 
-        System.out.println(lista.reversed());
-
     }
 
 }

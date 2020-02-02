@@ -100,24 +100,6 @@ public class DequeList<E> extends DoublyLinkedList<E> implements Deque<E>
     }
 
     @Override
-    public String reversed()
-    {
-        if (isEmpty())
-            return "La cola está vacía.";
-
-        DoublyLinkedNode<E> nodo = last;
-        String result = nodo.getDato().toString();
-
-        while (nodo.getPrev() != null)
-        {
-            nodo = nodo.getPrev();
-            result += " <- " + nodo.getDato().toString();
-        }
-
-        return result;
-    }
-
-    @Override
     public E first() throws DequeEmptyException
     {
         if (isEmpty())

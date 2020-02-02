@@ -101,23 +101,6 @@ public class DoublyLinkedList<E> extends LinkedList<E>
         return result;
     }
 
-    public String reversed()
-    {
-        if (isEmpty())
-            return "";
-
-        DoublyLinkedNode<E> nodo = getLastNode();
-        String result = nodo.getDato().toString();
-
-        while (nodo.getPrev() != null)
-        {
-            nodo = nodo.getPrev();
-            result += " <=> " + nodo.getDato().toString();
-        }
-
-        return result;
-    }
-
     private DoublyLinkedNode<E> getLastNode()
     {
         if (isEmpty())

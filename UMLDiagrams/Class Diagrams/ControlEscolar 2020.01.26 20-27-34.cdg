@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="ControlEscolar">
+  <ClassDiagramComponents>
+    <Class name="ControlEscolar" package="controlescolar" visibility="public" xPosition="19.0" yPosition="10.0">
+      <Fields>
+        <Field name="relaciones" type="HashMap&lt;Maestro, ArrayList&lt;Curso&gt;&gt;" visibility="private"/>
+        <Field name="maestros" type="ArrayList&lt;Maestro&gt;" visibility="private"/>
+        <Field name="asignaturas" type="ArrayList&lt;Asignatura&gt;" visibility="private"/>
+        <Field name="alumnos" type="ArrayList&lt;Alumno&gt;" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="cargarDatos" returnType="void" visibility="private"/>
+        <Method name="ordenarDatos" returnType="void" visibility="private"/>
+        <Method name="mostrarMaestros" returnType="void" visibility="public"/>
+        <Method name="mostrarAsignaturas" returnType="void" visibility="public"/>
+        <Method name="mostrarAlumnos" returnType="void" visibility="public"/>
+        <Method name="mostrarRelacionesDeMaestrosConAsignaturas" returnType="void" visibility="public"/>
+        <Method name="mostrarTodasLasRelaciones" returnType="void" visibility="public"/>
+        <Method name="mostrarInformacionAlumno" returnType="void" visibility="public">
+          <Argument type="int" name="matricula"/>
+        </Method>
+        <Method name="mostrarAsignaturasAgrupadasPorLicenciatura" returnType="void" visibility="public"/>
+        <Method name="mostrarAsignaturasConRespectivosMaestros" returnType="void" visibility="public"/>
+        <Method name="mostrarNumAsignaturasPorLicenciatura" returnType="void" visibility="public"/>
+        <Method name="anadirMaestro" returnType="void" visibility="public">
+          <Argument type="int" name="claveMaestro"/>
+          <Argument type="String" name="nombre"/>
+          <Argument type="String" name="apellido"/>
+        </Method>
+        <Method name="eliminarMaestro" returnType="void" visibility="public">
+          <Argument type="int" name="claveMaestro"/>
+        </Method>
+        <Method name="anadirAlumno" returnType="void" visibility="public">
+          <Argument type="int" name="matricula"/>
+          <Argument type="String" name="nombre"/>
+          <Argument type="String" name="apellido"/>
+        </Method>
+        <Method name="eliminarAlumno" returnType="void" visibility="public">
+          <Argument type="int" name="matricula"/>
+        </Method>
+        <Method name="anadirAsignatura" returnType="void" visibility="public">
+          <Argument type="int" name="claveAsignatura"/>
+          <Argument type="String" name="nombreAsignatura"/>
+          <Argument type="String" name="licenciatura"/>
+        </Method>
+        <Method name="eliminarAsignatura" returnType="void" visibility="public">
+          <Argument type="int" name="claveAsignatura"/>
+        </Method>
+        <Method name="relacionarMaestroCurso" returnType="boolean" visibility="public">
+          <Argument type="int" name="claveMaestro"/>
+          <Argument type="int" name="claveAsignatura"/>
+        </Method>
+        <Method name="anadirRelacionMaestroCurso" returnType="void" visibility="private">
+          <Argument type="int" name="claveMaestro"/>
+          <Argument type="int" name="claveAsignatura"/>
+        </Method>
+        <Method name="quitarRelacionDeMaestroConCurso" returnType="boolean" visibility="public">
+          <Argument type="int" name="claveMaestro"/>
+          <Argument type="int" name="claveAsignatura"/>
+        </Method>
+        <Method name="relacionarAlumnoConCurso" returnType="void" visibility="public">
+          <Argument type="int" name="claveMaestro"/>
+          <Argument type="int" name="claveAsignatura"/>
+          <Argument type="int" name="matricula"/>
+        </Method>
+        <Method name="darBajaAlumnoDeCurso" returnType="void" visibility="public">
+          <Argument type="int" name="claveMaestro"/>
+          <Argument type="int" name="claveAsignatura"/>
+          <Argument type="int" name="matricula"/>
+        </Method>
+        <Method name="generarReporte" returnType="void" visibility="public">
+          <Argument type="int" name="claveMaestro"/>
+          <Argument type="int" name="claveAsignatura"/>
+        </Method>
+        <Method name="chocanHorarios" returnType="boolean" visibility="public">
+          <Argument type="int" name="claveMaestro"/>
+          <Argument type="int" name="claveAsignatura"/>
+          <Argument type="int" name="matricula"/>
+        </Method>
+        <Method name="obtenerCursosMatriculadosConAlumno" returnType="ArrayList&lt;Curso&gt;" visibility="private">
+          <Argument type="int" name="matricula"/>
+        </Method>
+        <Method name="obtenerHorariosAlumno" returnType="ArrayList&lt;Horario&gt;" visibility="private">
+          <Argument type="int" name="matricula"/>
+        </Method>
+        <Method name="obtenerMaestrosConMasCursos" returnType="ArrayList&lt;Maestro&gt;" visibility="public"/>
+        <Method name="obtenerMaestrosConMenosCursos" returnType="ArrayList&lt;Maestro&gt;" visibility="public"/>
+        <Method name="obtenerMaestrosConNCursos" returnType="ArrayList&lt;Maestro&gt;" visibility="private">
+          <Argument type="int" name="nCursos"/>
+        </Method>
+        <Method name="obtenerMaestrosRelacionadosCurso" returnType="ArrayList&lt;Maestro&gt;" visibility="public">
+          <Argument type="int" name="claveAsignatura"/>
+        </Method>
+        <Method name="numAlumnosConElNombre" returnType="long" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="asignaturasDeLicenciatura" returnType="ArrayList&lt;Asignatura&gt;" visibility="public">
+          <Argument type="String" name="licenciatura"/>
+        </Method>
+        <Method name="asignaturasAgrupadasPorLicenciatura" returnType="HashMap&lt;String, List&lt;Asignatura&gt;&gt;" visibility="private"/>
+        <Method name="numAsignaturasPorLicenciatura" returnType="TreeMap&lt;String, Long&gt;" visibility="public"/>
+        <Method name="licenciaturasRegistradas" returnType="ArrayList&lt;String&gt;" visibility="public"/>
+        <Method name="obtenerNumCursosMaestro" returnType="int" visibility="public">
+          <Argument type="int" name="claveMaestro"/>
+        </Method>
+        <Method name="obtenerNumAlumnosInscritosCurso" returnType="int" visibility="public">
+          <Argument type="int" name="claveMaestro"/>
+          <Argument type="int" name="claveAsignatura"/>
+        </Method>
+        <Method name="obtenerAsignatura" returnType="Asignatura" visibility="public">
+          <Argument type="int" name="claveAsignatura"/>
+        </Method>
+        <Method name="obtenerMaestro" returnType="Maestro" visibility="public">
+          <Argument type="int" name="claveMaestro"/>
+        </Method>
+        <Method name="obtenerAlumno" returnType="Alumno" visibility="public">
+          <Argument type="int" name="matricula"/>
+        </Method>
+        <Method name="obtenerCursosMaestro" returnType="ArrayList&lt;Curso&gt;" visibility="public">
+          <Argument type="int" name="claveMaestro"/>
+        </Method>
+        <Method name="obtenerCursoMaestro" returnType="Curso" visibility="public">
+          <Argument type="int" name="claveMaestro"/>
+          <Argument type="int" name="claveAsignatura"/>
+        </Method>
+        <Method name="maestroDaCurso" returnType="boolean" visibility="public">
+          <Argument type="int" name="claveMaestro"/>
+          <Argument type="int" name="claveAsignatura"/>
+        </Method>
+        <Method name="existeMaestro" returnType="boolean" visibility="public">
+          <Argument type="int" name="claveMaestro"/>
+        </Method>
+        <Method name="existeAsignatura" returnType="boolean" visibility="public">
+          <Argument type="int" name="claveAsignatura"/>
+        </Method>
+        <Method name="existeAlumno" returnType="boolean" visibility="public">
+          <Argument type="int" name="matricula"/>
+        </Method>
+        <Method name="guardarRelacionesDeMaestrosConCursos" returnType="void" visibility="private"/>
+        <Method name="guardarMaestros" returnType="void" visibility="private"/>
+        <Method name="guardarAlumnos" returnType="void" visibility="private"/>
+        <Method name="guardarAsignaturas" returnType="void" visibility="private"/>
+        <Method name="guardarRegistros" returnType="void" visibility="private"/>
+        <Method name="getMaestros" returnType="ArrayList&lt;Maestro&gt;" visibility="public"/>
+        <Method name="getAsignaturas" returnType="ArrayList&lt;Asignatura&gt;" visibility="public"/>
+        <Method name="getAlumnos" returnType="ArrayList&lt;Alumno&gt;" visibility="public"/>
+        <Method name="getRelaciones" returnType="HashMap&lt;Maestro, ArrayList&lt;Curso&gt;&gt;" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Alumno" package="model" visibility="public" xPosition="879.0" yPosition="250.0">
+      <Fields>
+        <Field name="matricula" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="matricula"/>
+          <Argument type="String" name="nombre"/>
+          <Argument type="String" name="apellido"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getMatricula" returnType="int" visibility="public"/>
+        <Method name="setMatricula" returnType="void" visibility="public">
+          <Argument type="int" name="matricula"/>
+        </Method>
+        <Method name="hashCode" returnType="int" visibility="public"/>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Asignatura" package="model" visibility="public" xPosition="547.0" yPosition="524.0">
+      <Fields>
+        <Field name="claveAsignatura" type="int" visibility="private"/>
+        <Field name="nombreAsignatura" type="String" visibility="private"/>
+        <Field name="licenciatura" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="clave"/>
+          <Argument type="String" name="nombreAsignatura"/>
+          <Argument type="String" name="licenciatura"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getClaveAsignatura" returnType="int" visibility="public"/>
+        <Method name="setClaveAsignatura" returnType="void" visibility="public">
+          <Argument type="int" name="claveAsignatura"/>
+        </Method>
+        <Method name="getNombreAsignatura" returnType="String" visibility="public"/>
+        <Method name="setNombreAsignatura" returnType="void" visibility="public">
+          <Argument type="String" name="nombreAsinatura"/>
+        </Method>
+        <Method name="getLicenciatura" returnType="String" visibility="public"/>
+        <Method name="setLicenciatura" returnType="void" visibility="public">
+          <Argument type="String" name="licenciatura"/>
+        </Method>
+        <Method name="getDescripcion" returnType="String" visibility="public"/>
+        <Method name="hashCode" returnType="int" visibility="public"/>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Curso" package="model" visibility="public" xPosition="547.0" yPosition="15.0">
+      <Fields>
+        <Field name="horario" type="Horario" visibility="private"/>
+        <Field name="asignatura" type="Asignatura" visibility="private"/>
+        <Field name="maestro" type="Maestro" visibility="private"/>
+        <Field name="alumnosInscritos" type="ArrayList&lt;Alumno&gt;" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Maestro" name="maestro"/>
+          <Argument type="Asignatura" name="asignatura"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="matricularAlumno" returnType="boolean" visibility="public">
+          <Argument type="Alumno" name="alumno"/>
+        </Method>
+        <Method name="darBajaAlumno" returnType="void" visibility="public">
+          <Argument type="Alumno" name="alumno"/>
+        </Method>
+        <Method name="getInicialesCurso" returnType="String" visibility="public"/>
+        <Method name="obtenerAlumnosOrdenados" returnType="ArrayList&lt;Alumno&gt;" visibility="public"/>
+        <Method name="existeAlumnoMatriculado" returnType="boolean" visibility="public">
+          <Argument type="int" name="matricula"/>
+        </Method>
+        <Method name="getMaestro" returnType="Maestro" visibility="public"/>
+        <Method name="setMaestro" returnType="void" visibility="public">
+          <Argument type="Maestro" name="maestro"/>
+        </Method>
+        <Method name="getHorario" returnType="Horario" visibility="public"/>
+        <Method name="setHorario" returnType="void" visibility="public">
+          <Argument type="Horario" name="horario"/>
+        </Method>
+        <Method name="getAsignatura" returnType="Asignatura" visibility="public"/>
+        <Method name="setAsignatura" returnType="void" visibility="public">
+          <Argument type="Asignatura" name="asignatura"/>
+        </Method>
+        <Method name="getAlumnosInscritos" returnType="ArrayList&lt;Alumno&gt;" visibility="public"/>
+        <Method name="setAlumnos" returnType="void" visibility="public">
+          <Argument type="ArrayList&lt;Alumno&gt;" name="alumnos"/>
+        </Method>
+        <Method name="hashCode" returnType="int" visibility="public"/>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Maestro" package="model" visibility="public" xPosition="879.0" yPosition="15.0">
+      <Fields>
+        <Field name="claveMaestro" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="clave"/>
+          <Argument type="String" name="nombre"/>
+          <Argument type="String" name="apellido"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getClaveMaestro" returnType="int" visibility="public"/>
+        <Method name="setClave" returnType="void" visibility="public">
+          <Argument type="int" name="clave"/>
+        </Method>
+        <Method name="hashCode" returnType="int" visibility="public"/>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Persona" package="model" visibility="public" isAbstract="true" xPosition="1256.0" yPosition="15.0">
+      <Fields>
+        <Field name="nombre" type="String" visibility="package"/>
+        <Field name="apellido" type="String" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="nombre"/>
+          <Argument type="String" name="apellido"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getNombre" returnType="String" visibility="public"/>
+        <Method name="setNombre" returnType="void" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="getApellido" returnType="String" visibility="public"/>
+        <Method name="setApellido" returnType="void" visibility="public">
+          <Argument type="String" name="apellido"/>
+        </Method>
+        <Method name="getNombreCompleto" returnType="String" visibility="public"/>
+        <Method name="getNombreInvertido" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Registro" package="model" visibility="public" xPosition="564.0" yPosition="914.0">
+      <Fields>
+        <Field name="claveMaestro" type="int" visibility="private"/>
+        <Field name="claveAsignatura" type="int" visibility="private"/>
+        <Field name="matricula" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="claveMaestro"/>
+          <Argument type="int" name="claveAsignatura"/>
+          <Argument type="int" name="matricula"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getClaveMaestro" returnType="int" visibility="public"/>
+        <Method name="setClaveMaestro" returnType="void" visibility="public">
+          <Argument type="int" name="claveMaestro"/>
+        </Method>
+        <Method name="getClaveAsignatura" returnType="int" visibility="public"/>
+        <Method name="setClaveAsignatura" returnType="void" visibility="public">
+          <Argument type="int" name="claveAsignatura"/>
+        </Method>
+        <Method name="getMatricula" returnType="int" visibility="public"/>
+        <Method name="setMatricula" returnType="void" visibility="public">
+          <Argument type="int" name="matricula"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Relacion" package="model" visibility="public" xPosition="964.0" yPosition="952.0">
+      <Fields>
+        <Field name="claveMaestro" type="int" visibility="private"/>
+        <Field name="claveAsignatura" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="claveMaestro"/>
+          <Argument type="int" name="claveAsignatura"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getClaveMaestro" returnType="int" visibility="public"/>
+        <Method name="setClaveMaestro" returnType="void" visibility="public">
+          <Argument type="int" name="claveMaestro"/>
+        </Method>
+        <Method name="getClaveAsignatura" returnType="int" visibility="public"/>
+        <Method name="setClaveAsignatura" returnType="void" visibility="public">
+          <Argument type="int" name="claveAsignatura"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="DAO" package="persistence" visibility="public" isAbstract="true" xPosition="1289.0" yPosition="302.0">
+      <Fields>
+        <Field name="FILE" type="File" visibility="protected" isFinal="true"/>
+        <Field name="SALTO_LINEA" type="String" visibility="protected" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="ruta"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="guardarItems" returnType="void" visibility="public" isAbstract="true">
+          <Argument type="E" name="items"/>
+        </Method>
+        <Method name="obtenerItems" returnType="ArrayList&lt;?&gt;" visibility="public" isAbstract="true"/>
+      </Methods>
+    </Class>
+    <Class name="DAOAlumno" package="persistence" visibility="public" xPosition="960.0" yPosition="542.0">
+      <Fields>
+        <Field name="RUTA_ALUMNOS" type="String" visibility="public" isStatic="true" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="guardarItems" returnType="void" visibility="public">
+          <Argument type="ArrayList&lt;Alumno&gt;" name="alumnos"/>
+        </Method>
+        <Method name="obtenerItems" returnType="ArrayList&lt;Alumno&gt;" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="DAOAsignatura" package="persistence" visibility="public" xPosition="1438.0" yPosition="727.0">
+      <Fields>
+        <Field name="RUTA_ASIGNATURAS" type="String" visibility="public" isStatic="true" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="guardarItems" returnType="void" visibility="public">
+          <Argument type="ArrayList&lt;Asignatura&gt;" name="asignaturas"/>
+        </Method>
+        <Method name="obtenerItems" returnType="ArrayList&lt;Asignatura&gt;" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="DAOMaestro" package="persistence" visibility="public" xPosition="1629.0" yPosition="143.0">
+      <Fields>
+        <Field name="RUTA_MAESTROS" type="String" visibility="public" isStatic="true" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="guardarItems" returnType="void" visibility="public">
+          <Argument type="ArrayList&lt;Maestro&gt;" name="maestros"/>
+        </Method>
+        <Method name="obtenerItems" returnType="ArrayList&lt;Maestro&gt;" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="DAORegistros" package="persistence" visibility="public" xPosition="1809.0" yPosition="727.0">
+      <Fields>
+        <Field name="RUTA_REGISTROS" type="String" visibility="public" isStatic="true" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="guardarItems" returnType="void" visibility="public">
+          <Argument type="HashMap&lt;Maestro, ArrayList&lt;Curso&gt;&gt;" name="maestros"/>
+        </Method>
+        <Method name="obtenerItems" returnType="ArrayList&lt;Registro&gt;" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="DAORelaciones" package="persistence" visibility="public" xPosition="1006.0" yPosition="727.0">
+      <Fields>
+        <Field name="RUTA_RELACIONES" type="String" visibility="public" isStatic="true" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="guardarItems" returnType="void" visibility="public">
+          <Argument type="HashMap&lt;Maestro, ArrayList&lt;Curso&gt;&gt;" name="maestros"/>
+        </Method>
+        <Method name="obtenerItems" returnType="ArrayList&lt;Relacion&gt;" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="GeneradorPdf" package="persistence" visibility="public" xPosition="1567.0" yPosition="402.0">
+      <Fields>
+        <Field name="RUTA_REPORTES" type="String" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="SATO_LINEA" type="String" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="generarPdf" returnType="void" visibility="public">
+          <Argument type="Curso" name="curso"/>
+        </Method>
+        <Method name="ponerEncabezado" returnType="void" visibility="private">
+          <Argument type="Paragraph" name="titulo"/>
+          <Argument type="Maestro" name="maestro"/>
+          <Argument type="Curso" name="curso"/>
+        </Method>
+        <Method name="ponerAlumnos" returnType="void" visibility="private">
+          <Argument type="Paragraph" name="listaAlumnos"/>
+          <Argument type="Curso" name="curso"/>
+        </Method>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <IsRelation name="is" source="persistence.DAOAsignatura" target="persistence.DAO"/>
+    <IsRelation name="is" source="persistence.DAOAlumno" target="persistence.DAO"/>
+    <IsRelation name="is" source="persistence.DAOMaestro" target="persistence.DAO"/>
+    <IsRelation name="is" source="model.Alumno" target="model.Persona"/>
+    <IsRelation name="is" source="model.Maestro" target="model.Persona"/>
+    <IsRelation name="is" source="persistence.DAORegistros" target="persistence.DAO"/>
+    <IsRelation name="is" source="persistence.DAORelaciones" target="persistence.DAO"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

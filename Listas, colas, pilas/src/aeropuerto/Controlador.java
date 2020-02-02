@@ -1,6 +1,5 @@
 package aeropuerto;
 
-import com.sun.istack.internal.NotNull;
 import excepciones.DequeEmptyException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,10 +13,10 @@ import javax.swing.*;
 public class Controlador implements ActionListener
 {
 
-    private Interfaz vista;
+    private VistaPrincipal vista;
     private Aeropuerto aeropuerto;
 
-    public Controlador(Interfaz vista)
+    public Controlador(VistaPrincipal vista)
     {
         this.vista = vista;
         aeropuerto = new Aeropuerto();
@@ -36,7 +35,7 @@ public class Controlador implements ActionListener
     }
 
     @Override
-    public void actionPerformed(@NotNull ActionEvent e)
+    public void actionPerformed(ActionEvent e)
     {
         try
         {
