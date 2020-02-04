@@ -31,7 +31,6 @@ public class Controlador implements ActionListener
 
         vista.getSiguienteVuelo().setEnabled(false);
         vista.getEliminarUnVuelo().setEnabled(false);
-
         repintar();
     }
 
