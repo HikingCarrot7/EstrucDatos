@@ -9,7 +9,7 @@ public class PruebaAeropuerto
     {
         EventQueue.invokeLater(() ->
         {
-            Interfaz vista = new Interfaz();
+            VistaPrincipal vista = new VistaPrincipal();
             vista.setLocationRelativeTo(null);
             vista.setVisible(true);
             new Controlador(vista);

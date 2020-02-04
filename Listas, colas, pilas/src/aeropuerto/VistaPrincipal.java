@@ -8,10 +8,10 @@ import javax.swing.JInternalFrame;
  *
  * @author HikingCarrot7
  */
-public class Interfaz extends javax.swing.JFrame
+public class VistaPrincipal extends javax.swing.JFrame
 {
 
-    public Interfaz()
+    public VistaPrincipal()
     {
         initWindow();
         initComponents();
@@ -56,10 +56,8 @@ public class Interfaz extends javax.swing.JFrame
         eliminarUnVuelo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(700, 600));
         setMinimumSize(new java.awt.Dimension(700, 600));
-        setPreferredSize(new java.awt.Dimension(700, 600));
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(null);
 
         siguienteVuelo.setText("Siguiente vuelo");
         siguienteVuelo.setToolTipText("Eliminar el siguiente vuelo.");
@@ -67,7 +65,8 @@ public class Interfaz extends javax.swing.JFrame
         siguienteVuelo.setMaximumSize(new java.awt.Dimension(120, 30));
         siguienteVuelo.setMinimumSize(new java.awt.Dimension(120, 30));
         siguienteVuelo.setPreferredSize(new java.awt.Dimension(120, 30));
-        getContentPane().add(siguienteVuelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 50, -1, -1));
+        getContentPane().add(siguienteVuelo);
+        siguienteVuelo.setBounds(560, 50, 120, 30);
 
         panel.setEnabled(false);
         panel.setMaximumSize(new java.awt.Dimension(545, 545));
@@ -116,7 +115,8 @@ public class Interfaz extends javax.swing.JFrame
             .addComponent(panelEsquema, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        getContentPane().add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 5, -1, -1));
+        getContentPane().add(panel);
+        panel.setBounds(5, 5, 545, 545);
 
         generarVuelos.setText("Generar vuelos");
         generarVuelos.setToolTipText("Genera los vuelos.");
@@ -124,7 +124,8 @@ public class Interfaz extends javax.swing.JFrame
         generarVuelos.setMaximumSize(new java.awt.Dimension(120, 30));
         generarVuelos.setMinimumSize(new java.awt.Dimension(120, 30));
         generarVuelos.setPreferredSize(new java.awt.Dimension(120, 30));
-        getContentPane().add(generarVuelos, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 10, -1, -1));
+        getContentPane().add(generarVuelos);
+        generarVuelos.setBounds(560, 10, 120, 30);
 
         eliminarUnVuelo.setText("Eliminar vuelo");
         eliminarUnVuelo.setToolTipText("Elimina un vuelo en un índice especificado.");
@@ -132,7 +133,8 @@ public class Interfaz extends javax.swing.JFrame
         eliminarUnVuelo.setMaximumSize(new java.awt.Dimension(120, 30));
         eliminarUnVuelo.setMinimumSize(new java.awt.Dimension(120, 30));
         eliminarUnVuelo.setPreferredSize(new java.awt.Dimension(120, 30));
-        getContentPane().add(eliminarUnVuelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 90, -1, -1));
+        getContentPane().add(eliminarUnVuelo);
+        eliminarUnVuelo.setBounds(560, 90, 120, 30);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
