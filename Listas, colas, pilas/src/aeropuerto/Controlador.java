@@ -100,7 +100,7 @@ public class Controlador implements ActionListener
 
     public boolean entradaValida(String text, String regex)
     {
-        return text.matches(regex);
+        return text.matches(regex) && Integer.parseInt(text) > 0 && Integer.parseInt(text) <= 10000;
     }
 
     private void repintar()
