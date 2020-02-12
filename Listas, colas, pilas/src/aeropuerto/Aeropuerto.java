@@ -3,15 +3,19 @@ package aeropuerto;
 import deque.DequeList;
 import dequestack.DequeStack;
 import excepciones.DequeEmptyException;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 
 public class Aeropuerto
 {
 
     private final DequeList<Vuelo> VUELOS;
+    private PropertyChangeSupport propertyChangeSupport;
 
     public Aeropuerto()
     {
         VUELOS = new DequeList<>();
+        propertyChangeSupport = new PropertyChangeSupport(this);
     }
 
     public void generarVuelos(int numeroVuelos)
@@ -24,9 +28,9 @@ public class Aeropuerto
                 clave = (int) (Math.random() * numeroVuelos * 100);
             while (existeClaveVuelo(clave));
 
+            propertyChangeSupport.firePropertyChange("progress", 0, (VUELOS.size() + 1) * 100 / numeroVuelos);
             VUELOS.insertLast(new Vuelo(clave));
         }
-
     }
 
     public void eliminarVueloAt(int index) throws DequeEmptyException
@@ -90,6 +94,16 @@ public class Aeropuerto
         }
 
         return copiaDeLosVuelos;
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener p)
+    {
+        propertyChangeSupport.addPropertyChangeListener(p);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener p)
+    {
+        propertyChangeSupport.removePropertyChangeListener(p);
     }
 
     public boolean existenVuelosEnCola()
