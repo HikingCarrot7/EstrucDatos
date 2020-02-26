@@ -18,7 +18,6 @@ public class MergeSort
         };
 
         System.out.println(Arrays.toString(mergeSort(list)));
-
     }
 
     public static <E extends Comparable<E>> E[] mergeSort(E[] data)
