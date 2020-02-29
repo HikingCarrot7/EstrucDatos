@@ -11,6 +11,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -159,11 +160,17 @@
         </VBox>
         <VBox>
             <children>
-                <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Listado ordenado:">
-                    <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                    </padding>
-                </Label>
+            <HBox alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
+               <children>
+                      <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Listado ordenado:">
+                          <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                          </padding>
+                      </Label>
+                  <Region maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                  <Button mnemonicParsing="false" text="Refresh" />
+               </children>
+            </HBox>
                 <TableView fx:id="tablaListaOrdenada">
                     <columns>
                         <TableColumn prefWidth="106.0" text="Nombre" />
@@ -184,11 +191,17 @@
         </VBox>
         <VBox>
             <children>
-                <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Archivos encontrados:">
-                    <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                    </padding>
-                </Label>
+            <HBox alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
+               <children>
+                      <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Archivos encontrados:">
+                          <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                          </padding>
+                      </Label>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button mnemonicParsing="false" text="Refresh" />
+               </children>
+            </HBox>
                 <TableView fx:id="tablaListaEncontrada">
                     <columns>
                         <TableColumn prefWidth="75.0" text="Nombre" />
