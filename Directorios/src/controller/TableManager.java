@@ -8,19 +8,27 @@ import javafx.scene.control.TableView;
  *
  * @author HikingCarrot7
  */
-public class TableManager
+public class TableManager<E>
 {
 
-    public void rellenarTabla(ObservableList<Directorio> directorios, TableView<Directorio> table)
+    public void rellenarTabla(ObservableList<E> directorios, TableView<E> table)
     {
         table.setItems(directorios);
         table.refresh();
     }
 
-    public void limpiarTabla(TableView<Directorio> table)
+    public void rellenarTabla(E item, TableView<E> table)
+    {
+        table.getItems().clear();
+        table.getItems().add(item);
+        table.refresh();
+    }
+
+    public void limpiarTabla(TableView<E> table)
     {
         table.getItems().clear();
         table.setItems(FXCollections.observableArrayList());
         table.refresh();
     }
+
 }

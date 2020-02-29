@@ -26,10 +26,13 @@ public class DirectoryManager
 
     }
 
-    public void obtenerArchivosDirectorio(File file)
+    public void obtenerArchivosDirectorio(ObservableList<Directorio> directorios, File file)
     {
         for (String direc : file.list())
-            System.out.println(direc);
+        {
+            File f = new File(file.getAbsolutePath(), direc);
+            directorios.add(new Directorio(f.getName(), f.getAbsolutePath(), new Date(f.lastModified()).toString()));
+        }
     }
 
 }

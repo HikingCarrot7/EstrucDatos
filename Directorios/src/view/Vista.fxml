@@ -11,7 +11,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -35,10 +34,10 @@
                         <Insets />
                     </HBox.margin>
                 </Label>
-                <TextField fx:id="entradaArchivo" prefWidth="300.0" />
-                <Button fx:id="buscar" mnemonicParsing="false" onAction="#busqueda" text="Buscar">
+                <TextField fx:id="entradaArchivo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyPressed="#buscarArchivo" HBox.hgrow="ALWAYS" />
+                <Button fx:id="buscar" mnemonicParsing="false" onAction="#nuevaBusqueda" prefWidth="106.0" text="Nueva búsqueda">
                     <HBox.margin>
-                        <Insets left="20.0" />
+                        <Insets left="20.0" right="50.0" />
                     </HBox.margin>
                 </Button>
             </children>
@@ -56,10 +55,10 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                     </padding>
                 </Label>
-            <VBox>
+            <VBox HBox.hgrow="ALWAYS">
                <children>
-                      <TextField fx:id="entradaDirectorio" onKeyPressed="#analizarEntradaDirectorio" prefWidth="300.0" />
-                      <CheckBox fx:id="incluirSubcarpetas" mnemonicParsing="false" text="Incluir subcarpetas">
+                      <TextField fx:id="entradaDirectorio" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyPressed="#analizarEntradaDirectorio" VBox.vgrow="ALWAYS" />
+                      <CheckBox fx:id="incluirSubcarpetas" mnemonicParsing="false" selected="true" text="Incluir subcarpetas">
                      <padding>
                         <Insets bottom="5.0" right="5.0" top="5.0" />
                      </padding>
@@ -71,7 +70,7 @@
             </VBox>
             <Button fx:id="buscarDirectorio" mnemonicParsing="false" onAction="#seleccionarDirectorio" text="Buscar directorio">
                <HBox.margin>
-                  <Insets left="20.0" />
+                  <Insets left="20.0" right="50.0" />
                </HBox.margin>
             </Button>
             </children>
@@ -162,13 +161,11 @@
             <children>
             <HBox alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
                <children>
-                      <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Listado ordenado:">
+                      <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Listado ordenado:" HBox.hgrow="ALWAYS">
                           <padding>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                           </padding>
                       </Label>
-                  <Region maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" text="Refresh" />
                </children>
             </HBox>
                 <TableView fx:id="tablaListaOrdenada">
@@ -191,15 +188,13 @@
         </VBox>
         <VBox>
             <children>
-            <HBox alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
+            <HBox alignment="TOP_CENTER">
                <children>
-                      <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Archivos encontrados:">
+                      <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Archivos encontrados:" HBox.hgrow="ALWAYS">
                           <padding>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                           </padding>
                       </Label>
-                  <Region HBox.hgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" text="Refresh" />
                </children>
             </HBox>
                 <TableView fx:id="tablaListaEncontrada">
