@@ -69,6 +69,10 @@ public class VistaController implements Initializable
     private Button buscarDirectorio;
     @FXML
     private Label reloj;
+    @FXML
+    private Button actualizar;
+    @FXML
+    private Button cancelar;
 
     private DirectoryManager directoryManager;
     private TableManager<Directorio> tableManager;
@@ -139,6 +143,30 @@ public class VistaController implements Initializable
             entradaDirectorio.setText(file.getAbsolutePath());
             procesarDirectorios(file);
         }
+
+    }
+
+    /**
+     * Método que se llama cuándo se presiona una tecla en el {@link TextField} para insertar el nombre del archivo que queremos buscar.
+     *
+     * @param e El {@link KeyEvent} que se crea al realizar la acción anterior.
+     */
+    @FXML
+    private void buscarArchivo(KeyEvent e)
+    {
+        if (e.getCode() == KeyCode.ENTER)
+            iniciarProcesamientoDirectorios();
+    }
+
+    @FXML
+    private void actualizar(ActionEvent e)
+    {
+        iniciarProcesamientoDirectorios();
+    }
+
+    @FXML
+    private void cancelar(ActionEvent event)
+    {
 
     }
 
@@ -236,36 +264,21 @@ public class VistaController implements Initializable
     private void analizarEntradaDirectorio(KeyEvent e)
     {
         if (e.getCode() == KeyCode.ENTER)
-        {
-            File file = new File(getEntradaRutaDirectorio());
-
-            if (file.exists())
-                procesarDirectorios(file);
-
-            else
-                mostrarError("La ruta que insertó no existe.");
-        }
-
+            iniciarProcesamientoDirectorios();
     }
 
     /**
-     * Método que se llama cuándo se presiona una tecla en el {@link TextField} para insertar el nombre del archivo que queremos buscar.
-     *
-     * @param e El {@link KeyEvent} que se crea al realizar la acción anterior.
+     * Inicia el proceso para buscar y ordenar los directorios de la ruta insertada.
      */
-    @FXML
-    private void buscarArchivo(KeyEvent e)
+    private void iniciarProcesamientoDirectorios()
     {
-        if (e.getCode() == KeyCode.ENTER)
-        {
-            File file = new File(getEntradaRutaDirectorio());
+        File file = new File(getEntradaRutaDirectorio());
 
-            if (file.exists())
-                procesarDirectorios(file);
+        if (file.exists())
+            procesarDirectorios(file);
 
-            else
-                mostrarError("La ruta que insertó no existe.");
-        }
+        else
+            mostrarError("La ruta que insertó no existe.");
     }
 
     /**

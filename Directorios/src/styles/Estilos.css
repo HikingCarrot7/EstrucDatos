@@ -1,0 +1,73 @@
+/*
+    Created on : 29/02/2020, 02:23:19 PM
+    Author     : HikingCarrot7
+*/
+
+.root
+{
+    -fx-font-family: 'Helvetica Neue';
+    -fx-font-size: 13px;
+    -fx-font-style: normal;
+    -fx-font-weight: normal;
+}
+
+.button-effect
+{
+    -fx-background-color: gainsboro;
+}
+
+.button-effect:hover
+{
+    -fx-background-color: gray;
+    -fx-text-fill: white;
+
+    /*-fx-skin: 'controller.MyButtonSkin';*/
+
+    /*-fx-background-color: linear-gradient(to bottom, derive(-fx-text-box-border, -10%), -fx-text-box-border),
+        linear-gradient(from 0px 0px to 0px 5px, derive(-fx-control-inner-background, -9%), -fx-control-inner-background);*/
+
+    /*-fx-background-color:
+        -fx-focus-color,
+        -fx-control-inner-background,
+        -fx-faint-focus-color,
+        linear-gradient(from 0px 0px to 0px 5px, derive(-fx-control-inner-background, -9%), -fx-control-inner-background);*/
+
+}
+
+.button-effect:pressed
+{
+    -fx-background-color: gray;
+    -fx-text-fill: white;
+    -fx-rotate: 3;
+
+    /*-fx-skin: 'controller.MyButtonSkin';*/
+
+    /*-fx-background-color: linear-gradient(to bottom, derive(-fx-text-box-border, -10%), -fx-text-box-border),
+        linear-gradient(from 0px 0px to 0px 5px, derive(-fx-control-inner-background, -9%), -fx-control-inner-background);*/
+
+    /*-fx-background-color:
+        -fx-focus-color,
+        -fx-control-inner-background,
+        -fx-faint-focus-color,
+        linear-gradient(from 0px 0px to 0px 5px, derive(-fx-control-inner-background, -9%), -fx-control-inner-background);*/
+
+}
+
+.button-cancelar
+{
+    -fx-background-color: tomato;
+    -fx-text-fill: white;
+}
+
+.button-cancelar:pressed
+{
+    -fx-background-color: red;
+    -fx-text-fill: white;
+    -fx-rotate: 3;
+}
+
+.button-cancelar:hover
+{
+    -fx-background-color: red;
+    -fx-text-fill: white;
+}

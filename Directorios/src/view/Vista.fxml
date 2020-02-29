@@ -12,19 +12,10 @@
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.VistaController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.VistaController">
     <children>
-        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Directorios">
-            <font>
-                <Font name="System Bold" size="14.0" />
-            </font>
-            <padding>
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-            </padding>
-        </Label>
-        <HBox alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
+        <HBox alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
             <children>
                 <Label prefWidth="80.0" text="Archivo:">
                     <padding>
@@ -34,8 +25,47 @@
                         <Insets />
                     </HBox.margin>
                 </Label>
-                <TextField fx:id="entradaArchivo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyPressed="#buscarArchivo" HBox.hgrow="ALWAYS" />
-                <Button fx:id="buscar" mnemonicParsing="false" onAction="#nuevaBusqueda" prefWidth="106.0" text="Nueva búsqueda">
+                <TextField fx:id="entradaArchivo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyPressed="#buscarArchivo" promptText="Inserte el nombre del archivo..." HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin></TextField>
+                <Button fx:id="buscar" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#nuevaBusqueda" styleClass="button-effect" text="Nueva búsqueda" HBox.hgrow="ALWAYS">
+                    <HBox.margin>
+                        <Insets left="20.0" right="50.0" />
+                    </HBox.margin>
+                </Button>
+            </children>
+            <VBox.margin>
+                <Insets top="10.0" />
+            </VBox.margin>
+            <padding>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </padding>
+        </HBox>
+        <HBox alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+            <children>
+                <Label prefWidth="80.0" text="Directorio:">
+                    <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </padding>
+                </Label>
+                <VBox HBox.hgrow="ALWAYS">
+                    <children>
+                        <TextField fx:id="entradaDirectorio" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyPressed="#analizarEntradaDirectorio" promptText="Inserte el directorio..." VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets right="5.0" />
+                     </VBox.margin></TextField>
+                        <CheckBox fx:id="incluirSubcarpetas" mnemonicParsing="false" selected="true" text="Incluir subcarpetas">
+                            <padding>
+                                <Insets bottom="5.0" right="5.0" top="5.0" />
+                            </padding>
+                            <VBox.margin>
+                                <Insets top="5.0" />
+                            </VBox.margin>
+                        </CheckBox>
+                    </children>
+                </VBox>
+                <Button fx:id="buscarDirectorio" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#seleccionarDirectorio" styleClass="button-effect" text="Buscar directorio" HBox.hgrow="ALWAYS">
                     <HBox.margin>
                         <Insets left="20.0" right="50.0" />
                     </HBox.margin>
@@ -48,46 +78,27 @@
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
             </padding>
         </HBox>
-        <HBox VBox.vgrow="ALWAYS">
-            <children>
-                <Label prefWidth="80.0" text="Directorio:">
-                    <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                    </padding>
-                </Label>
-            <VBox HBox.hgrow="ALWAYS">
-               <children>
-                      <TextField fx:id="entradaDirectorio" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyPressed="#analizarEntradaDirectorio" VBox.vgrow="ALWAYS" />
-                      <CheckBox fx:id="incluirSubcarpetas" mnemonicParsing="false" selected="true" text="Incluir subcarpetas">
-                     <padding>
-                        <Insets bottom="5.0" right="5.0" top="5.0" />
-                     </padding>
-                     <VBox.margin>
-                        <Insets top="5.0" />
-                     </VBox.margin>
-                      </CheckBox>
-               </children>
-            </VBox>
-            <Button fx:id="buscarDirectorio" mnemonicParsing="false" onAction="#seleccionarDirectorio" text="Buscar directorio">
-               <HBox.margin>
-                  <Insets left="20.0" right="50.0" />
-               </HBox.margin>
-            </Button>
-            </children>
-            <VBox.margin>
-                <Insets />
-            </VBox.margin>
-            <padding>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-            </padding>
-        </HBox>
         <VBox>
             <children>
-                <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Tipo de ordenamiento:">
-                    <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                    </padding>
-                </Label>
+            <HBox>
+               <children>
+                      <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Tipo de ordenamiento:" HBox.hgrow="ALWAYS">
+                          <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                          </padding>
+                      </Label>
+                  <Button fx:id="actualizar" contentDisplay="CENTER" mnemonicParsing="false" onAction="#actualizar" styleClass="button-effect" text="Actualizar">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="cancelar" cancelButton="true" contentDisplay="CENTER" mnemonicParsing="false" onAction="#cancelar" styleClass="button-cancelar" text="Cancelar">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
                 <HBox>
                     <children>
                         <RadioButton fx:id="burbuja" mnemonicParsing="false" selected="true" text="Burbuja">
@@ -141,13 +152,16 @@
                                 <Insets left="5.0" />
                             </HBox.margin>
                         </RadioButton>
-                  <Separator orientation="VERTICAL" />
-                  <Label fx:id="reloj">
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                  </Label>
+                        <Separator orientation="VERTICAL" />
+                        <Label fx:id="reloj">
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </padding>
+                        </Label>
                     </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
                 </HBox>
             </children>
             <VBox.margin>
@@ -159,15 +173,15 @@
         </VBox>
         <VBox>
             <children>
-            <HBox alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
-               <children>
-                      <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Listado ordenado:" HBox.hgrow="ALWAYS">
-                          <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                          </padding>
-                      </Label>
-               </children>
-            </HBox>
+                <HBox alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
+                    <children>
+                        <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Listado ordenado:" HBox.hgrow="ALWAYS">
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </padding>
+                        </Label>
+                    </children>
+                </HBox>
                 <TableView fx:id="tablaListaOrdenada">
                     <columns>
                         <TableColumn prefWidth="106.0" text="Nombre" />
@@ -179,7 +193,7 @@
                     </columnResizePolicy>
                 </TableView>
             </children>
-            <VBox.margin> 
+            <VBox.margin>
                 <Insets />
             </VBox.margin>
             <padding>
@@ -188,15 +202,15 @@
         </VBox>
         <VBox>
             <children>
-            <HBox alignment="TOP_CENTER">
-               <children>
-                      <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Archivos encontrados:" HBox.hgrow="ALWAYS">
-                          <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                          </padding>
-                      </Label>
-               </children>
-            </HBox>
+                <HBox alignment="TOP_CENTER">
+                    <children>
+                        <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Archivos encontrados:" HBox.hgrow="ALWAYS">
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </padding>
+                        </Label>
+                    </children>
+                </HBox>
                 <TableView fx:id="tablaListaEncontrada">
                     <columns>
                         <TableColumn prefWidth="75.0" text="Nombre" />
