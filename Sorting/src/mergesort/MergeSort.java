@@ -1,6 +1,8 @@
 package mergesort;
 
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.stream.Stream;
 
 /**
  *
@@ -11,7 +13,6 @@ public class MergeSort
 
     public static void main(String[] args)
     {
-
         String[] list = new String[]
         {
             "Javier", "Nicolás", "Guillermo", "Charly", "Eusebio", "Oscar", "Chomsky"
@@ -19,6 +20,13 @@ public class MergeSort
 
         System.out.println(Arrays.toString(mergeSort(list)));
 
+        System.out.println(
+                Stream.of(1, 2, 3, 4, 5, 6)
+                        .filter(x -> x >= 5)
+                        .map(x -> x * 2)
+                        .sorted()
+                        .min(Comparator.comparing(Integer::valueOf))
+                        .get());
     }
 
     public static <E extends Comparable<E>> E[] mergeSort(E[] data)
