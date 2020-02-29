@@ -1,8 +1,12 @@
 package controller;
 
+import java.util.Arrays;
 import javafx.collections.ObservableList;
 import model.BubbleSort;
 import model.InsertionSort;
+import model.MergeSort;
+import model.QuickSort;
+import model.ShellSort;
 
 /**
  *
@@ -30,10 +34,34 @@ public class SorterManager
                 BubbleSort.bubbleSort(directorios);
                 break;
 
+            case CLAVE_SHELL_SORT:
+                ShellSort.shellsort(directorios);
+                break;
+            case CLAVE_MERGE_SORT:
+                Directorio[] arrayDirectorios = getArrayDirectorios(directorios);
+                directorios.clear();
+                directorios.setAll(Arrays.asList(MergeSort.mergeSort(arrayDirectorios)));
+                break;
+            case CLAVE_QUICK_SORT:
+                QuickSort.quicksort(directorios);
+                break;
+            case CLAVE_MEZCLA_DIRECTA:
+
+                break;
             default:
                 throw new AssertionError();
         }
 
+    }
+
+    private static Directorio[] getArrayDirectorios(ObservableList<Directorio> directorios)
+    {
+        Directorio[] dir = new Directorio[directorios.size()];
+
+        for (int i = 0; i < directorios.size(); i++)
+            dir[i] = directorios.get(i);
+
+        return dir;
     }
 
 }

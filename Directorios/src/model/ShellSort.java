@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 /**
  *
  * @author HikingCarrot7
@@ -28,6 +30,40 @@ public class ShellSort
                         E aux = arreglo[i];
                         arreglo[i] = arreglo[i + intervalo];
                         arreglo[i + intervalo] = aux;
+
+                        band = true;
+                    }
+
+                    i++;
+                }
+
+            }
+
+        }
+
+    }
+
+    public static <E extends Comparable<E>> void shellsort(List<E> array)
+    {
+        int intervalo = array.size();
+        boolean band;
+
+        while (intervalo > 0)
+        {
+            intervalo /= 2;
+            band = true;
+
+            while (band)
+            {
+                band = false;
+                int i = 0;
+                while ((i + intervalo) <= array.size() - 1)
+                {
+                    if (array.get(i).compareTo(array.get(i + intervalo)) > 0)
+                    {
+                        E temp = array.get(i);
+                        array.set(i, array.get(i + intervalo));
+                        array.set(i + intervalo, temp);
 
                         band = true;
                     }
