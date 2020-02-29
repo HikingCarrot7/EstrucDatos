@@ -9,75 +9,51 @@ import java.util.List;
 public class QuickSort
 {
 
-    public static <E extends Comparable<E>> void quicksort(List<E> array)
+    public static <E extends Comparable<E>> List<E> quicksort(List<E> array)
     {
-        quicksortHelper(array, 0, array.size() - 1);
+        return quicksortHelper(array, 0, array.size() - 1);
     }
 
-    public static <E extends Comparable<E>> void quicksortHelper(E[] array, int left, int right)
+    protected static <E extends Comparable<E>> List<E> quicksortHelper(List<E> array, int izq, int der)
     {
-        int lo = left;
-        int hi = right;
+        if (izq >= der)
+            return array;
 
-        if (lo >= right)
-            return;
+        int i = izq, d = der;
 
-        E midPoint = array[(lo + hi) / 2];
-
-        while (lo < hi)
+        if (izq != der)
         {
-            while (lo < hi && array[lo].compareTo(midPoint) < 0)
-                lo++;
+            int pivote = izq;
 
-            while (lo < hi && array[hi].compareTo(midPoint) > 0)
-                hi--;
-
-            if (lo < hi)
+            while (izq != der)
             {
-                E temp = array[lo];
-                array[lo] = array[hi];
-                array[hi] = temp;
+                while (array.get(der).compareTo(array.get(pivote)) >= 0 && izq < der)
+                    der--;
+
+                while (array.get(izq).compareTo(array.get(pivote)) < 0 && izq < der)
+                    izq++;
+
+                if (der != izq)
+                    swap(array, der, izq);
             }
-        }
 
-        if (hi < lo)
-            lo = hi;
+            if (izq == der)
+            {
+                quicksortHelper(array, i, izq - 1);
+                quicksortHelper(array, izq + 1, d);
+            }
 
-        quicksortHelper(array, left, lo);
-        quicksortHelper(array, lo == left ? lo + 1 : lo, right);
+        } else
+            return array;
+
+        return array;
     }
 
-    public static <E extends Comparable<E>> void quicksortHelper(List<E> array, int left, int right)
+    public static <T> void swap(List<T> array, int i, int j)
     {
-        int lo = left;
-        int hi = right;
-
-        if (lo >= right)
-            return;
-
-        E midPoint = array.get((lo + hi) / 2);
-
-        while (lo < hi)
-        {
-            while (lo < hi && array.get(lo).compareTo(midPoint) < 0)
-                lo++;
-
-            while (lo < hi && array.get(hi).compareTo(midPoint) > 0)
-                hi--;
-
-            if (lo < hi)
-            {
-                E temp = array.get(lo);
-                array.set(lo, array.get(hi));
-                array.set(hi, temp);
-            }
-        }
-
-        if (hi < lo)
-            lo = hi;
-
-        QuickSort.quicksortHelper(array, left, lo);
-        QuickSort.quicksortHelper(array, lo == left ? lo + 1 : lo, right);
+        T temp = array.get(i);
+        array.set(i, array.get(j));
+        array.set(j, temp);
     }
 
 }
