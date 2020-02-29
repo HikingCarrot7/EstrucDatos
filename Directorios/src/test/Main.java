@@ -1,6 +1,5 @@
 package test;
 
-import java.io.File;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -29,28 +28,13 @@ public class Main extends Application
             loader.setLocation(Main.class.getResource("/view/Vista.fxml"));
             Pane ventana = (Pane) loader.load();
             Scene scene = new Scene(ventana);
+
             primaryStage.setScene(scene);
             primaryStage.show();
 
         } catch (IOException ex)
         {
             System.out.println(ex.getMessage());
-        }
-
-    }
-
-    public void getDirectorios(File file)
-    {
-        for (String direc : file.list())
-        {
-            File f = new File(file.getAbsolutePath(), direc);
-
-            if (f.isDirectory())
-                getDirectorios(f);
-
-            else
-                System.out.println(f.getAbsolutePath());
-
         }
 
     }
