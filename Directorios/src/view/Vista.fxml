@@ -25,10 +25,19 @@
                         <Insets />
                     </HBox.margin>
                 </Label>
-                <TextField fx:id="entradaArchivo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyPressed="#buscarArchivo" promptText="Inserte el nombre del archivo..." HBox.hgrow="ALWAYS">
-               <HBox.margin>
-                  <Insets right="5.0" />
-               </HBox.margin></TextField>
+            <VBox HBox.hgrow="ALWAYS">
+               <children>
+                      <TextField fx:id="entradaArchivo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyPressed="#buscarArchivo" promptText="Inserte el nombre del archivo..." VBox.vgrow="ALWAYS" />
+                  <CheckBox fx:id="todasCoincidencias" mnemonicParsing="false" selected="true" text="Incluir todas las coincidencias">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </CheckBox>
+               </children>
+            </VBox>
                 <Button fx:id="buscar" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#nuevaBusqueda" styleClass="button-effect" text="Nueva búsqueda" HBox.hgrow="ALWAYS">
                     <HBox.margin>
                         <Insets left="20.0" right="50.0" />
@@ -72,7 +81,7 @@
                 </Button>
             </children>
             <VBox.margin>
-                <Insets />
+                <Insets top="5.0" />
             </VBox.margin>
             <padding>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

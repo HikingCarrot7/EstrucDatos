@@ -50,6 +50,8 @@ public class VistaController implements Initializable
     @FXML
     private CheckBox incluirSubcarpetas;
     @FXML
+    private CheckBox todasCoincidencias;
+    @FXML
     private RadioButton burbuja;
     @FXML
     private RadioButton insercion;
@@ -117,7 +119,7 @@ public class VistaController implements Initializable
     }
 
     /**
-     * Método que se llama cuando presionamos el botón <em>Buscar</em>.
+     * Método llamado cuando presionamos el botón <em>Buscar</em>.
      *
      * @param e El {@link ActionEvent} que se crea al realizar la acción anterior.
      */
@@ -128,7 +130,7 @@ public class VistaController implements Initializable
     }
 
     /**
-     * Método que se llama cuando presionamos el botón <em>Buscar directorio</em>.
+     * Método llamado cuando presionamos el botón <em>Buscar directorio</em>.
      *
      * @param e El {@link ActionEvent} que se crea al realizar la acción anterior.
      */
@@ -146,7 +148,7 @@ public class VistaController implements Initializable
     }
 
     /**
-     * Método que se llama cuándo se presiona una tecla en el {@link TextField} para insertar el nombre del archivo que queremos buscar.
+     * Método llamado cuándo se presiona una tecla en el {@link TextField} para insertar el nombre del archivo que queremos buscar.
      *
      * @param e El {@link KeyEvent} que se crea al realizar la acción anterior.
      */
@@ -181,7 +183,6 @@ public class VistaController implements Initializable
      */
     private void procesarDirectorios(File file)
     {
-
         limpiarTablas();
 
         /**
