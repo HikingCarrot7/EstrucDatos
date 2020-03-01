@@ -256,7 +256,7 @@ public class VistaController implements Initializable
     }
 
     /**
-     * Método que se llama cuándo se presiona una tecla en el {@link TextField} para insertar la ruta del directorio.
+     * Método que se llama cuando se presiona una tecla en el {@link TextField} para insertar la ruta del directorio.
      *
      * @param e El {@link KeyEvent} que se crea al realizar la acción anterior.
      */
@@ -308,7 +308,7 @@ public class VistaController implements Initializable
     /**
      * Rellena la tabla con los registros encontrados en la ruta especificada.
      *
-     * @param directorios Los directorios encontrados.
+     * @param directorios La {@link ObservableList} de los directorios.
      */
     private void rellenarTablaDirectoriosEncontrados(ObservableList<Directorio> directorios)
     {
@@ -318,7 +318,7 @@ public class VistaController implements Initializable
     /**
      * Procede a buscar cuál {@link RadioButton} está seleccionado para aplicar el método de ordenamiento adecuando.
      *
-     * @param directorios La lista de directorios.
+     * @param directorios La {@link ObservableList} de los directorios.
      */
     public void ordenarDirectorios(ObservableList<Directorio> directorios)
     {
