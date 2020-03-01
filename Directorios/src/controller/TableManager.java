@@ -1,6 +1,5 @@
 package controller;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
 
@@ -27,7 +26,6 @@ public class TableManager<E>
     public void limpiarTabla(TableView<E> table)
     {
         table.getItems().clear();
-        table.setItems(FXCollections.observableArrayList());
         table.refresh();
     }
 

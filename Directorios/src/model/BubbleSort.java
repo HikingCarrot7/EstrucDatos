@@ -9,7 +9,7 @@ import java.util.List;
 public class BubbleSort
 {
 
-    public static <T extends Comparable<T>> void bubbleSort(T[] array)
+    public static <T extends Comparable<T>> void bubbleSort(T[] array) throws InterruptedException
     {
         boolean isSorted = false;
 
@@ -25,12 +25,15 @@ public class BubbleSort
                     isSorted = false;
                 }
 
+            if (Thread.currentThread().isInterrupted())
+                throw new InterruptedException("El ordenamiento fue cancelado.");
+
             lastSorted--;
         }
 
     }
 
-    public static <T extends Comparable<T>> void bubbleSort(List<T> array)
+    public static <T extends Comparable<T>> void bubbleSort(List<T> array) throws InterruptedException
     {
         boolean isSorted = false;
 
@@ -45,6 +48,9 @@ public class BubbleSort
                     swap(array, i, i + 1);
                     isSorted = false;
                 }
+
+            if (Thread.currentThread().isInterrupted())
+                throw new InterruptedException("El ordenamiento fue cancelado.");
 
             lastSorted--;
         }

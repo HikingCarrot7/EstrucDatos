@@ -9,7 +9,7 @@ import java.util.List;
 public class ShellSort
 {
 
-    public static <E extends Comparable<E>> void shellsort(E[] arreglo)
+    public static <E extends Comparable<E>> void shellsort(E[] arreglo) throws InterruptedException
     {
         int intervalo = arreglo.length;
         boolean band;
@@ -23,8 +23,12 @@ public class ShellSort
             {
                 band = false;
                 int i = 0;
+
                 while ((i + intervalo) <= arreglo.length - 1)
                 {
+                    if (Thread.currentThread().isInterrupted())
+                        throw new InterruptedException("El ordenamiento fue cancelado.");
+
                     if (arreglo[i].compareTo(arreglo[i + intervalo]) > 0)
                     {
                         E aux = arreglo[i];
@@ -43,7 +47,7 @@ public class ShellSort
 
     }
 
-    public static <E extends Comparable<E>> void shellsort(List<E> array)
+    public static <E extends Comparable<E>> void shellsort(List<E> array) throws InterruptedException
     {
         int intervalo = array.size();
         boolean band;
@@ -57,8 +61,12 @@ public class ShellSort
             {
                 band = false;
                 int i = 0;
+
                 while ((i + intervalo) <= array.size() - 1)
                 {
+                    if (Thread.currentThread().isInterrupted())
+                        throw new InterruptedException("El ordenamiento fue cancelado.");
+
                     if (array.get(i).compareTo(array.get(i + intervalo)) > 0)
                     {
                         E temp = array.get(i);

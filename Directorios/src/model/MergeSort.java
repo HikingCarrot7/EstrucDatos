@@ -7,13 +7,16 @@ package model;
 public class MergeSort
 {
 
-    public static <E extends Comparable<E>> E[] mergeSort(E[] data)
+    public static <E extends Comparable<E>> E[] mergeSort(E[] data) throws InterruptedException
     {
         return mergeSortHelper(data, 0, data.length - 1);
     }
 
-    protected static <E extends Comparable<E>> E[] mergeSortHelper(E[] data, int bottom, int top)
+    protected static <E extends Comparable<E>> E[] mergeSortHelper(E[] data, int bottom, int top) throws InterruptedException
     {
+        if (Thread.currentThread().isInterrupted())
+            throw new InterruptedException("El ordenamiento fue cancelado.");
+
         if (bottom == top)
             return (E[]) new Comparable[]
             {
