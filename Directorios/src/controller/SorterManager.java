@@ -60,6 +60,7 @@ public class SorterManager
 
         } catch (InterruptedException ex)
         {
+            Runtime.getRuntime().gc();
             directorios.clear();
             System.out.println(ex.getMessage());
         }

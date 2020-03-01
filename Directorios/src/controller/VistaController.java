@@ -166,12 +166,13 @@ public class VistaController implements Initializable
     }
 
     @FXML
-    private void cancelar(ActionEvent event)
+    private void cancelar(ActionEvent e)
     {
         if (existeTaskThread())
         {
             taskThread.cancel();
             t.interrupt();
+            limpiarTodosCampos(false);
         }
 
     }
@@ -211,7 +212,6 @@ public class VistaController implements Initializable
                 //Rellena la tabla con la lista de directorios.
                 rellenarTablaDirectoriosEncontrados(directorios);
                 rellenarTablaDirectoriosOrdenados(directorios);
-
                 currentScene.setCursor(Cursor.DEFAULT);
 
                 //Actualizamos el tiempo transcurrido desde que se inició el proceso.
@@ -229,7 +229,7 @@ public class VistaController implements Initializable
 
                 } catch (Exception ex)
                 {
-                    System.out.println("El proceso para buscar y ordenar los directotios fue cancelado.");
+                    System.out.println("El proceso para buscar y ordenar los directorios fue cancelado.");
                     limpiarTodosCampos(false);
                 }
             }
@@ -336,7 +336,7 @@ public class VistaController implements Initializable
     }
 
     /**
-     * Procede a buscar cuál {@link RadioButton} está seleccionado para aplicar el método de ordenamiento adecuando.
+     * Procede a buscar cuál {@link RadioButton} está seleccionado para aplicar el método de ordenamiento adecuado.
      *
      * @param directorios La {@link ObservableList} de los directorios.
      */
