@@ -9,13 +9,16 @@ import java.util.List;
 public class QuickSort
 {
 
-    public static <E extends Comparable<E>> List<E> quicksort(List<E> array)
+    public static <E extends Comparable<E>> List<E> quicksort(List<E> array) throws InterruptedException
     {
         return quicksortHelper(array, 0, array.size() - 1);
     }
 
-    protected static <E extends Comparable<E>> List<E> quicksortHelper(List<E> array, int izq, int der)
+    protected static <E extends Comparable<E>> List<E> quicksortHelper(List<E> array, int izq, int der) throws InterruptedException
     {
+        if (Thread.currentThread().isInterrupted())
+            throw new InterruptedException("El ordenamiento fue cancelado.");
+
         if (izq >= der)
             return array;
 

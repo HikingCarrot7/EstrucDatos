@@ -24,32 +24,44 @@ public class SorterManager
 
     public static void ordenarPor(int clave, ObservableList<Directorio> directorios)
     {
-        switch (clave)
+        try
         {
-            case CLAVE_INSERCION:
-                InsertionSort.insertionSort(directorios);
-                break;
+            switch (clave)
+            {
+                case CLAVE_INSERCION:
+                    InsertionSort.insertionSort(directorios);
+                    break;
 
-            case CLAVE_BURBUJA:
-                BubbleSort.bubbleSort(directorios);
-                break;
+                case CLAVE_BURBUJA:
+                    BubbleSort.bubbleSort(directorios);
+                    break;
 
-            case CLAVE_SHELL_SORT:
-                ShellSort.shellsort(directorios);
-                break;
-            case CLAVE_MERGE_SORT:
-                Directorio[] arrayDirectorios = getArrayDirectorios(directorios);
-                directorios.clear();
-                directorios.setAll(Arrays.asList(MergeSort.mergeSort(arrayDirectorios)));
-                break;
-            case CLAVE_QUICK_SORT:
-                QuickSort.quicksort(directorios);
-                break;
-            case CLAVE_MEZCLA_DIRECTA:
+                case CLAVE_SHELL_SORT:
+                    ShellSort.shellsort(directorios);
+                    break;
 
-                break;
-            default:
-                throw new AssertionError();
+                case CLAVE_MERGE_SORT:
+                    Directorio[] arrayDirectorios = getArrayDirectorios(directorios);
+                    directorios.clear();
+                    directorios.setAll(Arrays.asList(MergeSort.mergeSort(arrayDirectorios)));
+                    break;
+
+                case CLAVE_QUICK_SORT:
+                    QuickSort.quicksort(directorios);
+                    break;
+
+                case CLAVE_MEZCLA_DIRECTA:
+
+                    break;
+
+                default:
+                    throw new AssertionError();
+            }
+
+        } catch (InterruptedException ex)
+        {
+            directorios.clear();
+            System.out.println(ex.getMessage());
         }
 
     }

@@ -50,6 +50,8 @@ public class VistaController implements Initializable
     @FXML
     private CheckBox incluirSubcarpetas;
     @FXML
+    private CheckBox todasCoincidencias;
+    @FXML
     private RadioButton burbuja;
     @FXML
     private RadioButton insercion;
@@ -76,10 +78,9 @@ public class VistaController implements Initializable
 
     private DirectoryManager directoryManager;
     private TableManager<Directorio> tableManager;
+    private Task<Long> taskThread;
+    private Thread t;
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
@@ -118,18 +119,18 @@ public class VistaController implements Initializable
     }
 
     /**
-     * Método que se llama cuando presionamos el botón <em>Buscar</em>.
+     * Método llamado cuando presionamos el botón <em>Buscar</em>.
      *
      * @param e El {@link ActionEvent} que se crea al realizar la acción anterior.
      */
     @FXML
     private void nuevaBusqueda(ActionEvent e)
     {
-        limpiarTodosCampos();
+        limpiarTodosCampos(true);
     }
 
     /**
-     * Método que se llama cuando presionamos el botón <em>Buscar directorio</em>.
+     * Método llamado cuando presionamos el botón <em>Buscar directorio</em>.
      *
      * @param e El {@link ActionEvent} que se crea al realizar la acción anterior.
      */
@@ -147,7 +148,7 @@ public class VistaController implements Initializable
     }
 
     /**
-     * Método que se llama cuándo se presiona una tecla en el {@link TextField} para insertar el nombre del archivo que queremos buscar.
+     * Método llamado cuándo se presiona una tecla en el {@link TextField} para insertar el nombre del archivo que queremos buscar.
      *
      * @param e El {@link KeyEvent} que se crea al realizar la acción anterior.
      */
@@ -167,6 +168,11 @@ public class VistaController implements Initializable
     @FXML
     private void cancelar(ActionEvent event)
     {
+        if (existeTaskThread())
+        {
+            taskThread.cancel();
+            t.interrupt();
+        }
 
     }
 
@@ -177,13 +183,12 @@ public class VistaController implements Initializable
      */
     private void procesarDirectorios(File file)
     {
-
         limpiarTablas();
 
         /**
          * No debe someterse al hilo <em>JavaFx Application Thread</em> a una tarea pesada, ya que congelaríamos toda la GUI de la aplicación mientras se realiza todo el proceso (similar a lo que pasa con Swing).
          */
-        Task<Void> task = new Task<Void>()
+        taskThread = new Task<Long>()
         {
             private ObservableList<Directorio> directorios;
 
@@ -193,7 +198,7 @@ public class VistaController implements Initializable
             }
 
             @Override
-            protected Void call() throws Exception
+            protected Long call() throws Exception
             {
                 long antes = System.currentTimeMillis();
 
@@ -210,21 +215,28 @@ public class VistaController implements Initializable
                 currentScene.setCursor(Cursor.DEFAULT);
 
                 //Actualizamos el tiempo transcurrido desde que se inició el proceso.
-                actualizarReloj(System.currentTimeMillis() - antes);
-
-                return null;
+                return System.currentTimeMillis() - antes;
             }
 
             @Override
             protected void done()
             {
-                super.done();
-                actualizarTablas();
+                try
+                {
+                    super.done();
+                    actualizarTablas();
+                    actualizarReloj(get());
+
+                } catch (Exception ex)
+                {
+                    System.out.println("El proceso para buscar y ordenar los directotios fue cancelado.");
+                    limpiarTodosCampos(false);
+                }
             }
 
         };
 
-        Thread t = new Thread(task);
+        t = new Thread(taskThread);
         t.setDaemon(true);
         t.start();
     }
@@ -237,11 +249,19 @@ public class VistaController implements Initializable
      */
     private void rellenarDirectorios(ObservableList<Directorio> directorios, File file)
     {
-        if (incluirSubcarpetas.isSelected())
-            directoryManager.obtenerTodosArchivos(directorios, file);
+        try
+        {
+            if (incluirSubcarpetas.isSelected())
+                directoryManager.obtenerTodosArchivos(directorios, file);
 
-        else
-            directoryManager.obtenerArchivosDirectorio(directorios, file);
+            else
+                directoryManager.obtenerArchivosDirectorio(directorios, file);
+
+        } catch (InterruptedException ex)
+        {
+            System.out.println(ex.getMessage()); // La operación para la búsqueda de directorios fue cancelada.
+            limpiarTodosCampos(false); // Limpiamos todos los campos.
+        }
     }
 
     /**
@@ -378,15 +398,28 @@ public class VistaController implements Initializable
 
     /**
      * Limpia todos los datos de la vista.
+     *
+     * @param limpiarEntradas Establecemos <code>true</code> si queremos limpiar el texto que esté en las entradas, <code>false</code> en caso contrario.
      */
-    private void limpiarTodosCampos()
+    private void limpiarTodosCampos(boolean limpiarEntradas)
     {
-        reloj.setText("");
+        Platform.runLater(() ->
+        {
+            buscar.getScene().setCursor(Cursor.DEFAULT);
+            reloj.setText("");
+            burbuja.setSelected(true);
+
+            if (limpiarEntradas)
+                limpiarEntradas();
+
+            limpiarTablas();
+        });
+    }
+
+    private void limpiarEntradas()
+    {
         entradaArchivo.setText("");
         entradaDirectorio.setText("");
-        burbuja.setSelected(true);
-        tableManager.limpiarTabla(tablaListaEncontrada);
-        tableManager.limpiarTabla(tablaListaOrdenada);
     }
 
     /**
@@ -430,6 +463,11 @@ public class VistaController implements Initializable
     private String getEntradaNombreArchivoBuscar()
     {
         return entradaArchivo.getText().trim();
+    }
+
+    private boolean existeTaskThread()
+    {
+        return taskThread != null;
     }
 
 }
