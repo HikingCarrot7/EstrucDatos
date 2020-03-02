@@ -37,7 +37,6 @@
 .button-effect:pressed {
     -fx-background-color: gray;
     -fx-text-fill: white;
-    -fx-rotate: 3;
     /*-fx-skin: 'controller.MyButtonSkin';*/
     /*-fx-background-color: linear-gradient(to bottom, derive(-fx-text-box-border, -10%), -fx-text-box-border),
         linear-gradient(from 0px 0px to 0px 5px, derive(-fx-control-inner-background, -9%), -fx-control-inner-background);*/
@@ -56,7 +55,6 @@
 .button-cancelar:pressed {
     -fx-background-color: red;
     -fx-text-fill: white;
-    -fx-rotate: 3;
 }
 
 .button-cancelar:hover {

@@ -51,7 +51,7 @@ public class Directorio implements Comparable<Directorio>
     @Override
     public int compareTo(Directorio o)
     {
-        return getNombre().compareTo(o.getNombre());
+        return getNombre().toLowerCase().compareTo(o.getNombre().toLowerCase());
     }
 
 }

@@ -25,19 +25,19 @@
                         <Insets />
                     </HBox.margin>
                 </Label>
-            <VBox HBox.hgrow="ALWAYS">
-               <children>
-                      <TextField fx:id="entradaArchivo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyPressed="#buscarArchivo" promptText="Inserte el nombre del archivo..." VBox.vgrow="ALWAYS" />
-                  <CheckBox fx:id="todasCoincidencias" mnemonicParsing="false" selected="true" text="Incluir todas las coincidencias">
-                     <VBox.margin>
-                        <Insets top="5.0" />
-                     </VBox.margin>
-                     <padding>
-                        <Insets bottom="5.0" right="5.0" top="5.0" />
-                     </padding>
-                  </CheckBox>
-               </children>
-            </VBox>
+                <VBox HBox.hgrow="ALWAYS">
+                    <children>
+                        <TextField fx:id="entradaArchivo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyPressed="#buscarArchivo" promptText="Inserte el nombre del archivo..." VBox.vgrow="ALWAYS" />
+                        <CheckBox fx:id="todasCoincidencias" mnemonicParsing="false" selected="true" text="Incluir todas las coincidencias">
+                            <VBox.margin>
+                                <Insets top="5.0" />
+                            </VBox.margin>
+                            <padding>
+                                <Insets bottom="5.0" right="5.0" top="5.0" />
+                            </padding>
+                        </CheckBox>
+                    </children>
+                </VBox>
                 <Button fx:id="buscar" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#nuevaBusqueda" styleClass="button-effect" text="Nueva búsqueda" HBox.hgrow="ALWAYS">
                     <HBox.margin>
                         <Insets left="20.0" right="50.0" />
@@ -61,9 +61,10 @@
                 <VBox HBox.hgrow="ALWAYS">
                     <children>
                         <TextField fx:id="entradaDirectorio" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyPressed="#analizarEntradaDirectorio" promptText="Inserte el directorio..." VBox.vgrow="ALWAYS">
-                     <VBox.margin>
-                        <Insets right="5.0" />
-                     </VBox.margin></TextField>
+                            <VBox.margin>
+                                <Insets right="5.0" />
+                            </VBox.margin>
+                        </TextField>
                         <CheckBox fx:id="incluirSubcarpetas" mnemonicParsing="false" selected="true" text="Incluir subcarpetas">
                             <padding>
                                 <Insets bottom="5.0" right="5.0" top="5.0" />
@@ -89,25 +90,25 @@
         </HBox>
         <VBox>
             <children>
-            <HBox>
-               <children>
-                      <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Tipo de ordenamiento:" HBox.hgrow="ALWAYS">
-                          <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                          </padding>
-                      </Label>
-                  <Button fx:id="actualizar" contentDisplay="CENTER" mnemonicParsing="false" onAction="#actualizar" styleClass="button-effect" text="Actualizar">
-                     <HBox.margin>
-                        <Insets right="20.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="cancelar" cancelButton="true" contentDisplay="CENTER" mnemonicParsing="false" onAction="#cancelar" styleClass="button-cancelar" text="Cancelar">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Button>
-               </children>
-            </HBox>
+                <HBox> 
+                    <children>
+                        <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Tipo de ordenamiento:" HBox.hgrow="ALWAYS">
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </padding>
+                        </Label>
+                        <Button fx:id="actualizar" contentDisplay="CENTER" mnemonicParsing="false" onAction="#actualizar" styleClass="button-effect" text="Actualizar">
+                            <HBox.margin>
+                                <Insets right="20.0" />
+                            </HBox.margin>
+                        </Button>
+                        <Button fx:id="cancelar" cancelButton="true" contentDisplay="CENTER" mnemonicParsing="false" onAction="#cancelar" styleClass="button-cancelar" text="Cancelar">
+                            <HBox.margin>
+                                <Insets />
+                            </HBox.margin>
+                        </Button>
+                    </children>
+                </HBox>
                 <HBox>
                     <children>
                         <RadioButton fx:id="burbuja" mnemonicParsing="false" selected="true" text="Burbuja">
@@ -168,9 +169,9 @@
                             </padding>
                         </Label>
                     </children>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
+                    <VBox.margin>
+                        <Insets top="10.0" />
+                    </VBox.margin>
                 </HBox>
             </children>
             <VBox.margin>
