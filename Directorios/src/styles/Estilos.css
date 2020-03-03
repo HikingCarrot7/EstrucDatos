@@ -18,7 +18,7 @@
 .button-reset {
     -fx-background-image: url("/icons/reset.png");
     -fx-background-position: center, center;
-    -fx-background-repeat: no-repeat;
+    -fx-background-repeat: no-repeat; 
 }
 
 .button-effect:hover {
@@ -60,6 +60,11 @@
 .button-cancelar:hover {
     -fx-background-color: red;
     -fx-text-fill: white;
+}
+
+.tooltip{
+    -fx-background-color: #BCBCBC;
+    -fx-text-fill: black;
 }
 
 

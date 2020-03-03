@@ -23,10 +23,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.Stage;
 import model.BinarySearch;
 
 /**
@@ -83,6 +85,7 @@ public class VistaController implements Initializable
     private Task<Long> taskThread;
     private Thread t;
     private ObservableList<Directorio> directoriosEncontrados;
+    private Stage stage;
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -98,8 +101,22 @@ public class VistaController implements Initializable
         directoryManager = new DirectoryManager();
         tableManager = new TableManager<>();
         directoriosEncontrados = FXCollections.observableArrayList();
+        buscar.setTooltip(new Tooltip("Realizar una nueva búsqueda."));
+        buscarDirectorio.setTooltip(new Tooltip("Seleccionar un directorio."));
+        actualizar.setTooltip(new Tooltip("Actualiza la búsqueda de los directorios."));
+        cancelar.setTooltip(new Tooltip("Cancelar la operación de búsqueda y ordenamiento de directorios."));
         initTabla(tablaListaOrdenada);
         initTabla(tablaListaEncontrada);
+    }
+
+    /**
+     * Inicia el {@link Stage} para este controlador.
+     *
+     * @param stage El {@link Stage} para este controlador.
+     */
+    public void initStage(Stage stage)
+    {
+        this.stage = stage;
     }
 
     /**
@@ -503,7 +520,7 @@ public class VistaController implements Initializable
     private File obtenerRutaDirectorio()
     {
         DirectoryChooser directorio = new DirectoryChooser();
-        return directorio.showDialog(null);
+        return directorio.showDialog(stage);
     }
 
     /**
