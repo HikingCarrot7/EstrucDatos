@@ -3,9 +3,11 @@ package controller;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutionException;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -70,7 +72,7 @@ public class VistaController implements Initializable
     @FXML
     private Button buscarDirectorio;
     @FXML
-    private Label reloj;
+    private Label tiempoTranscurrido;
     @FXML
     private Button actualizar;
     @FXML
@@ -80,12 +82,22 @@ public class VistaController implements Initializable
     private TableManager<Directorio> tableManager;
     private Task<Long> taskThread;
     private Thread t;
+    private ObservableList<Directorio> directoriosEncontrados;
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        initMyComponents();
+    }
+
+    /**
+     * Iniciamos los algunos componentes importantes.
+     */
+    private void initMyComponents()
+    {
         directoryManager = new DirectoryManager();
         tableManager = new TableManager<>();
+        directoriosEncontrados = FXCollections.observableArrayList();
         initTabla(tablaListaOrdenada);
         initTabla(tablaListaEncontrada);
     }
@@ -153,12 +165,48 @@ public class VistaController implements Initializable
      * @param e El {@link KeyEvent} que se crea al realizar la acción anterior.
      */
     @FXML
-    private void buscarArchivo(KeyEvent e)
+    private void insertarNombreArchivo(KeyEvent e)
     {
-        if (e.getCode() == KeyCode.ENTER)
-            iniciarProcesamientoDirectorios();
+        Platform.runLater(() ->
+        {
+            rellenarTablaDirectoriosOrdenados(directoriosEncontrados);
+        });
     }
 
+    /**
+     * Método llamado cuando presionamos en el {@link CheckBox} <em>Todas las coincidencias</em>. La acción que se realiza aquí es la misma que se produce cuando presionamos una tecla en el {@link TextField} para insertar el nombre del archivo que queremos buscar.
+     *
+     * @param e El {@link KeyEvent} que se crea al realizar la acción anterior.
+     */
+    @FXML
+    private void todasLasCoincidencias(ActionEvent e)
+    {
+        Platform.runLater(() ->
+        {
+            rellenarTablaDirectoriosOrdenados(directoriosEncontrados);
+        });
+    }
+
+    /**
+     * Método que se llama cuando se presiona una tecla en el {@link TextField} para insertar la ruta del directorio.
+     *
+     * @param e El {@link KeyEvent} que se crea al realizar la acción anterior.
+     */
+    @FXML
+    private void analizarEntradaDirectorio(KeyEvent e)
+    {
+        Platform.runLater(() ->
+        {
+            if (e.getCode() == KeyCode.ENTER)
+                iniciarProcesamientoDirectorios();
+        });
+    }
+
+    /**
+     * Método llamado cuando presionamos el botón <em>Buscar directorio</em>. Lo único que hace es reiniciar la búsqueda y rodenamiento de los archivos.
+     *
+     * @param e El {@link ActionEvent} que se crea al realizar la acción anterior.
+     */
     @FXML
     private void actualizar(ActionEvent e)
     {
@@ -185,19 +233,13 @@ public class VistaController implements Initializable
     private void procesarDirectorios(File file)
     {
         limpiarTablas();
+        directoriosEncontrados.clear();
 
         /**
-         * No debe someterse al hilo <em>JavaFx Application Thread</em> a una tarea pesada, ya que congelaríamos toda la GUI de la aplicación mientras se realiza todo el proceso (similar a lo que pasa con Swing).
+         * No debe someterse al hilo <em>JavaFx Application Thread</em> a una tarea pesada, ya que congelaríamos toda la GUI de la aplicación mientras se realiza todo el proceso.
          */
         taskThread = new Task<Long>()
         {
-            private ObservableList<Directorio> directorios;
-
-
-            {
-                directorios = FXCollections.observableArrayList();
-            }
-
             @Override
             protected Long call() throws Exception
             {
@@ -207,11 +249,11 @@ public class VistaController implements Initializable
                 currentScene.setCursor(Cursor.WAIT);
 
                 //Rellena la lista de directorios.
-                rellenarDirectorios(directorios, file);
+                rellenarDirectorios(directoriosEncontrados, file);
 
                 //Rellena la tabla con la lista de directorios.
-                rellenarTablaDirectoriosEncontrados(directorios);
-                rellenarTablaDirectoriosOrdenados(directorios);
+                rellenarTablaDirectoriosEncontrados(directoriosEncontrados);
+                rellenarTablaDirectoriosOrdenados(ordenarDirectorios(directoriosEncontrados));
                 currentScene.setCursor(Cursor.DEFAULT);
 
                 //Actualizamos el tiempo transcurrido desde que se inició el proceso.
@@ -224,21 +266,45 @@ public class VistaController implements Initializable
                 try
                 {
                     super.done();
-                    actualizarTablas();
-                    actualizarReloj(get());
+                    actualizarTablas(); // El proceso ha terminado, actualizamos las tablas.
+                    actualizarTiempoTranscurrido(get()); // Actualizamos el tiempo transcurrido desde que se inició esta operación.
+                    return;
+
+                    //Algún error ocurrió o la operación fue cancelada.
+                } catch (ExecutionException e)
+                {
+                    mostrarError("¡No podemos analizar esa carpeta!");
 
                 } catch (Exception ex)
                 {
                     System.out.println("El proceso para buscar y ordenar los directorios fue cancelado.");
-                    limpiarTodosCampos(false);
                 }
+
+                limpiarTodosCampos(false);
             }
 
         };
 
+        /**
+         * Hilo encargado de iniciar la tarea anterior.
+         */
         t = new Thread(taskThread);
         t.setDaemon(true);
         t.start();
+    }
+
+    /**
+     * Inicia el proceso para buscar y ordenar los directorios de la ruta insertada.
+     */
+    private void iniciarProcesamientoDirectorios()
+    {
+        File file = new File(getEntradaRutaDirectorio());
+
+        if (file.exists())
+            procesarDirectorios(file);
+
+        else
+            mostrarError("La ruta que insertó no existe.");
     }
 
     /**
@@ -265,100 +331,103 @@ public class VistaController implements Initializable
     }
 
     /**
-     * Regresa la ruta del directorio seleccionado.
-     *
-     * @return El {@link File} que representa al directorio.
-     */
-    private File obtenerRutaDirectorio()
-    {
-        DirectoryChooser directorio = new DirectoryChooser();
-        return directorio.showDialog(null);
-    }
-
-    /**
-     * Método que se llama cuando se presiona una tecla en el {@link TextField} para insertar la ruta del directorio.
-     *
-     * @param e El {@link KeyEvent} que se crea al realizar la acción anterior.
-     */
-    @FXML
-    private void analizarEntradaDirectorio(KeyEvent e)
-    {
-        if (e.getCode() == KeyCode.ENTER)
-            iniciarProcesamientoDirectorios();
-    }
-
-    /**
-     * Inicia el proceso para buscar y ordenar los directorios de la ruta insertada.
-     */
-    private void iniciarProcesamientoDirectorios()
-    {
-        File file = new File(getEntradaRutaDirectorio());
-
-        if (file.exists())
-            procesarDirectorios(file);
-
-        else
-            mostrarError("La ruta que insertó no existe.");
-    }
-
-    /**
      * Rellena la tabla con la lista de directorios ordenados.
-     *
-     * Primeros se ordenan los directorios según el método de ordenamiento seleccionado y luego se muestra en la tabla correspondiente.
      *
      * @param directorios Los directorios rescatados de la ruta insertada.
      *
      */
     private void rellenarTablaDirectoriosOrdenados(ObservableList<Directorio> directorios)
     {
-        ObservableList<Directorio> direc = FXCollections.observableArrayList(directorios);
-        ordenarDirectorios(direc);
-
         if (hayQueBuscarArchivoEspecifico())
-        {
-            int index = BinarySearch.binarySearch(direc, getEntradaNombreArchivoBuscar());
+            if (todasCoincidencias.isSelected()) // ÚNICAMENTO FILTRAMOS LOS ARCHIVOS SI LA OPCIÓN INCLUIR TODAS LAS COINDIDENCIAS ESTÁ SELECCIONADA, EN CASO CONTRARIO USAMOS EL ALGORITMO BINARY SEARCH PARA BUSCAR EL ARCHIVO QUE QUEREMOS.
+                tableManager.rellenarTabla(filtrarDirectorios(directorios, getNombreArchivoBuscar()), tablaListaOrdenada);
 
-            if (index >= 0)
-                tableManager.rellenarTabla(direc.get(index), tablaListaOrdenada);
+            else
+            {
+                int index = encontrarArchivoEspecifico(directorios, getNombreArchivoBuscar());
 
-        } else
-            tableManager.rellenarTabla(direc, tablaListaOrdenada);
+                if (index >= 0)
+                    tableManager.rellenarTabla(directorios.get(index), tablaListaOrdenada);
+
+                else
+                    tableManager.limpiarTabla(tablaListaOrdenada);
+            }
+
+        else
+            tableManager.rellenarTabla(directorios, tablaListaOrdenada);
+
     }
 
     /**
-     * Rellena la tabla con los registros encontrados en la ruta especificada.
+     * Rellena la tabla con los registros encontrados en la ruta especificada. Nótese que esta tabla será rellenada con la referencia de una nueva lista.
      *
      * @param directorios La {@link ObservableList} de los directorios.
      */
     private void rellenarTablaDirectoriosEncontrados(ObservableList<Directorio> directorios)
     {
-        tableManager.rellenarTabla(directorios, tablaListaEncontrada);
+        tableManager.rellenarTablaConNuevaLista(directorios, tablaListaEncontrada);
     }
 
     /**
      * Procede a buscar cuál {@link RadioButton} está seleccionado para aplicar el método de ordenamiento adecuado.
      *
      * @param directorios La {@link ObservableList} de los directorios.
+     *
+     * @return Los directorios ordenados según el método de ordenamiento seleccionado.
      */
-    public void ordenarDirectorios(ObservableList<Directorio> directorios)
+    public ObservableList<Directorio> ordenarDirectorios(ObservableList<Directorio> directorios)
     {
-        if (ordenamiento.getSelectedToggle() == burbuja)
-            SorterManager.ordenarPor(SorterManager.CLAVE_BURBUJA, directorios);
+        switch (((RadioButton) ordenamiento.getSelectedToggle()).getText())
+        {
+            case "Burbuja":
+                SorterManager.ordenarPor(SorterManager.CLAVE_BURBUJA, directorios);
+                break;
+            case "Inserción":
+                SorterManager.ordenarPor(SorterManager.CLAVE_INSERCION, directorios);
+                break;
+            case "ShellSort":
+                SorterManager.ordenarPor(SorterManager.CLAVE_SHELL_SORT, directorios);
+                break;
+            case "MergeSort":
+                SorterManager.ordenarPor(SorterManager.CLAVE_MERGE_SORT, directorios);
+                break;
+            case "QuickSort":
+                SorterManager.ordenarPor(SorterManager.CLAVE_QUICK_SORT, directorios);
+                break;
+            case "Mezcla directa":
+                SorterManager.ordenarPor(SorterManager.CLAVE_MEZCLA_DIRECTA, directorios);
+                break;
+            default:
+                throw new AssertionError();
+        }
 
-        else if (ordenamiento.getSelectedToggle() == insercion)
-            SorterManager.ordenarPor(SorterManager.CLAVE_INSERCION, directorios);
+        return directorios;
+    }
 
-        else if (ordenamiento.getSelectedToggle() == shellsort)
-            SorterManager.ordenarPor(SorterManager.CLAVE_SHELL_SORT, directorios);
+    /**
+     * Filtamos la {@link ObservableList} dependiendo del nombre del archivo que se nos especifica.
+     *
+     * @param directoriosAFiltrar La {@link ObservableList} a filtrar.
+     * @param key La llave para hacer el filtro.
+     *
+     * @return Una {@link FilteredList} con los valores que nos interesan.
+     */
+    private FilteredList<Directorio> filtrarDirectorios(ObservableList<Directorio> directoriosAFiltrar, String key)
+    {
+        return directoriosAFiltrar.filtered(direc -> direc.getNombre().toLowerCase().contains(key.toLowerCase()));
+    }
 
-        else if (ordenamiento.getSelectedToggle() == mergesort)
-            SorterManager.ordenarPor(SorterManager.CLAVE_MERGE_SORT, directorios);
-
-        else if (ordenamiento.getSelectedToggle() == quicksort)
-            SorterManager.ordenarPor(SorterManager.CLAVE_QUICK_SORT, directorios);
-
-        else if (ordenamiento.getSelectedToggle() == mezclaDirecta)
-            SorterManager.ordenarPor(SorterManager.CLAVE_MEZCLA_DIRECTA, directorios);
+    /**
+     * Encontramos un archivo en específico usando el algoritmo <em>Binary search</em>.
+     *
+     * @param directoriosAFiltrar La {@link ObservableList} a filtrar.
+     * @param key La llave para hacer el filtro.
+     *
+     * @return El índice del {@link Directorio} que nos interesa.
+     */
+    private int encontrarArchivoEspecifico(ObservableList<Directorio> directorios, String key)
+    {
+        return BinarySearch.binarySearch(directorios, key);
     }
 
     /**
@@ -366,11 +435,11 @@ public class VistaController implements Initializable
      *
      * @param tiempoTrancurrido El tiempo (en milisegundos) que ha transcurrido desde que se inició todo el proceso.
      */
-    private void actualizarReloj(long tiempoTrancurrido)
+    private void actualizarTiempoTranscurrido(long tiempoTrancurrido)
     {
         Platform.runLater(() ->
         {
-            reloj.setText("Tiempo transcurrido: " + tiempoTrancurrido + " ms");
+            tiempoTranscurrido.setText("Tiempo transcurrido: " + tiempoTrancurrido + " ms");
         });
     }
 
@@ -391,7 +460,7 @@ public class VistaController implements Initializable
      */
     private void limpiarTablas()
     {
-        reloj.setText("");
+        tiempoTranscurrido.setText("");
         tableManager.limpiarTabla(tablaListaEncontrada);
         tableManager.limpiarTabla(tablaListaOrdenada);
     }
@@ -406,8 +475,9 @@ public class VistaController implements Initializable
         Platform.runLater(() ->
         {
             buscar.getScene().setCursor(Cursor.DEFAULT);
-            reloj.setText("");
+            tiempoTranscurrido.setText("");
             burbuja.setSelected(true);
+            directoriosEncontrados.clear();
 
             if (limpiarEntradas)
                 limpiarEntradas();
@@ -416,6 +486,9 @@ public class VistaController implements Initializable
         });
     }
 
+    /**
+     * Limpia las entradas de texto.
+     */
     private void limpiarEntradas()
     {
         entradaArchivo.setText("");
@@ -423,13 +496,14 @@ public class VistaController implements Initializable
     }
 
     /**
-     * ¿Se insertó el nombre de un archivo para buscar?
+     * Regresa la ruta del directorio seleccionado.
      *
-     * @return <code>true</code> si la hay una palabra a buscar, <code>false</code> en caso contrario.
+     * @return El {@link File} que representa al directorio.
      */
-    private boolean hayQueBuscarArchivoEspecifico()
+    private File obtenerRutaDirectorio()
     {
-        return !getEntradaNombreArchivoBuscar().equals("");
+        DirectoryChooser directorio = new DirectoryChooser();
+        return directorio.showDialog(null);
     }
 
     /**
@@ -439,10 +513,35 @@ public class VistaController implements Initializable
      */
     private void mostrarError(String mensaje)
     {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setContentText(mensaje);
-        alert.showAndWait();
+        Platform.runLater(() ->
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText(mensaje);
+            alert.showAndWait();
+        });
+    }
+
+    /**
+     * ¿Existe la ruta insertada?
+     *
+     * @param ruta
+     *
+     * @return <code>true</code> si la ruta insertada existe, <code>false</code> en caso contrario.
+     */
+    private boolean esRutaValida(String ruta)
+    {
+        return new File(ruta).exists();
+    }
+
+    /**
+     * ¿Se insertó el nombre de un archivo para buscar?
+     *
+     * @return <code>true</code> si la hay una palabra a buscar, <code>false</code> en caso contrario.
+     */
+    private boolean hayQueBuscarArchivoEspecifico()
+    {
+        return !getNombreArchivoBuscar().equals("");
     }
 
     /**
@@ -460,11 +559,16 @@ public class VistaController implements Initializable
      *
      * @return El {@link String} que representa el nombre del archivo que queremos buscar.
      */
-    private String getEntradaNombreArchivoBuscar()
+    private String getNombreArchivoBuscar()
     {
         return entradaArchivo.getText().trim();
     }
 
+    /**
+     * ¿Ya se ha creado la tarea para la búsqueda y ordenamiento de los archivos?
+     *
+     * @return <code>true</code> si la ya se ha creado la tarea, <code>false</code> en caso contrario.
+     */
     private boolean existeTaskThread()
     {
         return taskThread != null;
