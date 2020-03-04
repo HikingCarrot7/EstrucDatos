@@ -3,15 +3,19 @@ package aeropuerto;
 import deque.DequeList;
 import dequestack.DequeStack;
 import excepciones.DequeEmptyException;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 
 public class Aeropuerto
 {
 
-    private DequeList<Vuelo> vuelos;
+    private final DequeList<Vuelo> VUELOS;
+    private PropertyChangeSupport propertyChangeSupport;
 
     public Aeropuerto()
     {
-        vuelos = new DequeList<>();
+        VUELOS = new DequeList<>();
+        propertyChangeSupport = new PropertyChangeSupport(this);
     }
 
     public void generarVuelos(int numeroVuelos)
@@ -24,46 +28,26 @@ public class Aeropuerto
                 clave = (int) (Math.random() * numeroVuelos * 100);
             while (existeClaveVuelo(clave));
 
-            vuelos.insertLast(new Vuelo(clave));
+            propertyChangeSupport.firePropertyChange("progress", 0, (VUELOS.size() + 1) * 100 / numeroVuelos);
+            VUELOS.insertLast(new Vuelo(clave));
         }
-
-    }
-
-    public void imprimirColaVuelos()
-    {
-        DequeList<Vuelo> vuelosTemporales = obtenerCopiaVuelos();
-        int numeroVuelos = vuelosTemporales.size();
-
-        System.out.println("VUELOS EN LA COLA:\n");
-
-        System.out.printf("%-12s", "Posición:");
-        for (int i = 0; i < vuelosTemporales.size(); i++)
-            System.out.printf("%-8s", (i + 1));
-
-        System.out.println();
-
-        System.out.printf("%-12s", "Clave:");
-        for (int i = 0; i < numeroVuelos; i++)
-            System.out.printf("%-8s", vuelosTemporales.removeFirst().getClave());
-
-        System.out.println("\n\n");
     }
 
     public void eliminarVueloAt(int index) throws DequeEmptyException
     {
         DequeStack<Vuelo> pilaTemporal = new DequeStack<>();
-        int numeroVuelos = vuelos.size();
+        int numeroVuelos = VUELOS.size();
 
         if (existenVuelosEnCola() && esVueloValido(index))
         {
             for (int i = 0; i < numeroVuelos; i++)
                 if (i == index)
-                    vuelos.removeFirst();
+                    VUELOS.removeFirst();
                 else
-                    pilaTemporal.push(vuelos.removeFirst());
+                    pilaTemporal.push(VUELOS.removeFirst());
 
             for (int i = 0; i < numeroVuelos - 1; i++)
-                vuelos.insertFirst(pilaTemporal.pop());
+                VUELOS.insertFirst(pilaTemporal.pop());
 
         } else
             throw new DequeEmptyException("El vuelo no es válido o no hay vuelos disponibles.");
@@ -75,7 +59,7 @@ public class Aeropuerto
         Vuelo siguienteVuelo = null;
 
         if (existenVuelosEnCola())
-            siguienteVuelo = vuelos.removeFirst();
+            siguienteVuelo = VUELOS.removeFirst();
         else
             throw new DequeEmptyException("No hay más vuelos.");
 
@@ -86,7 +70,7 @@ public class Aeropuerto
     {
         DequeList<Vuelo> vuelosTemporales = obtenerCopiaVuelos();
 
-        for (int i = 0; i < vuelos.size(); i++)
+        for (int i = 0; i < VUELOS.size(); i++)
             if (vuelosTemporales.removeFirst().getClave() == clave)
                 return true;
 
@@ -95,36 +79,46 @@ public class Aeropuerto
 
     private DequeList<Vuelo> obtenerCopiaVuelos()
     {
-        int numeroVuelos = vuelos.size();
+        int numeroVuelos = VUELOS.size();
         DequeStack<Vuelo> pilaTemporal = new DequeStack<>();
         DequeList<Vuelo> copiaDeLosVuelos = new DequeList<>();
 
         for (int i = 0; i < numeroVuelos; i++)
-            pilaTemporal.push(vuelos.removeFirst());
+            pilaTemporal.push(VUELOS.removeFirst());
 
         for (int i = 0; i < numeroVuelos; i++)
         {
             Vuelo vuelo = pilaTemporal.pop();
-            vuelos.insertFirst(new Vuelo(vuelo.getClave()));
+            VUELOS.insertFirst(new Vuelo(vuelo.getClave()));
             copiaDeLosVuelos.insertFirst(new Vuelo(vuelo.getClave()));
         }
 
         return copiaDeLosVuelos;
     }
 
+    public void addPropertyChangeListener(PropertyChangeListener p)
+    {
+        propertyChangeSupport.addPropertyChangeListener(p);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener p)
+    {
+        propertyChangeSupport.removePropertyChangeListener(p);
+    }
+
     public boolean existenVuelosEnCola()
     {
-        return vuelos.size() > 0;
+        return VUELOS.size() > 0;
     }
 
     public boolean esVueloValido(int index)
     {
-        return index >= 0 && index < vuelos.size();
+        return index >= 0 && index < VUELOS.size();
     }
 
     public int vuelosDisponibles()
     {
-        return vuelos.size();
+        return VUELOS.size();
     }
 
     public DequeList<Vuelo> obtenerVuelos()

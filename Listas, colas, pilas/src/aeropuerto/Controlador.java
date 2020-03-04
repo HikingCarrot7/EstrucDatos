@@ -1,6 +1,5 @@
 package aeropuerto;
 
-import com.sun.istack.internal.NotNull;
 import excepciones.DequeEmptyException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,10 +13,11 @@ import javax.swing.*;
 public class Controlador implements ActionListener
 {
 
-    private Interfaz vista;
+    private VistaPrincipal vista;
+    private VistaPrincipal2 vista2;
     private Aeropuerto aeropuerto;
 
-    public Controlador(Interfaz vista)
+    public Controlador(VistaPrincipal vista)
     {
         this.vista = vista;
         aeropuerto = new Aeropuerto();
@@ -31,12 +31,11 @@ public class Controlador implements ActionListener
 
         vista.getSiguienteVuelo().setEnabled(false);
         vista.getEliminarUnVuelo().setEnabled(false);
-
         repintar();
     }
 
     @Override
-    public void actionPerformed(@NotNull ActionEvent e)
+    public void actionPerformed(ActionEvent e)
     {
         try
         {
@@ -102,7 +101,7 @@ public class Controlador implements ActionListener
 
     public boolean entradaValida(String text, String regex)
     {
-        return text.matches(regex);
+        return text.matches(regex) && Integer.parseInt(text) > 0 && Integer.parseInt(text) <= 10000;
     }
 
     private void repintar()
