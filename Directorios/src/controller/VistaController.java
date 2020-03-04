@@ -19,6 +19,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -87,6 +88,8 @@ public class VistaController implements Initializable
     private Thread t;
     private ObservableList<Directorio> directoriosEncontrados;
     private Stage stage;
+    @FXML
+    private ProgressIndicator progressIndicator;
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -106,6 +109,7 @@ public class VistaController implements Initializable
         buscarDirectorio.setTooltip(new Tooltip("Seleccionar un directorio."));
         actualizar.setTooltip(new Tooltip("Actualiza la búsqueda de los directorios."));
         cancelar.setTooltip(new Tooltip("Cancelar la operación de búsqueda y ordenamiento de directorios."));
+        progressIndicator.setVisible(false);
         initTabla(tablaListaOrdenada);
         initTabla(tablaListaEncontrada);
     }
@@ -156,7 +160,12 @@ public class VistaController implements Initializable
     @FXML
     private void nuevaBusqueda(ActionEvent e)
     {
-        limpiarTodosCampos(true);
+        if (existeTaskThread())
+        {
+            taskThread.cancel();
+            t.interrupt();
+            limpiarTodosCampos(true);
+        }
     }
 
     /**
@@ -265,6 +274,7 @@ public class VistaController implements Initializable
 
                 Scene currentScene = buscar.getScene();
                 currentScene.setCursor(Cursor.WAIT);
+                progressIndicator.setVisible(true);
 
                 //Rellena la lista de directorios.
                 rellenarDirectorios(directoriosEncontrados, file);
@@ -273,6 +283,7 @@ public class VistaController implements Initializable
                 rellenarTablaDirectoriosEncontrados(directoriosEncontrados);
                 rellenarTablaDirectoriosOrdenados(ordenarDirectorios(directoriosEncontrados));
                 currentScene.setCursor(Cursor.DEFAULT);
+                progressIndicator.setVisible(false);
 
                 //Actualizamos el tiempo transcurrido desde que se inició el proceso.
                 return System.currentTimeMillis() - antes;
@@ -496,6 +507,7 @@ public class VistaController implements Initializable
             tiempoTranscurrido.setText("");
             burbuja.setSelected(true);
             directoriosEncontrados.clear();
+            progressIndicator.setVisible(false);
 
             if (limpiarEntradas)
                 limpiarEntradas();
