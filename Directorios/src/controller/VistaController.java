@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.Toolkit;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -422,7 +423,7 @@ public class VistaController implements Initializable
     }
 
     /**
-     * Filtamos la {@link ObservableList} dependiendo del nombre del archivo que se nos especifica.
+     * Filtramos la {@link ObservableList} dependiendo del nombre del archivo que se nos especifica.
      *
      * @param directoriosAFiltrar La {@link ObservableList} a filtrar.
      * @param key La llave para hacer el filtro.
@@ -438,7 +439,7 @@ public class VistaController implements Initializable
      * Encontramos un archivo en específico usando el algoritmo <em>Binary search</em>.
      *
      * @param directoriosAFiltrar La {@link ObservableList} a filtrar.
-     * @param key La llave para hacer el filtro.
+     * @param key La llave para hacer la búsqueda.
      *
      * @return El índice del {@link Directorio} que nos interesa.
      */
@@ -535,20 +536,9 @@ public class VistaController implements Initializable
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setContentText(mensaje);
+            Toolkit.getDefaultToolkit().beep();
             alert.showAndWait();
         });
-    }
-
-    /**
-     * ¿Existe la ruta insertada?
-     *
-     * @param ruta
-     *
-     * @return <code>true</code> si la ruta insertada existe, <code>false</code> en caso contrario.
-     */
-    private boolean esRutaValida(String ruta)
-    {
-        return new File(ruta).exists();
     }
 
     /**

@@ -19,7 +19,7 @@ public class BinarySearch
         {
             centro = (sup + inf) / 2;
 
-            if (directorios.get(centro).getNombre().toLowerCase().equals(dato.toLowerCase()))
+            if (directorios.get(centro).getNombre().toLowerCase().contains(dato.toLowerCase()))
                 return centro;
 
             else if (dato.toLowerCase().compareTo(directorios.get(centro).getNombre().toLowerCase()) < 0)
