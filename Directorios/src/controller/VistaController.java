@@ -98,7 +98,7 @@ public class VistaController implements Initializable
     }
 
     /**
-     * Iniciamos los algunos componentes importantes.
+     * Iniciamos algunos de los componentes importantes de la vista.
      */
     private void initMyComponents()
     {
@@ -164,8 +164,9 @@ public class VistaController implements Initializable
         {
             taskThread.cancel();
             t.interrupt();
-            limpiarTodosCampos(true);
         }
+
+        limpiarTodosCampos(true);
     }
 
     /**
@@ -590,7 +591,7 @@ public class VistaController implements Initializable
      */
     private boolean existeTaskThread()
     {
-        return taskThread != null;
+        return taskThread != null && taskThread.isRunning();
     }
 
 }
