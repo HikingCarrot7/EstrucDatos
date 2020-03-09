@@ -2,6 +2,7 @@ package controller;
 
 import java.awt.Toolkit;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutionException;
@@ -11,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
@@ -22,6 +24,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
@@ -29,6 +32,7 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import model.BinarySearch;
@@ -150,6 +154,33 @@ public class VistaController implements Initializable
                     throw new AssertionError();
             }
         }
+
+        EventHandler<? super MouseEvent> event = e ->
+        {
+            if (e.getClickCount() == 2)
+            {
+                TablePosition<Directorio, ?> tp = ((TableView) e.getSource()).getFocusModel().getFocusedCell();
+                Directorio selected = tp.getTableView().getSelectionModel().getSelectedItems().get(0);
+
+                try
+                {
+                    String url = selected.getRuta();
+
+                    ProcessBuilder p = new ProcessBuilder();
+                    p.command("cmd.exe", "/c", url);
+                    p.start();
+
+                } catch (IOException ex)
+                {
+                    System.out.println(ex.getMessage());
+                }
+
+            }
+
+        };
+
+        tablaListaOrdenada.addEventFilter(MouseEvent.MOUSE_PRESSED, event);
+        tablaListaEncontrada.addEventFilter(MouseEvent.MOUSE_PRESSED, event);
     }
 
     /**
