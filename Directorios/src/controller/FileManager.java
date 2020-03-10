@@ -40,3 +40,38 @@ public class FileManager<T extends MouseEvent> implements EventHandler<T>
     }
 
 }
+
+/**
+ * Encuentra el error xD
+ *
+ * @author nicol
+ * @param <T>
+ */
+/*class Outer<T>
+{
+
+    public static void main(String[] args)
+    {
+        new Outer().foo();
+        Outer<String>.Inner i = new Outer<>().new Inner();
+    }
+
+    public void foo()
+    {
+        Outer<String>.Inner i = new Outer<String>.Inner();
+        Outer<String>.Inner[] o = i.getInners();
+        System.out.println(Arrays.toString(o));
+    }
+
+    final class Inner
+    {
+
+        Outer<T>.Inner[] inner = new Outer.Inner[3];
+
+        public Inner[] getInners()
+        {
+            return inner;
+        }
+
+    }
+}*/
