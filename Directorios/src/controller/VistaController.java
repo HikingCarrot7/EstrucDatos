@@ -154,8 +154,8 @@ public class VistaController implements Initializable
 
         FileManager<MouseEvent> handler = new FileManager<>();
 
-        tablaListaOrdenada.addEventFilter(MouseEvent.MOUSE_PRESSED, handler);
-        tablaListaEncontrada.addEventFilter(MouseEvent.MOUSE_PRESSED, handler);
+        tablaListaOrdenada.setOnMouseClicked(handler);
+        tablaListaEncontrada.setOnMouseClicked(handler);
     }
 
     /**
