@@ -17,16 +17,11 @@ public class FileManager<T extends MouseEvent> implements EventHandler<T>
     @Override
     public synchronized void handle(T e)
     {
-        System.out.println(e.getClickCount());
-
         if (e.getClickCount() == 2)
         {
-            e.consume();
-            System.out.println("Hola Hola");
             TablePosition<Directorio, ?> tp = ((TableView) e.getSource()).getFocusModel().getFocusedCell();
             Directorio selected = tp.getTableView().getSelectionModel().getSelectedItems().get(0);
 
-            System.out.println(selected.getNombre());
             try
             {
                 String url = selected.getRuta();
