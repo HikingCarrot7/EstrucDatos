@@ -51,10 +51,10 @@ class Test
     {
         NewClass c = new NewClass();
 
-        c.addPropertyChangeListener(evt ->
+        c.addPropertyChangeListener(e ->
         {
-            if (evt.getPropertyName().equals("progress"))
-                System.out.println(evt.getNewValue());
+            if (e.getPropertyName().equals("progress"))
+                System.out.println(e.getNewValue());
         });
 
         Thread t = new Thread(c);

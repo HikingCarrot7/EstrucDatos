@@ -29,7 +29,6 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import model.BinarySearch;
@@ -152,7 +151,7 @@ public class VistaController implements Initializable
             }
         }
 
-        FileManager<MouseEvent> handler = new FileManager<>();
+        FileManager handler = new FileManager();
 
         tablaListaOrdenada.setOnMouseClicked(handler);
         tablaListaEncontrada.setOnMouseClicked(handler);

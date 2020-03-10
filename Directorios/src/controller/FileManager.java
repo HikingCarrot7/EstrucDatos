@@ -11,11 +11,11 @@ import javafx.scene.input.MouseEvent;
  * @author nicol
  * @param <T>
  */
-public class FileManager<T extends MouseEvent> implements EventHandler<T>
+public class FileManager implements EventHandler<MouseEvent>
 {
 
     @Override
-    public synchronized void handle(T e)
+    public synchronized void handle(MouseEvent e)
     {
         if (e.getClickCount() == 2)
         {
