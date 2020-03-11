@@ -165,12 +165,7 @@ public class VistaController implements Initializable
     @FXML
     private void nuevaBusqueda(ActionEvent e)
     {
-        if (existeTaskThread())
-        {
-            taskThread.cancel();
-            t.interrupt();
-        }
-
+        cancelarOperacion();
         limpiarTodosCampos(true);
     }
 
@@ -243,6 +238,8 @@ public class VistaController implements Initializable
     @FXML
     private void actualizar(ActionEvent e)
     {
+        cancelarOperacion();
+        limpiarTodosCampos(false);
         iniciarProcesamientoDirectorios();
     }
 
@@ -587,6 +584,18 @@ public class VistaController implements Initializable
     private String getNombreArchivoBuscar()
     {
         return entradaArchivo.getText().trim();
+    }
+
+    /**
+     * Cancela la operación de búsqueda y ordenamiento.
+     */
+    private void cancelarOperacion()
+    {
+        if (existeTaskThread())
+        {
+            taskThread.cancel();
+            t.interrupt();
+        }
     }
 
     /**

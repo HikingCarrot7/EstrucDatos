@@ -22,18 +22,19 @@ public class FileManager implements EventHandler<MouseEvent>
             TablePosition<Directorio, ?> tp = ((TableView) e.getSource()).getFocusModel().getFocusedCell();
             Directorio selected = tp.getTableView().getSelectionModel().getSelectedItems().get(0);
 
-            try
-            {
-                String url = selected.getRuta();
+            if (selected != null)
+                try
+                {
+                    String url = selected.getRuta();
 
-                ProcessBuilder p = new ProcessBuilder();
-                p.command("cmd.exe", "/c", url);
-                p.start();
+                    ProcessBuilder p = new ProcessBuilder();
+                    p.command("cmd.exe", "/c", url);
+                    p.start();
 
-            } catch (IOException ex)
-            {
-                System.out.println(ex.getMessage());
-            }
+                } catch (IOException ex)
+                {
+                    System.out.println(ex.getMessage());
+                }
 
         }
 
