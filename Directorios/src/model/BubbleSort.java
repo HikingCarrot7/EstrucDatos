@@ -9,64 +9,33 @@ import java.util.List;
 public class BubbleSort
 {
 
-    public static <T extends Comparable<T>> void bubbleSort(T[] array) throws InterruptedException
+    public static <E extends Comparable<E>> void bubbleSort(List<E> array) throws InterruptedException
     {
-        boolean isSorted = false;
+        boolean swapped;
+        int n = array.size();
 
-        while (!isSorted)
+        for (int i = 0; i < n - 1; i++)
         {
-            int lastSorted = array.length - 1;
-            isSorted = true;
+            swapped = false;
 
-            for (int i = 0; i < lastSorted; i++)
-                if (array[i].compareTo(array[i + 1]) > 0)
+            for (int j = 0; j < n - i - 1; j++)
+                if (array.get(j).compareTo(array.get(j + 1)) > 0)
                 {
-                    swap(array, i, i + 1);
-                    isSorted = false;
+                    swap(array, j, j + 1);
+                    swapped = true;
                 }
 
             if (Thread.currentThread().isInterrupted())
                 throw new InterruptedException("El ordenamiento fue cancelado.");
 
-            lastSorted--;
+            if (!swapped)
+                break;
         }
-
     }
 
-    public static <T extends Comparable<T>> void bubbleSort(List<T> array) throws InterruptedException
+    public static <E> void swap(List<E> array, int i, int j)
     {
-        boolean isSorted = false;
-
-        while (!isSorted)
-        {
-            int lastSorted = array.size() - 1;
-            isSorted = true;
-
-            for (int i = 0; i < lastSorted; i++)
-                if (array.get(i).compareTo(array.get(i + 1)) > 0)
-                {
-                    swap(array, i, i + 1);
-                    isSorted = false;
-                }
-
-            if (Thread.currentThread().isInterrupted())
-                throw new InterruptedException("El ordenamiento fue cancelado.");
-
-            lastSorted--;
-        }
-
-    }
-
-    public static <T> void swap(T[] array, int i, int j)
-    {
-        T temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-    }
-
-    public static <T> void swap(List<T> array, int i, int j)
-    {
-        T temp = array.get(i);
+        E temp = array.get(i);
         array.set(i, array.get(j));
         array.set(j, temp);
     }

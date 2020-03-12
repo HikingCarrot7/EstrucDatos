@@ -14,35 +14,27 @@ public class TableManager<E>
 
     public void rellenarTabla(ObservableList<E> directorios, TableView<E> table)
     {
-        Platform.runLater(() ->
-        {
-            table.setItems(FXCollections.observableArrayList(directorios));
-            refreshTable(table);
-        });
+        table.setItems(FXCollections.observableArrayList(directorios));
+        table.refresh();
     }
 
     public void rellenarTabla(E item, TableView<E> table)
     {
-        table.getItems().clear();
-        table.getItems().add(item);
-        refreshTable(table);
-    }
-
-    public void rellenarTablaConNuevaLista(ObservableList<E> directorios, TableView<E> table)
-    {
-        table.setItems(FXCollections.observableArrayList(directorios));
-        refreshTable(table);
+        Platform.runLater(() ->
+        {
+            table.getItems().clear();
+            table.getItems().add(item);
+            table.refresh();
+        });
     }
 
     public void limpiarTabla(TableView<E> table)
     {
-        table.getItems().clear();
-        refreshTable(table);
-    }
-
-    public void refreshTable(TableView<E> table)
-    {
-        table.refresh();
+        Platform.runLater(() ->
+        {
+            table.getItems().clear();
+            table.refresh();
+        });
     }
 
 }
