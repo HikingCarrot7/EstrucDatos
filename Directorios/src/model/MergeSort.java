@@ -1,9 +1,12 @@
 package model;
 
+import test.FunnyStuff;
+
 /**
  *
  * @author A15001169
  */
+@FunnyStuff(descripcion = "Funny stuff :)")
 public class MergeSort
 {
 

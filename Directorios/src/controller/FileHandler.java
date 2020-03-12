@@ -5,12 +5,14 @@ import javafx.event.EventHandler;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
+import test.TechnicalStuff;
 
 /**
  *
  * @author nicol
  * @param <T>
  */
+@TechnicalStuff(descripcion = "Algunas cosas pueden ser complicadas de entender :(")
 public class FileHandler implements EventHandler<MouseEvent>
 {
 

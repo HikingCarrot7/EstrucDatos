@@ -32,12 +32,14 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import model.BinarySearch;
+import test.TechnicalStuff;
 
 /**
  * FXML Controller class
  *
  * @author HikingCarrot7
  */
+@TechnicalStuff(descripcion = "Algunas cosas pueden ser complicadas de entender :(")
 public class VistaController implements Initializable
 {
 

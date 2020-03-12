@@ -2,11 +2,13 @@ package model;
 
 import controller.Directorio;
 import java.util.List;
+import test.FunnyStuff;
 
 /**
  *
  * @author HikingCarrot7
  */
+@FunnyStuff(descripcion = "Funny stuff :)")
 public class BinarySearch
 {
 

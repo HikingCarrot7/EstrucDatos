@@ -3,11 +3,13 @@ package controller;
 import java.io.File;
 import java.util.Date;
 import javafx.collections.ObservableList;
+import test.FunnyStuff;
 
 /**
  *
  * @author HikingCarrot7
  */
+@FunnyStuff(descripcion = "Funny stuff :)")
 public class DirectoryManager
 {
 

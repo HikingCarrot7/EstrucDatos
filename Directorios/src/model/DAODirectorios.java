@@ -9,11 +9,13 @@ import java.util.Formatter;
 import java.util.List;
 import java.util.Scanner;
 import javafx.collections.FXCollections;
+import test.TechnicalStuff;
 
 /**
  *
  * @author HikingCarrot7
  */
+@TechnicalStuff(descripcion = "Algunas cosas pueden ser complicadas de entender :(")
 public class DAODirectorios
 {
 

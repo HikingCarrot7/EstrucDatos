@@ -4,11 +4,13 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
+import test.FunnyStuff;
 
 /**
  *
  * @author HikingCarrot7
  */
+@FunnyStuff(descripcion = "Funny stuff :)")
 public class TableManager<E>
 {
 

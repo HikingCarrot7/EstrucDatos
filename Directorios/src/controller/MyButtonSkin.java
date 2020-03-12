@@ -4,11 +4,13 @@ import com.sun.javafx.scene.control.skin.ButtonSkin;
 import javafx.animation.FadeTransition;
 import javafx.scene.control.Button;
 import javafx.util.Duration;
+import test.TechnicalStuff;
 
 /**
  *
  * @author HikingCarrot7
  */
+@TechnicalStuff(descripcion = "Algunas cosas pueden ser complicadas de entender :(")
 public class MyButtonSkin extends ButtonSkin
 {
 

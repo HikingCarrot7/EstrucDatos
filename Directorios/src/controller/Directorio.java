@@ -1,9 +1,12 @@
 package controller;
 
+import test.FunnyStuff;
+
 /**
  *
  * @author HikingCarrot7
  */
+@FunnyStuff(descripcion = "Funny stuff :)")
 public class Directorio implements Comparable<Directorio>
 {
 

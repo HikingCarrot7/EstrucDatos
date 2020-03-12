@@ -1,11 +1,13 @@
 package model;
 
 import java.util.List;
+import test.FunnyStuff;
 
 /**
  *
  * @author A15001169
  */
+@FunnyStuff(descripcion = "Funny stuff :)")
 public class QuickSort
 {
 

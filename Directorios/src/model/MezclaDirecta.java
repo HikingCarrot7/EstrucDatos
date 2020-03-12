@@ -6,11 +6,13 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+import test.FunnyStuff;
 
 /**
  *
  * @author HikingCarrot7
  */
+@FunnyStuff(descripcion = "Funny stuff :)")
 public class MezclaDirecta
 {
 
