@@ -11,7 +11,7 @@ import javafx.scene.input.MouseEvent;
  * @author nicol
  * @param <T>
  */
-public class FileManager implements EventHandler<MouseEvent>
+public class FileHandler implements EventHandler<MouseEvent>
 {
 
     @Override

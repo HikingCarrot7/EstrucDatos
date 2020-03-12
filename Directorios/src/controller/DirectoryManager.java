@@ -34,10 +34,7 @@ public class DirectoryManager
         for (String direc : file.list())
         {
             if (Thread.currentThread().isInterrupted())
-            {
-                System.out.println("El hilo ha sido interrumpido");
                 throw new InterruptedException("La operación para la búsqueda de directorios fue cancelada.");
-            }
 
             File f = new File(file.getAbsolutePath(), direc);
             directorios.add(new Directorio(f.getName(), f.getAbsolutePath(), new Date(f.lastModified()).toString()));

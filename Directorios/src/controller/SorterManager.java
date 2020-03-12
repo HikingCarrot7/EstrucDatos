@@ -3,8 +3,10 @@ package controller;
 import java.util.Arrays;
 import javafx.collections.ObservableList;
 import model.BubbleSort;
+import model.DAODirectorios;
 import model.InsertionSort;
 import model.MergeSort;
+import model.MezclaDirecta;
 import model.QuickSort;
 import model.ShellSort;
 
@@ -51,7 +53,11 @@ public class SorterManager
                     break;
 
                 case CLAVE_MEZCLA_DIRECTA:
-
+                    DAODirectorios dao = new DAODirectorios();
+                    dao.guardarDirectorios(directorios);
+                    MezclaDirecta.sort(dao.getFile(), directorios.size());
+                    directorios.clear();
+                    directorios.addAll(dao.getDirectorios());
                     break;
 
                 default:

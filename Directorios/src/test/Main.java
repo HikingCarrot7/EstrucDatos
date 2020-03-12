@@ -2,7 +2,6 @@ package test;
 
 import controller.VistaController;
 import java.io.IOException;
-import java.util.Arrays;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -19,32 +18,23 @@ public class Main extends Application
 
     public static void main(String[] args)
     {
-        System.out.println(Arrays.toString(args));
         launch(args);
     }
 
     @Override
-    public void start(Stage primaryStage)
+    public void start(Stage primaryStage) throws IOException
     {
-        try
-        {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("/view/Vista.fxml"));
-            Pane ventana = (Pane) loader.load();
-            ((VistaController) loader.getController()).initStage(primaryStage);
-            Scene scene = new Scene(ventana);
-            scene.getStylesheets().add("styles/Estilos.css");
-            primaryStage.setScene(scene);
-            primaryStage.setTitle("Algoritmos de ordenamiento");
-            primaryStage.centerOnScreen();
-            primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("/icons/Java.png")));
-            primaryStage.show();
-
-        } catch (IOException ex)
-        {
-            System.out.println(ex.getMessage());
-        }
-
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Main.class.getResource("/view/Vista.fxml"));
+        Pane ventana = (Pane) loader.load();
+        ((VistaController) loader.getController()).initStage(primaryStage);
+        Scene scene = new Scene(ventana);
+        scene.getStylesheets().add("styles/Stylesheet.css");
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Algoritmos de ordenamiento");
+        primaryStage.centerOnScreen();
+        primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("/icons/Java.png")));
+        primaryStage.show();
     }
 
 }

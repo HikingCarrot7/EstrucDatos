@@ -81,6 +81,8 @@ public class VistaController implements Initializable
     private Button actualizar;
     @FXML
     private Button cancelar;
+    @FXML
+    private ProgressIndicator progressIndicator;
 
     private DirectoryManager directoryManager;
     private TableManager<Directorio> tableManager;
@@ -88,8 +90,6 @@ public class VistaController implements Initializable
     private Thread t;
     private ObservableList<Directorio> directoriosEncontrados;
     private Stage stage;
-    @FXML
-    private ProgressIndicator progressIndicator;
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -151,7 +151,7 @@ public class VistaController implements Initializable
             }
         }
 
-        FileManager handler = new FileManager();
+        FileHandler handler = new FileHandler();
 
         tablaListaOrdenada.setOnMouseClicked(handler);
         tablaListaEncontrada.setOnMouseClicked(handler);
