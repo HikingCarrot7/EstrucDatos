@@ -9,47 +9,40 @@ import java.util.List;
 public class QuickSort
 {
 
-    public static <E extends Comparable<E>> List<E> quicksort(List<E> array) throws InterruptedException
+    public static <E extends Comparable<E>> void quicksort(List<E> array) throws InterruptedException
     {
-        return quicksortHelper(array, 0, array.size() - 1);
+        quicksortHelper(array, 0, array.size() - 1);
     }
 
-    protected static <E extends Comparable<E>> List<E> quicksortHelper(List<E> array, int izq, int der) throws InterruptedException
+    protected static <E extends Comparable<E>> void quicksortHelper(List<E> array, int izq, int der) throws InterruptedException
     {
         if (Thread.currentThread().isInterrupted())
             throw new InterruptedException("El ordenamiento fue cancelado.");
 
-        if (izq >= der)
-            return array;
+        E pivote = array.get(izq); // tomamos primer elemento como pivote
+        int i = izq; // i realiza la búsqueda de izquierda a derecha
+        int j = der; // j realiza la búsqueda de derecha a izquierda
 
-        int i = izq, d = der;
+        while (i < j)
+        {            // mientras no se crucen las búsquedas
+            while (array.get(i).compareTo(pivote) <= 0 && i < j)
+                i++; // busca elemento mayor que pivote
 
-        if (izq != der)
-        {
-            int pivote = izq;
+            while (array.get(j).compareTo(pivote) > 0)
+                j--;         // busca elemento menor que pivote
 
-            while (izq != der)
-            {
-                while (array.get(der).compareTo(array.get(pivote)) >= 0 && izq < der)
-                    der--;
+            if (i < j)                      // si no se han cruzado
+                swap(array, i, j);
+        }
 
-                while (array.get(izq).compareTo(array.get(pivote)) < 0 && izq < der)
-                    izq++;
+        array.set(izq, array.get(j));
+        array.set(j, pivote);
 
-                if (der != izq)
-                    swap(array, der, izq);
-            }
+        if (izq < j - 1)
+            quicksortHelper(array, izq, j - 1); // ordenamos subarray izquierdo
 
-            if (izq == der)
-            {
-                quicksortHelper(array, i, izq - 1);
-                quicksortHelper(array, izq + 1, d);
-            }
-
-        } else
-            return array;
-
-        return array;
+        if (j + 1 < der)
+            quicksortHelper(array, j + 1, der); // ordenamos subarray derecho
     }
 
     public static <T> void swap(List<T> array, int i, int j)

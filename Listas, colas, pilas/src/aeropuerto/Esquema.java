@@ -85,9 +85,9 @@ public final class Esquema extends Canvas
         g.drawRect(x, y, RECT_WIDTH, RECT_HEIGHT);
     }
 
-    private void drawTriangle(Graphics2D g, int x, int y, int lenght)
+    private void drawTriangle(Graphics2D g, int x, int y, int length)
     {
-        int offset = (int) Math.sqrt(Math.pow(lenght, 2) - Math.pow((lenght / 2), 2));
+        int offset = (int) Math.sqrt(Math.pow(length, 2) - Math.pow((length / 2), 2));
 
         int[] puntosX =
         {

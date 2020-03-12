@@ -238,9 +238,8 @@ public class VistaController implements Initializable
     @FXML
     private void actualizar(ActionEvent e)
     {
-        cancelarOperacion();
-        limpiarTodosCampos(false);
-        iniciarProcesamientoDirectorios();
+        if (!existeTaskThread())
+            iniciarProcesamientoDirectorios();
     }
 
     @FXML
@@ -305,7 +304,8 @@ public class VistaController implements Initializable
                     //Algún error ocurrió o la operación fue cancelada.
                 } catch (ExecutionException e)
                 {
-                    mostrarError("¡No podemos analizar esa carpeta!");
+                    e.printStackTrace();
+                    mostrarError("¡Hubo un error o no podemos analizar esa carpeta!");
 
                 } catch (Exception ex)
                 {
@@ -397,7 +397,7 @@ public class VistaController implements Initializable
      */
     private void rellenarTablaDirectoriosEncontrados(ObservableList<Directorio> directorios)
     {
-        tableManager.rellenarTablaConNuevaLista(directorios, tablaListaEncontrada);
+        tableManager.rellenarTabla(directorios, tablaListaEncontrada);
     }
 
     /**
