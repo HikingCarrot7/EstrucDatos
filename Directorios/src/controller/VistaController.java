@@ -240,8 +240,12 @@ public class VistaController implements Initializable
     @FXML
     private void actualizar(ActionEvent e)
     {
-        if (!existeTaskThread())
+        cancelar(e);
+
+        Platform.runLater(() ->
+        {
             iniciarProcesamientoDirectorios();
+        });
     }
 
     @FXML
@@ -263,6 +267,7 @@ public class VistaController implements Initializable
      */
     private void procesarDirectorios(File file)
     {
+        progressIndicator.setVisible(true);
         limpiarTablas();
         directoriosEncontrados.clear();
 
@@ -278,7 +283,6 @@ public class VistaController implements Initializable
 
                 Scene currentScene = buscar.getScene();
                 currentScene.setCursor(Cursor.WAIT);
-                progressIndicator.setVisible(true);
 
                 //Rellena la lista de directorios.
                 rellenarDirectorios(directoriosEncontrados, file);
@@ -294,7 +298,7 @@ public class VistaController implements Initializable
             }
 
             @Override
-            protected void done()
+            protected synchronized void done()
             {
                 try
                 {
@@ -506,13 +510,13 @@ public class VistaController implements Initializable
      */
     private void limpiarTodosCampos(boolean limpiarEntradas)
     {
+        progressIndicator.setVisible(false);
+
         Platform.runLater(() ->
         {
             buscar.getScene().setCursor(Cursor.DEFAULT);
             tiempoTranscurrido.setText("");
-            burbuja.setSelected(true);
             directoriosEncontrados.clear();
-            progressIndicator.setVisible(false);
 
             if (limpiarEntradas)
                 limpiarEntradas();

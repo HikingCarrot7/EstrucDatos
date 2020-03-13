@@ -1,35 +1,14 @@
-.netbeans_automatic_build<C:\Users\HikingCarrot7\Downloads\SortAlgorithms\build\classes\.netbeans_automatic_build<Sat Feb 29 21:31:34 CST 2020
 .netbeans_automatic_build<C:\Users\HikingCarrot7\Downloads\OrdenamientoArchivo (1)\build\classes\.netbeans_automatic_build<Thu Dec 17 16:47:48 CST 2015
-.netbeans_update_resources<C:\Users\HikingCarrot7\Downloads\SortAlgorithms\build\classes\.netbeans_update_resources<Sat Feb 29 21:31:34 CST 2020
 .netbeans_update_resources<C:\Users\HikingCarrot7\Downloads\OrdenamientoArchivo (1)\build\classes\.netbeans_update_resources<Thu Dec 17 16:47:48 CST 2015
-10.txt<C:\Users\HikingCarrot7\Downloads\SortAlgorithms\10.txt<Tue Mar 03 07:39:16 CST 2020
-100.txt<C:\Users\HikingCarrot7\Downloads\SortAlgorithms\100.txt<Tue Mar 03 07:39:16 CST 2020
-1000.txt<C:\Users\HikingCarrot7\Downloads\SortAlgorithms\1000.txt<Tue Mar 03 07:39:16 CST 2020
-10000.txt<C:\Users\HikingCarrot7\Downloads\SortAlgorithms\10000.txt<Tue Mar 03 07:39:16 CST 2020
-100000.txt<C:\Users\HikingCarrot7\Downloads\SortAlgorithms\100000.txt<Tue Mar 03 07:39:16 CST 2020
-Aeropuerto.exe<C:\Users\HikingCarrot7\Downloads\EstrucDatos\Nicolás_Canul_Integradora_Aeropuerto\Programa\Aeropuerto.exe<Thu Feb 13 23:19:14 CST 2020
-Aeropuerto.jar<C:\Users\HikingCarrot7\Downloads\EstrucDatos\Nicolás_Canul_Integradora_Aeropuerto\Programa\Aeropuerto.jar<Thu Feb 13 23:14:01 CST 2020
-Aeropuerto.xml<C:\Users\HikingCarrot7\Downloads\EstrucDatos\Nicolás_Canul_Integradora_Aeropuerto\Programa\Aeropuerto.xml<Thu Feb 13 23:19:13 CST 2020
-Algorithms.class<C:\Users\HikingCarrot7\Downloads\SortAlgorithms\build\classes\Algorithms\Algorithms.class<Thu Mar 05 23:32:09 CST 2020
-Algorithms.java<C:\Users\HikingCarrot7\Downloads\SortAlgorithms\src\Algorithms\Algorithms.java<Thu Mar 05 23:32:09 CST 2020
+Aeropuerto.exe<C:\Users\HikingCarrot7\Downloads\Nicolás_Canul_Integradora_Aeropuerto\Programa\Aeropuerto.exe<Thu Feb 13 23:19:16 CST 2020
+Aeropuerto.jar<C:\Users\HikingCarrot7\Downloads\Nicolás_Canul_Integradora_Aeropuerto\Programa\Aeropuerto.jar<Thu Feb 13 23:14:02 CST 2020
+Aeropuerto.xml<C:\Users\HikingCarrot7\Downloads\Nicolás_Canul_Integradora_Aeropuerto\Programa\Aeropuerto.xml<Thu Feb 13 23:19:14 CST 2020
 Archivo_Imprimir.class<C:\Users\HikingCarrot7\Downloads\OrdenamientoArchivo (1)\build\classes\ordenamientoarchivo\Archivo_Imprimir.class<Tue Mar 03 07:21:23 CST 2020
 Archivo_Imprimir.java<C:\Users\HikingCarrot7\Downloads\OrdenamientoArchivo (1)\src\ordenamientoarchivo\Archivo_Imprimir.java<Thu Dec 17 16:38:24 CST 2015
 build-impl.xml<C:\Users\HikingCarrot7\Downloads\OrdenamientoArchivo (1)\nbproject\build-impl.xml<Tue Mar 03 07:21:22 CST 2020
-build-impl.xml<C:\Users\HikingCarrot7\Downloads\SortAlgorithms\nbproject\build-impl.xml<Tue Mar 03 07:39:11 CST 2020
-build.xml<C:\Users\HikingCarrot7\Downloads\SortAlgorithms\build.xml<Sat Feb 29 21:23:40 CST 2020
 build.xml<C:\Users\HikingCarrot7\Downloads\OrdenamientoArchivo (1)\build.xml<Thu Dec 17 14:19:20 CST 2015
 built-jar.properties<C:\Users\HikingCarrot7\Downloads\OrdenamientoArchivo (1)\build\built-jar.properties<Thu Dec 17 16:44:06 CST 2015
-ColaLlenaException.java<C:\Users\HikingCarrot7\Downloads\EstrucDatos\Nicolás_Canul_Integradora_Aeropuerto\Código fuente\Aeropuerto\src\excepciones\ColaLlenaException.java<Tue Jan 21 14:47:24 CST 2020
-ColaVaciaException.java<C:\Users\HikingCarrot7\Downloads\EstrucDatos\Nicolás_Canul_Integradora_Aeropuerto\Código fuente\Aeropuerto\src\excepciones\ColaVaciaException.java<Tue Jan 21 14:47:24 CST 2020
-Controlador.class<C:\Users\HikingCarrot7\Downloads\SortAlgorithms\build\classes\Algorithms\Controlador.class<Thu Mar 05 23:26:05 CST 2020
-Controlador.java<C:\Users\HikingCarrot7\Downloads\SortAlgorithms\src\Algorithms\Controlador.java<Thu Mar 05 23:26:05 CST 2020
-DequeEmptyException.java<C:\Users\HikingCarrot7\Downloads\EstrucDatos\Nicolás_Canul_Integradora_Aeropuerto\Código fuente\Aeropuerto\src\excepciones\DequeEmptyException.java<Tue Jan 21 18:53:05 CST 2020
-DoublyLinkedNode.java<C:\Users\HikingCarrot7\Downloads\EstrucDatos\Nicolás_Canul_Integradora_Aeropuerto\Código fuente\Aeropuerto\src\nodos\DoublyLinkedNode.java<Thu Feb 13 23:11:53 CST 2020
-ExpresionNoEvaluableException.java<C:\Users\HikingCarrot7\Downloads\EstrucDatos\Nicolás_Canul_Integradora_Aeropuerto\Código fuente\Aeropuerto\src\excepciones\ExpresionNoEvaluableException.java<Wed Jan 22 14:56:52 CST 2020
-GeneradorArrays.class<C:\Users\HikingCarrot7\Downloads\SortAlgorithms\build\classes\Algorithms\GeneradorArrays.class<Tue Mar 03 07:39:11 CST 2020
-GeneradorArrays.java<C:\Users\HikingCarrot7\Downloads\SortAlgorithms\src\Algorithms\GeneradorArrays.java<Tue Mar 03 07:39:11 CST 2020
 genfiles.properties<C:\Users\HikingCarrot7\Downloads\OrdenamientoArchivo (1)\nbproject\genfiles.properties<Tue Mar 03 07:21:22 CST 2020
-genfiles.properties<C:\Users\HikingCarrot7\Downloads\SortAlgorithms\nbproject\genfiles.properties<Tue Mar 03 07:37:54 CST 2020
 Git_ Learn Version Control with Git_ A step-by-step Ultimate beginners Guide ( PDFDrive.com ).pdf<C:\Users\HikingCarrot7\Downloads\PDFS\Git_ Learn Version Control with Git_ A step-by-step Ultimate beginners Guide ( PDFDrive.com ).pdf<Tue Feb 25 10:28:05 CST 2020
 Gui$1.class<C:\Users\HikingCarrot7\Downloads\OrdenamientoArchivo (1)\build\classes\ordenamientoarchivo\Gui$1.class<Tue Mar 03 07:21:23 CST 2020
 Gui$2.class<C:\Users\HikingCarrot7\Downloads\OrdenamientoArchivo (1)\build\classes\ordenamientoarchivo\Gui$2.class<Tue Mar 03 07:21:23 CST 2020
@@ -45,59 +24,46 @@ Java FX for Dummies ( PDFDrive.com ).pdf<C:\Users\HikingCarrot7\Downloads\PDFS\J
 Java Homework Projects_ A NetBeans GUI Swing Programming Tutorial ( PDFDrive.com ).pdf<C:\Users\HikingCarrot7\Downloads\PDFS\Java Homework Projects_ A NetBeans GUI Swing Programming Tutorial ( PDFDrive.com ).pdf<Mon Feb 03 15:38:29 CST 2020
 JavaScript and JQuery Interactive Front-En - Jon Duckett.pdf<C:\Users\HikingCarrot7\Downloads\PDFS\JavaScript and JQuery Interactive Front-En - Jon Duckett.pdf<Mon Feb 24 16:00:37 CST 2020
 JavaScript_ JavaScript For Beginners - Learn JavaScript Programming with ease in HALF THE TIME - Everything about the Language, Coding, Programming and Web Pages You need to know ( PDFDrive.com ).pdf<C:\Users\HikingCarrot7\Downloads\PDFS\JavaScript_ JavaScript For Beginners - Learn JavaScript Programming with ease in HALF THE TIME - Everything about the Language, Coding, Programming and Web Pages You need to know ( PDFDrive.com ).pdf<Sun Feb 23 09:34:14 CST 2020
-jcpicker.exe<C:\Users\HikingCarrot7\Downloads\jcpicker.exe<Sun Mar 08 22:45:13 CST 2020
-jcpicker.txt<C:\Users\HikingCarrot7\Downloads\jcpicker.txt<Sun Mar 08 22:51:47 CST 2020
 kotlin-docs.pdf<C:\Users\HikingCarrot7\Downloads\PDFS\kotlin-docs.pdf<Sun Jan 26 10:56:20 CST 2020
 kotlin-es.pdf<C:\Users\HikingCarrot7\Downloads\PDFS\kotlin-es.pdf<Sun Jan 26 14:17:57 CST 2020
 Learn JavaFX 8_ Building User Experience and Interfaces with Java 8 ( PDFDrive.com ).pdf<C:\Users\HikingCarrot7\Downloads\PDFS\Learn JavaFX 8_ Building User Experience and Interfaces with Java 8 ( PDFDrive.com ).pdf<Sun Feb 09 23:40:01 CST 2020
 Learning JavaScript ( PDFDrive.com ).pdf<C:\Users\HikingCarrot7\Downloads\PDFS\Learning JavaScript ( PDFDrive.com ).pdf<Sun Feb 23 09:45:04 CST 2020
-LinkedList.java<C:\Users\HikingCarrot7\Downloads\EstrucDatos\Nicolás_Canul_Integradora_Aeropuerto\Código fuente\Aeropuerto\src\linkedlist\LinkedList.java<Thu Feb 13 23:11:38 CST 2020
-LinkedStack.java<C:\Users\HikingCarrot7\Downloads\EstrucDatos\Nicolás_Canul_Integradora_Aeropuerto\Código fuente\Aeropuerto\src\linkedstack\LinkedStack.java<Fri Feb 14 19:25:27 CST 2020
-List.java<C:\Users\HikingCarrot7\Downloads\EstrucDatos\Nicolás_Canul_Integradora_Aeropuerto\Código fuente\Aeropuerto\src\linkedlist\List.java<Thu Feb 13 23:11:38 CST 2020
-ListaVaciaException.java<C:\Users\HikingCarrot7\Downloads\EstrucDatos\Nicolás_Canul_Integradora_Aeropuerto\Código fuente\Aeropuerto\src\excepciones\ListaVaciaException.java<Tue Jan 21 14:47:24 CST 2020
-ListNode.java<C:\Users\HikingCarrot7\Downloads\EstrucDatos\Nicolás_Canul_Integradora_Aeropuerto\Código fuente\Aeropuerto\src\nodos\ListNode.java<Thu Feb 13 23:11:53 CST 2020
+ListNode.java<C:\Users\HikingCarrot7\Downloads\Nicolás_Canul_Integradora_Aeropuerto\Código fuente\Aeropuerto\src\nodos\ListNode.java<Thu Feb 13 23:11:54 CST 2020
 Main.class<C:\Users\HikingCarrot7\Downloads\OrdenamientoArchivo (1)\build\classes\ordenamientoarchivo\Main.class<Tue Mar 03 07:21:23 CST 2020
 Main.java<C:\Users\HikingCarrot7\Downloads\OrdenamientoArchivo (1)\src\ordenamientoarchivo\Main.java<Thu Dec 17 15:56:44 CST 2015
-ManejadorArchivos.class<C:\Users\HikingCarrot7\Downloads\SortAlgorithms\build\classes\Algorithms\ManejadorArchivos.class<Tue Mar 03 07:39:11 CST 2020
-ManejadorArchivos.java<C:\Users\HikingCarrot7\Downloads\SortAlgorithms\src\Algorithms\ManejadorArchivos.java<Tue Mar 03 07:39:11 CST 2020
-manifest.mf<C:\Users\HikingCarrot7\Downloads\SortAlgorithms\manifest.mf<Sat Feb 29 21:23:40 CST 2020
-Manual  de uso.docx<C:\Users\HikingCarrot7\Downloads\EstrucDatos\Nicolás_Canul_Integradora_Aeropuerto\Manual  de uso.docx<Thu Feb 13 23:21:01 CST 2020
-Manual de instalación.txt<C:\Users\HikingCarrot7\Downloads\EstrucDatos\Nicolás_Canul_Integradora_Aeropuerto\Manual de instalación.txt<Thu Feb 13 23:20:10 CST 2020
+Manual  de uso.docx<C:\Users\HikingCarrot7\Downloads\Nicolás_Canul_Integradora_Aeropuerto\Manual  de uso.docx<Thu Feb 13 23:21:02 CST 2020
+Manual de instalación.txt<C:\Users\HikingCarrot7\Downloads\Nicolás_Canul_Integradora_Aeropuerto\Manual de instalación.txt<Thu Feb 13 23:20:12 CST 2020
+Manual de instalación.txt<C:\Users\HikingCarrot7\Downloads\Nicolás_Canul_Integradora_Ordenamiento\Manual de instalación.txt<Thu Mar 12 15:21:06 CST 2020
+Manual de uso.docx<C:\Users\HikingCarrot7\Downloads\Nicolás_Canul_Integradora_Ordenamiento\Manual de uso.docx<Thu Mar 12 22:12:06 CST 2020
 Mastering CSS _ a guided journey through modern CSS ( PDFDrive.com ).pdf<C:\Users\HikingCarrot7\Downloads\PDFS\Mastering CSS _ a guided journey through modern CSS ( PDFDrive.com ).pdf<Tue Feb 18 21:09:02 CST 2020
 metadata<C:\Users\HikingCarrot7\Downloads\opera autoupdate\Crash Reports\metadata<Tue Mar 03 21:22:46 CST 2020
-Node.java<C:\Users\HikingCarrot7\Downloads\EstrucDatos\Nicolás_Canul_Integradora_Aeropuerto\Código fuente\Aeropuerto\src\nodos\Node.java<Tue Jan 21 14:47:24 CST 2020
-opera_autoupdate.log<C:\Users\HikingCarrot7\Downloads\opera autoupdate\opera_autoupdate.log<Wed Mar 11 16:55:44 CST 2020
+Nicolás_Canul_Integradora_Aeropuerto.zip<C:\Users\HikingCarrot7\Downloads\Nicolás_Canul_Integradora_Aeropuerto.zip<Thu Mar 12 14:58:29 CST 2020
+Node.java<C:\Users\HikingCarrot7\Downloads\Nicolás_Canul_Integradora_Aeropuerto\Código fuente\Aeropuerto\src\nodos\Node.java<Tue Jan 21 14:47:26 CST 2020
+opera_autoupdate.log<C:\Users\HikingCarrot7\Downloads\opera autoupdate\opera_autoupdate.log<Thu Mar 12 21:55:05 CST 2020
 Operating System Concepts ( PDFDrive.com ).pdf<C:\Users\HikingCarrot7\Downloads\PDFS\Operating System Concepts ( PDFDrive.com ).pdf<Fri Mar 06 17:35:42 CST 2020
 OrdenamientoArchivo.jar<C:\Users\HikingCarrot7\Downloads\OrdenamientoArchivo (1)\dist\OrdenamientoArchivo.jar<Thu Dec 17 16:44:10 CST 2015
 Ordenar.class<C:\Users\HikingCarrot7\Downloads\OrdenamientoArchivo (1)\build\classes\ordenamientoarchivo\Ordenar.class<Tue Mar 03 07:21:23 CST 2020
 Ordenar.java<C:\Users\HikingCarrot7\Downloads\OrdenamientoArchivo (1)\src\ordenamientoarchivo\Ordenar.java<Thu Dec 17 15:50:08 CST 2015
 Original.txt<C:\Users\HikingCarrot7\Downloads\OrdenamientoArchivo (1)\dist\Original.txt<Thu Dec 17 16:49:38 CST 2015
 Original.txt<C:\Users\HikingCarrot7\Downloads\OrdenamientoArchivo (1)\Original.txt<Tue Mar 03 07:21:56 CST 2020
-PilaLlenaException.java<C:\Users\HikingCarrot7\Downloads\EstrucDatos\Nicolás_Canul_Integradora_Aeropuerto\Código fuente\Aeropuerto\src\excepciones\PilaLlenaException.java<Tue Jan 21 14:47:24 CST 2020
-PilaVaciaException.java<C:\Users\HikingCarrot7\Downloads\EstrucDatos\Nicolás_Canul_Integradora_Aeropuerto\Código fuente\Aeropuerto\src\excepciones\PilaVaciaException.java<Tue Jan 21 14:47:24 CST 2020
 Portada.docx<C:\Users\HikingCarrot7\Downloads\Portada.docx<Sun Mar 01 23:41:49 CST 2020
-Principal.class<C:\Users\HikingCarrot7\Downloads\SortAlgorithms\build\classes\Algorithms\Principal.class<Thu Mar 05 22:56:50 CST 2020
-Principal.java<C:\Users\HikingCarrot7\Downloads\SortAlgorithms\src\Algorithms\Principal.java<Thu Mar 05 22:56:50 CST 2020
+Presentación.pptx<C:\Users\HikingCarrot7\Downloads\Nicolás_Canul_Integradora_Ordenamiento\Presentación.pptx<Thu Mar 12 16:26:38 CST 2020
 private.properties<C:\Users\HikingCarrot7\Downloads\OrdenamientoArchivo (1)\nbproject\private\private.properties<Tue Mar 03 07:21:22 CST 2020
-private.properties<C:\Users\HikingCarrot7\Downloads\SortAlgorithms\nbproject\private\private.properties<Tue Mar 03 07:37:54 CST 2020
-private.xml<C:\Users\HikingCarrot7\Downloads\SortAlgorithms\nbproject\private\private.xml<Fri Mar 06 22:25:20 CST 2020
 private.xml<C:\Users\HikingCarrot7\Downloads\OrdenamientoArchivo (1)\nbproject\private\private.xml<Thu Dec 17 14:11:46 CST 2015
 Pro TypeScript ( PDFDrive.com ).pdf<C:\Users\HikingCarrot7\Downloads\PDFS\Pro TypeScript ( PDFDrive.com ).pdf<Sun Feb 23 09:26:43 CST 2020
 Probabilidad Unidad 2.pdf<C:\Users\HikingCarrot7\Downloads\Proba\Probabilidad Unidad 2.pdf<Tue Feb 18 18:39:07 CST 2020
 project.properties<C:\Users\HikingCarrot7\Downloads\OrdenamientoArchivo (1)\nbproject\project.properties<Thu Dec 17 15:22:58 CST 2015
-project.properties<C:\Users\HikingCarrot7\Downloads\SortAlgorithms\nbproject\project.properties<Tue Mar 03 07:43:22 CST 2020
-project.xml<C:\Users\HikingCarrot7\Downloads\SortAlgorithms\nbproject\project.xml<Sat Feb 29 21:23:38 CST 2020
 project.xml<C:\Users\HikingCarrot7\Downloads\OrdenamientoArchivo (1)\nbproject\project.xml<Thu Dec 17 14:11:46 CST 2015
 Python - How to Program.pdf<C:\Users\HikingCarrot7\Downloads\PDFS\Python - How to Program.pdf<Sat Dec 28 17:01:23 CST 2019
 README.TXT<C:\Users\HikingCarrot7\Downloads\OrdenamientoArchivo (1)\dist\README.TXT<Thu Dec 17 16:44:10 CST 2015
-RecorridoBidireccional.java<C:\Users\HikingCarrot7\Downloads\EstrucDatos\Nicolás_Canul_Integradora_Aeropuerto\Código fuente\Aeropuerto\src\nodos\RecorridoBidireccional.java<Mon Feb 17 19:52:04 CST 2020
-RecorridoHaciaAdelante.java<C:\Users\HikingCarrot7\Downloads\EstrucDatos\Nicolás_Canul_Integradora_Aeropuerto\Código fuente\Aeropuerto\src\nodos\RecorridoHaciaAdelante.java<Mon Feb 17 19:51:52 CST 2020
-Ricardo Nicolás Canul Ibarra.txt<C:\Users\HikingCarrot7\Downloads\EstrucDatos\Nicolás_Canul_Integradora_Aeropuerto\Ricardo Nicolás Canul Ibarra.txt<Thu Feb 13 23:21:23 CST 2020
+RecorridoBidireccional.java<C:\Users\HikingCarrot7\Downloads\Nicolás_Canul_Integradora_Aeropuerto\Código fuente\Aeropuerto\src\nodos\RecorridoBidireccional.java<Thu Feb 13 23:11:54 CST 2020
+RecorridoHaciaAdelante.java<C:\Users\HikingCarrot7\Downloads\Nicolás_Canul_Integradora_Aeropuerto\Código fuente\Aeropuerto\src\nodos\RecorridoHaciaAdelante.java<Thu Feb 13 23:11:54 CST 2020
+Ricardo Nicolás Canul Ibarra.txt<C:\Users\HikingCarrot7\Downloads\Nicolás_Canul_Integradora_Aeropuerto\Ricardo Nicolás Canul Ibarra.txt<Thu Feb 13 23:21:24 CST 2020
 Richard_Warburton-Java_8_Lambdas-EN.pdf<C:\Users\HikingCarrot7\Downloads\PDFS\Richard_Warburton-Java_8_Lambdas-EN.pdf<Tue Jan 28 17:20:36 CST 2020
-settings.dat<C:\Users\HikingCarrot7\Downloads\opera autoupdate\Crash Reports\settings.dat<Wed Mar 11 16:55:38 CST 2020
+settings.dat<C:\Users\HikingCarrot7\Downloads\opera autoupdate\Crash Reports\settings.dat<Thu Mar 12 21:54:59 CST 2020
 Sistemas_operativos_Tanenbaum.pdf<C:\Users\HikingCarrot7\Downloads\PDFS\Sistemas_operativos_Tanenbaum.pdf<Sat Jan 25 17:08:42 CST 2020
 Spring MVC Cookbook_ Over 40 recipes for creating cloud-ready Java web applications with Spring MVC ( PDFDrive.com ).pdf<C:\Users\HikingCarrot7\Downloads\PDFS\Spring MVC Cookbook_ Over 40 recipes for creating cloud-ready Java web applications with Spring MVC ( PDFDrive.com ).pdf<Sat Feb 22 09:44:12 CST 2020
-Stack.java<C:\Users\HikingCarrot7\Downloads\EstrucDatos\Nicolás_Canul_Integradora_Aeropuerto\Código fuente\Aeropuerto\src\linkedstack\Stack.java<Thu Feb 13 23:12:03 CST 2020
+Tareas de Garci.pptx<C:\Users\HikingCarrot7\Downloads\Tareas de Garci.pptx<Wed Mar 11 21:27:51 CST 2020
 Tema_3.pdf<C:\Users\HikingCarrot7\Downloads\PDFS\Tema_3.pdf<Fri Mar 06 18:09:38 CST 2020
 The Dart Programming Language ( PDFDrive.com ).pdf<C:\Users\HikingCarrot7\Downloads\PDFS\The Dart Programming Language ( PDFDrive.com ).pdf<Tue Feb 25 09:14:42 CST 2020
 Top 1000 Java Interview Questions_ Includes Spring, Hibernate, Microservices, GIT, Maven, JSP, AWS, Cloud Computing ( PDFDrive.com ).pdf<C:\Users\HikingCarrot7\Downloads\PDFS\Top 1000 Java Interview Questions_ Includes Spring, Hibernate, Microservices, GIT, Maven, JSP, AWS, Cloud Computing ( PDFDrive.com ).pdf<Tue Feb 25 10:34:05 CST 2020
@@ -107,3 +73,4 @@ Unidad II ADA 3.pdf<C:\Users\HikingCarrot7\Downloads\Proba\Unidad II ADA 3.pdf<T
 va.pdf<C:\Users\HikingCarrot7\Downloads\Proba\va.pdf<Tue Feb 25 14:50:06 CST 2020
 Video3.zip<C:\Users\HikingCarrot7\Downloads\Video3.zip<Wed Feb 26 19:59:04 CST 2020
 web-design-with-html-and-css-digital-classroom.pdf<C:\Users\HikingCarrot7\Downloads\PDFS\web-design-with-html-and-css-digital-classroom.pdf<Tue Feb 18 21:10:04 CST 2020
+~$Presentación.pptx<C:\Users\HikingCarrot7\Downloads\Nicolás_Canul_Integradora_Ordenamiento\~$Presentación.pptx<Thu Mar 12 22:13:15 CST 2020

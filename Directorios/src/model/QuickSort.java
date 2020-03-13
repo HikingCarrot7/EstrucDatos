@@ -13,6 +13,9 @@ public class QuickSort
 
     public static <E extends Comparable<E>> void quicksort(List<E> array) throws InterruptedException
     {
+        if (array.isEmpty())
+            return;
+
         quicksortHelper(array, 0, array.size() - 1);
     }
 

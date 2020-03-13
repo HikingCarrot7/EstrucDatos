@@ -12,6 +12,9 @@ public class MergeSort
 
     public static <E extends Comparable<E>> E[] mergeSort(E[] data) throws InterruptedException
     {
+        if (data.length == 0)
+            return data;
+
         return mergeSortHelper(data, 0, data.length - 1);
     }
 
