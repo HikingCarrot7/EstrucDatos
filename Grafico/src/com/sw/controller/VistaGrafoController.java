@@ -1,9 +1,10 @@
 package com.sw.controller;
 
 import com.sw.model.Grafico;
-import com.sw.model.Vertice;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 import javafx.application.Platform;
@@ -12,8 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -21,14 +21,15 @@ import javafx.scene.layout.AnchorPane;
  *
  * @author HikingCarrot7
  */
-public class VistaGrafoController implements Initializable
+public class VistaGrafoController implements Initializable, Observer
 {
 
     @FXML
     private AnchorPane panel;
+    @FXML
+    private Label estado;
 
     private Grafico grafico;
-    private AristaHandler aristaHandler;
 
     /**
      * Initializes the controller class.
@@ -37,32 +38,9 @@ public class VistaGrafoController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         grafico = new Grafico();
-        aristaHandler = new AristaHandler(grafico);
-        panel.setOnMouseMoved(aristaHandler);
-        panel.addEventHandler(MouseEvent.MOUSE_CLICKED, aristaHandler);
-    }
-
-    @FXML
-    private void ponerVertice(MouseEvent e)
-    {
-        if (e.getButton().equals(MouseButton.SECONDARY))
-            return;
-
-        double x = e.getSceneX();
-        double y = e.getSceneY();
-
-        Platform.runLater(() ->
-        {
-            if (!VerticeHandler.existeVerticeEnPosicion(grafico, x, y))
-            {
-                Vertice v = new Vertice(x, y);
-                VerticeHandler.setEvents(v);
-                aristaHandler.accionPonerArista(this, v);
-                grafico.addVertice(v);
-                actualizarGrafico();
-            }
-        });
-
+        GraphLogic graphLogic = new GraphLogic(this, grafico);
+        panel.setOnMouseClicked(graphLogic);
+        graphLogic.addObserver(this);
     }
 
     public void actualizarGrafico()
@@ -73,6 +51,20 @@ public class VistaGrafoController implements Initializable
         children.addAll(grafico.getAristas());
         panel.getChildren().addAll(children);
         grafico.getAristas().forEach(Node::toBack);
+    }
+
+    public AnchorPane getPanel()
+    {
+        return panel;
+    }
+
+    @Override
+    public void update(Observable o, Object mensaje)
+    {
+        Platform.runLater(() ->
+        {
+            estado.setText(mensaje.toString());
+        });
     }
 
 }

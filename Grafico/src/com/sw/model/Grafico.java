@@ -53,4 +53,9 @@ public class Grafico
         return aristas;
     }
 
+    public boolean existenVerticesSuficientesParaCrearArista()
+    {
+        return vertices.size() > 1;
+    }
+
 }

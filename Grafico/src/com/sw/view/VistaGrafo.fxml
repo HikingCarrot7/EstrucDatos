@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sw.controller.VistaGrafoController">
    <center>
-        <AnchorPane fx:id="panel" onMouseClicked="#ponerVertice" BorderPane.alignment="CENTER" />
+        <AnchorPane fx:id="panel" BorderPane.alignment="CENTER" />
    </center>
+   <bottom>
+      <Label fx:id="estado" alignment="CENTER" contentDisplay="CENTER" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </Label>
+   </bottom>
 </BorderPane>

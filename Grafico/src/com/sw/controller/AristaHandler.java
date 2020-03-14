@@ -15,10 +15,11 @@ import javafx.scene.input.MouseEvent;
 public class AristaHandler implements EventHandler<MouseEvent>
 {
 
-    private boolean poniendoArista;
     private Grafico grafico;
+
+    private boolean poniendoArista;
     private Punto cursor;
-    private Arista aristaVista;
+    private Arista aristaCursor;
     private Vertice verticeSeleccionado;
 
     public AristaHandler(Grafico grafico)
@@ -35,15 +36,15 @@ public class AristaHandler implements EventHandler<MouseEvent>
                 verticeSeleccionado = v;
                 v.setSelected(!v.isSelected());
                 cursor = new Punto(e.getSceneX(), e.getSceneY());
-                aristaVista = new Arista(v, cursor);
-                grafico.addArista(aristaVista);
+                aristaCursor = new Arista(v, cursor);
+                grafico.addArista(aristaCursor);
                 poniendoArista = true;
 
             } else if (v.isSelected())
             {
                 poniendoArista = false;
                 cursor = null;
-                grafico.eliminarArista(aristaVista);
+                grafico.eliminarArista(aristaCursor);
                 v.setSelected(false);
             }
 
@@ -58,7 +59,7 @@ public class AristaHandler implements EventHandler<MouseEvent>
         {
             poniendoArista = false;
             cursor = null;
-            grafico.eliminarArista(aristaVista);
+            grafico.eliminarArista(aristaCursor);
             verticeSeleccionado.setSelected(false);
         }
 
