@@ -11,44 +11,6 @@ import test.FunnyStuff;
 public class ShellSort
 {
 
-    public static <E extends Comparable<E>> void shellsort(E[] arreglo) throws InterruptedException
-    {
-        int intervalo = arreglo.length;
-        boolean band;
-
-        while (intervalo > 0)
-        {
-            intervalo /= 2;
-            band = true;
-
-            while (band)
-            {
-                band = false;
-                int i = 0;
-
-                while ((i + intervalo) <= arreglo.length - 1)
-                {
-                    if (Thread.currentThread().isInterrupted())
-                        throw new InterruptedException("El ordenamiento fue cancelado.");
-
-                    if (arreglo[i].compareTo(arreglo[i + intervalo]) > 0)
-                    {
-                        E aux = arreglo[i];
-                        arreglo[i] = arreglo[i + intervalo];
-                        arreglo[i + intervalo] = aux;
-
-                        band = true;
-                    }
-
-                    i++;
-                }
-
-            }
-
-        }
-
-    }
-
     public static <E extends Comparable<E>> void shellsort(List<E> array) throws InterruptedException
     {
         int intervalo = array.size();
