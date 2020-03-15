@@ -7,6 +7,8 @@ import com.sw.model.Vertice;
 import java.util.Observable;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
@@ -18,22 +20,30 @@ import javafx.scene.input.MouseEvent;
 public final class GraphLogic extends Observable implements EventHandler<MouseEvent>
 {
 
-    private VistaGrafoController vgc;
+    private VistaGrafoController controller;
     private Grafico grafico;
     private MouseMovement mouseMovement;
 
     private boolean poniendoArista;
+    private boolean moviendoVertice;
+
     private Arista aristaCursor;
     private Vertice verticeSeleccionado;
 
-    public GraphLogic(VistaGrafoController vgc, Grafico grafico)
+    public GraphLogic(VistaGrafoController controller, Grafico grafico)
     {
         this.grafico = grafico;
-        this.vgc = vgc;
+        this.controller = controller;
         mouseMovement = new MouseMovement();
-        vgc.getPanel().setOnMouseMoved(mouseMovement);
+        controller.getPanel().setOnMouseMoved(mouseMovement);
     }
 
+    /**
+     * Añade un {@link Vertice} al grafo.
+     *
+     * @param x La coordenada x del nuevo {@link Vertice}.
+     * @param y La coordenada y del nuevo {@link Vertice}.
+     */
     public void anadirVertice(double x, double y)
     {
         if (VerticeUtils.existeVerticeEnPosicion(grafico, x, y))
@@ -49,9 +59,11 @@ public final class GraphLogic extends Observable implements EventHandler<MouseEv
         }
     }
 
-    public void eliminarVertice()
+    public void eliminarVertice(Vertice v)
     {
-
+        grafico.eliminarVertice(v);
+        notificar("Se ha eliminado el vértice: " + v.getNombre().getText());
+        actualizarGrafico();
     }
 
     private void moverVertice(Vertice v, double x, double y)
@@ -63,6 +75,7 @@ public final class GraphLogic extends Observable implements EventHandler<MouseEv
 
         nombre.setTranslateX(v.getCenterX() - nombre.getWidth() / 2);
         nombre.setTranslateY(v.getCenterY() - nombre.getHeight() / 2);
+        moviendoVertice = true;
         notificar("Moviendo vértice: " + v.getNombre().getText());
     }
 
@@ -83,7 +96,7 @@ public final class GraphLogic extends Observable implements EventHandler<MouseEv
         return arista;
     }
 
-    public void manejarAristaCursor(Vertice v, double x, double y)
+    public void manejarAristaCursor(Vertice vInicio, double x, double y)
     {
         if (!grafico.existenVerticesSuficientesParaCrearArista())
         {
@@ -91,20 +104,20 @@ public final class GraphLogic extends Observable implements EventHandler<MouseEv
             return;
         }
 
-        if (v.isSelected())
+        if (vInicio.isSelected())
         {
             eliminarArista(aristaCursor);
-            v.setSelected(false);
+            vInicio.setSelected(false);
             poniendoArista = false;
 
         } else if (!poniendoArista)
         {
-            verticeSeleccionado = v;
-            v.setSelected(true);
+            verticeSeleccionado = vInicio;
+            vInicio.setSelected(true);
             mouseMovement.ponerCoordenadasCursor(x, y);
-            aristaCursor = anadirArista(v, mouseMovement.getCursor());
+            aristaCursor = anadirArista(vInicio, mouseMovement.getCursor());
             poniendoArista = true;
-            notificar("Poniendo arista. Vértice de origen: " + v.getNombre().getText());
+            notificar("Poniendo arista. Vértice de origen: " + vInicio.getNombre().getText());
         }
 
         actualizarGrafico();
@@ -121,6 +134,7 @@ public final class GraphLogic extends Observable implements EventHandler<MouseEv
         eliminarArista(aristaCursor);
         verticeSeleccionado.setSelected(false);
         poniendoArista = false;
+        notificar("Se ha cancelado la operación");
     }
 
     @Override
@@ -128,9 +142,10 @@ public final class GraphLogic extends Observable implements EventHandler<MouseEv
     {
         double x = e.getSceneX();
         double y = e.getSceneY();
+
         anadirVertice(x, y);
 
-        if (e.getButton().equals(MouseButton.SECONDARY) && poniendoArista)
+        if (clicDerechoPresionado(e) && poniendoArista)
             eliminarSeleccionActual();
     }
 
@@ -138,11 +153,15 @@ public final class GraphLogic extends Observable implements EventHandler<MouseEv
     {
         v.setOnMouseClicked(e ->
         {
-            if (!e.getButton().equals(MouseButton.SECONDARY) && poniendoArista)
-            {
-                anadirArista(verticeSeleccionado, v);
-                eliminarSeleccionActual();
-            }
+            if (clicIzquierdoPresionado(e))
+                if (!poniendoArista)
+                    manejarAristaCursor(v, e.getSceneX(), e.getSceneY());
+
+                else
+                {
+                    eliminarSeleccionActual();
+                    anadirArista(verticeSeleccionado, v);
+                }
         });
 
         v.setOnMouseEntered(e ->
@@ -153,12 +172,16 @@ public final class GraphLogic extends Observable implements EventHandler<MouseEv
                 v.getNombre().toFront();
                 v.setFill(Vertice.HOVER_SKIN);
             }
+
+            v.requestFocus();
         });
 
         v.setOnMouseExited(e ->
         {
             if (!v.isSelected())
                 v.setFill(Vertice.DEFAULT_SKIN);
+
+            controller.getPanel().requestFocus();
         });
 
         v.setOnMouseDragged(e ->
@@ -166,9 +189,18 @@ public final class GraphLogic extends Observable implements EventHandler<MouseEv
             moverVertice(v, e.getSceneX(), e.getSceneY());
         });
 
-        v.setOnContextMenuRequested(e ->
+        v.setOnMouseReleased(e ->
         {
-            manejarAristaCursor(v, e.getSceneX(), e.getSceneY());
+            if (moviendoVertice)
+                notificar("Ha dejado de mover al vértice: " + v.getNombre().getText());
+
+            moviendoVertice = false;
+        });
+
+        v.setOnKeyReleased(e ->
+        {
+            if (eliminarPresionado(e) && !poniendoArista)
+                eliminarVertice(v);
         });
 
     }
@@ -182,7 +214,22 @@ public final class GraphLogic extends Observable implements EventHandler<MouseEv
 
     private void actualizarGrafico()
     {
-        vgc.actualizarGrafico();
+        controller.actualizarGrafico();
+    }
+
+    private boolean clicDerechoPresionado(MouseEvent e)
+    {
+        return e.getButton().equals(MouseButton.SECONDARY);
+    }
+
+    private boolean clicIzquierdoPresionado(MouseEvent e)
+    {
+        return e.getButton().equals(MouseButton.PRIMARY);
+    }
+
+    private boolean eliminarPresionado(KeyEvent e)
+    {
+        return e.getCode().equals(KeyCode.BACK_SPACE) || e.getCode().equals(KeyCode.DELETE);
     }
 
 }

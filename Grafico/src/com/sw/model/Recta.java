@@ -21,6 +21,14 @@ public class Recta
         this(new Punto(xInicial, yInicial), new Punto(xFinal, yFinal));
     }
 
+    public Recta(Movable puntoInicial, Movable puntoFinal)
+    {
+        this(puntoInicial.getXDoubleValue(),
+                puntoInicial.getYDoubleValue(),
+                puntoFinal.getXDoubleValue(),
+                puntoFinal.getYDoubleValue());
+    }
+
     public Punto getPuntoInicial()
     {
         return puntoInicial;

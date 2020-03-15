@@ -1,56 +1,58 @@
 package com.sw.model;
 
-import javafx.scene.shape.Line;
+import javafx.scene.shape.LineTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
 
 /**
  *
  * @author HikingCarrot7
  */
-public class Arista extends Line
+public class Arista extends Path
 {
 
-    private Vertice verticeInicial;
-    private Vertice verticeFinal;
+    private Movable puntoInicial;
+    private Movable puntoFinal;
 
-    public Arista(Vertice verticeInicial, Vertice verticeFinal)
+    public Arista(Movable puntoInicial, Movable puntoFinal)
     {
-        this.verticeInicial = verticeInicial;
-        this.verticeFinal = verticeFinal;
+        this.puntoInicial = puntoInicial;
+        this.puntoFinal = puntoFinal;
 
-        startXProperty().bind(verticeInicial.centerXProperty());
-        startYProperty().bind(verticeInicial.centerYProperty());
-        endXProperty().bind(verticeFinal.centerXProperty());
-        endYProperty().bind(verticeFinal.centerYProperty());
+        createShape(puntoInicial, puntoFinal);
     }
 
-    public Arista(Vertice verticeInicial, Punto puntoFinal)
+    private void createShape(Movable puntoInicial, Movable puntoFinal)
     {
-        this.verticeInicial = verticeInicial;
+        MoveTo mt = new MoveTo(puntoInicial.getXDoubleValue(), puntoInicial.getYDoubleValue());
+        mt.xProperty().bind(puntoInicial.getXProperty());
+        mt.yProperty().bind(puntoInicial.getYProperty());
 
-        startXProperty().bind(verticeInicial.centerXProperty());
-        startYProperty().bind(verticeInicial.centerYProperty());
-        endXProperty().bind(puntoFinal.getXProperty());
-        endYProperty().bind(puntoFinal.getYProperty());
+        LineTo lt = new LineTo(puntoFinal.getXDoubleValue(), puntoFinal.getYDoubleValue());
+        lt.xProperty().bind(puntoFinal.getXProperty());
+        lt.yProperty().bind(puntoFinal.getYProperty());
+
+        getElements().addAll(mt, lt);
     }
 
-    public Vertice getVerticeInicial()
+    public Movable getPuntoInicial()
     {
-        return verticeInicial;
+        return puntoInicial;
     }
 
-    public void setVerticeInicial(Vertice verticeInicial)
+    public void setPuntoInicial(Movable puntoInicial)
     {
-        this.verticeInicial = verticeInicial;
+        this.puntoInicial = puntoInicial;
     }
 
-    public Vertice getVerticeFinal()
+    public Movable getPuntoFinal()
     {
-        return verticeFinal;
+        return puntoFinal;
     }
 
-    public void setVerticeFinal(Vertice verticeFinal)
+    public void setPuntoFinal(Movable puntoFinal)
     {
-        this.verticeFinal = verticeFinal;
+        this.puntoFinal = puntoFinal;
     }
 
 }

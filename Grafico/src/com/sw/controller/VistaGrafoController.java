@@ -1,6 +1,7 @@
 package com.sw.controller;
 
 import com.sw.model.Grafico;
+import com.sw.model.Vertice;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Observable;
@@ -47,15 +48,10 @@ public class VistaGrafoController implements Initializable, Observer
     {
         panel.getChildren().clear();
         ObservableList<Node> children = FXCollections.observableArrayList(grafico.getVertices());
-        children.addAll(grafico.getVertices().stream().map(v -> v.getNombre()).collect(Collectors.toCollection(ArrayList::new)));
+        children.addAll(grafico.getVertices().stream().map(Vertice::getNombre).collect(Collectors.toCollection(ArrayList::new)));
         children.addAll(grafico.getAristas());
         panel.getChildren().addAll(children);
         grafico.getAristas().forEach(Node::toBack);
-    }
-
-    public AnchorPane getPanel()
-    {
-        return panel;
     }
 
     @Override
@@ -65,6 +61,11 @@ public class VistaGrafoController implements Initializable, Observer
         {
             estado.setText(mensaje.toString());
         });
+    }
+
+    public AnchorPane getPanel()
+    {
+        return panel;
     }
 
 }

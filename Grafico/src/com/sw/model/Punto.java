@@ -7,7 +7,7 @@ import javafx.beans.property.SimpleDoubleProperty;
  *
  * @author HikingCarrot7
  */
-public class Punto
+public class Punto implements Movable
 {
 
     private DoubleProperty xProperty;
@@ -19,9 +19,10 @@ public class Punto
         this.yProperty = new SimpleDoubleProperty(y);
     }
 
-    public double getX()
+    @Override
+    public double getXDoubleValue()
     {
-        return xProperty.getValue();
+        return xProperty.doubleValue();
     }
 
     public void setX(double x)
@@ -32,9 +33,10 @@ public class Punto
         this.xProperty.set(x);
     }
 
-    public double getY()
+    @Override
+    public double getYDoubleValue()
     {
-        return yProperty.getValue();
+        return yProperty.doubleValue();
     }
 
     public void setY(double y)
@@ -45,11 +47,13 @@ public class Punto
         this.yProperty.set(y);
     }
 
+    @Override
     public DoubleProperty getXProperty()
     {
         return xProperty;
     }
 
+    @Override
     public DoubleProperty getYProperty()
     {
         return yProperty;
