@@ -1,8 +1,10 @@
 package com.sw.model;
 
 import com.sw.controller.Utilidades;
+import javafx.beans.property.DoubleProperty;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
+import javafx.scene.effect.InnerShadow;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.Paint;
@@ -14,7 +16,7 @@ import javafx.scene.shape.Circle;
  *
  * @author HikingCarrot7
  */
-public class Vertice extends Circle
+public class Vertice extends Circle implements Movable
 {
 
     public static final double DEFAULT_RADIO = 30;
@@ -43,6 +45,7 @@ public class Vertice extends Circle
     public Vertice(double centerX, double centerY, double radio)
     {
         setFill(DEFAULT_SKIN);
+        setEffect(new InnerShadow(7, Color.ORANGE.darker().darker()));
         setStroke(Color.BLACK);
         setStrokeWidth(3);
         setCenterX(centerX);
@@ -73,6 +76,30 @@ public class Vertice extends Circle
     public boolean isSelected()
     {
         return selected;
+    }
+
+    @Override
+    public DoubleProperty getXProperty()
+    {
+        return centerXProperty();
+    }
+
+    @Override
+    public DoubleProperty getYProperty()
+    {
+        return centerYProperty();
+    }
+
+    @Override
+    public double getXDoubleValue()
+    {
+        return getXProperty().doubleValue();
+    }
+
+    @Override
+    public double getYDoubleValue()
+    {
+        return getYProperty().doubleValue();
     }
 
 }

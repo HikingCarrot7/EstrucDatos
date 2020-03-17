@@ -28,6 +28,12 @@ public class Grafico
         addVertice(new Vertice(centerX, centerY));
     }
 
+    public void eliminarVertice(Vertice v)
+    {
+        vertices.remove(v);
+        eliminarAristasRelacionadosConVertice(v);
+    }
+
     public void addArista(Vertice verticeInicial, Vertice verticeFinal)
     {
         addArista(new Arista(verticeInicial, verticeFinal));
@@ -41,6 +47,11 @@ public class Grafico
     public void eliminarArista(Arista arista)
     {
         aristas.remove(arista);
+    }
+
+    public void eliminarAristasRelacionadosConVertice(Vertice v)
+    {
+        aristas.removeIf(a -> a.getPuntoInicial() == v || a.getPuntoFinal() == v);
     }
 
     public ArrayList<Vertice> getVertices()

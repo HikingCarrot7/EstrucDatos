@@ -10,14 +10,14 @@ public class GeometriaUtils
     public static EcuacionGeneralLinea obtenerEcuacionRecta(Recta linea)
     {
         if (esVertical(linea))
-            return new EcuacionGeneralLinea(1, 0, -linea.getPuntoInicial().getX());
+            return new EcuacionGeneralLinea(1, 0, -linea.getPuntoInicial().getXDoubleValue());
 
-        return new EcuacionGeneralLinea(obtenerPendiente(linea), -1, -obtenerPendiente(linea) * linea.getPuntoInicial().getX() + linea.getPuntoInicial().getY());
+        return new EcuacionGeneralLinea(obtenerPendiente(linea), -1, -obtenerPendiente(linea) * linea.getPuntoInicial().getXDoubleValue() + linea.getPuntoInicial().getYDoubleValue());
     }
 
     public static EcuacionGeneralLinea obtenerEcuacionRecta(Punto p1, double pendiente)
     {
-        return new EcuacionGeneralLinea(pendiente, -1, -pendiente * p1.getX() + p1.getY());
+        return new EcuacionGeneralLinea(pendiente, -1, -pendiente * p1.getXDoubleValue() + p1.getYDoubleValue());
     }
 
     public static EcuacionGeneralLinea obtenerEcuacionDeLaRectaPerpendicular(Recta linea)
@@ -36,7 +36,7 @@ public class GeometriaUtils
 
     public static double distanciaEntreDosPuntos(Punto p1, Punto p2)
     {
-        return Math.sqrt(Math.pow((p2.getX() - p1.getX()), 2) + Math.pow((p2.getY() - p1.getY()), 2));
+        return Math.sqrt(Math.pow((p2.getXDoubleValue() - p1.getXDoubleValue()), 2) + Math.pow((p2.getYDoubleValue() - p1.getYDoubleValue()), 2));
     }
 
     public static double distanciaEntreDosPuntos(double inicialX, double inicialY, double finalX, double finalY)
@@ -94,12 +94,17 @@ public class GeometriaUtils
 
     public static Punto obtenerPuntoMedio(Punto p1, Punto p2)
     {
-        return new Punto((p1.getX() + p2.getX()) / 2, (p1.getY() + p2.getY()) / 2);
+        return new Punto((p1.getXDoubleValue() + p2.getXDoubleValue()) / 2, (p1.getYDoubleValue() + p2.getYDoubleValue()) / 2);
+    }
+
+    public static Punto obtenerPuntoMedio(Movable p1, Movable p2)
+    {
+        return new Punto((p1.getXDoubleValue() + p2.getXDoubleValue()) / 2, (p1.getYDoubleValue() + p2.getYDoubleValue()) / 2);
     }
 
     public static double obtenerPendiente(Recta linea)
     {
-        return esVertical(linea) ? Double.POSITIVE_INFINITY : (linea.getPuntoFinal().getY() - linea.getPuntoInicial().getY()) / (linea.getPuntoFinal().getX() - linea.getPuntoInicial().getX());
+        return esVertical(linea) ? Double.POSITIVE_INFINITY : (linea.getPuntoFinal().getYDoubleValue() - linea.getPuntoInicial().getYDoubleValue()) / (linea.getPuntoFinal().getXDoubleValue() - linea.getPuntoInicial().getXDoubleValue());
     }
 
     public static double obtenerPendiente(EcuacionGeneralLinea linea)
@@ -109,7 +114,7 @@ public class GeometriaUtils
 
     public static boolean esVertical(Recta linea)
     {
-        return linea.getPuntoFinal().getX() - linea.getPuntoInicial().getX() == 0;
+        return linea.getPuntoFinal().getXDoubleValue() - linea.getPuntoInicial().getXDoubleValue() == 0;
     }
 
     public static boolean esVertical(EcuacionGeneralLinea ecuacionRecta)
