@@ -7,7 +7,6 @@ import com.sw.model.Vertice;
 import java.util.Observable;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
 /**
@@ -129,19 +128,29 @@ public final class GraphLogic extends Observable implements EventHandler<MouseEv
         double x = e.getSceneX();
         double y = e.getSceneY();
         anadirVertice(x, y);
-
-        if (e.getButton().equals(MouseButton.SECONDARY) && poniendoArista)
-            eliminarSeleccionActual();
     }
 
     private void setVerticeEvents(Vertice v)
     {
         v.setOnMouseClicked(e ->
         {
-            if (!e.getButton().equals(MouseButton.SECONDARY) && poniendoArista)
+            switch (e.getButton())
             {
-                anadirArista(verticeSeleccionado, v);
-                eliminarSeleccionActual();
+                case PRIMARY:
+                    if (poniendoArista)
+                    {
+                        anadirArista(verticeSeleccionado, v);
+                        eliminarSeleccionActual();
+                    }
+
+                    break;
+
+                case SECONDARY:
+                    manejarAristaCursor(v, e.getSceneX(), e.getSceneY());
+                    break;
+
+                default:
+                    throw new AssertionError();
             }
         });
 
@@ -164,11 +173,6 @@ public final class GraphLogic extends Observable implements EventHandler<MouseEv
         v.setOnMouseDragged(e ->
         {
             moverVertice(v, e.getSceneX(), e.getSceneY());
-        });
-
-        v.setOnContextMenuRequested(e ->
-        {
-            manejarAristaCursor(v, e.getSceneX(), e.getSceneY());
         });
 
     }
