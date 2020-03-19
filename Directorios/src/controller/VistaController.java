@@ -228,7 +228,10 @@ public class VistaController implements Initializable
         Platform.runLater(() ->
         {
             if (e.getCode() == KeyCode.ENTER)
+            {
+                cancelarOperacion();
                 iniciarProcesamientoDirectorios();
+            }
         });
     }
 
@@ -288,8 +291,8 @@ public class VistaController implements Initializable
                 rellenarDirectorios(directoriosEncontrados, file);
 
                 //Rellena la tabla con la lista de directorios.
-                rellenarTablaDirectoriosEncontrados(directoriosEncontrados);
-                rellenarTablaDirectoriosOrdenados(ordenarDirectorios(directoriosEncontrados));
+                rellenarTablaDirectoriosEncontrados(ordenarDirectorios(directoriosEncontrados));
+                rellenarTablaDirectoriosOrdenados(directoriosEncontrados);
                 currentScene.setCursor(Cursor.DEFAULT);
                 progressIndicator.setVisible(false);
 
