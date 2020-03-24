@@ -10,12 +10,12 @@ public class ArbolBB<T extends Comparable<T>>
 
     private NodoABB<T> raiz;
 
-    public void anadirElemento(T elemento)
+    public void insertar(T elemento)
     {
-        anadirElemento(raiz, elemento);
+        insertar(raiz, elemento);
     }
 
-    private void anadirElemento(NodoABB<T> origen, T elemento)
+    private void insertar(NodoABB<T> origen, T elemento)
     {
         if (isEmpty())
             raiz = new NodoABB<>(elemento);
@@ -25,22 +25,22 @@ public class ArbolBB<T extends Comparable<T>>
             if (origen.getIzq() == null)
                 origen.setIzq(new NodoABB<>(elemento));
             else
-                anadirElemento(origen.getIzq(), elemento);
+                insertar(origen.getIzq(), elemento);
 
         else if (origen.getDato().compareTo(elemento) < 0)
 
             if (origen.getDer() == null)
                 origen.setDer(new NodoABB<>(elemento));
             else
-                anadirElemento(origen.getDer(), elemento);
+                insertar(origen.getDer(), elemento);
     }
 
-    public void buscar(T elemento)
+    public T buscar(T elemento)
     {
-        buscar(raiz, elemento);
+        return buscar(raiz, elemento);
     }
 
-    private void buscar(NodoABB<T> nodo, T elemento) throws ItemNotFoundException
+    private T buscar(NodoABB<T> nodo, T elemento) throws ItemNotFoundException
     {
         if (elemento.compareTo(nodo.getDato()) < 0)
             if (nodo.getIzq() == null)
@@ -52,18 +52,20 @@ public class ArbolBB<T extends Comparable<T>>
             if (nodo.getDer() == null)
                 throw new ItemNotFoundException();
             else
-                buscar(nodo, elemento);
+                buscar(nodo.getDer(), elemento);
 
         else
-            System.out.println("El elemento está en el árbol.");
+            return elemento;
+
+        return null;
     }
 
-    public NodoABB<T> eliminar(T elemento)
+    public void eliminar(T elemento) throws ItemNotFoundException
     {
-        return eliminar(raiz, elemento);
+        eliminar(raiz, elemento);
     }
 
-    private NodoABB<T> eliminar(NodoABB<T> nodo, T elemento)
+    private NodoABB<T> eliminar(NodoABB<T> nodo, T elemento) throws ItemNotFoundException
     {
         if (nodo == null)
             throw new ItemNotFoundException();
