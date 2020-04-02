@@ -1,25 +1,26 @@
 package aeropuerto;
 
 import javax.swing.JButton;
-import javax.swing.JDesktopPane;
-import javax.swing.JInternalFrame;
+import javax.swing.JPanel;
 
 /**
  *
- * @author HikingCarrot7
+ * @author Nicolás
  */
 public class VistaPrincipal extends javax.swing.JFrame
 {
 
+    /**
+     * Creates new form VistaPrincipalFull
+     */
     public VistaPrincipal()
     {
-        initWindow();
         initComponents();
+        initLookAndFeel();
     }
 
-    private void initWindow()
+    private void initLookAndFeel()
     {
-
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -28,7 +29,7 @@ public class VistaPrincipal extends javax.swing.JFrame
         try
         {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
-                if ("Nimbus".equals(info.getName()))
+                if ("Windows".equals(info.getName()))
                 {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
@@ -38,7 +39,6 @@ public class VistaPrincipal extends javax.swing.JFrame
             System.out.println(ex.getMessage());
         }
         //</editor-fold>
-
     }
 
     /**
@@ -49,131 +49,124 @@ public class VistaPrincipal extends javax.swing.JFrame
     private void initComponents()
     {
 
-        siguienteVuelo = new javax.swing.JButton();
-        panel = new javax.swing.JDesktopPane();
-        panelEsquema = new javax.swing.JInternalFrame();
-        generarVuelos = new javax.swing.JButton();
-        eliminarUnVuelo = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        filler7 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 5), new java.awt.Dimension(0, 5), new java.awt.Dimension(0, 5));
+        jPanel1 = new javax.swing.JPanel();
+        filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 5), new java.awt.Dimension(0, 5), new java.awt.Dimension(0, 5));
+        jPanel4 = new javax.swing.JPanel();
+        filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
+        jLabel3 = new javax.swing.JLabel();
+        filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
+        panelGrafico = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 17), new java.awt.Dimension(0, 17), new java.awt.Dimension(0, 17));
+        btnGenerarVuelos = new javax.swing.JButton();
+        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
+        btnSigVuelo = new javax.swing.JButton();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
+        btnEliminarVuelo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(700, 600));
-        getContentPane().setLayout(null);
+        setMaximumSize(new java.awt.Dimension(500, 400));
+        setMinimumSize(new java.awt.Dimension(500, 400));
+        setPreferredSize(new java.awt.Dimension(500, 400));
 
-        siguienteVuelo.setText("Siguiente vuelo");
-        siguienteVuelo.setToolTipText("Eliminar el siguiente vuelo.");
-        siguienteVuelo.setActionCommand("siguienteVuelo");
-        siguienteVuelo.setMaximumSize(new java.awt.Dimension(120, 30));
-        siguienteVuelo.setMinimumSize(new java.awt.Dimension(120, 30));
-        siguienteVuelo.setPreferredSize(new java.awt.Dimension(120, 30));
-        getContentPane().add(siguienteVuelo);
-        siguienteVuelo.setBounds(560, 50, 120, 30);
+        jPanel3.add(filler7);
 
-        panel.setEnabled(false);
-        panel.setMaximumSize(new java.awt.Dimension(545, 545));
-        panel.setMinimumSize(new java.awt.Dimension(545, 545));
-        panel.setPreferredSize(new java.awt.Dimension(545, 545));
+        getContentPane().add(jPanel3, java.awt.BorderLayout.LINE_START);
 
-        panelEsquema.setTitle("Representación de los vuelos.");
-        panelEsquema.setToolTipText("");
-        panelEsquema.setEnabled(false);
-        panelEsquema.setMaximumSize(new java.awt.Dimension(545, 545));
-        panelEsquema.setMinimumSize(new java.awt.Dimension(545, 545));
-        panelEsquema.setNormalBounds(new java.awt.Rectangle(545, 545, 545, 545));
-        panelEsquema.setPreferredSize(new java.awt.Dimension(545, 545));
-        try
-        {
-            panelEsquema.setSelected(true);
-        } catch (java.beans.PropertyVetoException e1)
-        {
-            e1.printStackTrace();
-        }
-        panelEsquema.setVisible(true);
+        jPanel1.add(filler6);
 
-        javax.swing.GroupLayout panelEsquemaLayout = new javax.swing.GroupLayout(panelEsquema.getContentPane());
-        panelEsquema.getContentPane().setLayout(panelEsquemaLayout);
-        panelEsquemaLayout.setHorizontalGroup(
-            panelEsquemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 529, Short.MAX_VALUE)
-        );
-        panelEsquemaLayout.setVerticalGroup(
-            panelEsquemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 516, Short.MAX_VALUE)
-        );
+        getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_END);
 
-        panel.setLayer(panelEsquema, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jPanel4.setLayout(new javax.swing.BoxLayout(jPanel4, javax.swing.BoxLayout.Y_AXIS));
+        jPanel4.add(filler5);
 
-        javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
-        panel.setLayout(panelLayout);
-        panelLayout.setHorizontalGroup(
-            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelLayout.createSequentialGroup()
-                .addComponent(panelEsquema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        panelLayout.setVerticalGroup(
-            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelEsquema, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setText("Simulación de vuelos");
+        jLabel3.setAlignmentX(0.5F);
+        jPanel4.add(jLabel3);
+        jPanel4.add(filler4);
 
-        getContentPane().add(panel);
-        panel.setBounds(5, 5, 545, 545);
+        getContentPane().add(jPanel4, java.awt.BorderLayout.PAGE_START);
 
-        generarVuelos.setText("Generar vuelos");
-        generarVuelos.setToolTipText("Genera los vuelos.");
-        generarVuelos.setActionCommand("generarVuelos");
-        generarVuelos.setMaximumSize(new java.awt.Dimension(120, 30));
-        generarVuelos.setMinimumSize(new java.awt.Dimension(120, 30));
-        generarVuelos.setPreferredSize(new java.awt.Dimension(120, 30));
-        getContentPane().add(generarVuelos);
-        generarVuelos.setBounds(560, 10, 120, 30);
+        panelGrafico.setLayout(new javax.swing.BoxLayout(panelGrafico, javax.swing.BoxLayout.Y_AXIS));
 
-        eliminarUnVuelo.setText("Eliminar vuelo");
-        eliminarUnVuelo.setToolTipText("Elimina un vuelo en un índice especificado.");
-        eliminarUnVuelo.setActionCommand("eliminarUnVuelo");
-        eliminarUnVuelo.setMaximumSize(new java.awt.Dimension(120, 30));
-        eliminarUnVuelo.setMinimumSize(new java.awt.Dimension(120, 30));
-        eliminarUnVuelo.setPreferredSize(new java.awt.Dimension(120, 30));
-        getContentPane().add(eliminarUnVuelo);
-        eliminarUnVuelo.setBounds(560, 90, 120, 30);
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Representación gráfica");
+        jLabel1.setAlignmentX(0.5F);
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        panelGrafico.add(jLabel1);
+
+        getContentPane().add(panelGrafico, java.awt.BorderLayout.CENTER);
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Botones de acción"));
+        jPanel2.setMaximumSize(new java.awt.Dimension(110, 129));
+        jPanel2.setMinimumSize(new java.awt.Dimension(110, 129));
+        jPanel2.setPreferredSize(new java.awt.Dimension(110, 129));
+        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.Y_AXIS));
+        jPanel2.add(filler2);
+
+        btnGenerarVuelos.setText("<html><center>Generar<p>vuelos.</center></html>");
+        btnGenerarVuelos.setActionCommand("");
+        btnGenerarVuelos.setAlignmentX(0.5F);
+        jPanel2.add(btnGenerarVuelos);
+        jPanel2.add(filler3);
+
+        btnSigVuelo.setText("<html><center>Eliminar<p>siguiente<p>vuelo.</center></html>");
+        btnSigVuelo.setActionCommand("");
+        btnSigVuelo.setAlignmentX(0.5F);
+        jPanel2.add(btnSigVuelo);
+        jPanel2.add(filler1);
+
+        btnEliminarVuelo.setText("<html><center>Eliminar un<p>vuelo<p>específico.</center></html>");
+        btnEliminarVuelo.setActionCommand("");
+        btnEliminarVuelo.setAlignmentX(0.5F);
+        jPanel2.add(btnEliminarVuelo);
+
+        getContentPane().add(jPanel2, java.awt.BorderLayout.EAST);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public JDesktopPane getPanel()
+    public JButton getBtnEliminarVuelo()
     {
-        return panel;
+        return btnEliminarVuelo;
     }
 
-    public JInternalFrame getPanelEsquema()
+    public JButton getBtnGenerarVuelos()
     {
-        return panelEsquema;
+        return btnGenerarVuelos;
     }
 
-    public void setPanelEsquema(JInternalFrame panelEsquema)
+    public JButton getBtnSigVuelo()
     {
-        this.panelEsquema = panelEsquema;
+        return btnSigVuelo;
     }
 
-    public JButton getSiguienteVuelo()
+    public JPanel getPanelGrafico()
     {
-        return siguienteVuelo;
-    }
-
-    public JButton getGenerarVuelos()
-    {
-        return generarVuelos;
-    }
-
-    public JButton getEliminarUnVuelo()
-    {
-        return eliminarUnVuelo;
+        return panelGrafico;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton eliminarUnVuelo;
-    private javax.swing.JButton generarVuelos;
-    private javax.swing.JDesktopPane panel;
-    private javax.swing.JInternalFrame panelEsquema;
-    private javax.swing.JButton siguienteVuelo;
+    private javax.swing.JButton btnEliminarVuelo;
+    private javax.swing.JButton btnGenerarVuelos;
+    private javax.swing.JButton btnSigVuelo;
+    private javax.swing.Box.Filler filler1;
+    private javax.swing.Box.Filler filler2;
+    private javax.swing.Box.Filler filler3;
+    private javax.swing.Box.Filler filler4;
+    private javax.swing.Box.Filler filler5;
+    private javax.swing.Box.Filler filler6;
+    private javax.swing.Box.Filler filler7;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel panelGrafico;
     // End of variables declaration//GEN-END:variables
 }

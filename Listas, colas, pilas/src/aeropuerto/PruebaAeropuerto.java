@@ -12,9 +12,8 @@ public class PruebaAeropuerto
             VistaPrincipal vista = new VistaPrincipal();
             vista.setLocationRelativeTo(null);
             vista.setVisible(true);
-            new Controlador(vista);
+            new Controlador(vista, new Aeropuerto());
         });
-
     }
 
 }

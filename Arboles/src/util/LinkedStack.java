@@ -1,8 +1,4 @@
-package ada_5;
-
-import ada_3.LinkedList;
-import excepciones.PilaVaciaException;
-import interfaces.Stack;
+package util;
 
 /**
  *
