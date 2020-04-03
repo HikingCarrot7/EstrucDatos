@@ -34,6 +34,7 @@ public class VistaPrincipal extends javax.swing.JFrame
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
+
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex)
         {
             System.out.println(ex.getMessage());
@@ -49,14 +50,16 @@ public class VistaPrincipal extends javax.swing.JFrame
     private void initComponents()
     {
 
-        jPanel3 = new javax.swing.JPanel();
-        filler7 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 5), new java.awt.Dimension(0, 5), new java.awt.Dimension(0, 5));
-        jPanel1 = new javax.swing.JPanel();
-        filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 5), new java.awt.Dimension(0, 5), new java.awt.Dimension(0, 5));
         jPanel4 = new javax.swing.JPanel();
         filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
         jLabel3 = new javax.swing.JLabel();
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
+        jSplitPane1 = new javax.swing.JSplitPane();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 5), new java.awt.Dimension(0, 5), new java.awt.Dimension(0, 5));
+        jPanel3 = new javax.swing.JPanel();
+        filler7 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 5), new java.awt.Dimension(0, 5), new java.awt.Dimension(0, 5));
         panelGrafico = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -72,14 +75,6 @@ public class VistaPrincipal extends javax.swing.JFrame
         setMinimumSize(new java.awt.Dimension(500, 400));
         setPreferredSize(new java.awt.Dimension(500, 400));
 
-        jPanel3.add(filler7);
-
-        getContentPane().add(jPanel3, java.awt.BorderLayout.LINE_START);
-
-        jPanel1.add(filler6);
-
-        getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_END);
-
         jPanel4.setLayout(new javax.swing.BoxLayout(jPanel4, javax.swing.BoxLayout.Y_AXIS));
         jPanel4.add(filler5);
 
@@ -91,6 +86,16 @@ public class VistaPrincipal extends javax.swing.JFrame
 
         getContentPane().add(jPanel4, java.awt.BorderLayout.PAGE_START);
 
+        jPanel5.setLayout(new java.awt.BorderLayout());
+
+        jPanel1.add(filler6);
+
+        jPanel5.add(jPanel1, java.awt.BorderLayout.SOUTH);
+
+        jPanel3.add(filler7);
+
+        jPanel5.add(jPanel3, java.awt.BorderLayout.EAST);
+
         panelGrafico.setLayout(new javax.swing.BoxLayout(panelGrafico, javax.swing.BoxLayout.Y_AXIS));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -99,7 +104,9 @@ public class VistaPrincipal extends javax.swing.JFrame
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         panelGrafico.add(jLabel1);
 
-        getContentPane().add(panelGrafico, java.awt.BorderLayout.CENTER);
+        jPanel5.add(panelGrafico, java.awt.BorderLayout.CENTER);
+
+        jSplitPane1.setRightComponent(jPanel5);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Botones de acción"));
         jPanel2.setMaximumSize(new java.awt.Dimension(110, 129));
@@ -125,7 +132,9 @@ public class VistaPrincipal extends javax.swing.JFrame
         btnEliminarVuelo.setAlignmentX(0.5F);
         jPanel2.add(btnEliminarVuelo);
 
-        getContentPane().add(jPanel2, java.awt.BorderLayout.EAST);
+        jSplitPane1.setLeftComponent(jPanel2);
+
+        getContentPane().add(jSplitPane1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -167,6 +176,8 @@ public class VistaPrincipal extends javax.swing.JFrame
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JPanel panelGrafico;
     // End of variables declaration//GEN-END:variables
 }
