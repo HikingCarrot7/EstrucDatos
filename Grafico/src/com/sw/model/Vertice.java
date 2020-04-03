@@ -55,6 +55,7 @@ public class Vertice extends Circle implements Movable
         nombre = new Label(String.valueOf(++n_vertice));
         nombre.setTranslateX(centerX - Utilidades.getFontWidth(String.valueOf(n_vertice), nombre.getFont()) / 2);
         nombre.setTranslateY(centerY - Utilidades.getFontHeight(nombre.getFont()) / 2);
+        nombre.setMouseTransparent(true);
     }
 
     public Vertice(double centerX, double centerY)

@@ -12,7 +12,7 @@ import interfaces.Stack;
 public class LinkedStack<E> implements Stack<E>
 {
 
-    private LinkedList<E> lista;
+    private final LinkedList<E> lista;
 
     public LinkedStack()
     {

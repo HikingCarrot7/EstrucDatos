@@ -149,6 +149,11 @@ public final class GraphLogic extends Observable implements EventHandler<MouseEv
             eliminarSeleccionActual();
     }
 
+    /**
+     * Eventos de los {@link Vertice}.
+     *
+     * @param v
+     */
     private void setVerticeEvents(Vertice v)
     {
         v.setOnMouseClicked(e ->

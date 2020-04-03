@@ -3,15 +3,13 @@ package aeropuerto;
 import deque.DequeList;
 import java.awt.*;
 import java.awt.geom.GeneralPath;
+import javax.swing.JPanel;
 
 /**
  * @author HikingCarrot7
  */
-public final class Esquema extends Canvas
+public final class Esquema extends JPanel
 {
-
-    private final int ESQUEMA_WIDTH = 550;
-    private final int ESQUEMA_HEIGHT = 550;
 
     private final int OFFSET_X = 40;
     private final int OFFSET_Y = 25;
@@ -21,16 +19,14 @@ public final class Esquema extends Canvas
     private final int RECT_WIDTH = 40;
     private final int RECT_HEIGHT = 20;
 
-    private final int MAX_VUELOS_POR_LINEA = (ESQUEMA_WIDTH - 100) / (FLY_TO_FLY + RECT_WIDTH);
     private final int SEPARACION_POR_LINEA = 30;
 
-    private Aeropuerto aeropuerto;
+    private final Aeropuerto aeropuerto;
 
     public Esquema(Aeropuerto aeropuerto)
     {
         this.aeropuerto = aeropuerto;
         setBackground(Color.WHITE);
-        repaint();
     }
 
     @Override
@@ -41,23 +37,28 @@ public final class Esquema extends Canvas
         g.setColor(Color.BLACK);
         Graphics2D g2d = (Graphics2D) g;
         dibujarVuelosDisponibles(g2d, g2d.getFontMetrics());
-
         g.dispose();
         g2d.dispose();
     }
 
+    public void repintar()
+    {
+        repaint();
+    }
+
     private void dibujarVuelosDisponibles(Graphics2D g, FontMetrics fm)
     {
-
-        DequeList<Vuelo> vuelos = aeropuerto.obtenerVuelos();
+        final DequeList<Vuelo> vuelos = aeropuerto.obtenerVuelos();
+        final int nVuelos = vuelos.size();
+        final int MAX_VUELOS_POR_LINEA = (getWidth() - OFFSET_X) / (FLY_TO_FLY + RECT_WIDTH);
         int y = OFFSET_Y;
 
-        for (int i = 0, x = OFFSET_X; i < aeropuerto.vuelosDisponibles(); i++, x += FLY_TO_FLY + RECT_WIDTH)
+        for (int i = 0, x = OFFSET_X; i < nVuelos; i++, x += FLY_TO_FLY + RECT_WIDTH)
         {
             String claveVuelo = String.valueOf(vuelos.removeFirst().getClave());
             drawVuelo(g, fm, x, y, i, claveVuelo);
 
-            if (aeropuerto.vuelosDisponibles() - (i + 1) > 0)
+            if (nVuelos - (i + 1) > 0)
                 if ((i + 1) % MAX_VUELOS_POR_LINEA == 0)
                 {
                     drawLargeLine(g, x + RECT_WIDTH, y + RECT_HEIGHT / 2);

@@ -16,8 +16,11 @@ public class TableManager<E>
 
     public void rellenarTabla(ObservableList<E> directorios, TableView<E> table)
     {
-        table.setItems(FXCollections.observableArrayList(directorios));
-        table.refresh();
+        Platform.runLater(() ->
+        {
+            table.setItems(FXCollections.observableArrayList(directorios));
+            table.refresh();
+        });
     }
 
     public void rellenarTabla(E item, TableView<E> table)

@@ -16,6 +16,7 @@ public class Arista extends Path
 
     public Arista(Movable puntoInicial, Movable puntoFinal)
     {
+
         this.puntoInicial = puntoInicial;
         this.puntoFinal = puntoFinal;
 

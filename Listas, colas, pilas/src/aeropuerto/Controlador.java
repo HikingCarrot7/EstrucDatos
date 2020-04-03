@@ -1,92 +1,116 @@
 package aeropuerto;
 
 import excepciones.DequeEmptyException;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.InputMismatchException;
-import javax.swing.*;
+import javax.swing.JOptionPane;
 
 /**
- * @author HikingCarrot7
+ *
+ * @author Nicolás
  */
-public class Controlador implements ActionListener
+public class Controlador
 {
 
-    private VistaPrincipal vista;
-    private VistaPrincipal2 vista2;
-    private Aeropuerto aeropuerto;
+    private final String REGEX_NATURAL_VALIDO = "^[0-9]+$";
+    private final VistaPrincipal vista;
+    private final Aeropuerto aeropuerto;
+    private final Esquema esquema;
 
-    public Controlador(VistaPrincipal vista)
+    public Controlador(VistaPrincipal vista, Aeropuerto aeropuerto)
     {
         this.vista = vista;
-        aeropuerto = new Aeropuerto();
-
-        vista.getPanelEsquema().setEnabled(false);
-        vista.getPanelEsquema().setVisible(true);
-
-        vista.getSiguienteVuelo().addActionListener(this);
-        vista.getGenerarVuelos().addActionListener(this);
-        vista.getEliminarUnVuelo().addActionListener(this);
-
-        vista.getSiguienteVuelo().setEnabled(false);
-        vista.getEliminarUnVuelo().setEnabled(false);
-        repintar();
+        this.aeropuerto = aeropuerto;
+        this.esquema = new Esquema(aeropuerto);
+        initComponents();
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e)
+    private void initComponents()
+    {
+        vista.getPanelGrafico().add(esquema);
+        vista.getBtnGenerarVuelos().addActionListener(e -> generarVuelos());
+        vista.getBtnSigVuelo().addActionListener(e -> eliminarSigVuelo());
+        vista.getBtnEliminarVuelo().addActionListener(e -> eliminarVueloEspecifico());
+
+        vista.getBtnSigVuelo().setEnabled(false);
+        vista.getBtnEliminarVuelo().setEnabled(false);
+    }
+
+    private void generarVuelos()
     {
         try
         {
-            switch (e.getActionCommand())
-            {
-                case "generarVuelos":
-                    int numeroVuelos = pedirEntrada("Número de vuelos.", "^[0-9]+$");
-                    aeropuerto.generarVuelos(numeroVuelos);
-                    vista.getGenerarVuelos().setEnabled(false);
-                    vista.getSiguienteVuelo().setEnabled(true);
-                    vista.getEliminarUnVuelo().setEnabled(true);
-                    break;
-
-                case "siguienteVuelo":
-                    aeropuerto.eliminarSiguienteVuelo();
-                    break;
-
-                case "eliminarUnVuelo":
-
-                    if (!aeropuerto.existenVuelosEnCola())
-                        throw new DequeEmptyException("No hay más vuelos.");
-
-                    int indiceVuelo = pedirEntrada("Índice del vuelo:", "^[0-9]+$") - 1;
-
-                    if (!aeropuerto.esVueloValido(indiceVuelo))
-                        throw new InputMismatchException("No existe tal vuelo.");
-
-                    aeropuerto.eliminarVueloAt(indiceVuelo);
-                    break;
-
-            }
+            int numeroVuelos = pedirEntrada("Número de vuelos.", REGEX_NATURAL_VALIDO);
+            aeropuerto.generarVuelos(numeroVuelos);
+            vista.getBtnGenerarVuelos().setEnabled(false);
+            vista.getBtnSigVuelo().setEnabled(true);
+            vista.getBtnEliminarVuelo().setEnabled(true);
 
         } catch (InputMismatchException | DequeEmptyException ex)
         {
-            JOptionPane.showMessageDialog(vista, ex.getMessage(), "Error.", JOptionPane.ERROR_MESSAGE);
+            mostrarError(ex.getMessage());
 
         } catch (NullPointerException exc)
         {
         }
 
-        if (!aeropuerto.existenVuelosEnCola())
-        {
-            vista.getGenerarVuelos().setEnabled(true);
-            vista.getSiguienteVuelo().setEnabled(false);
-            vista.getEliminarUnVuelo().setEnabled(false);
-        }
-
-        repintar();
+        repintarGrafico();
+        revisarVuelos();
     }
 
-    private int pedirEntrada(String mensaje, String regex)
+    private void eliminarSigVuelo()
+    {
+        try
+        {
+            aeropuerto.eliminarSiguienteVuelo();
+
+        } catch (DequeEmptyException ex)
+        {
+            mostrarError(ex.getMessage());
+        }
+
+        repintarGrafico();
+        revisarVuelos();
+    }
+
+    private void eliminarVueloEspecifico()
+    {
+        try
+        {
+            int indiceVuelo = pedirEntrada("Índice del vuelo:", REGEX_NATURAL_VALIDO) - 1;
+
+            if (!aeropuerto.esVueloValido(indiceVuelo))
+                throw new InputMismatchException("No existe tal vuelo.");
+
+            aeropuerto.eliminarVueloAt(indiceVuelo);
+
+        } catch (InputMismatchException | DequeEmptyException ex)
+        {
+            mostrarError(ex.getMessage());
+
+        } catch (NullPointerException exc)
+        {
+        }
+
+        repintarGrafico();
+        revisarVuelos();
+    }
+
+    private void revisarVuelos()
+    {
+        if (!aeropuerto.existenVuelosEnCola())
+        {
+            vista.getBtnGenerarVuelos().setEnabled(true);
+            vista.getBtnSigVuelo().setEnabled(false);
+            vista.getBtnEliminarVuelo().setEnabled(false);
+        }
+    }
+
+    private void repintarGrafico()
+    {
+        esquema.repintar();
+    }
+
+    private int pedirEntrada(String mensaje, String regex) throws NullPointerException, InputMismatchException
     {
         String entrada = JOptionPane.showInputDialog(vista, mensaje);
 
@@ -99,21 +123,14 @@ public class Controlador implements ActionListener
         throw new InputMismatchException("La entrada no es válida.");
     }
 
-    public boolean entradaValida(String text, String regex)
+    private void mostrarError(String mensaje)
     {
-        return text.matches(regex) && Integer.parseInt(text) > 0 && Integer.parseInt(text) <= 10000;
+        JOptionPane.showMessageDialog(vista, mensaje, "Error.", JOptionPane.ERROR_MESSAGE);
     }
 
-    private void repintar()
+    private boolean entradaValida(String text, String regex)
     {
-        Rectangle tamanio = vista.getPanelEsquema().getBounds();
-        vista.getPanel().removeAll();
-        vista.setPanelEsquema(new JInternalFrame("Representación de los vuelos.", true));
-        vista.getPanel().add(vista.getPanelEsquema(), JLayeredPane.DEFAULT_LAYER);
-        vista.getPanelEsquema().setBounds(tamanio);
-        vista.getPanelEsquema().setVisible(true);
-        vista.getPanelEsquema().setEnabled(false);
-        vista.getPanelEsquema().add(new Esquema(aeropuerto), BorderLayout.CENTER);
+        return text.matches(regex) && Integer.parseInt(text) > 0 && Integer.parseInt(text) <= 10000;
     }
 
 }
