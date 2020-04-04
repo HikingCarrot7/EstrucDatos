@@ -1,9 +1,5 @@
 package expresiones;
 
-import java.util.HashMap;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-
 /**
  *
  * @author Nicolás
@@ -13,17 +9,22 @@ public class PruebaConversor
 
     public static void main(String[] args)
     {
-        String test = "(6+4)*8*(7+4)";
-        System.out.println(Conversor.deInfijoAPrefijo(test));
 
-        HashMap<String, String> map = new HashMap<>();
-        JFrame j = new JFrame();
-        JLabel b = new JLabel("hola ");
-        j.getContentPane().add(b);
-        j.pack();
+        String ejemplo4 = "19 - 0 / 5 *10";
+        System.out.println("Entrada: " + ejemplo4);
+        ArbolExpresiones arbolExpresiones = new ArbolExpresiones(ejemplo4);
 
-        j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        j.setVisible(true);
+        System.out.println("\nRecorrido en PreOrden");
+        arbolExpresiones.preorder();
+
+        System.out.println("\nRecorrido en Inorden");
+        arbolExpresiones.inorder();
+
+        System.out.println("\nRecorrido en PostOrden");
+        arbolExpresiones.postorder();
+
+        System.out.println("\n");
 
     }
+
 }

@@ -1,6 +1,17 @@
 package expresiones;
 
+import static expresiones.Operador.DIVISION;
+import static expresiones.Operador.ESPACIO;
+import static expresiones.Operador.MULTIPLICACION;
+import static expresiones.Operador.RESTA;
+import static expresiones.Operador.SUMA;
+import static expresiones.Operador.esEspacio;
+import static expresiones.Operador.esOperador;
+import static expresiones.Operador.esParentesis;
+import static expresiones.Operador.esParentesisDerecho;
+import static expresiones.Operador.esParentesisIzquierdo;
 import util.LinkedStack;
+import util.Stack;
 
 /**
  *
@@ -9,46 +20,99 @@ import util.LinkedStack;
 public class Conversor
 {
 
-    private static final String APERTURA_PARENTESIS = "(";
-    private static final String CIERRE_PARENTESIS = ")";
-    private static final String SUMA = "+";
-    private static final String RESTA = "-";
-    private static final String MULTIPLICACION = "*";
-    private static final String DIVISION = "/";
-    private static final String EXPONENTE = "^";
-
     public static String deInfijoAPrefijo(String expresion)
     {
         StringBuilder resultado = new StringBuilder();
-        String[] charsExpresionInvertida = invertirCadena(expresion).split("");
-        LinkedStack<String> operadores = new LinkedStack<>();
+        String[] tokens = invertirCadena(expresion).split("");
+        Stack<String> operadores = new LinkedStack<>();
 
-        for (int i = 0; i < charsExpresionInvertida.length; i++)
-        {
-            String caracterActual = charsExpresionInvertida[i];
-
-            if (esParentesisIzquierdo(caracterActual))
+        for (String token : tokens)
+            if (esParentesisIzquierdo(token))
             {
                 while (!esParentesisDerecho(operadores.peek()))
                     resultado.append(operadores.pop());
 
                 operadores.pop();
 
-            } else if (esOperador(caracterActual) || esParentesisDerecho(caracterActual))
-                operadores.push(caracterActual);
+            } else if (esOperador(token) || esParentesisDerecho(token))
+                operadores.push(token);
 
             else
-                resultado.append(caracterActual);
-        }
+                resultado.append(token);
 
         vaciarPila(resultado, operadores);
         return invertirCadena(resultado.toString());
     }
 
-    private static void vaciarPila(StringBuilder resultado, LinkedStack<String> operadores)
+    public static String deInfijoAPostfijo(String expresion)
+    {
+        StringBuilder resultado = new StringBuilder();
+        String[] tokens = expresion.split("");
+        Stack<String> pila = new LinkedStack<>();
+
+        for (int i = 0; i < tokens.length; i++)
+        {
+            if (esEspacio(tokens[i]))
+                continue;
+
+            if (esParentesisIzquierdo(tokens[i]))
+            {
+                pila.push(tokens[i]);
+                continue;
+            }
+
+            if (esParentesisDerecho(tokens[i]))
+            {
+                while (!esParentesisIzquierdo(pila.peek()))
+                    resultado.append(pila.pop()).append(ESPACIO);
+
+                pila.pop();
+                continue;
+            }
+
+            if (esOperador(tokens[i]))
+            {
+                if (!pila.isEmpty() && procedencia(pila.peek(), tokens[i]))
+                    resultado.append(pila.pop()).append(ESPACIO);
+
+                pila.push(tokens[i]);
+
+            } else
+            {
+                while (i < tokens.length && !(esOperador(tokens[i]) || esParentesis(tokens[i]) || esEspacio(tokens[i])))
+                    resultado.append(tokens[i++]);
+
+                resultado.append(ESPACIO);
+                i--;
+            }
+
+        }
+
+        vaciarPila(resultado, pila);
+        return resultado.substring(0, resultado.length() - 1);
+    }
+
+    private static void vaciarPila(StringBuilder resultado, Stack<String> operadores)
     {
         while (!operadores.isEmpty())
-            resultado.append(operadores.pop());
+            resultado.append(operadores.pop()).append(ESPACIO);
+    }
+
+    private static boolean procedencia(String caracter1, String caracter2)
+    {
+        if ((caracter1.equals(MULTIPLICACION) || caracter1.equals(DIVISION))
+                && (caracter2.equals(SUMA) || caracter2.equals(RESTA)))
+            return true;
+
+        else if ((caracter1.equals(SUMA) || caracter1.equals(RESTA))
+                && (caracter2.equals(SUMA) || caracter2.equals(RESTA)))
+            return true;
+
+        else if ((caracter1.equals(MULTIPLICACION) || caracter1.equals(DIVISION))
+                && (caracter2.equals(MULTIPLICACION) || caracter2.equals(DIVISION)))
+            return true;
+
+        return false;
     }
 
     private static String invertirCadena(String cadena)
@@ -59,36 +123,6 @@ public class Conversor
             cadenaInvertida += String.valueOf(cadena.charAt(i));
 
         return cadenaInvertida;
-    }
-
-    private static boolean esParentesisIzquierdo(String caracter)
-    {
-        return caracter.equals(APERTURA_PARENTESIS);
-    }
-
-    private static boolean esParentesisDerecho(String caracter)
-    {
-        return caracter.equals(CIERRE_PARENTESIS);
-    }
-
-    private static boolean esOperador(String caracter)
-    {
-        switch (caracter)
-        {
-            case SUMA:
-            case RESTA:
-            case MULTIPLICACION:
-            case DIVISION:
-            case EXPONENTE:
-                return true;
-        }
-
-        return false;
-    }
-
-    private static boolean esOperando(String caracter)
-    {
-        return Character.isDigit(caracter.toCharArray()[0]);
     }
 
 }
