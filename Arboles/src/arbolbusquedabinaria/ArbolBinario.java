@@ -12,7 +12,8 @@ public abstract class ArbolBinario<T extends Comparable<T>>
 
     public void preorder()
     {
-        preorder(raiz);
+        if (raiz != null)
+            preorder(raiz);
     }
 
     private void preorder(NodoABB<T> nodo)
@@ -28,7 +29,8 @@ public abstract class ArbolBinario<T extends Comparable<T>>
 
     public void inorder()
     {
-        inorder(raiz);
+        if (raiz != null)
+            inorder(raiz);
     }
 
     private void inorder(NodoABB<T> nodo)
@@ -44,7 +46,8 @@ public abstract class ArbolBinario<T extends Comparable<T>>
 
     public void postorder()
     {
-        postorder(raiz);
+        if (raiz != null)
+            postorder(raiz);
     }
 
     private void postorder(NodoABB<T> nodo)

@@ -8,9 +8,9 @@ package arbolbusquedabinaria;
 public class NodoABB<E>
 {
 
-    private E dato;
-    private NodoABB<E> izq;
-    private NodoABB<E> der;
+    protected E dato;
+    protected NodoABB<E> izq;
+    protected NodoABB<E> der;
 
     public NodoABB(E dato)
     {

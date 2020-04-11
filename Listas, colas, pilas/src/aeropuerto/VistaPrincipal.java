@@ -15,8 +15,8 @@ public class VistaPrincipal extends javax.swing.JFrame
      */
     public VistaPrincipal()
     {
-        initComponents();
         initLookAndFeel();
+        initComponents();
     }
 
     private void initLookAndFeel()
