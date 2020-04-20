@@ -56,12 +56,7 @@ public class VistaPrincipal extends javax.swing.JFrame
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel5 = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 5), new java.awt.Dimension(0, 5), new java.awt.Dimension(0, 5));
-        jPanel3 = new javax.swing.JPanel();
-        filler7 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 5), new java.awt.Dimension(0, 5), new java.awt.Dimension(0, 5));
         panelGrafico = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 17), new java.awt.Dimension(0, 17), new java.awt.Dimension(0, 17));
         btnGenerarVuelos = new javax.swing.JButton();
@@ -86,24 +81,12 @@ public class VistaPrincipal extends javax.swing.JFrame
 
         getContentPane().add(jPanel4, java.awt.BorderLayout.PAGE_START);
 
+        jSplitPane1.setContinuousLayout(true);
+
         jPanel5.setLayout(new java.awt.BorderLayout());
 
-        jPanel1.add(filler6);
-
-        jPanel5.add(jPanel1, java.awt.BorderLayout.SOUTH);
-
-        jPanel3.add(filler7);
-
-        jPanel5.add(jPanel3, java.awt.BorderLayout.EAST);
-
+        panelGrafico.setBorder(javax.swing.BorderFactory.createTitledBorder("Representación gráfica"));
         panelGrafico.setLayout(new javax.swing.BoxLayout(panelGrafico, javax.swing.BoxLayout.Y_AXIS));
-
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Representación gráfica");
-        jLabel1.setAlignmentX(0.5F);
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        panelGrafico.add(jLabel1);
-
         jPanel5.add(panelGrafico, java.awt.BorderLayout.CENTER);
 
         jSplitPane1.setRightComponent(jPanel5);
@@ -168,13 +151,8 @@ public class VistaPrincipal extends javax.swing.JFrame
     private javax.swing.Box.Filler filler3;
     private javax.swing.Box.Filler filler4;
     private javax.swing.Box.Filler filler5;
-    private javax.swing.Box.Filler filler6;
-    private javax.swing.Box.Filler filler7;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JSplitPane jSplitPane1;

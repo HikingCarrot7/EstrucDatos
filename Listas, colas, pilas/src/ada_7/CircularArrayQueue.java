@@ -9,7 +9,7 @@ public class CircularArrayQueue<E> implements Queue<E>
 
     private int front;
     private int size;
-    private E[] elements;
+    private final E[] elements;
 
     @SuppressWarnings("unchecked")
     public CircularArrayQueue()
