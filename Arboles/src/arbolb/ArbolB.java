@@ -77,6 +77,7 @@ public class ArbolB<T extends Comparable<T>>
         insertar(clave, nodo, null, null);
     }
 
+    @SuppressWarnings("unchecked")
     private void insertar(T clave, NodoB<T> nodo, NodoB<T> hijo1, NodoB<T> hijo2)
     {
         NodoB<T> padre, nuevo;
@@ -368,7 +369,12 @@ public class ArbolB<T extends Comparable<T>>
         return null;
     }
 
-    public void preorder(boolean r, NodoB<T> nodo)
+    public void preorder()
+    {
+        preorder(true, null);
+    }
+
+    private void preorder(boolean r, NodoB<T> nodo)
     {
         if (r)
             nodo = raiz;
