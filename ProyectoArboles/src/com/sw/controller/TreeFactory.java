@@ -9,12 +9,12 @@ import com.sw.util.LinkedList;
  *
  * @author Nicolás
  */
-public class MyTreeFactory implements Factory<LinkedList<Integer>, Egresado>
+public class TreeFactory implements Factory<LinkedList<Integer>, Egresado>
 {
 
-    private static MyTreeFactory instance;
+    private static TreeFactory instance;
 
-    private MyTreeFactory()
+    private TreeFactory()
     {
 
     }
@@ -61,10 +61,10 @@ public class MyTreeFactory implements Factory<LinkedList<Integer>, Egresado>
         }
     }
 
-    public static synchronized MyTreeFactory getInstance()
+    public static synchronized TreeFactory getInstance()
     {
         if (instance == null)
-            instance = new MyTreeFactory();
+            instance = new TreeFactory();
 
         return instance;
     }

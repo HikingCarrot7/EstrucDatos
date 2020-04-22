@@ -38,14 +38,14 @@ public class VistaController
 
     private final Vista vista;
     private final SeleccionadorArchivos seleccionadorArchivos;
-    private final MyTreeFactory myTreeFactory;
+    private final TreeFactory myTreeFactory;
     private Egresado[] egresados;
 
     public VistaController(Vista vista)
     {
         this.vista = vista;
         this.seleccionadorArchivos = SeleccionadorArchivos.getInstance();
-        this.myTreeFactory = MyTreeFactory.getInstance();
+        this.myTreeFactory = TreeFactory.getInstance();
 
         COMPARADOR_POR_NOMBRE = (lista, egresado) -> egresados[lista.first()].getNombre().compareTo(egresado.getNombre());
         COMPARADOR_POR_PROFESION = (lista, egresado) -> egresados[lista.first()].getProfesion().compareTo(egresado.getProfesion());
