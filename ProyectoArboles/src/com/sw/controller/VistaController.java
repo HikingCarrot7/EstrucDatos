@@ -2,7 +2,10 @@ package com.sw.controller;
 
 import com.sw.model.ArbolBB;
 import com.sw.model.Egresado;
+import com.sw.util.LinkedList;
 import com.sw.view.Vista;
+import java.awt.Component;
+import javax.swing.JPanel;
 
 /**
  *
@@ -11,32 +14,60 @@ import com.sw.view.Vista;
 public class VistaController
 {
 
-    public final Vista vista;
+    private final Vista vista;
+    private final Egresado[] egresados;
 
-    public VistaController(Vista vista)
+    private final Comparador<LinkedList<Integer>, Egresado> COMPARADOR_POR_NOMBRE;
+    private final Comparador<LinkedList<Integer>, Egresado> COMPARADOR_POR_PROFESION;
+    private final Comparador<LinkedList<Integer>, Egresado> COMPARADOR_POR_PROMEDIO;
+
+    public VistaController(Vista vista, Egresado[] egresados)
     {
         this.vista = vista;
+        this.egresados = egresados;
 
-        Egresado[] egresados = new Egresado[10];
-        egresados[0] = new Egresado("Nicolás", "LIS", 20);
-        egresados[1] = new Egresado("Nicolás", "FIQ", 20);
-        egresados[2] = new Egresado("Nicolás", "LCC", 20);
-        egresados[3] = new Egresado("Emmanuel", "LIS", 20);
-        egresados[4] = new Egresado("Eusebio", "LIC", 20);
-        egresados[5] = new Egresado("Carlos", "LCC", 20);
-        egresados[6] = new Egresado("Antonio", "LIC", 20);
+        COMPARADOR_POR_NOMBRE = (lista, egresado) -> egresados[lista.first()].getNombre().compareTo(egresado.getNombre());
+        COMPARADOR_POR_PROFESION = (lista, egresado) -> egresados[lista.first()].getProfesion().compareTo(egresado.getProfesion());
+        COMPARADOR_POR_PROMEDIO = (lista, egresado) -> egresados[lista.first()].getPromedio().compareTo(egresado.getPromedio());
 
-        ArbolBB arbolBB = new ArbolBB();
+        initComponents();
+        crearArbol();
+    }
 
-        arbolBB.insertar(0, egresados[0], (lista, egresado) -> egresados[lista.first()].getProfesion().compareTo(egresado.getProfesion()));
-        arbolBB.insertar(1, egresados[1], (lista, egresado) -> egresados[lista.first()].getProfesion().compareTo(egresado.getProfesion()));
-        arbolBB.insertar(2, egresados[2], (lista, egresado) -> egresados[lista.first()].getProfesion().compareTo(egresado.getProfesion()));
-        arbolBB.insertar(3, egresados[3], (lista, egresado) -> egresados[lista.first()].getProfesion().compareTo(egresado.getProfesion()));
-        arbolBB.insertar(4, egresados[4], (lista, egresado) -> egresados[lista.first()].getProfesion().compareTo(egresado.getProfesion()));
-        arbolBB.insertar(5, egresados[5], (lista, egresado) -> egresados[lista.first()].getProfesion().compareTo(egresado.getProfesion()));
-        arbolBB.insertar(6, egresados[6], (lista, egresado) -> egresados[lista.first()].getProfesion().compareTo(egresado.getProfesion()));
+    private void initComponents()
+    {
+        setPanelEnabled(vista.getPanelLateralIzq(), false);
+        setPanelEnabled(vista.getPanelLateralDer(), false);
+        setPanelEnabled(vista.getPanelSuperior(), false);
+    }
+
+    private void crearArbol()
+    {
+        ArbolBB<LinkedList<Integer>, Egresado> arbolBB = new ArbolBB<>(COMPARADOR_POR_NOMBRE);
+
+        for (int i = 0; i < egresados.length; i++)
+            arbolBB.insertar(i, egresados[i]);
 
         System.out.println("Resultados");
         arbolBB.inorder();
+
+        LinkedList<Integer> resultados = arbolBB.buscar(egresados[0]);
+        System.out.println("\n\n\n");
+        System.out.println(resultados);
+    }
+
+    private void setPanelEnabled(JPanel panel, boolean isEnabled)
+    {
+        panel.setEnabled(isEnabled);
+
+        Component[] components = panel.getComponents();
+
+        for (Component component : components)
+        {
+            if (component instanceof JPanel)
+                setPanelEnabled((JPanel) component, isEnabled);
+
+            component.setEnabled(isEnabled);
+        }
     }
 }

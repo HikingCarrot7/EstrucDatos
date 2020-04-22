@@ -1,4 +1,4 @@
-package com.sw.utils;
+package com.sw.util;
 
 /**
  *

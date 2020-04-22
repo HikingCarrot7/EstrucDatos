@@ -38,7 +38,7 @@ public class Egresado
         this.profesion = profesion;
     }
 
-    public double getPromedio()
+    public Double getPromedio()
     {
         return promedio;
     }

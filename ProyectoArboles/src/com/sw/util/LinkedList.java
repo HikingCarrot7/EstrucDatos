@@ -1,4 +1,4 @@
-package com.sw.utils;
+package com.sw.util;
 
 /**
  * @author A15001169
