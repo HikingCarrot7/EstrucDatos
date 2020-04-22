@@ -92,6 +92,7 @@
                 </Property>
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="&#xc1;rbol BB"/>
+                <Property name="actionCommand" type="java.lang.String" value="Arbol BB"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Hand Cursor"/>
                 </Property>
@@ -119,6 +120,7 @@
                   <ComponentRef name="grupoRadioButtons"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="&#xc1;rbol AVL"/>
+                <Property name="actionCommand" type="java.lang.String" value="Arbol AVL"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Hand Cursor"/>
                 </Property>
@@ -146,6 +148,7 @@
                   <ComponentRef name="grupoRadioButtons"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="&#xc1;rbol B"/>
+                <Property name="actionCommand" type="java.lang.String" value="Arbol B"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Hand Cursor"/>
                 </Property>

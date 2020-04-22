@@ -9,7 +9,7 @@ import com.sw.util.LinkedList;
  * @param <L>
  * @param <E>
  */
-public class ArbolBB<L extends LinkedList<Integer>, E> extends ArbolBinario<L>
+public class ArbolBB<L extends LinkedList<Integer>, E> extends ArbolBinario<L, E>
 {
 
     private final Comparador<L, E> comparador;
@@ -19,13 +19,14 @@ public class ArbolBB<L extends LinkedList<Integer>, E> extends ArbolBinario<L>
         this.comparador = comparador;
     }
 
+    @Override
     public void insertar(int idx, E egresado)
     {
         insertar(raiz, idx, egresado);
     }
 
     @SuppressWarnings("unchecked")
-    private void insertar(NodoABB<L> nodo, Integer idx, E egresado)
+    private void insertar(NodoABB<L> nodo, int idx, E egresado)
     {
         if (isEmpty())
         {
@@ -54,6 +55,7 @@ public class ArbolBB<L extends LinkedList<Integer>, E> extends ArbolBinario<L>
             nodo.getDato().addFirst(idx);
     }
 
+    @Override
     public L buscar(E egresado)
     {
         return buscar(raiz, egresado);

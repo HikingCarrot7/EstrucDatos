@@ -3,12 +3,13 @@ package com.sw.model;
 /**
  *
  * @author Nicolás
- * @param <T>
+ * @param <L>
+ * @param <E>
  */
-public abstract class ArbolBinario<T>
+public abstract class ArbolBinario<L, E>
 {
 
-    protected NodoABB<T> raiz;
+    protected NodoABB<L> raiz;
 
     public void preorder()
     {
@@ -16,7 +17,7 @@ public abstract class ArbolBinario<T>
             preorder(raiz);
     }
 
-    private void preorder(NodoABB<T> nodo)
+    private void preorder(NodoABB<L> nodo)
     {
         System.out.printf("[" + nodo.getDato().toString() + "] ");
 
@@ -33,7 +34,7 @@ public abstract class ArbolBinario<T>
             inorder(raiz);
     }
 
-    private void inorder(NodoABB<T> nodo)
+    private void inorder(NodoABB<L> nodo)
     {
         if (nodo.getIzq() != null)
             inorder(nodo.getIzq());
@@ -50,7 +51,7 @@ public abstract class ArbolBinario<T>
             postorder(raiz);
     }
 
-    private void postorder(NodoABB<T> nodo)
+    private void postorder(NodoABB<L> nodo)
     {
         if (nodo.getIzq() != null)
             postorder(nodo.getIzq());
@@ -61,12 +62,16 @@ public abstract class ArbolBinario<T>
         System.out.printf("[" + nodo.getDato().toString() + "] ");
     }
 
-    public NodoABB<T> getRaiz()
+    public abstract void insertar(int idx, E element);
+
+    public abstract L buscar(E element);
+
+    public NodoABB<L> getRaiz()
     {
         return raiz;
     }
 
-    public void setRaiz(NodoABB<T> raiz)
+    public void setRaiz(NodoABB<L> raiz)
     {
         this.raiz = raiz;
     }

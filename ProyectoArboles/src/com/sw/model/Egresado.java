@@ -48,4 +48,10 @@ public class Egresado
         this.promedio = promedio;
     }
 
+    @Override
+    public String toString()
+    {
+        return "Egresado{" + "nombre=" + nombre + ", profesion=" + profesion + ", promedio=" + promedio + '}';
+    }
+
 }

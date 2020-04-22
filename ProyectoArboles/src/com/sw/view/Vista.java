@@ -132,18 +132,21 @@ public class Vista extends JFrame
         grupoRadioButtons.add(rbArbolBB);
         rbArbolBB.setSelected(true);
         rbArbolBB.setText("Árbol BB");
+        rbArbolBB.setActionCommand("Arbol BB");
         rbArbolBB.setCursor(new Cursor(Cursor.HAND_CURSOR));
         panelSuperior.add(rbArbolBB);
         panelSuperior.add(filler2);
 
         grupoRadioButtons.add(rbArbolAVL);
         rbArbolAVL.setText("Árbol AVL");
+        rbArbolAVL.setActionCommand("Arbol AVL");
         rbArbolAVL.setCursor(new Cursor(Cursor.HAND_CURSOR));
         panelSuperior.add(rbArbolAVL);
         panelSuperior.add(filler3);
 
         grupoRadioButtons.add(rbArbolB);
         rbArbolB.setText("Árbol B");
+        rbArbolB.setActionCommand("Arbol B");
         rbArbolB.setCursor(new Cursor(Cursor.HAND_CURSOR));
         panelSuperior.add(rbArbolB);
         panelSuperior.add(filler1);
