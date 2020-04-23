@@ -1,5 +1,6 @@
-package com.sw.model;
+package com.sw.model.persistence;
 
+import com.sw.model.Egresado;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -21,7 +22,7 @@ public class DAO implements Loader<Egresado[]>
     }
 
     @Override
-    public Egresado[] loadData()
+    public Egresado[] load()
     {
         try
         {

@@ -1,5 +1,6 @@
-package com.sw.model;
+package com.sw.model.trees;
 
+import com.sw.model.treenodes.NodoABB;
 import com.sw.util.LinkedList;
 
 /**

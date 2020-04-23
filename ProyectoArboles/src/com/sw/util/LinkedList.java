@@ -102,7 +102,7 @@ public class LinkedList<E> implements List<E>, Predecessor<E>
         if (head.getItem() == head.getNext().getItem())
             listaAAlmacenarRepetidos.addFirst(head.getItem());
 
-        return (head.getItem() == head.getNext().getItem()) ? head.getNext() : head;
+        return head.getItem() == head.getNext().getItem() ? head.getNext() : head;
     }
 
     public static <T extends Comparable<T>> LinkedList<T> mergeLists(LinkedList<T> lista1, LinkedList<T> lista2)

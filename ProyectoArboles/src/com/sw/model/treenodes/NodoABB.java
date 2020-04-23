@@ -1,4 +1,4 @@
-package com.sw.model;
+package com.sw.model.treenodes;
 
 /**
  *

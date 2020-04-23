@@ -1,10 +1,12 @@
 package com.sw.controller;
 
-import com.sw.model.ArbolBinario;
-import com.sw.model.DAO;
+import com.sw.model.Buscador;
 import com.sw.model.Egresado;
-import com.sw.model.ItemNotFoundException;
-import com.sw.model.NohayCoincidenciasException;
+import com.sw.model.exceptions.ItemNotFoundException;
+import com.sw.model.exceptions.NohayCoincidenciasException;
+import com.sw.model.persistence.DAO;
+import com.sw.model.persistence.Loader;
+import com.sw.model.trees.ArbolBinario;
 import com.sw.util.LinkedList;
 import com.sw.view.UIConstants;
 import com.sw.view.Vista;
@@ -71,6 +73,7 @@ public class VistaController implements UIConstants
         vista.getProgressBar().setEnabled(true);
         setProgressBarVisible(false);
 
+        vista.getTxtPromedio().setFormatterFactory(new PromedioFormatter());
         vista.getTxtDireccion().setText("data/Egresados.csv");
         vista.getTxtNombre().setText("Emmanuel");
 
@@ -85,12 +88,17 @@ public class VistaController implements UIConstants
 
     private void accionBtnBuscarDirectorio(ActionEvent e)
     {
+        inhabilitarUI();
+
         File file = seleccionadorArchivos.seleccionarArchivo(vista, "csv and xls files", "csv", "xls");
-        vista.getTxtDireccion().setText(file.getAbsolutePath());
+
+        if (file != null)
+            vista.getTxtDireccion().setText(file.getAbsolutePath());
     }
 
     private void accionBtnGenerarArbol(ActionEvent e)
     {
+        habilitarCheckBoxes(false);
         setBtnGenerarEnabled(false);
         setProgressBarVisible(true);
         crearArboles();
@@ -99,18 +107,11 @@ public class VistaController implements UIConstants
 
     private void accionBtnBuscar(ActionEvent e)
     {
-        try
-        {
-            if (ningunOpcionSeleccionada())
-                cargarDatosTabla(egresados);
-            else
-                mostrarResultadosBusqueda(realizarBusqueda());
+        if (ningunOpcionSeleccionada())
+            mostrarTodosEgresados();
 
-        } catch (ItemNotFoundException | NohayCoincidenciasException ex)
-        {
-            tableManager.vaciarTabla(vista.getTablaEgresados());
-            mostrarError("Error", ex.getMessage());
-        }
+        else
+            buscarCoincidencias();
     }
 
     private void crearArboles()
@@ -120,7 +121,7 @@ public class VistaController implements UIConstants
             case ARBOL_BB:
                 arbolNombres = myTreeFactory.crearArbolNombres(ARBOL_BB);
                 arbolProfesiones = myTreeFactory.crearArbolProfesiones(ARBOL_BB);
-                arbolPromedios = myTreeFactory.crearArbolPromedio(ARBOL_BB);
+                arbolPromedios = myTreeFactory.crearArbolPromedios(ARBOL_BB);
                 break;
             case ARBOL_AVL:
             case ARBOL_B:
@@ -131,7 +132,7 @@ public class VistaController implements UIConstants
 
     private void rellenarArboles()
     {
-        SwingWorker<Long, Long> service = new SwingWorker<Long, Long>()
+        SwingWorker<Long, Long> backgroundTask = new SwingWorker<Long, Long>()
         {
             @Override
             protected Long doInBackground() throws Exception
@@ -151,10 +152,8 @@ public class VistaController implements UIConstants
             }
         };
 
-        service.addPropertyChangeListener(this::esperarLlenadoDeArboles);
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        executorService.submit(service);
-        executorService.shutdown();
+        backgroundTask.addPropertyChangeListener(this::esperarLlenadoDeArboles);
+        ejecutarTareaEnSegundoPlano(backgroundTask);
     }
 
     public void esperarLlenadoDeArboles(PropertyChangeEvent e)
@@ -167,61 +166,74 @@ public class VistaController implements UIConstants
                 setBtnGenerarEnabled(true);
                 setProgressBarVisible(false);
                 actualizarUI();
-                cargarDatosTabla(egresados);
+                mostrarTodosEgresados();
 
             } catch (InterruptedException | ExecutionException ex)
             {
-                System.out.println(ex.getMessage());
+                ex.printStackTrace();
             }
     }
 
-    private LinkedList<Integer> realizarBusqueda()
+    private void buscarCoincidencias()
     {
-        boolean buscarCoincidencias = false;
-        LinkedList<Integer> listaCoincidencias = null;
-
-        if (nombreSeleccionado())
+        SwingWorker<Long, Long> backgroundTask = new SwingWorker<Long, Long>()
         {
-            listaCoincidencias = new LinkedList<>(arbolNombres.buscar(getNombreEgresado()));
-            buscarCoincidencias = true;
-        }
-
-        if (profesionSeleccionado())
-            if (buscarCoincidencias)
-                listaCoincidencias = buscarMasCoincidencias(arbolProfesiones, listaCoincidencias, getProfesionEgresado());
-            else
+            @Override
+            protected Long doInBackground() throws Exception
             {
-                listaCoincidencias = new LinkedList<>(arbolProfesiones.buscar(getProfesionEgresado()));
-                buscarCoincidencias = true;
+                long now = System.currentTimeMillis();
+
+                try
+                {
+                    Buscador buscador = new Buscador(arbolNombres, arbolProfesiones, arbolPromedios);
+                    mostrarResultadosBusqueda(buscador.realizarBusqueda(
+                            nombreSeleccionado(), profesionSeleccionado(), promedioSeleccionado(),
+                            getNombreEgresado(), getProfesionEgresado(), promedioSeleccionado() ? getPromedioEgresado() : 0));
+
+                } catch (ItemNotFoundException | NohayCoincidenciasException ex)
+                {
+                    tableManager.vaciarTabla(vista.getTablaEgresados());
+                    mostrarError("Error", ex.getMessage());
+                    throw new Exception();
+
+                } catch (NullPointerException ex)
+                {
+                    mostrarError("Error", "Algún campo es incorrecto.");
+                    throw new Exception();
+                }
+
+                return System.currentTimeMillis() - now;
             }
+        };
 
-        if (promedioSeleccionado())
-            if (buscarCoincidencias)
-                listaCoincidencias = buscarMasCoincidencias(arbolPromedios, listaCoincidencias, getPromedioEgresado());
-            else
-                listaCoincidencias = new LinkedList<>(arbolPromedios.buscar(getPromedioEgresado()));
-
-        return listaCoincidencias;
+        backgroundTask.addPropertyChangeListener(this::esperarBusquedaDeCoincidencias);
+        ejecutarTareaEnSegundoPlano(backgroundTask);
     }
 
-    @SuppressWarnings("unchecked")
-    private LinkedList<Integer> buscarMasCoincidencias(ArbolBinario arbolBinario, LinkedList<Integer> coincidenciasAcumuladas, Object datoABuscar)
+    private void esperarBusquedaDeCoincidencias(PropertyChangeEvent e)
     {
-        LinkedList<Integer> busquedaProfesiones = (LinkedList<Integer>) arbolBinario.buscar(datoABuscar);
-        LinkedList<Integer> mergedList = LinkedList.mergeLists(coincidenciasAcumuladas, busquedaProfesiones);
-        LinkedList<Integer> duplicados = new LinkedList<>();
-        LinkedList.removeDuplicates(mergedList, duplicados);
+        try
+        {
+            if (e.getNewValue() == SwingWorker.StateValue.DONE)
+                setTiempoTranscurrido(((SwingWorker<?, ?>) e.getSource()).get() + " milisegundos.");
 
-        if (duplicados.isEmpty())
-            throw new NohayCoincidenciasException();
+        } catch (InterruptedException | ExecutionException ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+    }
 
-        return duplicados;
+    private void ejecutarTareaEnSegundoPlano(Runnable tarea)
+    {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        executorService.submit(tarea);
+        executorService.shutdown();
     }
 
     private void cargarEgresados()
     {
-        DAO dao = new DAO(getRutaCSV());
-        egresados = dao.loadData();
+        Loader<Egresado[]> dao = new DAO(getRutaCSV());
+        egresados = dao.load();
     }
 
     private void cargarDatosCmbProfesiones()
@@ -235,7 +247,7 @@ public class VistaController implements UIConstants
                     egresados[listaIdxProfesiones.removeFirst().first()].getProfesion());
     }
 
-    private void cargarDatosTabla(Egresado[] egresados)
+    private void mostrarTodosEgresados()
     {
         tableManager.vaciarTabla(vista.getTablaEgresados());
 
@@ -345,6 +357,27 @@ public class VistaController implements UIConstants
         vista.getTxtNombre().setEnabled(false);
         vista.getCmbProfesiones().setEnabled(false);
         vista.getTxtPromedio().setEnabled(false);
+    }
+
+    private void inhabilitarUI()
+    {
+        setPanelEnabled(vista.getPanelLateralIzq(), false);
+        setPanelEnabled(vista.getPanelLateralDer(), false);
+
+        tableManager.vaciarTabla(vista.getTablaEgresados());
+        comboBoxManager.vaciarComboBox(vista.getCmbProfesiones());
+
+        vista.getTxtNombre().setText("");
+        vista.getTxtPromedio().setText("");
+
+        habilitarCheckBoxes(false);
+    }
+
+    private void habilitarCheckBoxes(boolean habilitar)
+    {
+        vista.getChbNombre().setSelected(habilitar);
+        vista.getChbProfesion().setSelected(habilitar);
+        vista.getChbPromedio().setSelected(habilitar);
     }
 
     private void mostrarError(String titulo, String text)

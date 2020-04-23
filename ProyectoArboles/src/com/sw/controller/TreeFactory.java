@@ -1,7 +1,7 @@
 package com.sw.controller;
 
-import com.sw.model.ArbolBB;
-import com.sw.model.ArbolBinario;
+import com.sw.model.trees.ArbolBB;
+import com.sw.model.trees.ArbolBinario;
 import com.sw.util.LinkedList;
 
 /**
@@ -40,7 +40,7 @@ public class TreeFactory implements Factory
     }
 
     @Override
-    public ArbolBinario<LinkedList<Integer>, Double> crearArbolPromedio(String tipoArbol)
+    public ArbolBinario<LinkedList<Integer>, Double> crearArbolPromedios(String tipoArbol)
     {
         switch (tipoArbol)
         {

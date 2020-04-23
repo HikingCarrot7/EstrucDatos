@@ -24,6 +24,8 @@ import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
@@ -49,14 +51,14 @@ public class Vista extends JFrame
          */
         try
         {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
-                if ("Nimbus".equals(info.getName()))
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels())
+                if ("Windows".equals(info.getName()))
                 {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
 
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex)
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex)
         {
             System.out.println(ex.getMessage());
         }
@@ -172,7 +174,7 @@ public class Vista extends JFrame
         getContentPane().add(jPanel1, BorderLayout.PAGE_START);
 
         jSplitPane1.setDividerLocation(230);
-        jSplitPane1.setDividerSize(8);
+        jSplitPane1.setDividerSize(6);
         jSplitPane1.setContinuousLayout(true);
         jSplitPane1.setOneTouchExpandable(true);
 

@@ -1,4 +1,4 @@
-package com.sw.model;
+package com.sw.model.persistence;
 
 /**
  *
@@ -8,5 +8,5 @@ package com.sw.model;
 public interface Loader<L>
 {
 
-    public L loadData();
+    public L load();
 }
