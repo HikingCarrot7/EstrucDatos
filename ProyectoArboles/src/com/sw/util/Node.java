@@ -15,7 +15,7 @@ public class Node<E>
         this.dato = dato;
     }
 
-    public E getDato()
+    public E getItem()
     {
         return dato;
     }

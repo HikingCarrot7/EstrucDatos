@@ -20,7 +20,6 @@ public class Main
             vista.setLocationRelativeTo(null);
             new VistaController(vista);
         });
-
     }
 
 }

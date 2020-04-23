@@ -4,7 +4,7 @@ package com.sw.util;
  * @author A15001169
  * @param <E>
  */
-public class LinkedList<E> implements List<E>
+public class LinkedList<E> implements List<E>, Predecessor<E>
 {
 
     protected ListNode<E> first;
@@ -14,6 +14,19 @@ public class LinkedList<E> implements List<E>
     {
         size = 0;
         first = null;
+    }
+
+    public LinkedList(LinkedList<E> lista)
+    {
+        ListNode<E> nodo = lista.first;
+
+        while (nodo != null)
+        {
+            addLast(nodo.getItem());
+            nodo = nodo.getNext();
+        }
+
+        size = lista.size;
     }
 
     @Override
@@ -43,7 +56,7 @@ public class LinkedList<E> implements List<E>
         if (isEmpty())
             return null;
 
-        E element = first.getDato();
+        E element = first.getItem();
         first = first.getNext();
 
         size--;
@@ -56,7 +69,7 @@ public class LinkedList<E> implements List<E>
         if (isEmpty())
             return null;
 
-        E element = getLastNode().getDato();
+        E element = getLastNode().getItem();
         ListNode<E> node = first;
 
         for (int i = 0; i < size - 2; i++)
@@ -71,32 +84,53 @@ public class LinkedList<E> implements List<E>
         return element;
     }
 
+    public static <T extends Comparable<T>> LinkedList<T> removeDuplicates(LinkedList<T> lista, LinkedList<T> listaAAlmacenarRepetidos)
+    {
+        LinkedList<T> list = new LinkedList<>();
+        list.setFirst(removeDuplicatesHelper(lista.first, listaAAlmacenarRepetidos));
+        listaAAlmacenarRepetidos.setFirst(removeDuplicatesHelper(listaAAlmacenarRepetidos.first, new LinkedList<>()));
+        return list;
+    }
+
+    private static <T extends Comparable<T>> ListNode<T> removeDuplicatesHelper(ListNode<T> head, LinkedList<T> listaAAlmacenarRepetidos)
+    {
+        if (head == null || head.getNext() == null)
+            return head;
+
+        head.setNext(removeDuplicatesHelper(head.getNext(), listaAAlmacenarRepetidos));
+
+        if (head.getItem() == head.getNext().getItem())
+            listaAAlmacenarRepetidos.addFirst(head.getItem());
+
+        return (head.getItem() == head.getNext().getItem()) ? head.getNext() : head;
+    }
+
     public static <T extends Comparable<T>> LinkedList<T> mergeLists(LinkedList<T> lista1, LinkedList<T> lista2)
     {
         LinkedList<T> mergedList = new LinkedList<>();
-        mergedList.setFirst(mergeListsHelper(lista1.first, lista2.first));
+        mergedList.setFirst(mergeListsHelper(new LinkedList<>(lista1).first, new LinkedList<>(lista2).first));
+        SortableLinkedList.insertionSort(mergedList);
         return mergedList;
     }
 
-    private static <T extends Comparable<T>> ListNode<T> mergeListsHelper(ListNode<T> nodo1, ListNode<T> nodo2)
+    private static <T extends Comparable<T>> ListNode<T> mergeListsHelper(ListNode<T> head1, ListNode<T> head2)
     {
-        if (nodo1 == null)
-            return nodo2;
+        if (head1 == null)
+            return head2;
 
-        if (nodo2 == null)
-            return nodo1;
+        if (head2 == null)
+            return head1;
 
-        if (nodo1.getDato().compareTo(nodo2.getDato()) <= 0)
+        if (head1.getItem().compareTo(head2.getItem()) <= 0)
         {
-            nodo1.setNext(mergeListsHelper(nodo1.getNext(), nodo2));
-            return nodo1;
+            head1.setNext(mergeListsHelper(head1.getNext(), head2));
+            return head1;
 
         } else
         {
-            nodo2.setNext(mergeListsHelper(nodo2.getNext(), nodo1));
-            return nodo2;
+            head2.setNext(mergeListsHelper(head2.getNext(), head1));
+            return head2;
         }
-
     }
 
     @Override
@@ -106,12 +140,12 @@ public class LinkedList<E> implements List<E>
             return "";
 
         ListNode<E> nodo = first;
-        String result = "[" + nodo.getDato().toString();
+        String result = "[" + nodo.getItem().toString();
 
         while (nodo.getNext() != null)
         {
             nodo = nodo.getNext();
-            result += "->" + nodo.getDato().toString();
+            result += "->" + nodo.getItem().toString();
         }
 
         return result + "]";
@@ -129,7 +163,7 @@ public class LinkedList<E> implements List<E>
 
     public E first()
     {
-        return first.getDato();
+        return first.getItem();
     }
 
     public void setFirst(ListNode<E> first)
@@ -147,6 +181,18 @@ public class LinkedList<E> implements List<E>
     public int size()
     {
         return size;
+    }
+
+    @Override
+    public ListNode<E> getNext()
+    {
+        return first;
+    }
+
+    @Override
+    public void setNext(ListNode<E> next)
+    {
+        first = next;
     }
 
 }
