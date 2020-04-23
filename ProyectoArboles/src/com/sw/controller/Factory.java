@@ -1,19 +1,18 @@
 package com.sw.controller;
 
 import com.sw.model.ArbolBinario;
+import com.sw.util.LinkedList;
 
 /**
  *
  * @author Nicolás
- * @param <L>
- * @param <E>
  */
-public interface Factory<L, E>
+public interface Factory
 {
 
-    public ArbolBinario<L, E> crearArbolNombres(String tipoArbol);
+    public ArbolBinario<LinkedList<Integer>, String> crearArbolNombres(String tipoArbol);
 
-    public ArbolBinario<L, E> crearArbolProfesiones(String tipoArbol);
+    public ArbolBinario<LinkedList<Integer>, String> crearArbolProfesiones(String tipoArbol);
 
-    public ArbolBinario<L, E> crearArbolPromedio(String tipoArbol);
+    public ArbolBinario<LinkedList<Integer>, Double> crearArbolPromedio(String tipoArbol);
 }

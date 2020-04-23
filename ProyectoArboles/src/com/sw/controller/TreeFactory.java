@@ -2,18 +2,17 @@ package com.sw.controller;
 
 import com.sw.model.ArbolBB;
 import com.sw.model.ArbolBinario;
-import com.sw.model.Egresado;
 import com.sw.util.LinkedList;
 
 /**
  *
  * @author Nicolás
  */
-public class TreeFactory implements Factory<LinkedList<Integer>, Egresado>
+public class TreeFactory implements Factory
 {
 
     @Override
-    public ArbolBinario<LinkedList<Integer>, Egresado> crearArbolNombres(String tipoArbol)
+    public ArbolBinario<LinkedList<Integer>, String> crearArbolNombres(String tipoArbol)
     {
         switch (tipoArbol)
         {
@@ -27,7 +26,7 @@ public class TreeFactory implements Factory<LinkedList<Integer>, Egresado>
     }
 
     @Override
-    public ArbolBinario<LinkedList<Integer>, Egresado> crearArbolProfesiones(String tipoArbol)
+    public ArbolBinario<LinkedList<Integer>, String> crearArbolProfesiones(String tipoArbol)
     {
         switch (tipoArbol)
         {
@@ -41,7 +40,7 @@ public class TreeFactory implements Factory<LinkedList<Integer>, Egresado>
     }
 
     @Override
-    public ArbolBinario<LinkedList<Integer>, Egresado> crearArbolPromedio(String tipoArbol)
+    public ArbolBinario<LinkedList<Integer>, Double> crearArbolPromedio(String tipoArbol)
     {
         switch (tipoArbol)
         {

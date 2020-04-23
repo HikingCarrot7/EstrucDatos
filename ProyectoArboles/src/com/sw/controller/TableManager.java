@@ -93,6 +93,37 @@ public class TableManager
         return (DefaultTableModel) table.getModel();
     }
 
+    public Object[][] getTableItems(JTable table)
+    {
+        Object[][] items = new Object[table.getRowCount()][table.getColumnCount()];
+
+        for (int i = 0; i < items.length; i++)
+            for (int j = 0; j < items[i].length; j++)
+                items[i][j] = table.getValueAt(i, j);
+
+        return items;
+    }
+
+    public Object[][] recortarFilaItems(Object[][] items, int row)
+    {
+        Object[][] newItems = new Object[items.length - 1][items[0].length];
+
+        for (int i = 0; i < items.length - 1; i++)
+            System.arraycopy(items[i + (i >= row ? 1 : 0)], 0, newItems[i], 0, items[i].length);
+
+        return newItems;
+    }
+
+    public Object[][] recortarFilasItems(Object[][] items, int rowInicio, int rowFin)
+    {
+        Object[][] newItems = new Object[items.length - (rowFin - rowInicio) - 1][items[0].length];
+
+        for (int i = 0; i < items.length - (rowFin - rowInicio) - 1; i++)
+            System.arraycopy(items[i + (i >= rowInicio ? rowFin : 0)], 0, newItems[i], 0, items[i].length);
+
+        return newItems;
+    }
+
     public static synchronized TableManager getInstance()
     {
         if (instance == null)

@@ -106,7 +106,7 @@ public class LinkedList<E> implements List<E>
             return "";
 
         ListNode<E> nodo = first;
-        String result = nodo.getDato().toString();
+        String result = "[" + nodo.getDato().toString();
 
         while (nodo.getNext() != null)
         {
@@ -114,7 +114,7 @@ public class LinkedList<E> implements List<E>
             result += "->" + nodo.getDato().toString();
         }
 
-        return result;
+        return result + "]";
     }
 
     private ListNode<E> getLastNode()

@@ -31,7 +31,7 @@ public interface UIConstants
     public static final DefaultCellEditor COLUMNA_NO_EDITABLE = new DefaultCellEditor(new JTextField())
     {
         @Override
-        public boolean isCellEditable(EventObject anEvent)
+        public boolean isCellEditable(EventObject e)
         {
             return false;
         }

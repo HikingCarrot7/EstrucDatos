@@ -63,22 +63,20 @@ public class ArbolBB<L extends LinkedList<Integer>, E> extends ArbolBinario<L, E
 
     private L buscar(NodoABB<L> nodo, E item) throws ItemNotFoundException
     {
-        if (comparador.comparar(nodo.getDato(), item) < 0)
+        if (comparador.comparar(nodo.getDato(), item) > 0)
             if (nodo.getIzq() == null)
                 throw new ItemNotFoundException();
             else
-                buscar(nodo.getIzq(), item);
+                return buscar(nodo.getIzq(), item);
 
-        else if (comparador.comparar(nodo.getDato(), item) > 0)
+        else if (comparador.comparar(nodo.getDato(), item) < 0)
             if (nodo.getDer() == null)
                 throw new ItemNotFoundException();
             else
-                buscar(nodo.getDer(), item);
+                return buscar(nodo.getDer(), item);
 
         else
             return nodo.getDato();
-
-        return null;
     }
 
     public void eliminar(E item) throws ItemNotFoundException

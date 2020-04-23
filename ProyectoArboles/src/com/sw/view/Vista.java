@@ -87,10 +87,10 @@ public class Vista extends JFrame
         jSplitPane1 = new JSplitPane();
         panelLateralIzq = new JPanel();
         jPanel3 = new JPanel();
-        cbNombre = new JCheckBox();
+        chbNombre = new JCheckBox();
         txtNombre = new JTextField();
-        chPromedio = new JCheckBox();
-        chProfesion = new JCheckBox();
+        chbPromedio = new JCheckBox();
+        chbProfesion = new JCheckBox();
         cmbProfesiones = new JComboBox<>();
         txtPromedio = new JFormattedTextField();
         jPanel5 = new JPanel();
@@ -181,53 +181,53 @@ public class Vista extends JFrame
 
         jPanel3.setLayout(new GridBagLayout());
 
-        cbNombre.setText("Nombre:");
-        cbNombre.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        cbNombre.setHorizontalAlignment(SwingConstants.LEFT);
-        cbNombre.setHorizontalTextPosition(SwingConstants.RIGHT);
+        chbNombre.setText("Nombre:");
+        chbNombre.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        chbNombre.setHorizontalAlignment(SwingConstants.LEFT);
+        chbNombre.setHorizontalTextPosition(SwingConstants.RIGHT);
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(3, 3, 3, 3);
-        jPanel3.add(cbNombre, gridBagConstraints);
+        jPanel3.add(chbNombre, gridBagConstraints);
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(3, 3, 3, 3);
         jPanel3.add(txtNombre, gridBagConstraints);
 
-        chPromedio.setText("Promedio:");
-        chPromedio.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        chPromedio.setHorizontalAlignment(SwingConstants.LEFT);
-        chPromedio.setHorizontalTextPosition(SwingConstants.RIGHT);
+        chbPromedio.setText("Promedio:");
+        chbPromedio.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        chbPromedio.setHorizontalAlignment(SwingConstants.LEFT);
+        chbPromedio.setHorizontalTextPosition(SwingConstants.RIGHT);
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new Insets(3, 3, 3, 3);
+        jPanel3.add(chbPromedio, gridBagConstraints);
+
+        chbProfesion.setText("Profesión:");
+        chbProfesion.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        chbProfesion.setHorizontalAlignment(SwingConstants.LEFT);
+        chbProfesion.setHorizontalTextPosition(SwingConstants.RIGHT);
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(3, 3, 3, 3);
-        jPanel3.add(chPromedio, gridBagConstraints);
-
-        chProfesion.setText("Profesión:");
-        chProfesion.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        chProfesion.setHorizontalAlignment(SwingConstants.LEFT);
-        chProfesion.setHorizontalTextPosition(SwingConstants.RIGHT);
-        gridBagConstraints = new GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new Insets(3, 3, 3, 3);
-        jPanel3.add(chProfesion, gridBagConstraints);
+        jPanel3.add(chbProfesion, gridBagConstraints);
 
         cmbProfesiones.setCursor(new Cursor(Cursor.HAND_CURSOR));
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(3, 3, 3, 3);
         jPanel3.add(cmbProfesiones, gridBagConstraints);
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(3, 3, 3, 3);
@@ -330,19 +330,19 @@ public class Vista extends JFrame
         return btnGenerar;
     }
 
-    public JCheckBox getCbNombre()
+    public JCheckBox getChbNombre()
     {
-        return cbNombre;
+        return chbNombre;
     }
 
-    public JCheckBox getChProfesion()
+    public JCheckBox getChbProfesion()
     {
-        return chProfesion;
+        return chbProfesion;
     }
 
-    public JCheckBox getChPromedio()
+    public JCheckBox getChbPromedio()
     {
-        return chPromedio;
+        return chbPromedio;
     }
 
     public JComboBox<String> getCmbProfesiones()
@@ -419,9 +419,9 @@ public class Vista extends JFrame
     private JButton btnBuscar;
     private JButton btnBuscarDirectorio;
     private JButton btnGenerar;
-    private JCheckBox cbNombre;
-    private JCheckBox chProfesion;
-    private JCheckBox chPromedio;
+    private JCheckBox chbNombre;
+    private JCheckBox chbProfesion;
+    private JCheckBox chbPromedio;
     private JComboBox<String> cmbProfesiones;
     private Box.Filler filler1;
     private Box.Filler filler2;
