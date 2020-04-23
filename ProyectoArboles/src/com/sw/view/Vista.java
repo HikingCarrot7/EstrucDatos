@@ -7,6 +7,7 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -97,10 +98,13 @@ public class Vista extends JFrame
         jPanel6 = new JPanel();
         jLabel2 = new JLabel();
         jLabel3 = new JLabel();
+        jLabel4 = new JLabel();
+        tiempoTranscurrido = new JLabel();
         panelLateralDer = new JPanel();
+        progressBar = new JProgressBar();
+        jPanel2 = new JPanel();
         jScrollPane1 = new JScrollPane();
         tablaEgresados = new JTable();
-        progressBar = new JProgressBar();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new Dimension(600, 450));
@@ -241,27 +245,45 @@ public class Vista extends JFrame
 
         jPanel6.setLayout(new GridBagLayout());
 
-        jLabel2.setHorizontalAlignment(SwingConstants.LEFT);
+        jLabel2.setHorizontalAlignment(SwingConstants.RIGHT);
         jLabel2.setText("Comparaciones:");
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new Insets(3, 0, 3, 3);
+        gridBagConstraints.insets = new Insets(3, 3, 3, 3);
         jPanel6.add(jLabel2, gridBagConstraints);
 
-        jLabel3.setHorizontalAlignment(SwingConstants.LEFT);
-        jLabel3.setText("Tiempo de ejecución:");
+        jLabel3.setHorizontalAlignment(SwingConstants.RIGHT);
+        jLabel3.setText("Tiempo transcurrido:");
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new Insets(3, 0, 3, 3);
+        gridBagConstraints.insets = new Insets(3, 3, 3, 3);
         jPanel6.add(jLabel3, gridBagConstraints);
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new Insets(3, 3, 3, 3);
+        jPanel6.add(jLabel4, gridBagConstraints);
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new Insets(3, 3, 3, 3);
+        jPanel6.add(tiempoTranscurrido, gridBagConstraints);
 
         panelLateralIzq.add(jPanel6, BorderLayout.SOUTH);
 
         jSplitPane1.setLeftComponent(panelLateralIzq);
 
         panelLateralDer.setLayout(new BorderLayout());
+
+        progressBar.setIndeterminate(true);
+        panelLateralDer.add(progressBar, BorderLayout.SOUTH);
+
+        jPanel2.setBorder(BorderFactory.createTitledBorder("Resultados"));
+        jPanel2.setLayout(new BorderLayout());
 
         tablaEgresados.setModel(new DefaultTableModel(
             new Object [][]
@@ -272,13 +294,19 @@ public class Vista extends JFrame
             {
                 "Nombre", "Profesión", "Promedio"
             }
-        ));
+        )
+        {
+            @Override
+            public boolean isCellEditable(int row, int column)
+            {
+                return false;
+            }
+        });
         jScrollPane1.setViewportView(tablaEgresados);
 
-        panelLateralDer.add(jScrollPane1, BorderLayout.CENTER);
+        jPanel2.add(jScrollPane1, BorderLayout.CENTER);
 
-        progressBar.setIndeterminate(true);
-        panelLateralDer.add(progressBar, BorderLayout.SOUTH);
+        panelLateralDer.add(jPanel2, BorderLayout.CENTER);
 
         jSplitPane1.setRightComponent(panelLateralDer);
 
@@ -382,6 +410,11 @@ public class Vista extends JFrame
         return panelSuperior;
     }
 
+    public JLabel getTiempoTranscurrido()
+    {
+        return tiempoTranscurrido;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JButton btnBuscar;
     private JButton btnBuscarDirectorio;
@@ -397,7 +430,9 @@ public class Vista extends JFrame
     private JLabel jLabel1;
     private JLabel jLabel2;
     private JLabel jLabel3;
+    private JLabel jLabel4;
     private JPanel jPanel1;
+    private JPanel jPanel2;
     private JPanel jPanel3;
     private JPanel jPanel5;
     private JPanel jPanel6;
@@ -411,6 +446,7 @@ public class Vista extends JFrame
     private JRadioButton rbArbolB;
     private JRadioButton rbArbolBB;
     private JTable tablaEgresados;
+    private JLabel tiempoTranscurrido;
     private JTextField txtDireccion;
     private JTextField txtNombre;
     private JFormattedTextField txtPromedio;

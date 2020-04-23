@@ -4,6 +4,7 @@ import com.sw.model.ArbolBinario;
 import com.sw.model.DAO;
 import com.sw.model.Egresado;
 import com.sw.util.LinkedList;
+import com.sw.view.UIConstants;
 import com.sw.view.Vista;
 import java.awt.Component;
 import java.awt.EventQueue;
@@ -21,7 +22,7 @@ import javax.swing.SwingWorker;
  *
  * @author Nicolás
  */
-public class VistaController
+public class VistaController implements UIConstants
 {
 
     public static final String ARBOL_BB = "Arbol BB";
@@ -39,13 +40,17 @@ public class VistaController
     private final Vista vista;
     private final SeleccionadorArchivos seleccionadorArchivos;
     private final TreeFactory myTreeFactory;
+    private final ComboBoxManager comboBoxManager;
+    private final TableManager tableManager;
     private Egresado[] egresados;
 
     public VistaController(Vista vista)
     {
         this.vista = vista;
+        this.myTreeFactory = new TreeFactory();
         this.seleccionadorArchivos = SeleccionadorArchivos.getInstance();
-        this.myTreeFactory = TreeFactory.getInstance();
+        this.comboBoxManager = ComboBoxManager.getInstance();
+        this.tableManager = TableManager.getInstance();
 
         COMPARADOR_POR_NOMBRE = (lista, egresado) -> egresados[lista.first()].getNombre().compareTo(egresado.getNombre());
         COMPARADOR_POR_PROFESION = (lista, egresado) -> egresados[lista.first()].getProfesion().compareTo(egresado.getProfesion());
@@ -61,9 +66,11 @@ public class VistaController
         vista.getProgressBar().setEnabled(true);
         setProgressBarVisible(false);
 
-        vista.getTxtDireccion().setText("data/Egresados.csv");//<--
+        vista.getTxtDireccion().setText("data/Egresados.csv");
+
         vista.getBtnBuscarDirectorio().addActionListener(this::accionBtnBuscarDirectorio);
         vista.getBtnGenerar().addActionListener(this::accionBtnGenerarArbol);
+        vista.getBtnBuscar().addActionListener(this::accionBtnBuscar);
     }
 
     private void accionBtnBuscarDirectorio(ActionEvent e)
@@ -74,11 +81,16 @@ public class VistaController
 
     private void accionBtnGenerarArbol(ActionEvent e)
     {
-        setBtnGenerarEnable(false);
+        setBtnGenerarEnabled(false);
         setProgressBarVisible(true);
         cargarEgresados();
         crearArboles();
         inicializarArboles();
+    }
+
+    private void accionBtnBuscar(ActionEvent e)
+    {
+
     }
 
     private void cargarEgresados()
@@ -99,9 +111,13 @@ public class VistaController
             if (e.getNewValue() == SwingWorker.StateValue.DONE)
                 try
                 {
-                    System.out.println(service.get() + " nanosegundos");
-                    setBtnGenerarEnable(true);
+                    actualizarTiempoTranscurrido(service.get() + " milisegundos.");
+                    cargarDatosCmbProfesiones();
+                    setBtnGenerarEnabled(true);
                     setProgressBarVisible(false);
+                    setPanelEnabled(vista.getPanelLateralIzq(), true);
+                    setPanelEnabled(vista.getPanelLateralDer(), true);
+                    cargarDatosTabla(egresados);
 
                 } catch (InterruptedException | ExecutionException ex)
                 {
@@ -126,9 +142,38 @@ public class VistaController
         }
     }
 
+    private void cargarDatosCmbProfesiones()
+    {
+        LinkedList<LinkedList<Integer>> listaIdxProfesiones = new LinkedList<>();
+        arbolProfesiones.inorder(listaIdxProfesiones);
+
+        while (!listaIdxProfesiones.isEmpty())
+            comboBoxManager.anadirElementoAlComboBox(vista.getCmbProfesiones(),
+                    egresados[listaIdxProfesiones.removeLast().first()].getProfesion());
+    }
+
+    private void cargarDatosTabla(Egresado[] egresados)
+    {
+        tableManager.vaciarTabla(vista.getTablaEgresados());
+
+        for (Egresado egresado : egresados)
+            tableManager.anadirFila(vista.getTablaEgresados(), new Object[]
+            {
+                egresado.getNombre(), egresado.getProfesion(), egresado.getPromedio()
+            });
+    }
+
     private String getRutaCSV()
     {
         return vista.getTxtDireccion().getText();
+    }
+
+    private void actualizarTiempoTranscurrido(String texto)
+    {
+        EventQueue.invokeLater(() ->
+        {
+            vista.getTiempoTranscurrido().setText(texto);
+        });
     }
 
     private void setProgressBarVisible(boolean enable)
@@ -140,7 +185,7 @@ public class VistaController
         });
     }
 
-    private void setBtnGenerarEnable(boolean enable)
+    private void setBtnGenerarEnabled(boolean enable)
     {
         EventQueue.invokeLater(() ->
         {

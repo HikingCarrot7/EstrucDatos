@@ -12,13 +12,6 @@ import com.sw.util.LinkedList;
 public class TreeFactory implements Factory<LinkedList<Integer>, Egresado>
 {
 
-    private static TreeFactory instance;
-
-    private TreeFactory()
-    {
-
-    }
-
     @Override
     public ArbolBinario<LinkedList<Integer>, Egresado> crearArbolNombres(String tipoArbol)
     {
@@ -59,14 +52,6 @@ public class TreeFactory implements Factory<LinkedList<Integer>, Egresado>
             default:
                 throw new AssertionError();
         }
-    }
-
-    public static synchronized TreeFactory getInstance()
-    {
-        if (instance == null)
-            instance = new TreeFactory();
-
-        return instance;
     }
 
 }

@@ -49,6 +49,7 @@ public class VistaPrincipal extends javax.swing.JFrame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents()
     {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel4 = new javax.swing.JPanel();
         filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
@@ -58,12 +59,10 @@ public class VistaPrincipal extends javax.swing.JFrame
         jPanel5 = new javax.swing.JPanel();
         panelGrafico = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 17), new java.awt.Dimension(0, 17), new java.awt.Dimension(0, 17));
         btnGenerarVuelos = new javax.swing.JButton();
-        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
         btnSigVuelo = new javax.swing.JButton();
-        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
         btnEliminarVuelo = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(500, 400));
@@ -95,25 +94,42 @@ public class VistaPrincipal extends javax.swing.JFrame
         jPanel2.setMaximumSize(new java.awt.Dimension(110, 129));
         jPanel2.setMinimumSize(new java.awt.Dimension(110, 129));
         jPanel2.setPreferredSize(new java.awt.Dimension(110, 129));
-        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.Y_AXIS));
-        jPanel2.add(filler2);
+        jPanel2.setLayout(new java.awt.GridBagLayout());
 
         btnGenerarVuelos.setText("<html><center>Generar<p>vuelos.</center></html>");
         btnGenerarVuelos.setActionCommand("");
         btnGenerarVuelos.setAlignmentX(0.5F);
-        jPanel2.add(btnGenerarVuelos);
-        jPanel2.add(filler3);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        jPanel2.add(btnGenerarVuelos, gridBagConstraints);
 
         btnSigVuelo.setText("<html><center>Eliminar<p>siguiente<p>vuelo.</center></html>");
         btnSigVuelo.setActionCommand("");
         btnSigVuelo.setAlignmentX(0.5F);
-        jPanel2.add(btnSigVuelo);
-        jPanel2.add(filler1);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        jPanel2.add(btnSigVuelo, gridBagConstraints);
 
         btnEliminarVuelo.setText("<html><center>Eliminar un<p>vuelo<p>específico.</center></html>");
         btnEliminarVuelo.setActionCommand("");
         btnEliminarVuelo.setAlignmentX(0.5F);
-        jPanel2.add(btnEliminarVuelo);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        jPanel2.add(btnEliminarVuelo, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        jPanel2.add(jPanel1, gridBagConstraints);
 
         jSplitPane1.setLeftComponent(jPanel2);
 
@@ -146,12 +162,10 @@ public class VistaPrincipal extends javax.swing.JFrame
     private javax.swing.JButton btnEliminarVuelo;
     private javax.swing.JButton btnGenerarVuelos;
     private javax.swing.JButton btnSigVuelo;
-    private javax.swing.Box.Filler filler1;
-    private javax.swing.Box.Filler filler2;
-    private javax.swing.Box.Filler filler3;
     private javax.swing.Box.Filler filler4;
     private javax.swing.Box.Filler filler5;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;

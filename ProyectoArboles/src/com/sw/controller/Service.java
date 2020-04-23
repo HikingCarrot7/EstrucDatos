@@ -31,7 +31,7 @@ public class Service extends SwingWorker<Long, Long>
     @Override
     protected Long doInBackground() throws Exception
     {
-        long now = System.nanoTime();
+        long now = System.currentTimeMillis();
 
         for (int i = 0; i < egresados.length; i++)
         {
@@ -40,7 +40,7 @@ public class Service extends SwingWorker<Long, Long>
             arbolPromedios.insertar(i, egresados[i]);
         }
 
-        return System.nanoTime() - now;
+        return System.currentTimeMillis() - now;
     }
 
 }

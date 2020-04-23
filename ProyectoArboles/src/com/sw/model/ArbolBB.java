@@ -20,60 +20,60 @@ public class ArbolBB<L extends LinkedList<Integer>, E> extends ArbolBinario<L, E
     }
 
     @Override
-    public void insertar(int idx, E egresado)
+    public void insertar(int idx, E item)
     {
-        insertar(raiz, idx, egresado);
+        insertar(raiz, idx, item);
     }
 
     @SuppressWarnings("unchecked")
-    private void insertar(NodoABB<L> nodo, int idx, E egresado)
+    private void insertar(NodoABB<L> nodo, int idx, E item)
     {
         if (isEmpty())
         {
             raiz = new NodoABB<>((L) new LinkedList<Integer>());
-            raiz.getDato().addFirst(idx);
+            raiz.getDato().addLast(idx);
 
-        } else if (comparador.comparar(nodo.getDato(), egresado) > 0)
+        } else if (comparador.comparar(nodo.getDato(), item) > 0)
             if (nodo.getIzq() == null)
             {
                 nodo.setIzq(new NodoABB<>((L) new LinkedList<Integer>()));
-                nodo.getIzq().getDato().addFirst(idx);
+                nodo.getIzq().getDato().addLast(idx);
 
             } else
-                insertar(nodo.getIzq(), idx, egresado);
+                insertar(nodo.getIzq(), idx, item);
 
-        else if (comparador.comparar(nodo.getDato(), egresado) < 0)
+        else if (comparador.comparar(nodo.getDato(), item) < 0)
             if (nodo.getDer() == null)
             {
                 nodo.setDer(new NodoABB<>((L) new LinkedList<Integer>()));
-                nodo.getDer().getDato().addFirst(idx);
+                nodo.getDer().getDato().addLast(idx);
 
             } else
-                insertar(nodo.getDer(), idx, egresado);
+                insertar(nodo.getDer(), idx, item);
 
         else
-            nodo.getDato().addFirst(idx);
+            nodo.getDato().addLast(idx);
     }
 
     @Override
-    public L buscar(E egresado)
+    public L buscar(E item)
     {
-        return buscar(raiz, egresado);
+        return buscar(raiz, item);
     }
 
-    private L buscar(NodoABB<L> nodo, E egresado) throws ItemNotFoundException
+    private L buscar(NodoABB<L> nodo, E item) throws ItemNotFoundException
     {
-        if (comparador.comparar(nodo.getDato(), egresado) < 0)
+        if (comparador.comparar(nodo.getDato(), item) < 0)
             if (nodo.getIzq() == null)
                 throw new ItemNotFoundException();
             else
-                buscar(nodo.getIzq(), egresado);
+                buscar(nodo.getIzq(), item);
 
-        else if (comparador.comparar(nodo.getDato(), egresado) > 0)
+        else if (comparador.comparar(nodo.getDato(), item) > 0)
             if (nodo.getDer() == null)
                 throw new ItemNotFoundException();
             else
-                buscar(nodo.getDer(), egresado);
+                buscar(nodo.getDer(), item);
 
         else
             return nodo.getDato();
@@ -81,21 +81,21 @@ public class ArbolBB<L extends LinkedList<Integer>, E> extends ArbolBinario<L, E
         return null;
     }
 
-    public void eliminar(E egresado) throws ItemNotFoundException
+    public void eliminar(E item) throws ItemNotFoundException
     {
-        eliminar(raiz, egresado);
+        eliminar(raiz, item);
     }
 
-    private NodoABB<L> eliminar(NodoABB<L> nodo, E egresado) throws ItemNotFoundException
+    private NodoABB<L> eliminar(NodoABB<L> nodo, E item) throws ItemNotFoundException
     {
         if (nodo == null)
             throw new ItemNotFoundException();
 
-        else if (comparador.comparar(nodo.getDato(), egresado) < 0)
-            nodo.setIzq(eliminar(nodo.getIzq(), egresado));
+        else if (comparador.comparar(nodo.getDato(), item) < 0)
+            nodo.setIzq(eliminar(nodo.getIzq(), item));
 
-        else if (comparador.comparar(nodo.getDato(), egresado) > 0)
-            nodo.setDer(eliminar(nodo.getDer(), egresado));
+        else if (comparador.comparar(nodo.getDato(), item) > 0)
+            nodo.setDer(eliminar(nodo.getDer(), item));
 
         else if (nodo.getDer() != null && nodo.getIzq() != null)
         {
