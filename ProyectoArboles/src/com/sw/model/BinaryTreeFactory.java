@@ -1,5 +1,7 @@
-package com.sw.controller;
+package com.sw.model;
 
+import com.sw.controller.VistaController;
+import com.sw.model.TreeFactory;
 import com.sw.model.ArbolAVL;
 import com.sw.model.ArbolBB;
 import com.sw.model.ArbolBinario;
@@ -9,7 +11,7 @@ import com.sw.util.LinkedList;
  *
  * @author Nicolás
  */
-public class TreeFactory implements Factory
+public class BinaryTreeFactory implements TreeFactory
 {
 
     @Override

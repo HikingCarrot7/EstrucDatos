@@ -11,13 +11,13 @@ import com.sw.util.LinkedList;
 public class Buscador
 {
 
-    private final ArbolBinario<LinkedList<Integer>, String> arbolNombres;
-    private final ArbolBinario<LinkedList<Integer>, String> arbolProfesiones;
-    private final ArbolBinario<LinkedList<Integer>, Double> arbolPromedios;
+    private final Arbol<LinkedList<Integer>, String> arbolNombres;
+    private final Arbol<LinkedList<Integer>, String> arbolProfesiones;
+    private final Arbol<LinkedList<Integer>, Double> arbolPromedios;
 
-    public Buscador(ArbolBinario<LinkedList<Integer>, String> arbolNombres,
-            ArbolBinario<LinkedList<Integer>, String> arbolProfesiones,
-            ArbolBinario<LinkedList<Integer>, Double> arbolPromedios)
+    public Buscador(Arbol<LinkedList<Integer>, String> arbolNombres,
+            Arbol<LinkedList<Integer>, String> arbolProfesiones,
+            Arbol<LinkedList<Integer>, Double> arbolPromedios)
     {
         this.arbolNombres = arbolNombres;
         this.arbolProfesiones = arbolProfesiones;
@@ -56,7 +56,7 @@ public class Buscador
     }
 
     @SuppressWarnings("unchecked")
-    private LinkedList<Integer> buscarMasCoincidencias(ArbolBinario arbolBinario, LinkedList<Integer> coincidenciasAcumuladas, Object datoABuscar)
+    private LinkedList<Integer> buscarMasCoincidencias(Arbol arbolBinario, LinkedList<Integer> coincidenciasAcumuladas, Object datoABuscar)
     {
         LinkedList<Integer> busquedaProfesiones = (LinkedList<Integer>) arbolBinario.buscar(datoABuscar);
         LinkedList<Integer> mergedList = LinkedList.mergeLists(coincidenciasAcumuladas, busquedaProfesiones);

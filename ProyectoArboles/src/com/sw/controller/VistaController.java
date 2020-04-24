@@ -1,5 +1,6 @@
 package com.sw.controller;
 
+import com.sw.model.BinaryTreeFactory;
 import com.sw.model.ArbolBinario;
 import com.sw.model.Buscador;
 import com.sw.model.Comparador;
@@ -47,7 +48,7 @@ public class VistaController implements UIConstants
 
     private final Vista vista;
     private final SeleccionadorArchivos seleccionadorArchivos;
-    private final TreeFactory myTreeFactory;
+    private final BinaryTreeFactory myTreeFactory;
     private final ComboBoxManager comboBoxManager;
     private final TableManager tableManager;
     private Egresado[] egresados;
@@ -55,7 +56,7 @@ public class VistaController implements UIConstants
     public VistaController(Vista vista)
     {
         this.vista = vista;
-        this.myTreeFactory = new TreeFactory();
+        this.myTreeFactory = new BinaryTreeFactory();
         this.seleccionadorArchivos = SeleccionadorArchivos.getInstance();
         this.comboBoxManager = ComboBoxManager.getInstance();
         this.tableManager = TableManager.getInstance();

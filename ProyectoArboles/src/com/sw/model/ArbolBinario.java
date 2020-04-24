@@ -8,7 +8,7 @@ import com.sw.util.LinkedList;
  * @param <L>
  * @param <I>
  */
-public abstract class ArbolBinario<L, I>
+public abstract class ArbolBinario<L, I> implements Arbol<L, I>
 {
 
     protected NodoBinario<L> raiz;
@@ -75,10 +75,6 @@ public abstract class ArbolBinario<L, I>
 
         lista.addFirst(nodo.getDato());
     }
-
-    public abstract void insertar(int idx, I item);
-
-    public abstract L buscar(I item);
 
     public NodoBinario<L> getRaiz()
     {
