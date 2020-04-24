@@ -284,7 +284,7 @@ public class Vista extends JFrame
         progressBar.setIndeterminate(true);
         panelLateralDer.add(progressBar, BorderLayout.SOUTH);
 
-        jPanel2.setBorder(BorderFactory.createTitledBorder("Resultados"));
+        jPanel2.setBorder(BorderFactory.createTitledBorder("Egresados"));
         jPanel2.setLayout(new BorderLayout());
 
         tablaEgresados.setModel(new DefaultTableModel(

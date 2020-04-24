@@ -1,6 +1,7 @@
 package com.sw.model.persistence;
 
 import com.sw.model.Egresado;
+import com.sw.model.exceptions.RutaInvalidaException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -40,10 +41,8 @@ public class DAO implements Loader<Egresado[]>
 
         } catch (IOException ex)
         {
-            System.out.println(ex.getMessage());
+            throw new RutaInvalidaException();
         }
-
-        return null;
     }
 
 }

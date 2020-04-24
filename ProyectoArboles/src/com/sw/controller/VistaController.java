@@ -4,6 +4,7 @@ import com.sw.model.Buscador;
 import com.sw.model.Egresado;
 import com.sw.model.exceptions.ItemNotFoundException;
 import com.sw.model.exceptions.NohayCoincidenciasException;
+import com.sw.model.exceptions.RutaInvalidaException;
 import com.sw.model.persistence.DAO;
 import com.sw.model.persistence.Loader;
 import com.sw.model.trees.ArbolBinario;
@@ -88,8 +89,6 @@ public class VistaController implements UIConstants
 
     private void accionBtnBuscarDirectorio(ActionEvent e)
     {
-        inhabilitarUI();
-
         File file = seleccionadorArchivos.seleccionarArchivo(vista, "csv and xls files", "csv", "xls");
 
         if (file != null)
@@ -99,6 +98,7 @@ public class VistaController implements UIConstants
     private void accionBtnGenerarArbol(ActionEvent e)
     {
         habilitarCheckBoxes(false);
+        setBtnBuscarDirectorioEnabled(false);
         setBtnGenerarEnabled(false);
         setProgressBarVisible(true);
         crearArboles();
@@ -139,13 +139,21 @@ public class VistaController implements UIConstants
             {
                 long now = System.currentTimeMillis();
 
-                cargarEgresados();
-
-                for (int i = 0; i < egresados.length; i++)
+                try
                 {
-                    arbolNombres.insertar(i, egresados[i].getNombre());
-                    arbolProfesiones.insertar(i, egresados[i].getProfesion());
-                    arbolPromedios.insertar(i, egresados[i].getPromedio());
+                    cargarEgresados();
+
+                    for (int i = 0; i < egresados.length; i++)
+                    {
+                        arbolNombres.insertar(i, egresados[i].getNombre());
+                        arbolProfesiones.insertar(i, egresados[i].getProfesion());
+                        arbolPromedios.insertar(i, egresados[i].getPromedio());
+                    }
+
+                } catch (RutaInvalidaException ex)
+                {
+                    mostrarError("Error", ex.getMessage());
+                    throw new Exception();
                 }
 
                 return System.currentTimeMillis() - now;
@@ -158,20 +166,26 @@ public class VistaController implements UIConstants
 
     public void esperarLlenadoDeArboles(PropertyChangeEvent e)
     {
-        if (e.getNewValue() == SwingWorker.StateValue.DONE)
-            try
+        try
+        {
+            if (e.getNewValue() == SwingWorker.StateValue.DONE)
             {
                 setTiempoTranscurrido(((SwingWorker<?, ?>) e.getSource()).get() + " milisegundos.");
                 cargarDatosCmbProfesiones();
+                setBtnBuscarDirectorioEnabled(true);
                 setBtnGenerarEnabled(true);
                 setProgressBarVisible(false);
-                actualizarUI();
+                habilitarUI();
                 mostrarTodosEgresados();
-
-            } catch (InterruptedException | ExecutionException ex)
-            {
-                ex.printStackTrace();
             }
+
+        } catch (InterruptedException | ExecutionException ex)
+        {
+            ex.printStackTrace();
+            setBtnBuscarDirectorioEnabled(true);
+            setBtnGenerarEnabled(true);
+            setProgressBarVisible(false);
+        }
     }
 
     private void buscarCoincidencias()
@@ -192,7 +206,7 @@ public class VistaController implements UIConstants
 
                 } catch (ItemNotFoundException | NohayCoincidenciasException ex)
                 {
-                    tableManager.vaciarTabla(vista.getTablaEgresados());
+                    vaciarTablaEgresados();
                     mostrarError("Error", ex.getMessage());
                     throw new Exception();
 
@@ -249,7 +263,7 @@ public class VistaController implements UIConstants
 
     private void mostrarTodosEgresados()
     {
-        tableManager.vaciarTabla(vista.getTablaEgresados());
+        vaciarTablaEgresados();
 
         for (Egresado egresado : egresados)
             tableManager.anadirFila(vista.getTablaEgresados(), new Object[]
@@ -260,7 +274,7 @@ public class VistaController implements UIConstants
 
     private void mostrarResultadosBusqueda(LinkedList<Integer> resultados)
     {
-        tableManager.vaciarTabla(vista.getTablaEgresados());
+        vaciarTablaEgresados();
 
         while (!resultados.isEmpty())
         {
@@ -349,7 +363,15 @@ public class VistaController implements UIConstants
         });
     }
 
-    private void actualizarUI()
+    private void setBtnBuscarDirectorioEnabled(boolean enable)
+    {
+        EventQueue.invokeLater(() ->
+        {
+            vista.getBtnBuscarDirectorio().setEnabled(enable);
+        });
+    }
+
+    private void habilitarUI()
     {
         setPanelEnabled(vista.getPanelLateralIzq(), true);
         setPanelEnabled(vista.getPanelLateralDer(), true);
@@ -383,6 +405,11 @@ public class VistaController implements UIConstants
     private void mostrarError(String titulo, String text)
     {
         JOptionPane.showMessageDialog(vista, text, titulo, JOptionPane.ERROR_MESSAGE);
+    }
+
+    private void vaciarTablaEgresados()
+    {
+        tableManager.vaciarTabla(vista.getTablaEgresados());
     }
 
     private void setPanelEnabled(JPanel panel, boolean isEnabled)
