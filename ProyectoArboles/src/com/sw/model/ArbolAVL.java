@@ -1,10 +1,11 @@
 package com.sw.model;
 
+import com.sw.model.exceptions.ItemNotFoundException;
 import com.sw.util.LinkedList;
 
 /**
  *
- * @author Nicolás
+ * @author jorge.reyes
  * @param <L>
  * @param <I>
  */
@@ -32,25 +33,52 @@ public class ArbolAVL<L extends LinkedList<Integer>, I> extends ArbolBinario<L, 
             raiz = new NodoAVL<>((L) new LinkedList<Integer>());
             raiz.getDato().addFirst(idx);
 
-        } else if (comparador.comparar(nodo.getDato(), item) < 0)
+        } else if (comparador.comparar(nodo.getDato(), item) > 0)
             if (nodo.getIzq() == null)
             {
                 nodo.setIzq(new NodoAVL<>((L) new LinkedList<Integer>(), null, null, nodo));
-                nodo.getIzq().getDato().addFirst(idx);
+                nodo.getIzq().getDato().addLast(idx);
                 recalcularFE(nodo);
 
             } else
                 insertarOrdenado(nodo.getIzq(), idx, item);
 
-        else if (comparador.comparar(nodo.getDato(), item) > 0)
+        else if (comparador.comparar(nodo.getDato(), item) < 0)
             if (nodo.getDer() == null)
             {
                 nodo.setDer(new NodoAVL<>((L) new LinkedList<Integer>(), null, null, nodo));
-                nodo.getDer().getDato().addFirst(idx);
+                nodo.getDer().getDato().addLast(idx);
                 recalcularFE(nodo);
 
             } else
                 insertarOrdenado(nodo.getDer(), idx, item);
+
+        else
+            nodo.getDato().addLast(idx);
+    }
+
+    @Override
+    public L buscar(I item)
+    {
+        return buscar(raiz, item);
+    }
+
+    private L buscar(NodoBinario<L> nodo, I item) throws ItemNotFoundException
+    {
+        if (comparador.comparar(nodo.getDato(), item) > 0)
+            if (nodo.getIzq() == null)
+                throw new ItemNotFoundException();
+            else
+                return buscar(nodo.getIzq(), item);
+
+        else if (comparador.comparar(nodo.getDato(), item) < 0)
+            if (nodo.getDer() == null)
+                throw new ItemNotFoundException();
+            else
+                return buscar(nodo.getDer(), item);
+
+        else
+            return nodo.getDato();
     }
 
     public void recalcularFE(NodoAVL<L> nodo)
@@ -76,11 +104,9 @@ public class ArbolAVL<L extends LinkedList<Integer>, I> extends ArbolBinario<L, 
             {
                 case 0:
                 case 1:
-                    System.out.println("Aplicando rotación DD...");
                     rotacionDD(nodo);
                     break;
                 case -1:
-                    System.out.println("Aplicando rotación DI...");
                     rotacionDI(nodo);
                     break;
             }
@@ -90,11 +116,9 @@ public class ArbolAVL<L extends LinkedList<Integer>, I> extends ArbolBinario<L, 
             {
                 case 0:
                 case -1:
-                    System.out.println("Aplicando rotación II...");
                     rotacionII(nodo);
                     break;
                 case 1:
-                    System.out.println("Aplicando rotación ID...");
                     rotacionID(nodo);
                     break;
             }
@@ -266,12 +290,6 @@ public class ArbolAVL<L extends LinkedList<Integer>, I> extends ArbolBinario<L, 
         }
 
         R.setFE(0);
-    }
-
-    @Override
-    public L buscar(I item)
-    {
-        return null;
     }
 
     @Override

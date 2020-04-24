@@ -1,8 +1,8 @@
 package com.sw.controller;
 
-import com.sw.model.Comparador;
 import com.sw.model.ArbolBinario;
 import com.sw.model.Buscador;
+import com.sw.model.Comparador;
 import com.sw.model.Egresado;
 import com.sw.model.exceptions.ItemNotFoundException;
 import com.sw.model.exceptions.NohayCoincidenciasException;
@@ -60,12 +60,12 @@ public class VistaController implements UIConstants
         this.comboBoxManager = ComboBoxManager.getInstance();
         this.tableManager = TableManager.getInstance();
 
-        initComparators();
+        initComparadores();
         initComponents();
     }
 
     // <editor-fold defaultstate="collapsed" desc="initComparators">
-    private void initComparators()
+    private void initComparadores()
     {
         COMPARADOR_POR_NOMBRE = (lista, nombre) -> nombre.compareTo(egresados[lista.first()].getNombre());
         COMPARADOR_POR_PROFESION = (lista, profesion) -> profesion.compareTo(egresados[lista.first()].getProfesion());
@@ -141,13 +141,12 @@ public class VistaController implements UIConstants
                 {
                     cargarEgresados();
 
-                    for (Egresado egresado : egresados)
-                        System.out.println(egresado.getPromedio());
-
                     for (int i = 0; i < egresados.length; i++)
-//                        arbolNombres.insertar(i, egresados[i].getNombre());
-//                        arbolProfesiones.insertar(i, egresados[i].getProfesion());
+                    {
+                        arbolNombres.insertar(i, egresados[i].getNombre());
+                        arbolProfesiones.insertar(i, egresados[i].getProfesion());
                         arbolPromedios.insertar(i, egresados[i].getPromedio());
+                    }
 
                 } catch (RutaInvalidaException ex)
                 {
