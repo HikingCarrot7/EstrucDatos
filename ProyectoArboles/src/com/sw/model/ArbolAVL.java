@@ -1,6 +1,6 @@
-package arbolesavl;
+package com.sw.model;
 
-import util.LinkedList;
+import com.sw.util.LinkedList;
 
 /**
  *

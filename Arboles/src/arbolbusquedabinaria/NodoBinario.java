@@ -5,19 +5,19 @@ package arbolbusquedabinaria;
  * @author Nicolás
  * @param <E>
  */
-public class NodoABB<E>
+public class NodoBinario<E>
 {
 
     protected E dato;
-    protected NodoABB<E> izq;
-    protected NodoABB<E> der;
+    protected NodoBinario<E> izq;
+    protected NodoBinario<E> der;
 
-    public NodoABB(E dato)
+    public NodoBinario(E dato)
     {
         this(dato, null, null);
     }
 
-    public NodoABB(E dato, NodoABB<E> izq, NodoABB<E> der)
+    public NodoBinario(E dato, NodoBinario<E> izq, NodoBinario<E> der)
     {
         this.dato = dato;
         this.izq = izq;
@@ -34,22 +34,22 @@ public class NodoABB<E>
         this.dato = dato;
     }
 
-    public NodoABB<E> getIzq()
+    public NodoBinario<E> getIzq()
     {
         return izq;
     }
 
-    public void setIzq(NodoABB<E> izq)
+    public void setIzq(NodoBinario<E> izq)
     {
         this.izq = izq;
     }
 
-    public NodoABB<E> getDer()
+    public NodoBinario<E> getDer()
     {
         return der;
     }
 
-    public void setDer(NodoABB<E> der)
+    public void setDer(NodoBinario<E> der)
     {
         this.der = der;
     }

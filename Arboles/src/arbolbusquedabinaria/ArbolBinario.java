@@ -8,7 +8,7 @@ package arbolbusquedabinaria;
 public abstract class ArbolBinario<T extends Comparable<T>>
 {
 
-    protected NodoABB<T> raiz;
+    protected NodoBinario<T> raiz;
 
     public void preorder()
     {
@@ -16,7 +16,7 @@ public abstract class ArbolBinario<T extends Comparable<T>>
             preorder(raiz);
     }
 
-    private void preorder(NodoABB<T> nodo)
+    private void preorder(NodoBinario<T> nodo)
     {
         System.out.printf("[" + nodo.getDato().toString() + "] ");
 
@@ -33,7 +33,7 @@ public abstract class ArbolBinario<T extends Comparable<T>>
             inorder(raiz);
     }
 
-    private void inorder(NodoABB<T> nodo)
+    private void inorder(NodoBinario<T> nodo)
     {
         if (nodo.getIzq() != null)
             inorder(nodo.getIzq());
@@ -50,7 +50,7 @@ public abstract class ArbolBinario<T extends Comparable<T>>
             postorder(raiz);
     }
 
-    private void postorder(NodoABB<T> nodo)
+    private void postorder(NodoBinario<T> nodo)
     {
         if (nodo.getIzq() != null)
             postorder(nodo.getIzq());
@@ -61,12 +61,12 @@ public abstract class ArbolBinario<T extends Comparable<T>>
         System.out.printf("[" + nodo.getDato().toString() + "] ");
     }
 
-    public NodoABB<T> getRaiz()
+    public NodoBinario<T> getRaiz()
     {
         return raiz;
     }
 
-    public void setRaiz(NodoABB<T> raiz)
+    public void setRaiz(NodoBinario<T> raiz)
     {
         this.raiz = raiz;
     }

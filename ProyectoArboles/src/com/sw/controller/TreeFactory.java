@@ -1,7 +1,8 @@
 package com.sw.controller;
 
-import com.sw.model.trees.ArbolBB;
-import com.sw.model.trees.ArbolBinario;
+import com.sw.model.ArbolAVL;
+import com.sw.model.ArbolBB;
+import com.sw.model.ArbolBinario;
 import com.sw.util.LinkedList;
 
 /**
@@ -19,6 +20,7 @@ public class TreeFactory implements Factory
             case VistaController.ARBOL_BB:
                 return new ArbolBB<>(VistaController.COMPARADOR_POR_NOMBRE);
             case VistaController.ARBOL_AVL:
+                return new ArbolAVL<>(VistaController.COMPARADOR_POR_NOMBRE);
             case VistaController.ARBOL_B:
             default:
                 throw new AssertionError();
@@ -33,6 +35,7 @@ public class TreeFactory implements Factory
             case VistaController.ARBOL_BB:
                 return new ArbolBB<>(VistaController.COMPARADOR_POR_PROFESION);
             case VistaController.ARBOL_AVL:
+                return new ArbolAVL<>(VistaController.COMPARADOR_POR_PROFESION);
             case VistaController.ARBOL_B:
             default:
                 throw new AssertionError();
@@ -47,6 +50,7 @@ public class TreeFactory implements Factory
             case VistaController.ARBOL_BB:
                 return new ArbolBB<>(VistaController.COMPARADOR_POR_PROMEDIO);
             case VistaController.ARBOL_AVL:
+                return new ArbolAVL<>(VistaController.COMPARADOR_POR_PROMEDIO);
             case VistaController.ARBOL_B:
             default:
                 throw new AssertionError();

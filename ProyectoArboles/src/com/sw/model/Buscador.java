@@ -1,6 +1,6 @@
 package com.sw.model;
 
-import com.sw.model.trees.ArbolBinario;
+import com.sw.model.exceptions.ItemNotFoundException;
 import com.sw.model.exceptions.NohayCoincidenciasException;
 import com.sw.util.LinkedList;
 
@@ -24,8 +24,9 @@ public class Buscador
         this.arbolPromedios = arbolPromedios;
     }
 
-    public LinkedList<Integer> realizarBusqueda(boolean nombreSeleccionado, boolean profesionSeleccionada, boolean promedioSeleccionado,
-            String nombre, String profesion, double promedio)
+    public LinkedList<Integer> realizarBusqueda(
+            boolean nombreSeleccionado, boolean profesionSeleccionada, boolean promedioSeleccionado,
+            String nombre, String profesion, double promedio) throws NohayCoincidenciasException, ItemNotFoundException
     {
         boolean buscarCoincidencias = false;
         LinkedList<Integer> coincidenciasAcumuladas = null;

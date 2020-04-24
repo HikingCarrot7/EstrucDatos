@@ -28,7 +28,7 @@ public class ComboBoxManager
     public void establecerElementosComboBox(JComboBox<?> comboBox, List<?> elementos)
     {
         vaciarComboBox(comboBox);
-        anadirElementoAlComboBox(comboBox, elementos);
+        anadirElemento(comboBox, elementos);
     }
 
     public void anadirElementosAlComboBox(JComboBox<?> comboBox, Object[] elementos)
@@ -39,10 +39,10 @@ public class ComboBoxManager
     public void anadirElementosAlComboBox(JComboBox<?> comboBox, List<?> elementos)
     {
         for (Object elemento : elementos)
-            anadirElementoAlComboBox(comboBox, elemento);
+            anadirElemento(comboBox, elemento);
     }
 
-    public void anadirElementoAlComboBox(JComboBox<?> comboBox, Object element)
+    public void anadirElemento(JComboBox<?> comboBox, Object element)
     {
         DefaultComboBoxModel<Object> comboBoxModel = getDefaultComboBoxModel(comboBox);
         comboBoxModel.addElement(element);

@@ -1,5 +1,7 @@
 package com.sw.controller;
 
+import com.sw.model.Comparador;
+import com.sw.model.ArbolBinario;
 import com.sw.model.Buscador;
 import com.sw.model.Egresado;
 import com.sw.model.exceptions.ItemNotFoundException;
@@ -7,7 +9,6 @@ import com.sw.model.exceptions.NohayCoincidenciasException;
 import com.sw.model.exceptions.RutaInvalidaException;
 import com.sw.model.persistence.DAO;
 import com.sw.model.persistence.Loader;
-import com.sw.model.trees.ArbolBinario;
 import com.sw.util.LinkedList;
 import com.sw.view.UIConstants;
 import com.sw.view.Vista;
@@ -59,12 +60,17 @@ public class VistaController implements UIConstants
         this.comboBoxManager = ComboBoxManager.getInstance();
         this.tableManager = TableManager.getInstance();
 
-        COMPARADOR_POR_NOMBRE = (lista, nombre) -> nombre.compareTo(egresados[lista.first()].getNombre().trim());
-        COMPARADOR_POR_PROFESION = (lista, profesion) -> profesion.compareTo(egresados[lista.first()].getProfesion().trim());
-        COMPARADOR_POR_PROMEDIO = (lista, promedio) -> promedio.compareTo(egresados[lista.first()].getPromedio());
-
+        initComparators();
         initComponents();
     }
+
+    // <editor-fold defaultstate="collapsed" desc="initComparators">
+    private void initComparators()
+    {
+        COMPARADOR_POR_NOMBRE = (lista, nombre) -> nombre.compareTo(egresados[lista.first()].getNombre());
+        COMPARADOR_POR_PROFESION = (lista, profesion) -> profesion.compareTo(egresados[lista.first()].getProfesion());
+        COMPARADOR_POR_PROMEDIO = (lista, promedio) -> promedio.compareTo(egresados[lista.first()].getPromedio());
+    }// </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="initComponents">
     private void initComponents()
@@ -116,18 +122,10 @@ public class VistaController implements UIConstants
 
     private void crearArboles()
     {
-        switch (getTipoArbolSeleccionado())
-        {
-            case ARBOL_BB:
-                arbolNombres = myTreeFactory.crearArbolNombres(ARBOL_BB);
-                arbolProfesiones = myTreeFactory.crearArbolProfesiones(ARBOL_BB);
-                arbolPromedios = myTreeFactory.crearArbolPromedios(ARBOL_BB);
-                break;
-            case ARBOL_AVL:
-            case ARBOL_B:
-            default:
-                throw new AssertionError();
-        }
+        String arbolACrear = getTipoArbolSeleccionado();
+        arbolNombres = myTreeFactory.crearArbolNombres(arbolACrear);
+        arbolProfesiones = myTreeFactory.crearArbolProfesiones(arbolACrear);
+        arbolPromedios = myTreeFactory.crearArbolPromedios(arbolACrear);
     }
 
     private void rellenarArboles()
@@ -143,15 +141,19 @@ public class VistaController implements UIConstants
                 {
                     cargarEgresados();
 
+                    for (Egresado egresado : egresados)
+                        System.out.println(egresado.getPromedio());
+
                     for (int i = 0; i < egresados.length; i++)
-                    {
-                        arbolNombres.insertar(i, egresados[i].getNombre());
-                        arbolProfesiones.insertar(i, egresados[i].getProfesion());
+//                        arbolNombres.insertar(i, egresados[i].getNombre());
+//                        arbolProfesiones.insertar(i, egresados[i].getProfesion());
                         arbolPromedios.insertar(i, egresados[i].getPromedio());
-                    }
 
                 } catch (RutaInvalidaException ex)
                 {
+                    setBtnBuscarDirectorioEnabled(true);
+                    setBtnGenerarEnabled(true);
+                    setProgressBarVisible(false);
                     mostrarError("Error", ex.getMessage());
                     throw new Exception();
                 }
@@ -182,9 +184,6 @@ public class VistaController implements UIConstants
         } catch (InterruptedException | ExecutionException ex)
         {
             ex.printStackTrace();
-            setBtnBuscarDirectorioEnabled(true);
-            setBtnGenerarEnabled(true);
-            setProgressBarVisible(false);
         }
     }
 
@@ -253,12 +252,10 @@ public class VistaController implements UIConstants
     private void cargarDatosCmbProfesiones()
     {
         comboBoxManager.vaciarComboBox(vista.getCmbProfesiones());
-        LinkedList<LinkedList<Integer>> listaIdxProfesiones = new LinkedList<>();
-        arbolProfesiones.inorder(listaIdxProfesiones);
+        LinkedList<LinkedList<Integer>> listaIdxProfesiones = arbolProfesiones.inorder();
 
         while (!listaIdxProfesiones.isEmpty())
-            comboBoxManager.anadirElementoAlComboBox(vista.getCmbProfesiones(),
-                    egresados[listaIdxProfesiones.removeFirst().first()].getProfesion());
+            comboBoxManager.anadirElemento(vista.getCmbProfesiones(), egresados[listaIdxProfesiones.removeFirst().first()].getProfesion());
     }
 
     private void mostrarTodosEgresados()

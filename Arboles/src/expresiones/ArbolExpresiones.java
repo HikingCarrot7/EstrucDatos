@@ -1,7 +1,7 @@
 package expresiones;
 
 import arbolbusquedabinaria.ArbolBinario;
-import arbolbusquedabinaria.NodoABB;
+import arbolbusquedabinaria.NodoBinario;
 import static expresiones.Conversor.deInfijoAPostfijo;
 import static expresiones.Operador.ESPACIO;
 import static expresiones.Operador.esOperador;
@@ -27,13 +27,13 @@ public class ArbolExpresiones extends ArbolBinario<String>
         if (!esExpresionInfija(expresion))
             throw new ExpresionNoValidaException();
 
-        Stack<NodoABB<String>> pila = new LinkedStack<>();
+        Stack<NodoBinario<String>> pila = new LinkedStack<>();
         String expresionPostfija = deInfijoAPostfijo(expresion);
         String[] tokens = expresionPostfija.split(ESPACIO);
 
         for (String token : tokens)
         {
-            NodoABB<String> nodo = new NodoABB<>(token);
+            NodoBinario<String> nodo = new NodoBinario<>(token);
 
             if (esOperador(token))
             {

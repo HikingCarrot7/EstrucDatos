@@ -1,4 +1,4 @@
-package arbolesavl;
+package com.sw.model;
 
 /**
  *
