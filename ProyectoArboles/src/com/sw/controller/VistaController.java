@@ -1,10 +1,11 @@
 package com.sw.controller;
 
+import com.sw.model.Arbol;
 import com.sw.model.BinaryTreeFactory;
-import com.sw.model.ArbolBinario;
 import com.sw.model.Buscador;
 import com.sw.model.Comparador;
 import com.sw.model.Egresado;
+import com.sw.model.TreeFactory;
 import com.sw.model.exceptions.ItemNotFoundException;
 import com.sw.model.exceptions.NohayCoincidenciasException;
 import com.sw.model.exceptions.RutaInvalidaException;
@@ -42,13 +43,13 @@ public class VistaController implements UIConstants
     public static Comparador<LinkedList<Integer>, String> COMPARADOR_POR_PROFESION;
     public static Comparador<LinkedList<Integer>, Double> COMPARADOR_POR_PROMEDIO;
 
-    private ArbolBinario<LinkedList<Integer>, String> arbolNombres;
-    private ArbolBinario<LinkedList<Integer>, String> arbolProfesiones;
-    private ArbolBinario<LinkedList<Integer>, Double> arbolPromedios;
+    private Arbol<LinkedList<Integer>, String> arbolNombres;
+    private Arbol<LinkedList<Integer>, String> arbolProfesiones;
+    private Arbol<LinkedList<Integer>, Double> arbolPromedios;
 
     private final Vista vista;
     private final SeleccionadorArchivos seleccionadorArchivos;
-    private final BinaryTreeFactory myTreeFactory;
+    private final TreeFactory binaryTreeFactory;
     private final ComboBoxManager comboBoxManager;
     private final TableManager tableManager;
     private Egresado[] egresados;
@@ -56,7 +57,7 @@ public class VistaController implements UIConstants
     public VistaController(Vista vista)
     {
         this.vista = vista;
-        this.myTreeFactory = new BinaryTreeFactory();
+        this.binaryTreeFactory = new BinaryTreeFactory();
         this.seleccionadorArchivos = SeleccionadorArchivos.getInstance();
         this.comboBoxManager = ComboBoxManager.getInstance();
         this.tableManager = TableManager.getInstance();
@@ -124,9 +125,9 @@ public class VistaController implements UIConstants
     private void crearArboles()
     {
         String arbolACrear = getTipoArbolSeleccionado();
-        arbolNombres = myTreeFactory.crearArbolNombres(arbolACrear);
-        arbolProfesiones = myTreeFactory.crearArbolProfesiones(arbolACrear);
-        arbolPromedios = myTreeFactory.crearArbolPromedios(arbolACrear);
+        arbolNombres = binaryTreeFactory.crearArbolNombres(arbolACrear);
+        arbolProfesiones = binaryTreeFactory.crearArbolProfesiones(arbolACrear);
+        arbolPromedios = binaryTreeFactory.crearArbolPromedios(arbolACrear);
     }
 
     private void rellenarArboles()

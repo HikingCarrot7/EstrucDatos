@@ -13,6 +13,7 @@ public abstract class ArbolBinario<L, I> implements Arbol<L, I>
 
     protected NodoBinario<L> raiz;
 
+    @Override
     public LinkedList<L> preorder()
     {
         LinkedList<L> elementos = new LinkedList<>();
@@ -34,6 +35,7 @@ public abstract class ArbolBinario<L, I> implements Arbol<L, I>
             preorder(nodo.getDer(), lista);
     }
 
+    @Override
     public LinkedList<L> inorder()
     {
         LinkedList<L> elementos = new LinkedList<>();
@@ -55,6 +57,7 @@ public abstract class ArbolBinario<L, I> implements Arbol<L, I>
             inorder(nodo.getDer(), lista);
     }
 
+    @Override
     public LinkedList<L> postorder()
     {
         LinkedList<L> elementos = new LinkedList<>();

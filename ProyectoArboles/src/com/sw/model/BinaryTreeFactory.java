@@ -1,10 +1,6 @@
 package com.sw.model;
 
 import com.sw.controller.VistaController;
-import com.sw.model.TreeFactory;
-import com.sw.model.ArbolAVL;
-import com.sw.model.ArbolBB;
-import com.sw.model.ArbolBinario;
 import com.sw.util.LinkedList;
 
 /**
@@ -15,7 +11,7 @@ public class BinaryTreeFactory implements TreeFactory
 {
 
     @Override
-    public ArbolBinario<LinkedList<Integer>, String> crearArbolNombres(String tipoArbol)
+    public Arbol<LinkedList<Integer>, String> crearArbolNombres(String tipoArbol)
     {
         switch (tipoArbol)
         {
@@ -30,7 +26,7 @@ public class BinaryTreeFactory implements TreeFactory
     }
 
     @Override
-    public ArbolBinario<LinkedList<Integer>, String> crearArbolProfesiones(String tipoArbol)
+    public Arbol<LinkedList<Integer>, String> crearArbolProfesiones(String tipoArbol)
     {
         switch (tipoArbol)
         {
@@ -45,7 +41,7 @@ public class BinaryTreeFactory implements TreeFactory
     }
 
     @Override
-    public ArbolBinario<LinkedList<Integer>, Double> crearArbolPromedios(String tipoArbol)
+    public Arbol<LinkedList<Integer>, Double> crearArbolPromedios(String tipoArbol)
     {
         switch (tipoArbol)
         {

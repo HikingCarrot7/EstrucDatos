@@ -1,6 +1,5 @@
 package com.sw.model;
 
-import com.sw.model.Arbol;
 import com.sw.util.LinkedList;
 
 /**

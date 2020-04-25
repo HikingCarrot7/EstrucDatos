@@ -1,5 +1,7 @@
 package com.sw.model;
 
+import com.sw.util.LinkedList;
+
 /**
  *
  * @author Nicolás
@@ -9,7 +11,13 @@ package com.sw.model;
 public interface Arbol<L, I>
 {
 
-    public abstract void insertar(int idx, I item);
+    public void insertar(int idx, I item);
 
-    public abstract L buscar(I item);
+    public L buscar(I item);
+
+    public LinkedList<L> preorder();
+
+    public LinkedList<L> inorder();
+
+    public LinkedList<L> postorder();
 }
