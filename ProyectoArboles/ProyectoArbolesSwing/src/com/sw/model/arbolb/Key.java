@@ -7,7 +7,7 @@ import com.sw.util.LinkedList;
  * @author Nicolás
  * @param <E>
  */
-public class Key<E>
+public class Key<E extends Comparable<E>> implements Comparable<Key<E>>
 {
 
     private E elemento;
@@ -43,6 +43,12 @@ public class Key<E>
     public String toString()
     {
         return "elemento = " + elemento + " -índice Egresado=" + indices;
+    }
+
+    @Override
+    public int compareTo(Key<E> o)
+    {
+        return elemento.compareTo(o.getElemento());
     }
 
 }
