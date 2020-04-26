@@ -5,44 +5,38 @@ import com.sw.util.LinkedList;
 /**
  *
  * @author Nicolás
- * @param <T>
+ * @param <E>
  */
-public class Key<T extends Comparable<T>> implements Comparable<Key<T>>
+public class Key<E>
 {
 
-    private T elemento;
+    private E elemento;
     private LinkedList<Integer> indices;
 
-    public Key(T elemento)
+    public Key(E elemento)
     {
         this.elemento = elemento;
         indices = new LinkedList<>();
     }
 
-    public void setElemento(T elemento)
+    public void setElemento(E elemento)
     {
         this.elemento = elemento;
     }
 
-    public T getElemento()
+    public E getElemento()
     {
         return elemento;
     }
 
-    public void setIndecesEgresados(LinkedList<Integer> indecesEgresados)
+    public void setIndicesEgresados(LinkedList<Integer> indicesEgresados)
     {
-        this.indices = indecesEgresados;
+        this.indices = indicesEgresados;
     }
 
     public LinkedList<Integer> getIndiceEgresados()
     {
         return indices;
-    }
-
-    @Override
-    public int compareTo(Key<T> o)
-    {
-        return elemento.compareTo(o.getElemento());
     }
 
     @Override

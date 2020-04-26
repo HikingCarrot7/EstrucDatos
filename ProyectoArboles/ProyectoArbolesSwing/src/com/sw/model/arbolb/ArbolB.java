@@ -14,7 +14,7 @@ import com.sw.util.LinkedList;
 public class ArbolB<L extends LinkedList<Integer>, I extends Comparable<I>> implements Arbol<L, I>
 {
 
-    private Node<I> root = null;
+    private NodoB<I> root = null;
 
     private int minKeySize = 1;
     private int minChildrenSize = minKeySize + 1;
@@ -40,14 +40,14 @@ public class ArbolB<L extends LinkedList<Integer>, I extends Comparable<I>> impl
     {
         if (root == null)
         {
-            root = new Node<>(null, maxKeySize, maxChildrenSize);
+            root = new NodoB<>(null, maxKeySize, maxChildrenSize);
             Key<I> key = new Key<>(item);
             key.getIndiceEgresados().addLast(idx);
             root.addKey(key);
 
         } else
         {
-            Node<I> node = root;
+            NodoB<I> node = root;
 
             Loop:
             while (node != null)
@@ -113,14 +113,14 @@ public class ArbolB<L extends LinkedList<Integer>, I extends Comparable<I>> impl
         size++;
     }
 
-    private void split(Node<I> nodeToSplit)
+    private void split(NodoB<I> nodeToSplit)
     {
-        Node<I> node = nodeToSplit;
+        NodoB<I> node = nodeToSplit;
         int numberOfKeys = node.numberOfKeys();
         int medianIndex = numberOfKeys / 2;
         Key<I> medianValue = node.getKey(medianIndex);
 
-        Node<I> left = new Node<>(null, maxKeySize, maxChildrenSize);
+        NodoB<I> left = new NodoB<>(null, maxKeySize, maxChildrenSize);
 
         for (int i = 0; i < medianIndex; i++)
             left.addKey(node.getKey(i));
@@ -128,11 +128,11 @@ public class ArbolB<L extends LinkedList<Integer>, I extends Comparable<I>> impl
         if (node.numberOfChildren() > 0)
             for (int j = 0; j <= medianIndex; j++)
             {
-                Node<I> c = node.getChild(j);
+                NodoB<I> c = node.getChild(j);
                 left.addChild(c);
             }
 
-        Node<I> right = new Node<>(null, maxKeySize, maxChildrenSize);
+        NodoB<I> right = new NodoB<>(null, maxKeySize, maxChildrenSize);
 
         for (int i = medianIndex + 1; i < numberOfKeys; i++)
             right.addKey(node.getKey(i));
@@ -140,14 +140,14 @@ public class ArbolB<L extends LinkedList<Integer>, I extends Comparable<I>> impl
         if (node.numberOfChildren() > 0)
             for (int j = medianIndex + 1; j < node.numberOfChildren(); j++)
             {
-                Node<I> c = node.getChild(j);
+                NodoB<I> c = node.getChild(j);
                 right.addChild(c);
             }
 
         if (node.getParent() == null)
         {
             // new root, height of tree is increased
-            Node<I> newRoot = new Node<>(null, maxKeySize, maxChildrenSize);
+            NodoB<I> newRoot = new NodoB<>(null, maxKeySize, maxChildrenSize);
             newRoot.addKey(medianValue);
             node.setParent(newRoot);
             root = newRoot;
@@ -158,7 +158,7 @@ public class ArbolB<L extends LinkedList<Integer>, I extends Comparable<I>> impl
         } else
         {
             // Move the median value up to the parent
-            Node<I> parent = node.getParent();
+            NodoB<I> parent = node.getParent();
             parent.addKey(medianValue);
             parent.removeChild(node);
             parent.addChild(left);
@@ -169,9 +169,9 @@ public class ArbolB<L extends LinkedList<Integer>, I extends Comparable<I>> impl
         }
     }
 
-    private Node<I> getNode(I value)
+    private NodoB<I> getNode(I value)
     {
-        Node<I> node = root;
+        NodoB<I> node = root;
 
         while (node != null)
         {
@@ -234,7 +234,7 @@ public class ArbolB<L extends LinkedList<Integer>, I extends Comparable<I>> impl
     @Override
     public L buscar(I item) throws ItemNotFoundException
     {
-        Node<I> node = getNode(item);
+        NodoB<I> node = getNode(item);
 
         if (node == null)
             throw new ItemNotFoundException();
@@ -246,7 +246,7 @@ public class ArbolB<L extends LinkedList<Integer>, I extends Comparable<I>> impl
         throw new ItemNotFoundException();
     }
 
-    private void recorrerArbol(Node<I> node, LinkedList<LinkedList<Integer>> indices)
+    private void recorrerArbol(NodoB<I> node, LinkedList<LinkedList<Integer>> indices)
     {
         int x = 0;
 
@@ -291,9 +291,14 @@ public class ArbolB<L extends LinkedList<Integer>, I extends Comparable<I>> impl
         return inorder();
     }
 
-    private boolean isLeaf(Node<I> n)
+    private boolean isLeaf(NodoB<I> n)
     {
         return n.numberOfChildren() == 0;
+    }
+
+    public int getSize()
+    {
+        return size;
     }
 
 }

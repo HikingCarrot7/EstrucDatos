@@ -9,31 +9,31 @@ import java.util.Comparator;
  * @param <T>
  */
 @SuppressWarnings("unchecked")
-public class Node<T extends Comparable<T>>
+public class NodoB<T extends Comparable<T>>
 {
 
     private Key<T>[] keys = null;
-    private Node<T> parent = null;
-    private Node<T>[] children = null;
+    private NodoB<T> parent = null;
+    private NodoB<T>[] children = null;
     private int keysSize = 0;
     private int childrenSize = 0;
-    private Comparator<Node<T>> comparator = (nodo1, nodo2) -> nodo1.getKey(0).getElemento().compareTo(nodo2.getKey(0).getElemento());
+    private Comparator<NodoB<T>> comparator = (hijo1, hijo2) -> hijo1.getKey(0).getElemento().compareTo(hijo2.getKey(0).getElemento());
 
-    public Node(Node<T> parent, int maxKeySize, int maxChildrenSize)
+    public NodoB(NodoB<T> parent, int maxKeySize, int maxChildrenSize)
     {
         this.parent = parent;
         this.keys = new Key[maxKeySize + 1];
+        this.children = new NodoB[maxChildrenSize + 1];
         this.keysSize = 0;
-        this.children = new Node[maxChildrenSize + 1];
         this.childrenSize = 0;
     }
 
-    public void setParent(Node<T> parent)
+    public void setParent(NodoB<T> parent)
     {
         this.parent = parent;
     }
 
-    public Node<T> getParent()
+    public NodoB<T> getParent()
     {
         return parent;
     }
@@ -58,12 +58,12 @@ public class Node<T extends Comparable<T>>
         return keysSize;
     }
 
-    public void setChildren(Node<T>[] children)
+    public void setChildren(NodoB<T>[] children)
     {
         this.children = children;
     }
 
-    public Node<T>[] getChildren()
+    public NodoB<T>[] getChildren()
     {
         return children;
     }
@@ -78,12 +78,12 @@ public class Node<T extends Comparable<T>>
         return childrenSize;
     }
 
-    public void setComparator(Comparator<Node<T>> comparator)
+    public void setComparator(Comparator<NodoB<T>> comparator)
     {
         this.comparator = comparator;
     }
 
-    public Comparator<Node<T>> getComparator()
+    public Comparator<NodoB<T>> getComparator()
     {
         return comparator;
     }
@@ -153,14 +153,15 @@ public class Node<T extends Comparable<T>>
         return keysSize;
     }
 
-    public Node<T> getChild(int index)
+    public NodoB<T> getChild(int index)
     {
         if (index >= childrenSize)
             return null;
+
         return children[index];
     }
 
-    public int indexOf(Node<T> child)
+    public int indexOf(NodoB<T> child)
     {
         for (int i = 0; i < childrenSize; i++)
             if (children[i].equals(child))
@@ -169,7 +170,7 @@ public class Node<T extends Comparable<T>>
         return -1;
     }
 
-    public boolean addChild(Node<T> child)
+    public boolean addChild(NodoB<T> child)
     {
         child.setParent(this);
         children[childrenSize++] = child;
@@ -177,7 +178,7 @@ public class Node<T extends Comparable<T>>
         return true;
     }
 
-    public boolean removeChild(Node<T> child)
+    public boolean removeChild(NodoB<T> child)
     {
         boolean found = false;
 
@@ -200,12 +201,12 @@ public class Node<T extends Comparable<T>>
         return found;
     }
 
-    public Node<T> removeChild(int index)
+    public NodoB<T> removeChild(int index)
     {
         if (index >= childrenSize)
             return null;
 
-        Node<T> value = children[index];
+        NodoB<T> value = children[index];
         children[index] = null;
 
         for (int i = index + 1; i < childrenSize; i++)
