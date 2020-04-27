@@ -4,10 +4,12 @@ package arbolb;
  *
  * @author Nicolás
  */
-public class Test {
+public class Test
+{
 
-    public static void main(String[] args) {
-        ArbolB<Integer> arbol = new ArbolB<>(15);
+    public static void main(String[] args)
+    {
+        ArbolB<Integer> arbol = new ArbolB<>(3);
         arbol.insertar(23);
         arbol.insertar(65);
         arbol.insertar(98);

@@ -1,10 +1,11 @@
 package com.sw.controller;
 
 import com.sw.model.Arbol;
-import com.sw.model.TreeFactory;
 import com.sw.model.Buscador;
 import com.sw.model.Comparador;
 import com.sw.model.Egresado;
+import com.sw.model.Factory;
+import com.sw.model.TreeFactory;
 import com.sw.model.exceptions.ItemNotFoundException;
 import com.sw.model.exceptions.NohayCoincidenciasException;
 import com.sw.model.exceptions.RutaInvalidaException;
@@ -26,7 +27,6 @@ import javax.swing.AbstractButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingWorker;
-import com.sw.model.Factory;
 
 /**
  *
@@ -377,20 +377,6 @@ public class VistaController implements UIConstants
         vista.getTxtNombre().setEnabled(false);
         vista.getCmbProfesiones().setEnabled(false);
         vista.getTxtPromedio().setEnabled(false);
-    }
-
-    private void inhabilitarUI()
-    {
-        setPanelEnabled(vista.getPanelLateralIzq(), false);
-        setPanelEnabled(vista.getPanelLateralDer(), false);
-
-        tableManager.vaciarTabla(vista.getTablaEgresados());
-        comboBoxManager.vaciarComboBox(vista.getCmbProfesiones());
-
-        vista.getTxtNombre().setText("");
-        vista.getTxtPromedio().setText("");
-
-        habilitarCheckBoxes(false);
     }
 
     private void habilitarCheckBoxes(boolean habilitar)

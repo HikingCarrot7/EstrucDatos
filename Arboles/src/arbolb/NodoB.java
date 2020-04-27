@@ -3,7 +3,9 @@ package arbolb;
 /**
  *
  * @author Nicolás
+ * @param <E>
  */
+@SuppressWarnings("unchecked")
 public class NodoB<E>
 {
 
@@ -28,7 +30,6 @@ public class NodoB<E>
         this.llavesUsadas = llavesUsadas;
     }
 
-    @SuppressWarnings("unchecked")
     public E getClave(int idx)
     {
         return (E) claves[idx];
@@ -49,7 +50,6 @@ public class NodoB<E>
         this.padre = padre;
     }
 
-    @SuppressWarnings("unchecked")
     public NodoB<E> getHijo(int idx)
     {
         return (NodoB<E>) hijos[idx];

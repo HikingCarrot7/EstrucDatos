@@ -5,6 +5,7 @@ package arbolb;
  * @author Nicolás
  * @param <T>
  */
+@SuppressWarnings("unchecked")
 public class ArbolB<T extends Comparable<T>>
 {
 
@@ -77,7 +78,6 @@ public class ArbolB<T extends Comparable<T>>
         insertar(clave, nodo, null, null);
     }
 
-    @SuppressWarnings("unchecked")
     private void insertar(T clave, NodoB<T> nodo, NodoB<T> hijo1, NodoB<T> hijo2)
     {
         NodoB<T> padre, nuevo;
@@ -108,7 +108,7 @@ public class ArbolB<T extends Comparable<T>>
 
                 lista[i] = clave;
                 listaPunteros[i] = hijo1;
-                listaPunteros[i + 1] = hijo1;
+                listaPunteros[i + 1] = hijo2;
 
                 while (i < nClaves)
                 {
@@ -417,6 +417,7 @@ public class ArbolB<T extends Comparable<T>>
                     if (nodo.getHijo(0) == null)
                     {
                         hoja = nodo;
+
                         while (i < nodo.getLlavesUsadas() - 1)
                         {
                             nodo.setClave(i, nodo.getClave(i + 1));

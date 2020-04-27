@@ -26,6 +26,7 @@ public class Main extends Application
         loader.setLocation(Main.class.getResource("/com/sw/view/Vista.fxml"));
         Pane ventana = (Pane) loader.load();
         Scene scene = new Scene(ventana);
+        scene.getStylesheets().add("/com/sw/styles/Stylesheet.css");
         primaryStage.setScene(scene);
         primaryStage.centerOnScreen();
         primaryStage.show();
