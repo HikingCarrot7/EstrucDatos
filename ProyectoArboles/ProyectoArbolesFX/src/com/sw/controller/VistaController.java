@@ -22,6 +22,7 @@ import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
+import javafx.css.Styleable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -29,7 +30,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.Labeled;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableView;
@@ -49,9 +49,9 @@ public class VistaController implements Initializable, Controller
 {
 
     @FXML private ToggleGroup grupoRadioButtons;
-    @FXML private RadioButton rbArbolBB;
     @FXML private RadioButton rbArbolAVL;
     @FXML private RadioButton rbArbolB;
+    @FXML private RadioButton rbArbolBB;
     @FXML private ProgressIndicator progreso;
     @FXML private BorderPane panelPrincipal;
     @FXML private BorderPane panelIzq;
@@ -69,9 +69,9 @@ public class VistaController implements Initializable, Controller
     @FXML private Button btnGenerar;
     @FXML private TableView<Egresado> tablaEgresados;
 
-    public static final String ARBOL_BB = "Árbol BB";
-    public static final String ARBOL_AVL = "Árbol AVL";
-    public static final String ARBOL_B = "Árbol B";
+    public static final String ARBOL_BB = "Arbol BB";
+    public static final String ARBOL_AVL = "Arbol AVL";
+    public static final String ARBOL_B = "Arbol B";
 
     public static Comparador<LinkedList<Integer>, String> COMPARADOR_POR_NOMBRE;
     public static Comparador<LinkedList<Integer>, String> COMPARADOR_POR_PROFESION;
@@ -127,6 +127,10 @@ public class VistaController implements Initializable, Controller
         txtNombre.disableProperty().bind(chbNombre.selectedProperty().not());
         cmbProfesion.disableProperty().bind(chbProfesion.selectedProperty().not());
         txtPromedio.disableProperty().bind(chbPromedio.selectedProperty().not());
+
+        rbArbolBB.setId(ARBOL_BB);
+        rbArbolAVL.setId(ARBOL_AVL);
+        rbArbolB.setId(ARBOL_B);
 
         tablaEgresados.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("nombre"));
         tablaEgresados.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("profesion"));
@@ -325,7 +329,7 @@ public class VistaController implements Initializable, Controller
 
     private String getArbolSeleccionado()
     {
-        return ((Labeled) grupoRadioButtons.getSelectedToggle()).getText();
+        return ((Styleable) grupoRadioButtons.getSelectedToggle()).getId();
     }
 
     private String getNombreEgresado()
