@@ -5,7 +5,6 @@ import javafx.animation.Interpolator;
 import javafx.animation.PauseTransition;
 import javafx.animation.SequentialTransition;
 import javafx.animation.TranslateTransition;
-import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -64,30 +63,27 @@ public class Notificacion extends BorderPane
 
     public void mostrar()
     {
-        Platform.runLater(() ->
-        {
-            setTranslateX(panelPrincipal.getWidth());
-            setTranslateY(panelPrincipal.getHeight() - getHeight() - 10);
+        setTranslateX(panelPrincipal.getWidth());
+        setTranslateY(panelPrincipal.getHeight() - getHeight() - 10);
 
-            TranslateTransition t = new TranslateTransition(Duration.millis(500), this);
-            t.setInterpolator(Interpolator.EASE_BOTH);
-            t.setToX(getTranslateX() - getWidth());
+        TranslateTransition t = new TranslateTransition(Duration.millis(500), this);
+        t.setInterpolator(Interpolator.EASE_BOTH);
+        t.setToX(getTranslateX() - getWidth());
 
-            FadeTransition f = new FadeTransition(Duration.millis(1000), this);
-            f.setToValue(0.0);
+        FadeTransition f = new FadeTransition(Duration.millis(1000), this);
+        f.setToValue(0.0);
 
-            PauseTransition p = new PauseTransition(Duration.millis(3000));
+        PauseTransition p = new PauseTransition(Duration.millis(3000));
 
-            SequentialTransition s = new SequentialTransition(t, p, f);
-            s.play();
+        SequentialTransition s = new SequentialTransition(t, p, f);
+        s.play();
 
-            s.setOnFinished(e -> panelPrincipal.getChildren().remove(this));
+        s.setOnFinished(e -> panelPrincipal.getChildren().remove(this));
 
-            panelPrincipal.widthProperty().addListener(l -> setTranslateX(panelPrincipal.getWidth() - getWidth()));
-            panelPrincipal.heightProperty().addListener(l -> setTranslateY(panelPrincipal.getHeight() - getHeight() - 10));
+        panelPrincipal.widthProperty().addListener(l -> setTranslateX(panelPrincipal.getWidth() - getWidth()));
+        panelPrincipal.heightProperty().addListener(l -> setTranslateY(panelPrincipal.getHeight() - getHeight() - 10));
 
-            panelPrincipal.getChildren().add(this);
-        });
+        panelPrincipal.getChildren().add(this);
     }
 
 }

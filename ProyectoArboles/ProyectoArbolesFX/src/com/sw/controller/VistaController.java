@@ -395,10 +395,13 @@ public class VistaController implements Initializable, Controller
 
     private void mostrarError(String title, String text)
     {
-        Toolkit.getDefaultToolkit().beep();
-        Notificacion notificacion = new Notificacion(panelPrincipal, title, text);
-        notificacion.setCloseAction(e -> panelPrincipal.getChildren().remove(notificacion));
-        notificacion.mostrar();
+        Platform.runLater(() ->
+        {
+            Toolkit.getDefaultToolkit().beep();
+            Notificacion notificacion = new Notificacion(panelPrincipal, title, text);
+            notificacion.setCloseAction(e -> panelPrincipal.getChildren().remove(notificacion));
+            notificacion.mostrar();
+        });
     }
 
 }
