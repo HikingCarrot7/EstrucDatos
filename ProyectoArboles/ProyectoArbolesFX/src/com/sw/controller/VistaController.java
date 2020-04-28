@@ -292,29 +292,38 @@ public class VistaController implements Initializable, Controller
 
     private void cargarDatosCmbProfesiones()
     {
-        vaciarComboBoxProfesiones();
-        LinkedList<LinkedList<Integer>> listaIdxProfesiones = arbolProfesiones.inorder();
+        Platform.runLater(() ->
+        {
+            vaciarComboBoxProfesiones();
+            LinkedList<LinkedList<Integer>> listaIdxProfesiones = arbolProfesiones.inorder();
 
-        while (!listaIdxProfesiones.isEmpty())
-            cmbProfesion.getItems().add(egresados[listaIdxProfesiones.removeFirst().first()].getProfesion());
+            while (!listaIdxProfesiones.isEmpty())
+                cmbProfesion.getItems().add(egresados[listaIdxProfesiones.removeFirst().first()].getProfesion());
 
-        cmbProfesion.getSelectionModel().select(0);
+            cmbProfesion.getSelectionModel().select(0);
+        });
     }
 
     private void mostrarTodosEgresados()
     {
-        vaciarTablaEgresados();
+        Platform.runLater(() ->
+        {
+            vaciarTablaEgresados();
 
-        for (Egresado egresado : egresados)
-            tablaEgresados.getItems().add(egresado);
+            for (Egresado egresado : egresados)
+                tablaEgresados.getItems().add(egresado);
+        });
     }
 
     private void mostrarResultadosBusqueda(LinkedList<Integer> resultados)
     {
-        vaciarTablaEgresados();
+        Platform.runLater(() ->
+        {
+            vaciarTablaEgresados();
 
-        while (!resultados.isEmpty())
-            tablaEgresados.getItems().add(egresados[resultados.removeFirst()]);
+            while (!resultados.isEmpty())
+                tablaEgresados.getItems().add(egresados[resultados.removeFirst()]);
+        });
     }
 
     private String getRutaCSV()
@@ -377,10 +386,7 @@ public class VistaController implements Initializable, Controller
 
     private void setTiempoTranscurrido(String tiempo)
     {
-        Platform.runLater(() ->
-        {
-            tiempoTranscurrido.setText(tiempo);
-        });
+        Platform.runLater(() -> tiempoTranscurrido.setText(tiempo));
     }
 
     private void vaciarTablaEgresados()
