@@ -19,6 +19,7 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -49,7 +50,7 @@ public class VistaController implements UIConstants
 
     private final Vista vista;
     private final SeleccionadorArchivos seleccionadorArchivos;
-    private final Factory binaryTreeFactory;
+    private final Factory treeFactory;
     private final ComboBoxManager comboBoxManager;
     private final TableManager tableManager;
     private Egresado[] egresados;
@@ -57,7 +58,7 @@ public class VistaController implements UIConstants
     public VistaController(Vista vista)
     {
         this.vista = vista;
-        this.binaryTreeFactory = new TreeFactory();
+        this.treeFactory = new TreeFactory();
         this.seleccionadorArchivos = SeleccionadorArchivos.getInstance();
         this.comboBoxManager = ComboBoxManager.getInstance();
         this.tableManager = TableManager.getInstance();
@@ -125,9 +126,9 @@ public class VistaController implements UIConstants
     private void crearArboles()
     {
         String arbolACrear = getTipoArbolSeleccionado();
-        arbolNombres = binaryTreeFactory.crearArbolNombres(arbolACrear);
-        arbolProfesiones = binaryTreeFactory.crearArbolProfesiones(arbolACrear);
-        arbolPromedios = binaryTreeFactory.crearArbolPromedios(arbolACrear);
+        arbolNombres = treeFactory.crearArbolNombres(arbolACrear);
+        arbolProfesiones = treeFactory.crearArbolProfesiones(arbolACrear);
+        arbolPromedios = treeFactory.crearArbolPromedios(arbolACrear);
     }
 
     private void rellenarArboles()
@@ -246,8 +247,12 @@ public class VistaController implements UIConstants
 
     private void cargarEgresados()
     {
-        Loader<Egresado[]> dao = new DAO(getRutaCSV());
-        egresados = dao.load();
+        Loader<ArrayList<Egresado>> dao = new DAO(getRutaCSV());
+        ArrayList<Egresado> lista = dao.load();
+        egresados = new Egresado[lista.size()];
+
+        for (int i = 0; i < egresados.length; i++)
+            egresados[i] = lista.get(i);
     }
 
     private void cargarDatosCmbProfesiones()

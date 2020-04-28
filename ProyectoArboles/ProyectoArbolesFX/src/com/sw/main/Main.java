@@ -1,5 +1,6 @@
 package com.sw.main;
 
+import com.sw.controller.Controller;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -27,6 +28,7 @@ public class Main extends Application
         Pane ventana = (Pane) loader.load();
         Scene scene = new Scene(ventana);
         scene.getStylesheets().add("/com/sw/styles/Stylesheet.css");
+        ((Controller) loader.getController()).initStage(primaryStage);
         primaryStage.setScene(scene);
         primaryStage.centerOnScreen();
         primaryStage.show();

@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="panelPrincipal" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sw.controller.VistaController">
+<BorderPane fx:id="panelPrincipal" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="450.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sw.controller.VistaController">
     <top>
         <VBox BorderPane.alignment="CENTER">
             <children>
@@ -34,8 +34,8 @@
                     </rowConstraints>
                     <children>
                         <Label maxWidth="1.7976931348623157E308" text="Dirección:" />
-                        <TextField maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" />
-                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Buscar directorio" GridPane.columnIndex="2" />
+                        <TextField fx:id="txtRuta" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" />
+                        <Button fx:id="btnBuscarDirectorio" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#accionBtnBuscarDirectorio" text="Buscar directorio" GridPane.columnIndex="2" />
                     </children>
                     <VBox.margin>
                         <Insets />
@@ -43,19 +43,19 @@
                 </GridPane>
                 <FlowPane hgap="10.0">
                     <children>
-                        <RadioButton mnemonicParsing="false" selected="true" text="Árbol BB">
+                        <RadioButton fx:id="rbArbolBB" mnemonicParsing="false" selected="true" text="Árbol BB">
                             <toggleGroup>
                                 <ToggleGroup fx:id="grupoRadioButtons" />
                             </toggleGroup>
                         </RadioButton>
-                        <RadioButton mnemonicParsing="false" text="Árbol AVL" toggleGroup="$grupoRadioButtons" />
-                        <RadioButton mnemonicParsing="false" text="Árbol B" toggleGroup="$grupoRadioButtons" />
-                        <Button mnemonicParsing="false" text="Generar">
+                        <RadioButton fx:id="rbArbolAVL" mnemonicParsing="false" text="Árbol AVL" toggleGroup="$grupoRadioButtons" />
+                        <RadioButton fx:id="rbArbolB" mnemonicParsing="false" text="Árbol B" toggleGroup="$grupoRadioButtons" />
+                        <Button fx:id="btnGenerar" mnemonicParsing="false" onAction="#accionBtnGenerar" text="Generar">
                             <FlowPane.margin>
                                 <Insets left="10.0" />
                             </FlowPane.margin>
                         </Button>
-                        <ProgressIndicator maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" prefHeight="30.0" prefWidth="30.0" />
+                        <ProgressIndicator fx:id="progreso" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" prefHeight="30.0" prefWidth="30.0" />
                     </children>
                     <VBox.margin>
                         <Insets top="10.0" />
@@ -70,7 +70,7 @@
     <center>
         <SplitPane dividerPositions="0.4" BorderPane.alignment="CENTER">
             <items>
-                <BorderPane SplitPane.resizableWithParent="false">
+                <BorderPane fx:id="panelIzq" SplitPane.resizableWithParent="false">
                     <top>
                         <GridPane hgap="5.0" vgap="5.0" BorderPane.alignment="CENTER">
                             <columnConstraints>
@@ -83,12 +83,12 @@
                                 <RowConstraints vgrow="NEVER" />
                             </rowConstraints>
                             <children>
-                                <CheckBox maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Nombre:" GridPane.hgrow="NEVER" />
-                                <TextField GridPane.columnIndex="1" />
-                                <CheckBox maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Profesión:" GridPane.hgrow="NEVER" GridPane.rowIndex="1" />
-                                <CheckBox maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Promedio:" GridPane.hgrow="NEVER" GridPane.rowIndex="2" />
-                                <ComboBox maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                <CheckBox fx:id="chbNombre" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Nombre:" GridPane.hgrow="NEVER" />
+                                <TextField fx:id="txtNombre" GridPane.columnIndex="1" />
+                                <CheckBox fx:id="chbProfesion" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Profesión:" GridPane.hgrow="NEVER" GridPane.rowIndex="1" />
+                                <CheckBox fx:id="chbPromedio" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Promedio:" GridPane.hgrow="NEVER" GridPane.rowIndex="2" />
+                                <ComboBox fx:id="cmbProfesion" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                <TextField fx:id="txtPromedio" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                             </children>
                         </GridPane>
                     </top>
@@ -98,7 +98,7 @@
                     <center>
                         <FlowPane alignment="TOP_CENTER" BorderPane.alignment="CENTER">
                             <children>
-                                <Button mnemonicParsing="false" text="Buscar" />
+                                <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#accionBtnBuscar" text="Buscar" />
                             </children>
                             <BorderPane.margin>
                                 <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
@@ -119,7 +119,7 @@
                                 <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="Comparaciones:" />
                                 <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="Tiempo transcurrido:" GridPane.rowIndex="1" />
                                 <Label maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" />
-                                <Label maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                <Label fx:id="tiempoTranscurrido" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                             </children>
                             <BorderPane.margin>
                                 <Insets left="5.0" right="5.0" top="5.0" />
@@ -127,9 +127,9 @@
                         </GridPane>
                     </bottom>
                 </BorderPane>
-                <BorderPane>
+                <BorderPane fx:id="panelDerecho">
                     <center>
-                        <TableView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                        <TableView fx:id="tablaEgresados" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                             <columns>
                                 <TableColumn minWidth="-1.0" prefWidth="75.0" text="Nombre" />
                                 <TableColumn minWidth="-1.0" prefWidth="75.0" text="Profesión" />
