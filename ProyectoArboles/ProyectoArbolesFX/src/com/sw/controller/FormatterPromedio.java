@@ -1,5 +1,6 @@
 package com.sw.controller;
 
+import java.awt.Toolkit;
 import java.text.ParseException;
 import javafx.util.converter.NumberStringConverter;
 
@@ -27,6 +28,7 @@ public class FormatterPromedio extends NumberStringConverter
 
         } catch (NumberFormatException | ParseException e)
         {
+            Toolkit.getDefaultToolkit().beep();
             throw new RuntimeException(e);
         }
     }

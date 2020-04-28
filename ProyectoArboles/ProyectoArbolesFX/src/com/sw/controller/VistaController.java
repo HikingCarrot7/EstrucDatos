@@ -12,6 +12,7 @@ import com.sw.model.exceptions.RutaInvalidaException;
 import com.sw.model.persistence.DAO;
 import com.sw.model.persistence.Loader;
 import com.sw.util.LinkedList;
+import java.awt.Toolkit;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
@@ -392,9 +393,12 @@ public class VistaController implements Initializable, Controller
         cmbProfesion.getItems().clear();
     }
 
-    private void mostrarError(String titulo, String text)
+    private void mostrarError(String title, String text)
     {
-
+        Toolkit.getDefaultToolkit().beep();
+        Notificacion notificacion = new Notificacion(panelPrincipal, title, text);
+        notificacion.setCloseAction(e -> panelPrincipal.getChildren().remove(notificacion));
+        notificacion.mostrar();
     }
 
 }
