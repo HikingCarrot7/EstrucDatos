@@ -16,10 +16,12 @@ import java.awt.Toolkit;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -209,17 +211,13 @@ public class VistaController implements Initializable, Controller
             }
         };
 
-        backgroundTask.setOnSucceeded(e ->
-        {
-            esperarLlenadoDeArboles(backgroundTask);
-        });
-
+        backgroundTask.setOnSucceeded(this::esperarLlenadoDeArboles);
         backgroundTask.start();
     }
 
-    private void esperarLlenadoDeArboles(Service<Long> service)
+    private void esperarLlenadoDeArboles(WorkerStateEvent e)
     {
-        setTiempoTranscurrido(service.getValue() + " milisegundos.");
+        setTiempoTranscurrido(e.getSource().getValue() + " milisegundos.");
         cargarDatosCmbProfesiones();
         btnBuscarDirectorio.setDisable(false);
         btnGenerar.setDisable(false);
@@ -267,17 +265,13 @@ public class VistaController implements Initializable, Controller
             }
         };
 
-        service.setOnSucceeded(e ->
-        {
-            esperarBusquedaDeCoincidencias(service);
-        });
-
+        service.setOnSucceeded(this::esperarBusquedaDeCoincidencias);
         service.start();
     }
 
-    private void esperarBusquedaDeCoincidencias(Service<Long> service)
+    private void esperarBusquedaDeCoincidencias(WorkerStateEvent e)
     {
-        setTiempoTranscurrido(service.getValue() + " milisegundos.");
+        setTiempoTranscurrido(e.getSource().getValue() + " milisegundos.");
     }
 
     private void cargarEgresados()
@@ -309,9 +303,7 @@ public class VistaController implements Initializable, Controller
         Platform.runLater(() ->
         {
             vaciarTablaEgresados();
-
-            for (Egresado egresado : egresados)
-                tablaEgresados.getItems().add(egresado);
+            tablaEgresados.getItems().addAll(Arrays.asList(egresados));
         });
     }
 

@@ -50,7 +50,7 @@ public class VistaController implements UIConstants
 
     private final Vista vista;
     private final SeleccionadorArchivos seleccionadorArchivos;
-    private final Factory treeFactory;
+    private final Factory factory;
     private final ComboBoxManager comboBoxManager;
     private final TableManager tableManager;
     private Egresado[] egresados;
@@ -58,7 +58,7 @@ public class VistaController implements UIConstants
     public VistaController(Vista vista)
     {
         this.vista = vista;
-        this.treeFactory = new TreeFactory();
+        this.factory = new TreeFactory();
         this.seleccionadorArchivos = SeleccionadorArchivos.getInstance();
         this.comboBoxManager = ComboBoxManager.getInstance();
         this.tableManager = TableManager.getInstance();
@@ -126,9 +126,9 @@ public class VistaController implements UIConstants
     private void crearArboles()
     {
         String arbolACrear = getTipoArbolSeleccionado();
-        arbolNombres = treeFactory.crearArbolNombres(arbolACrear);
-        arbolProfesiones = treeFactory.crearArbolProfesiones(arbolACrear);
-        arbolPromedios = treeFactory.crearArbolPromedios(arbolACrear);
+        arbolNombres = factory.crearArbolNombres(arbolACrear);
+        arbolProfesiones = factory.crearArbolProfesiones(arbolACrear);
+        arbolPromedios = factory.crearArbolPromedios(arbolACrear);
     }
 
     private void rellenarArboles()
@@ -257,36 +257,45 @@ public class VistaController implements UIConstants
 
     private void cargarDatosCmbProfesiones()
     {
-        comboBoxManager.vaciarComboBox(vista.getCmbProfesiones());
-        LinkedList<LinkedList<Integer>> listaIdxProfesiones = arbolProfesiones.inorder();
+        EventQueue.invokeLater(() ->
+        {
+            comboBoxManager.vaciarComboBox(vista.getCmbProfesiones());
+            LinkedList<LinkedList<Integer>> listaIdxProfesiones = arbolProfesiones.inorder();
 
-        while (!listaIdxProfesiones.isEmpty())
-            comboBoxManager.anadirElemento(vista.getCmbProfesiones(), egresados[listaIdxProfesiones.removeFirst().first()].getProfesion());
+            while (!listaIdxProfesiones.isEmpty())
+                comboBoxManager.anadirElemento(vista.getCmbProfesiones(), egresados[listaIdxProfesiones.removeFirst().first()].getProfesion());
+        });
     }
 
     private void mostrarTodosEgresados()
     {
-        vaciarTablaEgresados();
+        EventQueue.invokeLater(() ->
+        {
+            vaciarTablaEgresados();
 
-        for (Egresado egresado : egresados)
-            tableManager.anadirFila(vista.getTablaEgresados(), new Object[]
-            {
-                egresado.getNombre(), egresado.getProfesion(), egresado.getPromedio()
-            });
+            for (Egresado egresado : egresados)
+                tableManager.anadirFila(vista.getTablaEgresados(), new Object[]
+                {
+                    egresado.getNombre(), egresado.getProfesion(), egresado.getPromedio()
+                });
+        });
     }
 
     private void mostrarResultadosBusqueda(LinkedList<Integer> resultados)
     {
-        vaciarTablaEgresados();
-
-        while (!resultados.isEmpty())
+        EventQueue.invokeLater(() ->
         {
-            Egresado egresado = egresados[resultados.removeFirst()];
-            tableManager.anadirFila(vista.getTablaEgresados(), new Object[]
+            vaciarTablaEgresados();
+
+            while (!resultados.isEmpty())
             {
-                egresado.getNombre(), egresado.getProfesion(), egresado.getPromedio()
-            });
-        }
+                Egresado egresado = egresados[resultados.removeFirst()];
+                tableManager.anadirFila(vista.getTablaEgresados(), new Object[]
+                {
+                    egresado.getNombre(), egresado.getProfesion(), egresado.getPromedio()
+                });
+            }
+        });
     }
 
     private String getRutaCSV()
@@ -344,34 +353,22 @@ public class VistaController implements UIConstants
 
     private void setTiempoTranscurrido(String texto)
     {
-        EventQueue.invokeLater(() ->
-        {
-            vista.getTiempoTranscurrido().setText(texto);
-        });
+        EventQueue.invokeLater(() -> vista.getTiempoTranscurrido().setText(texto));
     }
 
     private void setProgressBarVisible(boolean enable)
     {
-        EventQueue.invokeLater(() ->
-        {
-            vista.getProgressBar().setVisible(enable);
-        });
+        EventQueue.invokeLater(() -> vista.getProgressBar().setVisible(enable));
     }
 
     private void setBtnGenerarEnabled(boolean enable)
     {
-        EventQueue.invokeLater(() ->
-        {
-            vista.getBtnGenerar().setEnabled(enable);
-        });
+        EventQueue.invokeLater(() -> vista.getBtnGenerar().setEnabled(enable));
     }
 
     private void setBtnBuscarDirectorioEnabled(boolean enable)
     {
-        EventQueue.invokeLater(() ->
-        {
-            vista.getBtnBuscarDirectorio().setEnabled(enable);
-        });
+        EventQueue.invokeLater(() -> vista.getBtnBuscarDirectorio().setEnabled(enable));
     }
 
     private void habilitarUI()
