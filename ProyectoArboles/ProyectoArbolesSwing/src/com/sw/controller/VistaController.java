@@ -156,6 +156,7 @@ public class VistaController implements UIConstants
                     setBtnBuscarDirectorioEnabled(true);
                     setBtnGenerarEnabled(true);
                     setProgressBarVisible(false);
+                    reiniciarUI();
                     mostrarError("Error", ex.getMessage());
                     throw new Exception();
                 }
@@ -386,6 +387,19 @@ public class VistaController implements UIConstants
         vista.getChbNombre().setSelected(habilitar);
         vista.getChbProfesion().setSelected(habilitar);
         vista.getChbPromedio().setSelected(habilitar);
+    }
+
+    private void reiniciarUI()
+    {
+        setPanelEnabled(vista.getPanelLateralIzq(), false);
+        setPanelEnabled(vista.getPanelLateralDer(), false);
+
+        vista.getTxtNombre().setText("");
+        vista.getTxtPromedio().setText("");
+
+        habilitarCheckBoxes(false);
+        vaciarTablaEgresados();
+        comboBoxManager.vaciarComboBox(vista.getCmbProfesiones());
     }
 
     private void mostrarError(String titulo, String text)

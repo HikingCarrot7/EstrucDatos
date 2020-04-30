@@ -19,6 +19,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.Labeled;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
@@ -47,44 +48,25 @@ public class VistaController implements Initializable
     private static final int COL_RUTA = 1;
     private static final int COL_FECHA = 2;
 
-    @FXML
-    private Button buscar;
-    @FXML
-    private ToggleGroup ordenamiento;
-    @FXML
-    private TextField entradaArchivo;
-    @FXML
-    private TextField entradaDirectorio;
-    @FXML
-    private CheckBox incluirSubcarpetas;
-    @FXML
-    private CheckBox todasCoincidencias;
-    @FXML
-    private RadioButton burbuja;
-    @FXML
-    private RadioButton insercion;
-    @FXML
-    private RadioButton shellsort;
-    @FXML
-    private RadioButton mergesort;
-    @FXML
-    private RadioButton quicksort;
-    @FXML
-    private RadioButton mezclaDirecta;
-    @FXML
-    private TableView<Directorio> tablaListaOrdenada;
-    @FXML
-    private TableView<Directorio> tablaListaEncontrada;
-    @FXML
-    private Button buscarDirectorio;
-    @FXML
-    private Label tiempoTranscurrido;
-    @FXML
-    private Button actualizar;
-    @FXML
-    private Button cancelar;
-    @FXML
-    private ProgressIndicator progressIndicator;
+    @FXML private Button buscar;
+    @FXML private ToggleGroup ordenamiento;
+    @FXML private TextField entradaArchivo;
+    @FXML private TextField entradaDirectorio;
+    @FXML private CheckBox incluirSubcarpetas;
+    @FXML private CheckBox todasCoincidencias;
+    @FXML private RadioButton burbuja;
+    @FXML private RadioButton insercion;
+    @FXML private RadioButton shellsort;
+    @FXML private RadioButton mergesort;
+    @FXML private RadioButton quicksort;
+    @FXML private RadioButton mezclaDirecta;
+    @FXML private TableView<Directorio> tablaListaOrdenada;
+    @FXML private TableView<Directorio> tablaListaEncontrada;
+    @FXML private Button buscarDirectorio;
+    @FXML private Label tiempoTranscurrido;
+    @FXML private Button actualizar;
+    @FXML private Button cancelar;
+    @FXML private ProgressIndicator progressIndicator;
 
     private DirectoryManager directoryManager;
     private TableManager<Directorio> tableManager;
@@ -197,10 +179,7 @@ public class VistaController implements Initializable
     @FXML
     private void insertarNombreArchivo(KeyEvent e)
     {
-        Platform.runLater(() ->
-        {
-            rellenarTablaDirectoriosOrdenados(directoriosEncontrados);
-        });
+        Platform.runLater(() -> rellenarTablaDirectoriosOrdenados(directoriosEncontrados));
     }
 
     /**
@@ -211,10 +190,7 @@ public class VistaController implements Initializable
     @FXML
     private void todasLasCoincidencias(ActionEvent e)
     {
-        Platform.runLater(() ->
-        {
-            rellenarTablaDirectoriosOrdenados(directoriosEncontrados);
-        });
+        Platform.runLater(() -> rellenarTablaDirectoriosOrdenados(directoriosEncontrados));
     }
 
     /**
@@ -244,11 +220,7 @@ public class VistaController implements Initializable
     private void actualizar(ActionEvent e)
     {
         cancelar(e);
-
-        Platform.runLater(() ->
-        {
-            iniciarProcesamientoDirectorios();
-        });
+        Platform.runLater(() -> iniciarProcesamientoDirectorios());
     }
 
     @FXML
@@ -418,7 +390,7 @@ public class VistaController implements Initializable
      */
     public ObservableList<Directorio> ordenarDirectorios(ObservableList<Directorio> directorios)
     {
-        switch (((RadioButton) ordenamiento.getSelectedToggle()).getText())
+        switch (((Labeled) ordenamiento.getSelectedToggle()).getText())
         {
             case "Burbuja":
                 SorterManager.ordenarPor(SorterManager.CLAVE_BURBUJA, directorios);
@@ -478,10 +450,7 @@ public class VistaController implements Initializable
      */
     private void actualizarTiempoTranscurrido(long tiempoTrancurrido)
     {
-        Platform.runLater(() ->
-        {
-            tiempoTranscurrido.setText("Tiempo transcurrido: " + tiempoTrancurrido + " ms");
-        });
+        Platform.runLater(() -> tiempoTranscurrido.setText("Tiempo transcurrido: " + tiempoTrancurrido + " ms"));
     }
 
     /**

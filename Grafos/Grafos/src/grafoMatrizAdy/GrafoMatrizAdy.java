@@ -1,18 +1,23 @@
 package grafoMatrizAdy;
 
+import java.util.ArrayList;
+import util.Deque;
+import util.DequeList;
+
 /**
  *
  * @author Nicolás
+ * @param <E>
  */
 @SuppressWarnings("unchecked")
-public class GrafoMatriz<E>
+public class GrafoMatrizAdy<E>
 {
 
     private int numeroVertices;
     private final Vertice<E>[] vertices;
     private final int[][] matrizAdy;
 
-    public GrafoMatriz(int maxVertices)
+    public GrafoMatrizAdy(int maxVertices)
     {
         matrizAdy = new int[maxVertices][maxVertices];
         vertices = (Vertice<E>[]) new Vertice<?>[maxVertices];
@@ -37,7 +42,7 @@ public class GrafoMatriz<E>
         int verticeFinal = numVertice(destino);
 
         if (verticeInicio < 0 || verticeFinal < 0)
-            throw new RuntimeException("Algún vertice no existe.");
+            throw new RuntimeException("Algún vértice no existe.");
 
         matrizAdy[verticeInicio][verticeFinal] = 1;
         matrizAdy[verticeFinal][verticeInicio] = 1;
@@ -49,7 +54,7 @@ public class GrafoMatriz<E>
         int verticeFinal = numVertice(destino);
 
         if (verticeInicio < 0 || verticeFinal < 0)
-            throw new RuntimeException("Algún vertice no existe.");
+            throw new RuntimeException("Algún vértice no existe.");
 
         return matrizAdy[verticeInicio][verticeFinal] == 1;
     }
@@ -65,9 +70,36 @@ public class GrafoMatriz<E>
         return -1;
     }
 
+    public void recorridoAnchura()
+    {
+        if (!isEmpty())
+        {
+            Deque<Vertice<E>> colaRecorrido = new DequeList<>();
+            ArrayList<Vertice<E>> verticesRecorridos = new ArrayList<>();
+
+            colaRecorrido.insertFirst(vertices[0]);
+            verticesRecorridos.add(vertices[0]);
+
+            while (!colaRecorrido.isEmpty())
+            {
+                Vertice<E> sigVertice = colaRecorrido.removeFirst();
+                System.out.println(sigVertice.getDato());
+
+                for (int i = 0; i < matrizAdy[sigVertice.getNumVertice()].length; i++)
+                    if (matrizAdy[sigVertice.getNumVertice()][i] == 1 && !verticesRecorridos.contains(vertices[i]))
+                    {
+                        verticesRecorridos.add(vertices[i]);
+                        colaRecorrido.insertLast(vertices[i]);
+                    }
+
+            }
+
+        }
+
+    }
+
     public void mostrarMatrizAdy()
     {
-
         for (int i = 0; i < numeroVertices; i++)
         {
             System.out.print(String.format("%15s:", vertices[i].getDato()));
@@ -77,6 +109,11 @@ public class GrafoMatriz<E>
 
             System.out.println("");
         }
+    }
+
+    public boolean isEmpty()
+    {
+        return numeroVertices == 0;
     }
 
     public int getNumeroVertices()

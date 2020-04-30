@@ -19,12 +19,9 @@ public class PruebaGrafoListaAdy
         grafo.nuevoVertice("Emmanuel");
 
         grafo.nuevoArco("Nicolás", "Carlos");
-        grafo.nuevoArco("Carlos", "Lucas");
-        grafo.mostrarGradoListaAdy();
-        System.out.println("\n\n");
-
         grafo.nuevoArco("Nicolás", "Emmanuel");
-        grafo.mostrarGradoListaAdy();
+        grafo.nuevoArco("Carlos", "Lucas");
+        grafo.recorridoAnchura();
     }
 
 }

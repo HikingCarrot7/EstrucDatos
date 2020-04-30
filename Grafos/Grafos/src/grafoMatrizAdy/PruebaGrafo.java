@@ -9,7 +9,7 @@ public class PruebaGrafo
 
     public static void main(String[] args)
     {
-        GrafoMatriz<String> grafo = new GrafoMatriz<>(5);
+        GrafoMatrizAdy<String> grafo = new GrafoMatrizAdy<>(10);
 
         grafo.nuevoVertice("Nicolás");
         grafo.nuevoVertice("Antonio");
@@ -17,10 +17,13 @@ public class PruebaGrafo
         grafo.nuevoVertice("Carlos");
 
         grafo.nuevoArco("Nicolás", "Antonio");
-        grafo.nuevoArco("Javier", "Carlos");
-        grafo.nuevoArco("Carlos", "Nicolás");
+        grafo.nuevoArco("Nicolás", "Carlos");
+        grafo.nuevoArco("Carlos", "Antonio");
+        grafo.nuevoArco("Carlos", "Javier");
 
         grafo.mostrarMatrizAdy();
+
+        grafo.recorridoAnchura();
     }
 
 }

@@ -205,6 +205,7 @@ public class VistaController implements Initializable, Controller
                             btnGenerar.setDisable(false);
                             btnBuscarDirectorio.setDisable(false);
                             progreso.setVisible(false);
+                            reiniciarUI();
                             mostrarError("Error", ex.getMessage());
                             throw new Exception();
                         }
@@ -378,6 +379,21 @@ public class VistaController implements Initializable, Controller
     {
         panelIzq.setDisable(!habilitar);
         panelDerecho.setDisable(!habilitar);
+    }
+
+    private void reiniciarUI()
+    {
+        Platform.runLater(() ->
+        {
+            habilitarUI(false);
+            habilitarCheckBoxes(false);
+
+            txtNombre.setText("");
+            txtPromedio.setText("");
+
+            vaciarComboBoxProfesiones();
+            vaciarTablaEgresados();
+        });
     }
 
     private void setTiempoTranscurrido(String tiempo)

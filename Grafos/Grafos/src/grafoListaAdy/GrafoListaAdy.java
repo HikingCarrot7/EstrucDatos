@@ -1,6 +1,9 @@
 package grafoListaAdy;
 
+import grafoMatrizAdy.Vertice;
 import java.util.ArrayList;
+import util.Deque;
+import util.DequeList;
 
 /**
  *
@@ -89,6 +92,38 @@ public class GrafoListaAdy<E>
         return -1;
     }
 
+    public void recorridoAnchura()
+    {
+        if (!isEmpty())
+        {
+            Deque<VerticeAdy<E>> colaRecorrido = new DequeList<>();
+            ArrayList<VerticeAdy<E>> verticesRecorridos = new ArrayList<>();
+
+            colaRecorrido.insertFirst(tablaAdy[0]);
+            verticesRecorridos.add(tablaAdy[0]);
+
+            while (!colaRecorrido.isEmpty())
+            {
+                Vertice<E> sigVertice = colaRecorrido.removeFirst();
+                System.out.println(sigVertice.getDato());
+
+                for (int i = 0; i < tablaAdy[sigVertice.getNumVertice()].getListaAdy().size(); i++)
+                {
+                    int verticeAdy = tablaAdy[sigVertice.getNumVertice()].getListaAdy().get(i).getDestino();
+
+                    if (!verticesRecorridos.contains(tablaAdy[verticeAdy]))
+                    {
+                        verticesRecorridos.add(tablaAdy[verticeAdy]);
+                        colaRecorrido.insertLast(tablaAdy[verticeAdy]);
+                    }
+                }
+
+            }
+
+        }
+
+    }
+
     public void mostrarGradoListaAdy()
     {
         for (int i = 0; i < numeroVertices; i++)
@@ -103,6 +138,11 @@ public class GrafoListaAdy<E>
 
             System.out.println("");
         }
+    }
+
+    public boolean isEmpty()
+    {
+        return numeroVertices == 0;
     }
 
     public int getNumVerts()
