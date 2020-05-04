@@ -18,10 +18,14 @@ public class PruebaGrafoListaAdy
         grafo.nuevoVertice("Lucas");
         grafo.nuevoVertice("Emmanuel");
 
+        grafo.nuevoArco("Antonio", "Carlos");
         grafo.nuevoArco("Nicolás", "Carlos");
-        grafo.nuevoArco("Nicolás", "Emmanuel");
-        grafo.nuevoArco("Carlos", "Lucas");
-        grafo.recorridoAnchura();
+        grafo.nuevoArco("Carlos", "Javier");
+        grafo.nuevoArco("Carlos", "Antonio");
+        grafo.nuevoArco("Antonio", "Emmanuel");
+        grafo.nuevoArco("Antonio", "Lucas");
+        grafo.nuevoArco("Javier", "Emmanuel");
+        grafo.mostrarListaAdy();
     }
 
 }

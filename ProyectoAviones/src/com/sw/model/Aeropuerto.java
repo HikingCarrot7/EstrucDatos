@@ -1,8 +1,8 @@
-package aeropuerto;
+package com.sw.model;
 
-import deque.DequeList;
-import dequestack.DequeStack;
-import excepciones.DequeEmptyException;
+import com.sw.util.DequeEmptyException;
+import com.sw.util.DequeList;
+import com.sw.util.DequeStack;
 
 public class Aeropuerto
 {

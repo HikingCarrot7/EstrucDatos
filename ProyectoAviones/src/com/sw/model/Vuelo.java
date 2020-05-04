@@ -1,4 +1,4 @@
-package aeropuerto;
+package com.sw.model;
 
 public class Vuelo
 {

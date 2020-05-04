@@ -1,5 +1,8 @@
-package aeropuerto;
+package com.sw.main;
 
+import com.sw.controller.Controlador;
+import com.sw.model.Aeropuerto;
+import com.sw.view.VistaPrincipal;
 import java.awt.EventQueue;
 
 public class PruebaAeropuerto

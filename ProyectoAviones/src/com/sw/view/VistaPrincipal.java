@@ -1,4 +1,4 @@
-package aeropuerto;
+package com.sw.view;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -65,9 +65,7 @@ public class VistaPrincipal extends javax.swing.JFrame
         jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(500, 400));
         setMinimumSize(new java.awt.Dimension(500, 400));
-        setPreferredSize(new java.awt.Dimension(500, 400));
 
         jPanel4.setLayout(new javax.swing.BoxLayout(jPanel4, javax.swing.BoxLayout.Y_AXIS));
         jPanel4.add(filler5);

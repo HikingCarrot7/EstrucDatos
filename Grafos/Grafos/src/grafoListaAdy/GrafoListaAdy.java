@@ -124,7 +124,7 @@ public class GrafoListaAdy<E>
 
     }
 
-    public void mostrarGradoListaAdy()
+    public void mostrarListaAdy()
     {
         for (int i = 0; i < numeroVertices; i++)
         {
