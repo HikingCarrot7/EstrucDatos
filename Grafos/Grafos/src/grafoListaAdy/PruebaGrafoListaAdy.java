@@ -12,20 +12,22 @@ public class PruebaGrafoListaAdy
         GrafoListaAdy<String> grafo = new GrafoListaAdy<>(10);
 
         grafo.nuevoVertice("Nicolás");
-        grafo.nuevoVertice("Carlos");
-        grafo.nuevoVertice("Javier");
-        grafo.nuevoVertice("Antonio");
-        grafo.nuevoVertice("Lucas");
-        grafo.nuevoVertice("Emmanuel");
+        grafo.nuevoVertice("Jimmy");
+        grafo.nuevoVertice("Rafael");
+        grafo.nuevoVertice("Charly");
+        grafo.nuevoVertice("René");
+        grafo.nuevoVertice("Axel");
+        grafo.nuevoVertice("Alejandra");
 
-        grafo.nuevoArco("Antonio", "Carlos");
-        grafo.nuevoArco("Nicolás", "Carlos");
-        grafo.nuevoArco("Carlos", "Javier");
-        grafo.nuevoArco("Carlos", "Antonio");
-        grafo.nuevoArco("Antonio", "Emmanuel");
-        grafo.nuevoArco("Antonio", "Lucas");
-        grafo.nuevoArco("Javier", "Emmanuel");
-        grafo.mostrarListaAdy();
+        grafo.nuevoArco("Nicolás", "Jimmy");
+        grafo.nuevoArco("Jimmy", "Alejandra");
+        grafo.nuevoArco("Jimmy", "Axel");
+        grafo.nuevoArco("Jimmy", "René");
+        grafo.nuevoArco("Axel", "Nicolás");
+        grafo.nuevoArco("Axel", "Charly");
+        grafo.nuevoArco("Axel", "Rafael");
+
+        grafo.recorridoAnchura();
     }
 
 }

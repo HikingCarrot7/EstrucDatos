@@ -94,6 +94,8 @@ public class GrafoListaAdy<E>
 
     public void recorridoAnchura()
     {
+        StringBuilder recorrido = new StringBuilder();
+
         if (!isEmpty())
         {
             Deque<VerticeAdy<E>> colaRecorrido = new DequeList<>();
@@ -101,11 +103,12 @@ public class GrafoListaAdy<E>
 
             colaRecorrido.insertFirst(tablaAdy[0]);
             verticesRecorridos.add(tablaAdy[0]);
+            System.out.println("Empezamos con el vértice: " + tablaAdy[0].getDato());
 
             while (!colaRecorrido.isEmpty())
             {
                 Vertice<E> sigVertice = colaRecorrido.removeFirst();
-                System.out.println(sigVertice.getDato());
+                recorrido.append(sigVertice.getDato()).append("->");
 
                 for (int i = 0; i < tablaAdy[sigVertice.getNumVertice()].getListaAdy().size(); i++)
                 {
@@ -114,6 +117,7 @@ public class GrafoListaAdy<E>
                     if (!verticesRecorridos.contains(tablaAdy[verticeAdy]))
                     {
                         verticesRecorridos.add(tablaAdy[verticeAdy]);
+                        System.out.println("Se ha recorrido el vértice: " + tablaAdy[verticeAdy].getDato());
                         colaRecorrido.insertLast(tablaAdy[verticeAdy]);
                     }
                 }
@@ -122,6 +126,8 @@ public class GrafoListaAdy<E>
 
         }
 
+        System.out.println("\nRecorrido en anchura");
+        System.out.println(recorrido.substring(0, recorrido.length() - "->".length()));
     }
 
     public void mostrarListaAdy()

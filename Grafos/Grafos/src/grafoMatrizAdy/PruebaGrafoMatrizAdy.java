@@ -4,7 +4,7 @@ package grafoMatrizAdy;
  *
  * @author Nicolás
  */
-public class PruebaGrafo
+public class PruebaGrafoMatrizAdy
 {
 
     public static void main(String[] args)
@@ -15,15 +15,22 @@ public class PruebaGrafo
         grafo.nuevoVertice("Antonio");
         grafo.nuevoVertice("Javier");
         grafo.nuevoVertice("Carlos");
+        grafo.nuevoVertice("Juan");
+        grafo.nuevoVertice("Eusebio");
+        grafo.nuevoVertice("Emmanuel");
 
         grafo.nuevoArco("Nicolás", "Antonio");
         grafo.nuevoArco("Nicolás", "Carlos");
         grafo.nuevoArco("Carlos", "Antonio");
         grafo.nuevoArco("Carlos", "Javier");
-
-        grafo.mostrarMatrizAdy();
+        grafo.nuevoArco("Nicolás", "Juan");
+        grafo.nuevoArco("Juan", "Emmanuel");
+        grafo.nuevoArco("Eusebio", "Emmanuel");
 
         grafo.recorridoAnchura();
+
+        System.out.println("\nMatriz de adyacencia");
+        grafo.mostrarMatrizAdy();
     }
 
 }

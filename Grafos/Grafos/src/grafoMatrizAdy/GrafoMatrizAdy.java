@@ -72,6 +72,8 @@ public class GrafoMatrizAdy<E>
 
     public void recorridoAnchura()
     {
+        StringBuilder recorrido = new StringBuilder();
+
         if (!isEmpty())
         {
             Deque<Vertice<E>> colaRecorrido = new DequeList<>();
@@ -79,16 +81,18 @@ public class GrafoMatrizAdy<E>
 
             colaRecorrido.insertFirst(vertices[0]);
             verticesRecorridos.add(vertices[0]);
+            System.out.println("Empezamos con el vértice: " + vertices[0].getDato());
 
             while (!colaRecorrido.isEmpty())
             {
                 Vertice<E> sigVertice = colaRecorrido.removeFirst();
-                System.out.println(sigVertice.getDato());
+                recorrido.append(sigVertice.getDato()).append("->");
 
                 for (int i = 0; i < matrizAdy[sigVertice.getNumVertice()].length; i++)
                     if (matrizAdy[sigVertice.getNumVertice()][i] == 1 && !verticesRecorridos.contains(vertices[i]))
                     {
                         verticesRecorridos.add(vertices[i]);
+                        System.out.println("Se ha recorrido el vértice: " + vertices[i].getDato());
                         colaRecorrido.insertLast(vertices[i]);
                     }
 
@@ -96,6 +100,8 @@ public class GrafoMatrizAdy<E>
 
         }
 
+        System.out.println("\nRecorrido en anchura");
+        System.out.println(recorrido.substring(0, recorrido.length() - "->".length()));
     }
 
     public void mostrarMatrizAdy()
