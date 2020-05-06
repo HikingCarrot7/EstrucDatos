@@ -28,6 +28,9 @@ public class PruebaGrafoListaAdy
         grafo.nuevoArco("Axel", "Rafael");
 
         grafo.recorridoAnchura();
+        System.out.println("\n\n");
+        grafo.recorridoProfundidad();
+
     }
 
 }

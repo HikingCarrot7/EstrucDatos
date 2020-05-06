@@ -56,7 +56,7 @@ public class Buscador
     }
 
     @SuppressWarnings("unchecked")
-    private LinkedList<Integer> buscarMasCoincidencias(Arbol arbol, LinkedList<Integer> coincidenciasAcumuladas, Comparable<?> datoABuscar)
+    private <T> LinkedList<Integer> buscarMasCoincidencias(Arbol arbol, LinkedList<Integer> coincidenciasAcumuladas, Comparable<?> datoABuscar)
     {
         LinkedList<Integer> busqueda = (LinkedList<Integer>) arbol.buscar(datoABuscar);
         LinkedList<Integer> mergedList = LinkedList.mergeLists(coincidenciasAcumuladas, busqueda);

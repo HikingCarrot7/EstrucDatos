@@ -3,15 +3,15 @@ package com.sw.util;
 /**
  *
  * @author Nicolás
- * @param <E>
+ * @param <T>
  */
-public class SortableLinkedList<E extends Comparable<E>> extends LinkedList<E>
+public class SortableLinkedList<T extends Comparable<? super T>> extends LinkedList<T>
 {
 
-    protected void addInOrder(E target)
+    protected void addInOrder(T target)
     {
-        Predecessor<E> prev = this;
-        ListNode<E> node = getNext();
+        Predecessor<T> prev = this;
+        ListNode<T> node = getNext();
 
         while (node != null && node.getDato().compareTo(target) < 0)
         {
@@ -22,7 +22,7 @@ public class SortableLinkedList<E extends Comparable<E>> extends LinkedList<E>
         prev.setNext(new ListNode<>(node, target));
     }
 
-    public static <T extends Comparable<T>> void insertionSort(LinkedList<T> listaAOrdenar)
+    public static <T extends Comparable<? super T>> void insertionSort(LinkedList<T> listaAOrdenar)
     {
         SortableLinkedList<T> newList = new SortableLinkedList<>();
 

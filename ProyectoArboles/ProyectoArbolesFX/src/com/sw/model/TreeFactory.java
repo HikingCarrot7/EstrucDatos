@@ -13,6 +13,13 @@ import com.sw.util.LinkedList;
 public class TreeFactory implements Factory
 {
 
+    private static TreeFactory instance;
+
+    private TreeFactory()
+    {
+
+    }
+
     @Override
     public Arbol<LinkedList<Integer>, String> crearArbolNombres(String tipoArbol)
     {
@@ -59,6 +66,14 @@ public class TreeFactory implements Factory
             default:
                 throw new AssertionError();
         }
+    }
+
+    public synchronized static TreeFactory getInstance()
+    {
+        if (instance == null)
+            instance = new TreeFactory();
+
+        return instance;
     }
 
 }

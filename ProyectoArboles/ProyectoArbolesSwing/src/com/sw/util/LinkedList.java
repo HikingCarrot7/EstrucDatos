@@ -29,7 +29,7 @@ public class LinkedList<E> implements List<E>, Predecessor<E>
         size = lista.size;
     }
 
-    public static <T extends Comparable<T>> LinkedList<T> removeDuplicates(LinkedList<T> lista, LinkedList<T> listaAAlmacenarDuplicados)
+    public static <T extends Comparable<? super T>> LinkedList<T> removeDuplicates(LinkedList<T> lista, LinkedList<T> listaAAlmacenarDuplicados)
     {
         LinkedList<T> list = new LinkedList<>();
         list.setFirst(removeDuplicatesHelper(lista.first, listaAAlmacenarDuplicados));
@@ -37,7 +37,7 @@ public class LinkedList<E> implements List<E>, Predecessor<E>
         return list;
     }
 
-    private static <T extends Comparable<T>> ListNode<T> removeDuplicatesHelper(ListNode<T> head, LinkedList<T> listaAAlmacenarRepetidos)
+    private static <T extends Comparable<? super T>> ListNode<T> removeDuplicatesHelper(ListNode<T> head, LinkedList<T> listaAAlmacenarRepetidos)
     {
         if (head == null || head.getNext() == null)
             return head;
@@ -50,7 +50,7 @@ public class LinkedList<E> implements List<E>, Predecessor<E>
         return head.getDato() == head.getNext().getDato() ? head.getNext() : head;
     }
 
-    public static <T extends Comparable<T>> LinkedList<T> mergeLists(LinkedList<T> lista1, LinkedList<T> lista2)
+    public static <T extends Comparable<? super T>> LinkedList<T> mergeLists(LinkedList<T> lista1, LinkedList<T> lista2)
     {
         LinkedList<T> mergedList = new LinkedList<>();
         mergedList.setFirst(mergeListsHelper(new LinkedList<>(lista1).first, new LinkedList<>(lista2).first));
@@ -58,7 +58,7 @@ public class LinkedList<E> implements List<E>, Predecessor<E>
         return mergedList;
     }
 
-    private static <T extends Comparable<T>> ListNode<T> mergeListsHelper(ListNode<T> head1, ListNode<T> head2)
+    private static <T extends Comparable<? super T>> ListNode<T> mergeListsHelper(ListNode<T> head1, ListNode<T> head2)
     {
         if (head1 == null)
             return head2;

@@ -2,6 +2,7 @@ package grafoListaAdy;
 
 import grafoMatrizAdy.Vertice;
 import java.util.ArrayList;
+import java.util.List;
 import util.Deque;
 import util.DequeList;
 
@@ -128,6 +129,42 @@ public class GrafoListaAdy<E>
 
         System.out.println("\nRecorrido en anchura");
         System.out.println(recorrido.substring(0, recorrido.length() - "->".length()));
+    }
+
+    public void recorridoProfundidad()
+    {
+        recorridoProfundidad(0);
+    }
+
+    public void recorridoProfundidad(int numeroVertice)
+    {
+        Deque<Vertice<E>> pila = new DequeList<>();
+        List<Vertice<E>> verticesRecorridos = new ArrayList<>();
+        pila.insertLast(tablaAdy[numeroVertice]);
+        verticesRecorridos.add(tablaAdy[numeroVertice]);
+        recorridoProfundidad(pila, verticesRecorridos);
+    }
+
+    private void recorridoProfundidad(Deque<Vertice<E>> pila, List<Vertice<E>> verticesRecorridos)
+    {
+        if (!pila.isEmpty())
+        {
+            Vertice<E> verticeActual = pila.removeLast();
+
+            for (int i = 0; i < tablaAdy[verticeActual.getNumVertice()].getListaAdy().size(); i++)
+            {
+                int verticeAdy = tablaAdy[verticeActual.getNumVertice()].getListaAdy().get(i).getDestino();
+
+                if (!verticesRecorridos.contains(tablaAdy[verticeAdy]))
+                {
+                    pila.insertLast(tablaAdy[verticeAdy]);
+                    verticesRecorridos.add(tablaAdy[verticeAdy]);
+                }
+            }
+
+            System.out.println("Se ha recorrido el vértice: " + verticeActual.getDato());
+            recorridoProfundidad(pila, verticesRecorridos);
+        }
     }
 
     public void mostrarListaAdy()

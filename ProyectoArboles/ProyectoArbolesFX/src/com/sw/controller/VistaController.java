@@ -83,13 +83,13 @@ public class VistaController implements Initializable, Controller
 
     private Stage vista;
     private final SeleccionadorArchivos seleccionadorArchivos;
-    private final Factory factory;
+    private final Factory treeFactory;
     private Egresado[] egresados;
 
     public VistaController()
     {
         this.seleccionadorArchivos = SeleccionadorArchivos.getInstance();
-        this.factory = new TreeFactory();
+        this.treeFactory = TreeFactory.getInstance();
     }
 
     @Override
@@ -137,8 +137,7 @@ public class VistaController implements Initializable, Controller
         tablaEgresados.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("promedio"));
     }// </editor-fold>
 
-    @FXML
-    private void accionBtnBuscarDirectorio(ActionEvent e)
+    @FXML private void accionBtnBuscarDirectorio(ActionEvent e)
     {
         File file = seleccionadorArchivos.seleccionarArchivo(vista, "csv and xls files", "*.csv", "*.xls");
 
@@ -146,8 +145,7 @@ public class VistaController implements Initializable, Controller
             txtRuta.setText(file.getAbsolutePath());
     }
 
-    @FXML
-    private void accionBtnGenerar(ActionEvent e)
+    @FXML private void accionBtnGenerar(ActionEvent e)
     {
         habilitarCheckBoxes(false);
         btnBuscarDirectorio.setDisable(true);
@@ -157,10 +155,9 @@ public class VistaController implements Initializable, Controller
         rellenarArboles();
     }
 
-    @FXML
-    private void accionBtnBuscar(ActionEvent e)
+    @FXML private void accionBtnBuscar(ActionEvent e)
     {
-        if (ningunOpcionSeleccionada())
+        if (ningunaOpcionSeleccionada())
             mostrarTodosEgresados();
 
         else
@@ -170,9 +167,9 @@ public class VistaController implements Initializable, Controller
     private void crearArboles()
     {
         String arbolACrear = getArbolSeleccionado();
-        arbolNombres = factory.crearArbolNombres(arbolACrear);
-        arbolProfesiones = factory.crearArbolProfesiones(arbolACrear);
-        arbolPromedios = factory.crearArbolPromedios(arbolACrear);
+        arbolNombres = treeFactory.crearArbolNombres(arbolACrear);
+        arbolProfesiones = treeFactory.crearArbolProfesiones(arbolACrear);
+        arbolPromedios = treeFactory.crearArbolPromedios(arbolACrear);
     }
 
     private void rellenarArboles()
@@ -363,7 +360,7 @@ public class VistaController implements Initializable, Controller
         return chbPromedio.isSelected();
     }
 
-    private boolean ningunOpcionSeleccionada()
+    private boolean ningunaOpcionSeleccionada()
     {
         return !(nombreSeleccionado() || profesionSeleccionado() || promedioSeleccionado());
     }

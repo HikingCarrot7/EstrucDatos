@@ -27,7 +27,11 @@ public class PruebaGrafoMatrizAdy
         grafo.nuevoArco("Juan", "Emmanuel");
         grafo.nuevoArco("Eusebio", "Emmanuel");
 
+        System.out.println("Recorrido en anchura");
         grafo.recorridoAnchura();
+
+        System.out.println("\n\nRecorrido en profundidad");
+        grafo.recorridoProfundidad();
 
         System.out.println("\nMatriz de adyacencia");
         grafo.mostrarMatrizAdy();
