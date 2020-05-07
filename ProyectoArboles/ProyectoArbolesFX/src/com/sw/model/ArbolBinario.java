@@ -1,7 +1,7 @@
 package com.sw.model;
 
 import com.sw.model.arbolbb.NodoBinario;
-import com.sw.util.LinkedList;
+import com.sw.model.util.LinkedList;
 
 /**
  *

@@ -105,6 +105,7 @@ public class Vista extends JFrame
 
         jSplitPane1.setDividerLocation(385);
         jSplitPane1.setContinuousLayout(true);
+        jSplitPane1.setOneTouchExpandable(true);
 
         jSplitPane2.setDividerLocation(400);
         jSplitPane2.setOrientation(JSplitPane.VERTICAL_SPLIT);

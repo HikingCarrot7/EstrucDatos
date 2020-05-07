@@ -2,7 +2,7 @@ package com.sw.model.arbolb;
 
 import com.sw.model.Arbol;
 import com.sw.model.exceptions.ItemNotFoundException;
-import com.sw.util.LinkedList;
+import com.sw.model.util.LinkedList;
 
 /**
  *

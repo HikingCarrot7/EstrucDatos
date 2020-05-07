@@ -4,7 +4,7 @@ import com.sw.controller.VistaController;
 import com.sw.model.arbolavl.ArbolAVL;
 import com.sw.model.arbolb.ArbolB;
 import com.sw.model.arbolbb.ArbolBB;
-import com.sw.util.LinkedList;
+import com.sw.model.util.LinkedList;
 
 /**
  *

@@ -1,6 +1,6 @@
 package com.sw.model.arbolbb;
 
-import com.sw.util.Node;
+import com.sw.model.util.Node;
 
 /**
  *

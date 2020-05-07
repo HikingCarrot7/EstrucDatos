@@ -11,7 +11,7 @@ import com.sw.model.exceptions.NohayCoincidenciasException;
 import com.sw.model.exceptions.RutaInvalidaException;
 import com.sw.model.persistence.DAO;
 import com.sw.model.persistence.Loader;
-import com.sw.util.LinkedList;
+import com.sw.model.util.LinkedList;
 import java.awt.Toolkit;
 import java.io.File;
 import java.net.URL;

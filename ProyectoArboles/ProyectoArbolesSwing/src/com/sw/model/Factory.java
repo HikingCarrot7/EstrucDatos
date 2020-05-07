@@ -1,6 +1,6 @@
 package com.sw.model;
 
-import com.sw.util.LinkedList;
+import com.sw.model.util.LinkedList;
 
 /**
  *
