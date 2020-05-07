@@ -30,7 +30,6 @@ public class PruebaGrafoListaAdy
         grafo.recorridoAnchura();
         System.out.println("\n\n");
         grafo.recorridoProfundidad();
-
     }
 
 }

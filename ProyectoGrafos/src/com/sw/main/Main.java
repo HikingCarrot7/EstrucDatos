@@ -1,5 +1,6 @@
 package com.sw.main;
 
+import com.sw.controller.VistaController;
 import com.sw.view.Vista;
 import java.awt.EventQueue;
 
@@ -17,6 +18,7 @@ public class Main
             Vista vista = new Vista();
             vista.setLocationRelativeTo(null);
             vista.setVisible(true);
+            new VistaController(vista);
         });
     }
 

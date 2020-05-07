@@ -1,4 +1,4 @@
-package com.sw.util;
+package com.sw.model.util;
 
 public interface Deque<E>
 {

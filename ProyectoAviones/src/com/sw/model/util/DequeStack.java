@@ -1,4 +1,4 @@
-package com.sw.util;
+package com.sw.model.util;
 
 public class DequeStack<E> extends LinkedStack<E>
 {

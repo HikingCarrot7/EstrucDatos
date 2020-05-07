@@ -2,7 +2,7 @@ package com.sw.view;
 
 import com.sw.model.Aeropuerto;
 import com.sw.model.Vuelo;
-import com.sw.util.DequeList;
+import com.sw.model.util.DequeList;
 import java.awt.*;
 import java.awt.geom.GeneralPath;
 import javax.swing.JPanel;

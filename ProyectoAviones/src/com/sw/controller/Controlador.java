@@ -1,7 +1,7 @@
 package com.sw.controller;
 
 import com.sw.model.Aeropuerto;
-import com.sw.util.DequeEmptyException;
+import com.sw.model.util.DequeEmptyException;
 import com.sw.view.Esquema;
 import com.sw.view.VistaPrincipal;
 import java.util.InputMismatchException;

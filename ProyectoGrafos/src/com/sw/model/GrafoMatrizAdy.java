@@ -187,19 +187,13 @@ public class GrafoMatrizAdy<E> extends Grafo<E>
         return recorrido;
     }
 
-    public void mostrarMatrizAdy()
+    @Override
+    public ArrayList<Arco> getArcos()
     {
-        for (int i = 0; i < numeroVertices; i++)
-        {
-            System.out.print(String.format("%15s:", vertices[i].getDato()));
-
-            for (int j = 0; j < numeroVertices; j++)
-                System.out.print(String.format("[%d]", matrizAdy[i][j]));
-
-            System.out.println("");
-        }
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
     public Vertice<E>[] getVertices()
     {
         return vertices;

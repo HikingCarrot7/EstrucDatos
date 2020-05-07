@@ -1,7 +1,6 @@
 package com.sw.view;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -48,7 +47,7 @@ public class Vista extends JFrame
         jSplitPane2 = new JSplitPane();
         jPanel3 = new JPanel();
         jScrollPane1 = new JScrollPane();
-        jPanel4 = new JPanel();
+        panelGraficoGrafo = new JPanel();
         jPanel5 = new JPanel();
         jScrollPane2 = new JScrollPane();
         jPanel6 = new JPanel();
@@ -115,20 +114,10 @@ public class Vista extends JFrame
         jPanel3.setBorder(BorderFactory.createTitledBorder("Grafo"));
         jPanel3.setLayout(new BorderLayout());
 
-        jPanel4.setBackground(new Color(204, 0, 102));
-        jPanel4.setMinimumSize(new Dimension(0, 0));
-        jPanel4.setPreferredSize(new Dimension(0, 0));
-
-        GroupLayout jPanel4Layout = new GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(jPanel4Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 393, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(jPanel4Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 374, Short.MAX_VALUE)
-        );
-
-        jScrollPane1.setViewportView(jPanel4);
+        panelGraficoGrafo.setMinimumSize(new Dimension(0, 0));
+        panelGraficoGrafo.setPreferredSize(new Dimension(0, 0));
+        panelGraficoGrafo.setLayout(new BorderLayout());
+        jScrollPane1.setViewportView(panelGraficoGrafo);
 
         jPanel3.add(jScrollPane1, BorderLayout.CENTER);
 
@@ -137,19 +126,9 @@ public class Vista extends JFrame
         jPanel5.setBorder(BorderFactory.createTitledBorder("Recorrido"));
         jPanel5.setLayout(new BorderLayout());
 
-        jPanel6.setBackground(new Color(255, 102, 102));
         jPanel6.setMinimumSize(new Dimension(0, 0));
         jPanel6.setPreferredSize(new Dimension(0, 0));
-
-        GroupLayout jPanel6Layout = new GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(jPanel6Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 393, Short.MAX_VALUE)
-        );
-        jPanel6Layout.setVerticalGroup(jPanel6Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 167, Short.MAX_VALUE)
-        );
-
+        jPanel6.setLayout(new BorderLayout());
         jScrollPane2.setViewportView(jPanel6);
 
         jPanel5.add(jScrollPane2, BorderLayout.CENTER);
@@ -541,6 +520,11 @@ public class Vista extends JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public JPanel getPanelGraficoGrafo()
+    {
+        return panelGraficoGrafo;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private ButtonGroup grupoBusqueda;
     private ButtonGroup grupoCreacionGrafo;
@@ -570,7 +554,6 @@ public class Vista extends JFrame
     private JPanel jPanel1;
     private JPanel jPanel2;
     private JPanel jPanel3;
-    private JPanel jPanel4;
     private JPanel jPanel5;
     private JPanel jPanel6;
     private JPanel jPanel7;
@@ -598,5 +581,6 @@ public class Vista extends JFrame
     private JTextField jTextField7;
     private JTextField jTextField8;
     private JTextField jTextField9;
+    private JPanel panelGraficoGrafo;
     // End of variables declaration//GEN-END:variables
 }

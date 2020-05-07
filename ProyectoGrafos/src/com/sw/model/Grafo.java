@@ -15,7 +15,7 @@ public abstract class Grafo<E>
 {
 
     protected int numeroVertices;
-    public final static int MAX_NUMERO_VERTICES = 10;
+    public final static int MAX_NUMERO_VERTICES = 20;
 
     public abstract void nuevoVertice(E datoVertice) throws GrafoLlenoException, VerticeYaExisteException;
 
@@ -30,6 +30,10 @@ public abstract class Grafo<E>
     public abstract ArrayList<E> recorridoAnchura();
 
     public abstract ArrayList<E> recorridoProfundidad();
+
+    public abstract Vertice<E>[] getVertices();
+
+    public abstract ArrayList<Arco> getArcos();
 
     public boolean buscarAnchura(E dato)
     {

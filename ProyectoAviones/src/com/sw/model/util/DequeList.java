@@ -1,4 +1,4 @@
-package com.sw.util;
+package com.sw.model.util;
 
 public class DequeList<E> extends DoublyLinkedList<E> implements Deque<E>
 {
