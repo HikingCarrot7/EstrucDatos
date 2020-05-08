@@ -91,53 +91,47 @@ public class GrafoMatrizAdy<E> extends Grafo<E>
     }
 
     @Override
-    public void nuevoArco(E inicio, E destino) throws VerticeNoExistenteException
+    public void nuevoArco(E origen, E destino) throws VerticeNoExistenteException
     {
-        int verticeInicio = numeroVertice(inicio);
-        int verticeDestino = numeroVertice(destino);
+        if (!sonAdyacentes(origen, destino))
+        {
+            int verticeOrigen = numeroVertice(origen);
+            int verticeDestino = numeroVertice(destino);
 
-        if (verticeInicio < 0)
-            throw new VerticeNoExistenteException("El vértice " + inicio + " no existe!");
-
-        if (verticeDestino < 0)
-            throw new VerticeNoExistenteException("El vértice " + destino + " no existe!");
-
-        matrizAdy[verticeInicio][verticeDestino] = 1;
-        matrizAdy[verticeDestino][verticeInicio] = 1;
+            matrizAdy[verticeOrigen][verticeDestino] = 1;
+            matrizAdy[verticeDestino][verticeOrigen] = 1;
+        }
     }
 
     @Override
-    public void eliminarArco(E inicio, E destino) throws ArcoNoExistenteException, VerticeNoExistenteException
+    public void eliminarArco(E origen, E destino) throws ArcoNoExistenteException, VerticeNoExistenteException
     {
-        int verticeInicio = numeroVertice(inicio);
-        int verticeDestino = numeroVertice(destino);
+        if (sonAdyacentes(origen, destino))
+        {
+            int verticeOrigen = numeroVertice(origen);
+            int verticeDestino = numeroVertice(destino);
 
-        if (verticeInicio < 0)
-            throw new VerticeNoExistenteException("El vértice " + inicio + " no existe!");
+            if (matrizAdy[verticeOrigen][verticeDestino] == 0)
+                throw new ArcoNoExistenteException();
 
-        if (verticeDestino < 0)
-            throw new VerticeNoExistenteException("El vértice " + destino + " no existe!");
-
-        if (matrizAdy[verticeInicio][verticeDestino] == 0)
-            throw new ArcoNoExistenteException();
-
-        matrizAdy[verticeInicio][verticeDestino] = 0;
-        matrizAdy[verticeDestino][verticeInicio] = 0;
+            matrizAdy[verticeOrigen][verticeDestino] = 0;
+            matrizAdy[verticeDestino][verticeOrigen] = 0;
+        }
     }
 
     @Override
-    public boolean sonAdyacentes(E inicio, E destino) throws VerticeNoExistenteException
+    public boolean sonAdyacentes(E origen, E destino) throws VerticeNoExistenteException
     {
-        int verticeInicio = numeroVertice(inicio);
+        int verticeOrigen = numeroVertice(origen);
         int verticeDestino = numeroVertice(destino);
 
-        if (verticeInicio < 0)
-            throw new VerticeNoExistenteException("El vértice " + inicio + " no existe!");
+        if (verticeOrigen < 0)
+            throw new VerticeNoExistenteException("El vértice " + origen + " no existe!");
 
         if (verticeDestino < 0)
             throw new VerticeNoExistenteException("El vértice " + destino + " no existe!");
 
-        return matrizAdy[verticeInicio][verticeDestino] == 1;
+        return matrizAdy[verticeOrigen][verticeDestino] == 1;
     }
 
     @Override
@@ -153,19 +147,19 @@ public class GrafoMatrizAdy<E> extends Grafo<E>
     }
 
     @Override
-    public ArrayList<E> recorridoAnchura()
+    public List<E> recorridoAnchura()
     {
         return recorridoAnchura(0);
     }
 
-    public ArrayList<E> recorridoAnchura(int numeroVertice)
+    public List<E> recorridoAnchura(int numeroVertice)
     {
-        ArrayList<E> recorrido = new ArrayList<>();
+        List<E> recorrido = new ArrayList<>();
 
         if (!isEmpty())
         {
             Deque<Vertice<E>> colaRecorrido = new DequeList<>();
-            ArrayList<Vertice<E>> verticesRecorridos = new ArrayList<>();
+            List<Vertice<E>> verticesRecorridos = new ArrayList<>();
 
             colaRecorrido.insertFirst(vertices[numeroVertice]);
             verticesRecorridos.add(vertices[numeroVertice]);
@@ -189,14 +183,14 @@ public class GrafoMatrizAdy<E> extends Grafo<E>
     }
 
     @Override
-    public ArrayList<E> recorridoProfundidad()
+    public List<E> recorridoProfundidad()
     {
         return recorridoProfundidad(0);
     }
 
-    public ArrayList<E> recorridoProfundidad(int numeroVertice)
+    public List<E> recorridoProfundidad(int numeroVertice)
     {
-        ArrayList<E> recorrido = new ArrayList<>();
+        List<E> recorrido = new ArrayList<>();
         Deque<Vertice<E>> pila = new DequeList<>();
         List<Vertice<E>> verticesRecorridos = new ArrayList<>();
 
@@ -206,7 +200,7 @@ public class GrafoMatrizAdy<E> extends Grafo<E>
         return recorridoProfundidad(pila, verticesRecorridos, recorrido);
     }
 
-    private ArrayList<E> recorridoProfundidad(Deque<Vertice<E>> pila, List<Vertice<E>> verticesRecorridos, ArrayList<E> recorrido)
+    private List<E> recorridoProfundidad(Deque<Vertice<E>> pila, List<Vertice<E>> verticesRecorridos, List<E> recorrido)
     {
         if (!pila.isEmpty())
         {
@@ -240,7 +234,7 @@ public class GrafoMatrizAdy<E> extends Grafo<E>
     }
 
     @Override
-    public ArrayList<Arco> getArcos()
+    public List<Arco> getArcos()
     {
         ArrayList<Arco> arcos = new ArrayList<>();
 

@@ -77,6 +77,9 @@ public class Arco
 
         final Arco other = (Arco) obj;
 
+        if (this.origen == other.getDestino() && this.destino == other.getOrigen())
+            return true;
+
         if (this.destino != other.getDestino())
             return false;
 

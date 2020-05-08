@@ -5,7 +5,7 @@ import com.sw.model.exceptions.GrafoLlenoException;
 import com.sw.model.exceptions.NoHayCoincidenciasException;
 import com.sw.model.exceptions.VerticeNoExistenteException;
 import com.sw.model.exceptions.VerticeYaExisteException;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -30,9 +30,9 @@ public abstract class Grafo<E>
 
     public abstract int numeroVertice(E dato);
 
-    public abstract ArrayList<E> recorridoAnchura();
+    public abstract List<E> recorridoAnchura();
 
-    public abstract ArrayList<E> recorridoProfundidad();
+    public abstract List<E> recorridoProfundidad();
 
     public abstract Vertice<E>[] getVertices();
 
@@ -44,7 +44,7 @@ public abstract class Grafo<E>
         throw new ArcoNoExistenteException();
     }
 
-    public abstract ArrayList<Arco> getArcos();
+    public abstract List<Arco> getArcos();
 
     public int buscarAnchura(E dato) throws NoHayCoincidenciasException
     {

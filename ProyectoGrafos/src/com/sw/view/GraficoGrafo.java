@@ -14,7 +14,7 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
-import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JPanel;
 
 /**
@@ -70,7 +70,7 @@ public final class GraficoGrafo extends JPanel
     private void dibujarGrafo(Graphics2D g)
     {
         Vertice<?>[] vertices = grafo.getVertices();
-        ArrayList<Arco> arcos = grafo.getArcos();
+        List<Arco> arcos = grafo.getArcos();
 
         arcos.forEach(arco -> dibujarArco(g, coordenadasVertices[arco.getOrigen()], coordenadasVertices[arco.getDestino()], ARCO_COLOR));
 

@@ -18,7 +18,7 @@ public class GraphFactory implements Factory
     @Override
     public Grafo<String> createGraph(String tipo)
     {
-        return VistaController.GRAFO_MATRIZ_ADYACENCIA.equals(tipo) ? new GrafoMatrizAdy<>() : null;
+        return VistaController.GRAFO_MATRIZ_ADYACENCIA.equals(tipo) ? new GrafoMatrizAdy<>() : new GrafoListaAdy<>();
     }
 
     public synchronized static GraphFactory getInstance()

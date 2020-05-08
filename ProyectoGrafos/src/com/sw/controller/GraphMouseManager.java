@@ -1,6 +1,6 @@
 package com.sw.controller;
 
-import com.sw.model.Utilidades;
+import static com.sw.model.Utilidades.distanciaEntreDosPuntos;
 import com.sw.view.GraficoGrafo;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
@@ -63,7 +63,7 @@ public class GraphMouseManager extends MouseAdapter
         Point[] coordenadas = grafico.getCoordenadas();
 
         for (int i = 0; i < coordenadas.length; i++)
-            if (coordenadas[i] != null && Utilidades.distanciaEntreDosPuntos(coordenadas[i], mouse) <= GraficoGrafo.RADIO_CIRCULO)
+            if (coordenadas[i] != null && distanciaEntreDosPuntos(coordenadas[i], mouse) <= GraficoGrafo.RADIO_CIRCULO)
                 return i;
 
         return -1;

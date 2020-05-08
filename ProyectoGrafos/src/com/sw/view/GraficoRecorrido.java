@@ -10,6 +10,7 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.geom.GeneralPath;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -54,7 +55,7 @@ public final class GraficoRecorrido extends JPanel
         g2d.dispose();
     }
 
-    public void actualizarElementos(ArrayList<?> elementosNuevos)
+    public void actualizarElementos(List<?> elementosNuevos)
     {
         this.elementos.clear();
         this.elementos.addAll(elementosNuevos);
@@ -75,7 +76,6 @@ public final class GraficoRecorrido extends JPanel
 
         if (deboEstirarPanel(MAX_COLUMNS, MAX_ROWS))
             estirarPanel(getNewHeight(MAX_COLUMNS));
-
         else
             normalizarPanel();
 
@@ -112,20 +112,14 @@ public final class GraficoRecorrido extends JPanel
 
     private void estirarPanel(int newHeight)
     {
-        EventQueue.invokeLater(() ->
-        {
-            getParent().setPreferredSize(new Dimension(topParent.getWidth(), newHeight));
-            getParent().revalidate();
-        });
+        getParent().setPreferredSize(new Dimension(topParent.getWidth(), newHeight));
+        getParent().revalidate();
     }
 
     private void normalizarPanel()
     {
-        EventQueue.invokeLater(() ->
-        {
-            setPreferredSize(topParent.getSize());
-            revalidate();
-        });
+        getParent().setPreferredSize(topParent.getSize());
+        getParent().revalidate();
     }
 
     public void repintarGrafico()
