@@ -111,6 +111,8 @@ public class Vista extends JFrame
         jSplitPane2.setOrientation(JSplitPane.VERTICAL_SPLIT);
         jSplitPane2.setResizeWeight(1.0);
         jSplitPane2.setContinuousLayout(true);
+        jSplitPane2.setMinimumSize(new Dimension(150, 99));
+        jSplitPane2.setOneTouchExpandable(true);
 
         jPanel3.setBorder(BorderFactory.createTitledBorder("Grafo"));
         jPanel3.setLayout(new BorderLayout());

@@ -6,6 +6,7 @@ import static com.sw.model.Utilidades.aleatorio;
 import com.sw.model.Vertice;
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Graphics;
@@ -33,14 +34,16 @@ public final class GraficoGrafo extends JPanel
     private final Color MARKED_ARCO_COLOR = Color.MAGENTA;
 
     private final Grafo<?> grafo;
-    private final Point[] coordenadas;
+    private final Point[] coordenadasVertices;
+    private final Redimensionador redimensionador;
     private int idxVerticeMarcado;
     private Arco arcoMarcado;
 
     public GraficoGrafo(Grafo<?> grafo)
     {
         this.grafo = grafo;
-        this.coordenadas = new Point[Grafo.MAX_NUMERO_VERTICES];
+        this.redimensionador = new Redimensionador(this);
+        this.coordenadasVertices = new Point[Grafo.MAX_NUMERO_VERTICES];
         this.idxVerticeMarcado = -1;
         this.arcoMarcado = null;
         setBackground(BACKGROUND_COLOR);
@@ -58,6 +61,9 @@ public final class GraficoGrafo extends JPanel
 
         dibujarGrafo((Graphics2D) g);
 
+        if (!grafo.isEmpty())
+            redimensionador.redimensionar();
+
         g.dispose();
     }
 
@@ -66,10 +72,10 @@ public final class GraficoGrafo extends JPanel
         Vertice<?>[] vertices = grafo.getVertices();
         ArrayList<Arco> arcos = grafo.getArcos();
 
-        arcos.forEach(arco -> dibujarArco(g, coordenadas[arco.getOrigen()], coordenadas[arco.getDestino()], ARCO_COLOR));
+        arcos.forEach(arco -> dibujarArco(g, coordenadasVertices[arco.getOrigen()], coordenadasVertices[arco.getDestino()], ARCO_COLOR));
 
         if (arcoMarcado != null)
-            dibujarArco(g, coordenadas[arcoMarcado.getOrigen()], coordenadas[arcoMarcado.getDestino()], MARKED_ARCO_COLOR);
+            dibujarArco(g, coordenadasVertices[arcoMarcado.getOrigen()], coordenadasVertices[arcoMarcado.getDestino()], MARKED_ARCO_COLOR);
 
         if (idxVerticeMarcado >= 0)
             dibujarVertice(g, vertices[idxVerticeMarcado], MARKED_CIRCLE_COLOR);
@@ -81,8 +87,8 @@ public final class GraficoGrafo extends JPanel
 
     private void dibujarVertice(Graphics2D g, Vertice<?> vertice, Color colorVertice)
     {
-        dibujarCirculo(g, coordenadas[vertice.getNumVertice()], colorVertice);
-        dibujarContenidoVertice(g, coordenadas[vertice.getNumVertice()], vertice.getNumVertice(), vertice.getDato().toString());
+        dibujarCirculo(g, coordenadasVertices[vertice.getNumVertice()], colorVertice);
+        dibujarContenidoVertice(g, coordenadasVertices[vertice.getNumVertice()], vertice.getNumVertice(), vertice.getDato().toString());
     }
 
     private void dibujarCirculo(Graphics2D g, Point coordenada, Color colorCirculo)
@@ -95,12 +101,12 @@ public final class GraficoGrafo extends JPanel
         g.setColor(BACKGROUND_COLOR);
     }
 
-    private void dibujarContenidoVertice(Graphics2D g, Point coordenada, int nVertice, String contenido)
+    private void dibujarContenidoVertice(Graphics2D g, Point coordenadaVertice, int nVertice, String contenido)
     {
         g.setColor(Color.WHITE);
-        dibujarStringEnPunto(g, contenido, coordenada.x, coordenada.y);
+        dibujarStringEnPunto(g, contenido, coordenadaVertice.x, coordenadaVertice.y);
         g.setColor(Color.BLACK);
-        dibujarStringEnPunto(g, String.valueOf(nVertice), coordenada.x, coordenada.y - RADIO_CIRCULO - 10);
+        dibujarStringEnPunto(g, String.valueOf(nVertice), coordenadaVertice.x, coordenadaVertice.y - RADIO_CIRCULO - 10);
         g.setColor(BACKGROUND_COLOR);
     }
 
@@ -114,21 +120,24 @@ public final class GraficoGrafo extends JPanel
 
     public void anadirVerticeAlGrafico(int numVertice)
     {
-        coordenadas[numVertice] = situarVertice();
+        coordenadasVertices[numVertice] = situarVertice();
         repaint();
     }
 
     public void eliminarCoordenadasVertice(int numVertice)
     {
         for (int i = numVertice; i < grafo.getNumeroVertices(); i++)
-            coordenadas[i] = coordenadas[i + 1];
+            coordenadasVertices[i] = coordenadasVertices[i + 1];
 
         repaint();
     }
 
     private Point situarVertice()
     {
-        return new Point(aleatorio(RADIO_CIRCULO + 15, getWidth() - RADIO_CIRCULO), aleatorio(RADIO_CIRCULO + 15, getHeight() - RADIO_CIRCULO));
+        Container topParent = getParent().getParent();
+        return new Point(
+                aleatorio(RADIO_CIRCULO + 15, topParent.getWidth() - RADIO_CIRCULO),
+                aleatorio(RADIO_CIRCULO + 15, topParent.getHeight() - RADIO_CIRCULO));
     }
 
     private void dibujarStringEnPunto(Graphics2D g, String text, Point p)
@@ -171,12 +180,104 @@ public final class GraficoGrafo extends JPanel
 
     public Point[] getCoordenadas()
     {
-        return coordenadas;
+        return coordenadasVertices;
     }
 
     public void repintarGrafico()
     {
         EventQueue.invokeLater(this::repaint);
+    }
+
+    private class Redimensionador
+    {
+
+        private final GraficoGrafo graficoGrafo;
+        private Container parent;
+
+        public Redimensionador(GraficoGrafo graficoGrafo)
+        {
+            this.graficoGrafo = graficoGrafo;
+        }
+
+        private void redimensionar()
+        {
+            EventQueue.invokeLater(() ->
+            {
+                parent = graficoGrafo.getParent();
+
+                if (deboRedimensionarHorizontalmente())
+                    redimensionarHorizontalmente();
+                else
+                    normalizarDimensionHorizontalmente();
+
+                EventQueue.invokeLater(() ->
+                {
+                    if (deboRedimensionarVerticalmente())
+                        redimensionarVerticalmente();
+                    else
+                        normalizarDimensionVerticalmente();
+                });
+            });
+        }
+
+        private void normalizarDimensionHorizontalmente()
+        {
+            Container topParent = parent.getParent();
+            parent.setPreferredSize(new Dimension((int) topParent.getSize().getWidth(), (int) parent.getSize().getHeight()));
+            topParent.revalidate();
+        }
+
+        private void normalizarDimensionVerticalmente()
+        {
+            Container topParent = parent.getParent();
+            parent.setPreferredSize(new Dimension((int) parent.getSize().getWidth(), (int) topParent.getSize().getHeight()));
+            topParent.revalidate();
+        }
+
+        private void redimensionarHorizontalmente()
+        {
+            parent.setPreferredSize(new Dimension(buscarCoordenadaMasAlejadaEnX() + RADIO_CIRCULO, (int) parent.getSize().getHeight()));
+            parent.revalidate();
+        }
+
+        private void redimensionarVerticalmente()
+        {
+            parent.setPreferredSize(new Dimension((int) parent.getSize().getWidth(), buscarCoordenadaMasAlejadaEnY() + RADIO_CIRCULO));
+            parent.revalidate();
+        }
+
+        private boolean deboRedimensionarHorizontalmente()
+        {
+            return buscarCoordenadaMasAlejadaEnX() + RADIO_CIRCULO >= parent.getParent().getSize().getWidth();
+        }
+
+        private boolean deboRedimensionarVerticalmente()
+        {
+            return buscarCoordenadaMasAlejadaEnY() + RADIO_CIRCULO >= parent.getParent().getSize().getHeight();
+        }
+
+        private int buscarCoordenadaMasAlejadaEnX()
+        {
+            int xMasAlejado = graficoGrafo.getCoordenadas()[0].x;
+
+            for (Point coordenada : graficoGrafo.getCoordenadas())
+                if (coordenada != null && xMasAlejado < coordenada.x)
+                    xMasAlejado = coordenada.x;
+
+            return xMasAlejado;
+        }
+
+        private int buscarCoordenadaMasAlejadaEnY()
+        {
+            int yMasAlejado = graficoGrafo.getCoordenadas()[0].y;
+
+            for (Point coordenada : graficoGrafo.getCoordenadas())
+                if (coordenada != null && yMasAlejado < coordenada.y)
+                    yMasAlejado = coordenada.y;
+
+            return yMasAlejado;
+        }
+
     }
 
 }

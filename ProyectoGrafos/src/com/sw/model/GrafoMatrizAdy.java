@@ -182,9 +182,7 @@ public class GrafoMatrizAdy<E> extends Grafo<E>
                         colaRecorrido.insertLast(vertices[i]);
                         recorrido.add(vertices[i].getDato());
                     }
-
             }
-
         }
 
         return recorrido;

@@ -62,8 +62,8 @@ public class VistaController
         vista.getBtnRecorrerGrafo().addActionListener(this::accionBtnRecorrer);
         vista.getBtnEliminarVertice().addActionListener(this::accionBtnEliminarVertice);
         vista.getBtnEliminarArco().addActionListener(this::accionBtnEliminarArco);
-        vista.getBtnBuscar().addActionListener(this::accionBtnBuscar);
         vista.getBtnChecarAdyacencia().addActionListener(this::accionBtnChecarAdyacencia);
+        vista.getBtnBuscar().addActionListener(this::accionBtnBuscar);
 
         vista.getPanelRecorrido().add(graficoRecorrido, BorderLayout.CENTER);
         vista.getPanelRecorrido().revalidate();
@@ -74,7 +74,8 @@ public class VistaController
         setUpTextField(vista.getTxtEliminarVertice(), vista.getBtnEliminarVertice());
         setUpTextField(vista.getTxtEliminarArcoFrom(), vista.getBtnEliminarArco());
         setUpTextField(vista.getTxtEliminarArcoTo(), vista.getBtnEliminarArco());
-        setUpTextField(vista.getTxtVerticeBuscar(), vista.getBtnBuscar());
+        setUpTextField(vista.getTxtAdyacenciaArcoFrom(), vista.getBtnChecarAdyacencia());
+        setUpTextField(vista.getTxtAdyacenciaArcoTo(), vista.getBtnChecarAdyacencia());
 
         setPanelEnabled(vista.getPanelManipulacionGrafo(), false);
     }
