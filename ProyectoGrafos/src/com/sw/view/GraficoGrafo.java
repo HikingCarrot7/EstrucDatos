@@ -1,16 +1,19 @@
 package com.sw.view;
 
+import com.sw.model.Arco;
 import com.sw.model.Grafo;
-import com.sw.model.Utilidades;
+import static com.sw.model.Utilidades.aleatorio;
 import com.sw.model.Vertice;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.util.ArrayList;
 import javax.swing.JPanel;
 
 /**
@@ -52,11 +55,13 @@ public class GraficoGrafo extends JPanel
     private void dibujarGrafo(Graphics2D g)
     {
         Vertice<?>[] vertices = grafo.getVertices();
+        ArrayList<Arco> arcos = grafo.getArcos();
+
+        arcos.forEach(arco -> dibujarArco(g, coordenadas[arco.getOrigen()], coordenadas[arco.getDestino()]));
 
         for (int i = 0; i < grafo.getNumeroVertices(); i++)
             dibujarVertice(g, vertices[i]);
 
-        //Dibujar arcos xd...
     }
 
     private void dibujarVertice(Graphics2D g, Vertice<?> vertice)
@@ -84,6 +89,14 @@ public class GraficoGrafo extends JPanel
         g.setColor(BACKGROUND_COLOR);
     }
 
+    private void dibujarArco(Graphics2D g, Point origen, Point destino)
+    {
+        g.setColor(Color.BLACK);
+        g.setStroke(new BasicStroke(2));
+        g.drawLine(origen.x, origen.y, destino.x, destino.y);
+        g.setColor(BACKGROUND_COLOR);
+    }
+
     public void anadirVerticeAlGrafico(int numVertice)
     {
         coordenadas[numVertice] = situarVertice();
@@ -98,15 +111,17 @@ public class GraficoGrafo extends JPanel
         repaint();
     }
 
-    public void moverVertice(Point nuevaCoordenada, int numVertice)
+    public void moverVertice(Point coordenadasMouse, int numVertice, int offsetX, int offsetY)
     {
-        coordenadas[numVertice] = nuevaCoordenada;
+        coordenadas[numVertice].x = coordenadasMouse.x - offsetX;
+        coordenadas[numVertice].y = coordenadasMouse.y - offsetY;
+
         repaint();
     }
 
     private Point situarVertice()
     {
-        return new Point(Utilidades.aleatorio(RADIO_CIRCULO + 15, getWidth() - RADIO_CIRCULO), Utilidades.aleatorio(RADIO_CIRCULO + 15, getHeight() - RADIO_CIRCULO));
+        return new Point(aleatorio(RADIO_CIRCULO + 15, getWidth() - RADIO_CIRCULO), aleatorio(RADIO_CIRCULO + 15, getHeight() - RADIO_CIRCULO));
     }
 
     private void dibujarStringEnPunto(Graphics2D g, String text, Point p)
@@ -130,6 +145,11 @@ public class GraficoGrafo extends JPanel
     public Point[] getCoordenadas()
     {
         return coordenadas;
+    }
+
+    public void repintarGrafico()
+    {
+        EventQueue.invokeLater(this::repaint);
     }
 
 }

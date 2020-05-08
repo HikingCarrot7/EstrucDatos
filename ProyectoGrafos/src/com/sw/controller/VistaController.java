@@ -24,7 +24,9 @@ public class VistaController
         Grafo<String> grafo = new GrafoMatrizAdy<>();
         this.graficoGrafo = new GraficoGrafo(grafo);
         vista.getPanelGraficoGrafo().add(graficoGrafo, BorderLayout.CENTER);
-        graficoGrafo.addMouseMotionListener(new MouseDraggedManager(graficoGrafo));
+        GraphMouseManager graphMouseManager = new GraphMouseManager(graficoGrafo);
+        graficoGrafo.addMouseListener(graphMouseManager);
+        graficoGrafo.addMouseMotionListener(graphMouseManager);
 
         EventQueue.invokeLater(() ->
         {
@@ -42,6 +44,16 @@ public class VistaController
             this.graficoGrafo.anadirVerticeAlGrafico(grafo.getNumeroVertices() - 1);
             grafo.nuevoVertice("Emmanuel");
             this.graficoGrafo.anadirVerticeAlGrafico(grafo.getNumeroVertices() - 1);
+
+            grafo.nuevoArco("Nicolás", "Antonio");
+            grafo.nuevoArco("Nicolás", "Carlos");
+            grafo.nuevoArco("Carlos", "Antonio");
+            grafo.nuevoArco("Carlos", "Javier");
+            grafo.nuevoArco("Nicolás", "Juan");
+            grafo.nuevoArco("Juan", "Emmanuel");
+            grafo.nuevoArco("Eusebio", "Emmanuel");
+
+            graficoGrafo.repintarGrafico();
         });
     }
 

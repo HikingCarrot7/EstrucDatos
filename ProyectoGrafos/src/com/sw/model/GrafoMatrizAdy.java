@@ -190,7 +190,14 @@ public class GrafoMatrizAdy<E> extends Grafo<E>
     @Override
     public ArrayList<Arco> getArcos()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<Arco> arcos = new ArrayList<>();
+
+        for (int i = 0; i < matrizAdy.length; i++)
+            for (int j = i; j < matrizAdy.length; j++)
+                if (matrizAdy[i][j] == 1)
+                    arcos.add(new Arco(i, j));
+
+        return arcos;
     }
 
     @Override

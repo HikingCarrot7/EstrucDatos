@@ -52,6 +52,11 @@ public class Vista extends JFrame
         jScrollPane2 = new JScrollPane();
         jPanel6 = new JPanel();
         jPanel7 = new JPanel();
+        jPanel8 = new JPanel();
+        jLabel14 = new JLabel();
+        jRadioButton5 = new JRadioButton();
+        jRadioButton6 = new JRadioButton();
+        jButton8 = new JButton();
         jPanel1 = new JPanel();
         jLabel1 = new JLabel();
         jTextField1 = new JTextField();
@@ -91,11 +96,6 @@ public class Vista extends JFrame
         jRadioButton4 = new JRadioButton();
         jButton7 = new JButton();
         jPanel2 = new JPanel();
-        jPanel8 = new JPanel();
-        jLabel14 = new JLabel();
-        jRadioButton5 = new JRadioButton();
-        jRadioButton6 = new JRadioButton();
-        jButton8 = new JButton();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("Grafos!");
@@ -139,6 +139,50 @@ public class Vista extends JFrame
 
         jPanel7.setBorder(BorderFactory.createTitledBorder("Entrada de los datos"));
         jPanel7.setLayout(new BorderLayout());
+
+        jPanel8.setBorder(BorderFactory.createTitledBorder("Preparación"));
+        jPanel8.setLayout(new GridBagLayout());
+
+        jLabel14.setText("Generar grafo con:");
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new Insets(3, 0, 0, 0);
+        jPanel8.add(jLabel14, gridBagConstraints);
+
+        grupoCreacionGrafo.add(jRadioButton5);
+        jRadioButton5.setSelected(true);
+        jRadioButton5.setText("Matriz de adyacencia");
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new Insets(3, 0, 0, 0);
+        jPanel8.add(jRadioButton5, gridBagConstraints);
+
+        grupoCreacionGrafo.add(jRadioButton6);
+        jRadioButton6.setText("Lista de adyacencia");
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new Insets(3, 0, 0, 0);
+        jPanel8.add(jRadioButton6, gridBagConstraints);
+
+        jButton8.setText("Generar");
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new Insets(3, 0, 0, 0);
+        jPanel8.add(jButton8, gridBagConstraints);
+
+        jPanel7.add(jPanel8, BorderLayout.NORTH);
 
         jPanel1.setBorder(BorderFactory.createTitledBorder("Manipulación del grafo"));
         jPanel1.setLayout(new GridBagLayout());
@@ -452,15 +496,15 @@ public class Vista extends JFrame
         GroupLayout jPanel2Layout = new GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 360, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 96, Short.MAX_VALUE)
         );
 
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 18;
+        gridBagConstraints.gridy = 19;
         gridBagConstraints.gridwidth = 5;
         gridBagConstraints.fill = GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 0.1;
@@ -468,50 +512,6 @@ public class Vista extends JFrame
         jPanel1.add(jPanel2, gridBagConstraints);
 
         jPanel7.add(jPanel1, BorderLayout.CENTER);
-
-        jPanel8.setBorder(BorderFactory.createTitledBorder("Preparación"));
-        jPanel8.setLayout(new GridBagLayout());
-
-        jLabel14.setText("Generar grafo con:");
-        gridBagConstraints = new GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 0.1;
-        gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel8.add(jLabel14, gridBagConstraints);
-
-        grupoCreacionGrafo.add(jRadioButton5);
-        jRadioButton5.setSelected(true);
-        jRadioButton5.setText("Matriz de adyacencia");
-        gridBagConstraints = new GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 0.1;
-        gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel8.add(jRadioButton5, gridBagConstraints);
-
-        grupoCreacionGrafo.add(jRadioButton6);
-        jRadioButton6.setText("Lista de adyacencia");
-        gridBagConstraints = new GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 0.1;
-        gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel8.add(jRadioButton6, gridBagConstraints);
-
-        jButton8.setText("Generar");
-        gridBagConstraints = new GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel8.add(jButton8, gridBagConstraints);
-
-        jPanel7.add(jPanel8, BorderLayout.NORTH);
 
         jSplitPane1.setLeftComponent(jPanel7);
 
