@@ -1,9 +1,12 @@
 package com.sw.controller;
 
+import com.sw.model.Arco;
 import com.sw.model.Factory;
 import com.sw.model.Grafo;
 import com.sw.model.GraphFactory;
+import com.sw.model.exceptions.ArcoNoExistenteException;
 import com.sw.model.exceptions.GrafoLlenoException;
+import com.sw.model.exceptions.NoHayCoincidenciasException;
 import com.sw.model.exceptions.VerticeNoExistenteException;
 import com.sw.model.exceptions.VerticeYaExisteException;
 import com.sw.view.GraficoGrafo;
@@ -57,11 +60,21 @@ public class VistaController
         vista.getBtnCrearVertice().addActionListener(this::accionBtnAnadirVertice);
         vista.getBtnCrearArco().addActionListener(this::accionBtnCrearArco);
         vista.getBtnRecorrerGrafo().addActionListener(this::accionBtnRecorrer);
+        vista.getBtnEliminarVertice().addActionListener(this::accionBtnEliminarVertice);
+        vista.getBtnEliminarArco().addActionListener(this::accionBtnEliminarArco);
+        vista.getBtnBuscar().addActionListener(this::accionBtnBuscar);
+        vista.getBtnChecarAdyacencia().addActionListener(this::accionBtnChecarAdyacencia);
 
         vista.getPanelRecorrido().add(graficoRecorrido, BorderLayout.CENTER);
         vista.getPanelRecorrido().revalidate();
 
         setUpTextField(vista.getTxtNuevoVertice(), vista.getBtnCrearVertice());
+        setUpTextField(vista.getTxtCrearArcoFrom(), vista.getBtnCrearArco());
+        setUpTextField(vista.getTxtCrearArcoTo(), vista.getBtnCrearArco());
+        setUpTextField(vista.getTxtEliminarVertice(), vista.getBtnEliminarVertice());
+        setUpTextField(vista.getTxtEliminarArcoFrom(), vista.getBtnEliminarArco());
+        setUpTextField(vista.getTxtEliminarArcoTo(), vista.getBtnEliminarArco());
+        setUpTextField(vista.getTxtVerticeBuscar(), vista.getBtnBuscar());
 
         setPanelEnabled(vista.getPanelManipulacionGrafo(), false);
     }
@@ -95,10 +108,11 @@ public class VistaController
             graficoGrafo.anadirVerticeAlGrafico(grafo.getNumeroVertices() - 1);
             graficoGrafo.repintarGrafico();
             graficoRecorrido.limpiarGrafico();
+            quitarMarcasGraficoGrafo();
 
         } catch (GrafoLlenoException | VerticeYaExisteException ex)
         {
-            mostrarError("Error!", ex.getMessage());
+            mostrarMensaje("Error!", ex.getMessage());
         }
     }
 
@@ -109,10 +123,72 @@ public class VistaController
             grafo.nuevoArco(getCrearArcoFrom(), getCrearArcoTo());
             graficoGrafo.repintarGrafico();
             graficoRecorrido.limpiarGrafico();
+            quitarMarcasGraficoGrafo();
 
         } catch (VerticeNoExistenteException ex)
         {
-            mostrarError("Error!", ex.getMessage());
+            mostrarMensaje("Error!", ex.getMessage());
+        }
+    }
+
+    private void accionBtnEliminarVertice(ActionEvent e)
+    {
+        try
+        {
+            int nVertice = grafo.eliminarVertice(getVerticeAEliminar());
+            graficoGrafo.eliminarCoordenadasVertice(nVertice);
+            graficoGrafo.repintarGrafico();
+            graficoRecorrido.limpiarGrafico();
+            quitarMarcasGraficoGrafo();
+
+        } catch (VerticeNoExistenteException ex)
+        {
+            mostrarMensaje("Error!", ex.getMessage());
+        }
+    }
+
+    private void accionBtnEliminarArco(ActionEvent e)
+    {
+        try
+        {
+            grafo.eliminarArco(getEliminarArcoFrom(), getEliminarArcoTo());
+            graficoGrafo.repintarGrafico();
+            graficoRecorrido.limpiarGrafico();
+            quitarMarcasGraficoGrafo();
+
+        } catch (ArcoNoExistenteException | VerticeNoExistenteException ex)
+        {
+            mostrarMensaje("Error!", ex.getMessage());
+        }
+    }
+
+    private void accionBtnBuscar(ActionEvent e)
+    {
+        try
+        {
+            switch (getRadioButtonSeleccionado(vista.getGrupoBusqueda()))
+            {
+                case ANCHURA:
+                    int idxAnchura = grafo.buscarAnchura(getVerticeBuscar());
+                    graficoGrafo.setVerticeMarcado(idxAnchura);
+                    break;
+                case PROFUNDIDAD:
+                    int idxProfundidad = grafo.buscarProfundidad(getVerticeBuscar());
+                    graficoGrafo.setVerticeMarcado(idxProfundidad);
+                    break;
+                default:
+                    throw new AssertionError();
+            }
+
+            mostrarMensaje("Encontrado!", "Se ha encontrado el vértice!");
+            graficoGrafo.repintarGrafico();
+            graficoRecorrido.limpiarGrafico();
+            graficoGrafo.quitarArcoMarcado();
+
+        } catch (NoHayCoincidenciasException ex)
+        {
+            mostrarMensaje("Error!", ex.getMessage());
+            quitarMarcasGraficoGrafo();
         }
     }
 
@@ -133,11 +209,29 @@ public class VistaController
         graficoRecorrido.repintarGrafico();
     }
 
+    private void accionBtnChecarAdyacencia(ActionEvent e)
+    {
+        try
+        {
+            Arco arco = grafo.getArco(getAdyacenciaArcoFrom(), getAdyacenciaArcoTo());
+            graficoGrafo.setArcoMarcado(arco);
+            graficoGrafo.quitarVerticeMarcado();
+            graficoGrafo.repintarGrafico();
+            mostrarMensaje("Enhorabuena!", "Los vértices son adyacentes!");
+
+        } catch (ArcoNoExistenteException | VerticeNoExistenteException ex)
+        {
+            mostrarMensaje("Error!", ex.getMessage());
+            quitarMarcasGraficoGrafo();
+        }
+    }
+
     private void generarGrafo()
     {
         grafo = graphFactory.createGraph(getRadioButtonSeleccionado(vista.getGrupoCreacionGrafo()));
         this.graficoGrafo = new GraficoGrafo(grafo);
         vista.getPanelGraficoGrafo().add(graficoGrafo, BorderLayout.CENTER);
+
         GraphMouseManager graphMouseManager = new GraphMouseManager(graficoGrafo);
         graficoGrafo.addMouseListener(graphMouseManager);
         graficoGrafo.addMouseMotionListener(graphMouseManager);
@@ -168,7 +262,6 @@ public class VistaController
             grafo.nuevoArco("Juan", "Emmanuel");
             grafo.nuevoArco("Eusebio", "Emmanuel");
         });
-
     }
 
     private String getNuevoVertice()
@@ -184,6 +277,36 @@ public class VistaController
     private String getCrearArcoTo()
     {
         return vista.getTxtCrearArcoTo().getText().trim();
+    }
+
+    private String getVerticeAEliminar()
+    {
+        return vista.getTxtEliminarVertice().getText().trim();
+    }
+
+    private String getEliminarArcoFrom()
+    {
+        return vista.getTxtEliminarArcoFrom().getText().trim();
+    }
+
+    private String getEliminarArcoTo()
+    {
+        return vista.getTxtEliminarArcoTo().getText().trim();
+    }
+
+    private String getAdyacenciaArcoFrom()
+    {
+        return vista.getTxtAdyacenciaArcoFrom().getText().trim();
+    }
+
+    private String getAdyacenciaArcoTo()
+    {
+        return vista.getTxtAdyacenciaArcoTo().getText().trim();
+    }
+
+    private String getVerticeBuscar()
+    {
+        return vista.getTxtVerticeBuscar().getText().trim();
     }
 
     private String getRadioButtonSeleccionado(ButtonGroup grupo)
@@ -214,7 +337,13 @@ public class VistaController
         }
     }
 
-    private void mostrarError(String titulo, String text)
+    private void quitarMarcasGraficoGrafo()
+    {
+        graficoGrafo.quitarVerticeMarcado();
+        graficoGrafo.quitarArcoMarcado();
+    }
+
+    private void mostrarMensaje(String titulo, String text)
     {
         JOptionPane.showMessageDialog(vista, text, titulo, JOptionPane.ERROR_MESSAGE);
     }

@@ -64,4 +64,10 @@ public class Vertice<E>
         return Objects.equals(this.dato, other.getDato());
     }
 
+    @Override
+    public String toString()
+    {
+        return "Vertice{" + "dato=" + dato + ", numVertice=" + numVertice + '}';
+    }
+
 }

@@ -59,6 +59,7 @@ public class Arco
     {
         int hash = 7;
         hash = 17 * hash + this.destino;
+        hash = 17 * hash + this.origen;
         return hash;
     }
 
@@ -76,7 +77,16 @@ public class Arco
 
         final Arco other = (Arco) obj;
 
-        return this.destino == other.destino;
+        if (this.destino != other.getDestino())
+            return false;
+
+        return this.origen == other.getOrigen();
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Arco{" + "destino=" + destino + ", origen=" + origen + '}';
     }
 
 }

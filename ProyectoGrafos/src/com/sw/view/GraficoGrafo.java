@@ -20,21 +20,29 @@ import javax.swing.JPanel;
  *
  * @author Nicolás
  */
-public class GraficoGrafo extends JPanel
+public final class GraficoGrafo extends JPanel
 {
 
     public static final int DIAMETRO_CIRCULO = 70;
     public static final int RADIO_CIRCULO = DIAMETRO_CIRCULO / 2;
+
     private final Color BACKGROUND_COLOR = Color.WHITE;
     private final Color CIRCLE_COLOR = Color.RED;
+    private final Color MARKED_CIRCLE_COLOR = Color.DARK_GRAY;
+    private final Color ARCO_COLOR = Color.BLACK;
+    private final Color MARKED_ARCO_COLOR = Color.MAGENTA;
 
     private final Grafo<?> grafo;
     private final Point[] coordenadas;
+    private int idxVerticeMarcado;
+    private Arco arcoMarcado;
 
     public GraficoGrafo(Grafo<?> grafo)
     {
         this.grafo = grafo;
         this.coordenadas = new Point[Grafo.MAX_NUMERO_VERTICES];
+        this.idxVerticeMarcado = -1;
+        this.arcoMarcado = null;
         setBackground(BACKGROUND_COLOR);
     }
 
@@ -58,22 +66,28 @@ public class GraficoGrafo extends JPanel
         Vertice<?>[] vertices = grafo.getVertices();
         ArrayList<Arco> arcos = grafo.getArcos();
 
-        arcos.forEach(arco -> dibujarArco(g, coordenadas[arco.getOrigen()], coordenadas[arco.getDestino()]));
+        arcos.forEach(arco -> dibujarArco(g, coordenadas[arco.getOrigen()], coordenadas[arco.getDestino()], ARCO_COLOR));
+
+        if (arcoMarcado != null)
+            dibujarArco(g, coordenadas[arcoMarcado.getOrigen()], coordenadas[arcoMarcado.getDestino()], MARKED_ARCO_COLOR);
+
+        if (idxVerticeMarcado >= 0)
+            dibujarVertice(g, vertices[idxVerticeMarcado], MARKED_CIRCLE_COLOR);
 
         for (int i = 0; i < grafo.getNumeroVertices(); i++)
-            dibujarVertice(g, vertices[i]);
-
+            if (i != idxVerticeMarcado)
+                dibujarVertice(g, vertices[i], CIRCLE_COLOR);
     }
 
-    private void dibujarVertice(Graphics2D g, Vertice<?> vertice)
+    private void dibujarVertice(Graphics2D g, Vertice<?> vertice, Color colorVertice)
     {
-        dibujarCirculo(g, coordenadas[vertice.getNumVertice()]);
+        dibujarCirculo(g, coordenadas[vertice.getNumVertice()], colorVertice);
         dibujarContenidoVertice(g, coordenadas[vertice.getNumVertice()], vertice.getNumVertice(), vertice.getDato().toString());
     }
 
-    private void dibujarCirculo(Graphics2D g, Point coordenada)
+    private void dibujarCirculo(Graphics2D g, Point coordenada, Color colorCirculo)
     {
-        g.setColor(CIRCLE_COLOR);
+        g.setColor(colorCirculo);
         g.fillOval(coordenada.x - RADIO_CIRCULO, coordenada.y - RADIO_CIRCULO, DIAMETRO_CIRCULO, DIAMETRO_CIRCULO);
         g.setStroke(new BasicStroke(3));
         g.setColor(Color.BLACK);
@@ -90,9 +104,9 @@ public class GraficoGrafo extends JPanel
         g.setColor(BACKGROUND_COLOR);
     }
 
-    private void dibujarArco(Graphics2D g, Point origen, Point destino)
+    private void dibujarArco(Graphics2D g, Point origen, Point destino, Color colorArco)
     {
-        g.setColor(Color.BLACK);
+        g.setColor(colorArco);
         g.setStroke(new BasicStroke(2));
         g.drawLine(origen.x, origen.y, destino.x, destino.y);
         g.setColor(BACKGROUND_COLOR);
@@ -104,18 +118,10 @@ public class GraficoGrafo extends JPanel
         repaint();
     }
 
-    public void eliminarVertice(int numVertice)
+    public void eliminarCoordenadasVertice(int numVertice)
     {
-        for (int i = numVertice; i < coordenadas.length - 1; i++)
+        for (int i = numVertice; i < grafo.getNumeroVertices(); i++)
             coordenadas[i] = coordenadas[i + 1];
-
-        repaint();
-    }
-
-    public void moverVertice(Point coordenadasMouse, int numVertice, int offsetX, int offsetY)
-    {
-        coordenadas[numVertice].x = coordenadasMouse.x - offsetX;
-        coordenadas[numVertice].y = coordenadasMouse.y - offsetY;
 
         repaint();
     }
@@ -141,6 +147,26 @@ public class GraficoGrafo extends JPanel
         Rectangle r = g.getFontMetrics().getStringBounds(text, g).getBounds();
         r.setSize(new Dimension((int) r.getWidth(), g.getFontMetrics().getAscent()));
         return r;
+    }
+
+    public void setVerticeMarcado(int idxVerticeMarcado)
+    {
+        this.idxVerticeMarcado = idxVerticeMarcado;
+    }
+
+    public void quitarVerticeMarcado()
+    {
+        idxVerticeMarcado = -1;
+    }
+
+    public void setArcoMarcado(Arco arcoMarcado)
+    {
+        this.arcoMarcado = arcoMarcado;
+    }
+
+    public void quitarArcoMarcado()
+    {
+        arcoMarcado = null;
     }
 
     public Point[] getCoordenadas()

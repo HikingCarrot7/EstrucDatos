@@ -49,7 +49,6 @@ public class GraphMouseManager extends MouseAdapter
 
         } else
             moviendoVertice = false;
-
     }
 
     private int verticePresionado(Point origen)

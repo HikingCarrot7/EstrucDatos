@@ -70,25 +70,25 @@ public class Vista extends JFrame
         jSeparator1 = new JSeparator();
         jLabel4 = new JLabel();
         jLabel5 = new JLabel();
-        jTextField4 = new JTextField();
-        jButton3 = new JButton();
+        txtEliminarVertice = new JTextField();
+        btnEliminarVertice = new JButton();
         jLabel6 = new JLabel();
         jLabel7 = new JLabel();
         jLabel8 = new JLabel();
-        jTextField5 = new JTextField();
-        jTextField6 = new JTextField();
-        jButton4 = new JButton();
+        eliminarArcoFrom = new JTextField();
+        eliminarArcoTo = new JTextField();
+        btnEliminarArco = new JButton();
         jSeparator2 = new JSeparator();
         jLabel9 = new JLabel();
         jLabel10 = new JLabel();
         jLabel11 = new JLabel();
-        jTextField7 = new JTextField();
-        jTextField8 = new JTextField();
-        jButton5 = new JButton();
+        txtAdyacenciaArcoFrom = new JTextField();
+        txtAdyacenciaArcoTo = new JTextField();
+        btnChecarAdyacencia = new JButton();
         jSeparator3 = new JSeparator();
         jLabel12 = new JLabel();
-        jTextField9 = new JTextField();
-        jButton6 = new JButton();
+        txtVerticeBuscar = new JTextField();
+        btnBuscar = new JButton();
         jRadioButton1 = new JRadioButton();
         jRadioButton2 = new JRadioButton();
         jSeparator4 = new JSeparator();
@@ -287,15 +287,15 @@ public class Vista extends JFrame
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        panelManipulacionGrafo.add(jTextField4, gridBagConstraints);
+        panelManipulacionGrafo.add(txtEliminarVertice, gridBagConstraints);
 
-        jButton3.setText("Eliminar vértice");
+        btnEliminarVertice.setText("Eliminar vértice");
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        panelManipulacionGrafo.add(jButton3, gridBagConstraints);
+        panelManipulacionGrafo.add(btnEliminarVertice, gridBagConstraints);
 
         jLabel6.setText("Eliminar arco:");
         gridBagConstraints = new GridBagConstraints();
@@ -328,22 +328,22 @@ public class Vista extends JFrame
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        panelManipulacionGrafo.add(jTextField5, gridBagConstraints);
+        panelManipulacionGrafo.add(eliminarArcoFrom, gridBagConstraints);
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 8;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        panelManipulacionGrafo.add(jTextField6, gridBagConstraints);
+        panelManipulacionGrafo.add(eliminarArcoTo, gridBagConstraints);
 
-        jButton4.setText("Eliminar arco");
+        btnEliminarArco.setText("Eliminar arco");
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 8;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        panelManipulacionGrafo.add(jButton4, gridBagConstraints);
+        panelManipulacionGrafo.add(btnEliminarArco, gridBagConstraints);
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 9;
@@ -381,22 +381,22 @@ public class Vista extends JFrame
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        panelManipulacionGrafo.add(jTextField7, gridBagConstraints);
+        panelManipulacionGrafo.add(txtAdyacenciaArcoFrom, gridBagConstraints);
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 11;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        panelManipulacionGrafo.add(jTextField8, gridBagConstraints);
+        panelManipulacionGrafo.add(txtAdyacenciaArcoTo, gridBagConstraints);
 
-        jButton5.setText("¿Adyacentes?");
+        btnChecarAdyacencia.setText("¿Adyacentes?");
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 11;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        panelManipulacionGrafo.add(jButton5, gridBagConstraints);
+        panelManipulacionGrafo.add(btnChecarAdyacencia, gridBagConstraints);
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 12;
@@ -420,19 +420,20 @@ public class Vista extends JFrame
         gridBagConstraints.gridwidth = 4;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        panelManipulacionGrafo.add(jTextField9, gridBagConstraints);
+        panelManipulacionGrafo.add(txtVerticeBuscar, gridBagConstraints);
 
-        jButton6.setText("Buscar");
+        btnBuscar.setText("Buscar");
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 14;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        panelManipulacionGrafo.add(jButton6, gridBagConstraints);
+        panelManipulacionGrafo.add(btnBuscar, gridBagConstraints);
 
         grupoBusqueda.add(jRadioButton1);
         jRadioButton1.setSelected(true);
         jRadioButton1.setText("Anchura");
+        jRadioButton1.setActionCommand("anchura");
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 13;
@@ -443,6 +444,7 @@ public class Vista extends JFrame
 
         grupoBusqueda.add(jRadioButton2);
         jRadioButton2.setText("Profundidad");
+        jRadioButton2.setActionCommand("profundidad");
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 13;
@@ -527,6 +529,16 @@ public class Vista extends JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public JButton getBtnBuscar()
+    {
+        return btnBuscar;
+    }
+
+    public JButton getBtnChecarAdyacencia()
+    {
+        return btnChecarAdyacencia;
+    }
+
     public JButton getBtnCrearArco()
     {
         return btnCrearArco;
@@ -535,6 +547,16 @@ public class Vista extends JFrame
     public JButton getBtnCrearVertice()
     {
         return btnCrearVertice;
+    }
+
+    public JButton getBtnEliminarArco()
+    {
+        return btnEliminarArco;
+    }
+
+    public JButton getBtnEliminarVertice()
+    {
+        return btnEliminarVertice;
     }
 
     public JButton getBtnGenerar()
@@ -582,6 +604,16 @@ public class Vista extends JFrame
         return panelPreparacion;
     }
 
+    public JTextField getTxtAdyacenciaArcoFrom()
+    {
+        return txtAdyacenciaArcoFrom;
+    }
+
+    public JTextField getTxtAdyacenciaArcoTo()
+    {
+        return txtAdyacenciaArcoTo;
+    }
+
     public JTextField getTxtCrearArcoFrom()
     {
         return txtCrearArcoFrom;
@@ -592,23 +624,45 @@ public class Vista extends JFrame
         return txtCrearArcoTo;
     }
 
+    public JTextField getTxtEliminarArcoFrom()
+    {
+        return eliminarArcoFrom;
+    }
+
+    public JTextField getTxtEliminarArcoTo()
+    {
+        return eliminarArcoTo;
+    }
+
+    public JTextField getTxtEliminarVertice()
+    {
+        return txtEliminarVertice;
+    }
+
     public JTextField getTxtNuevoVertice()
     {
         return txtNuevoVertice;
     }
 
+    public JTextField getTxtVerticeBuscar()
+    {
+        return txtVerticeBuscar;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private JButton btnBuscar;
+    private JButton btnChecarAdyacencia;
     private JButton btnCrearArco;
     private JButton btnCrearVertice;
+    private JButton btnEliminarArco;
+    private JButton btnEliminarVertice;
     private JButton btnGenerar;
     private JButton btnRecorrerGrafo;
+    private JTextField eliminarArcoFrom;
+    private JTextField eliminarArcoTo;
     private ButtonGroup grupoBusqueda;
     private ButtonGroup grupoCreacionGrafo;
     private ButtonGroup grupoRecorrido;
-    private JButton jButton3;
-    private JButton jButton4;
-    private JButton jButton5;
-    private JButton jButton6;
     private JLabel jLabel1;
     private JLabel jLabel10;
     private JLabel jLabel11;
@@ -641,18 +695,16 @@ public class Vista extends JFrame
     private JSeparator jSeparator4;
     private JSplitPane jSplitPane1;
     private JSplitPane jSplitPane2;
-    private JTextField jTextField4;
-    private JTextField jTextField5;
-    private JTextField jTextField6;
-    private JTextField jTextField7;
-    private JTextField jTextField8;
-    private JTextField jTextField9;
     private JPanel panelGraficoGrafo;
     private JPanel panelManipulacionGrafo;
     private JPanel panelPreparacion;
     private JPanel panelRecorrido;
+    private JTextField txtAdyacenciaArcoFrom;
+    private JTextField txtAdyacenciaArcoTo;
     private JTextField txtCrearArcoFrom;
     private JTextField txtCrearArcoTo;
+    private JTextField txtEliminarVertice;
     private JTextField txtNuevoVertice;
+    private JTextField txtVerticeBuscar;
     // End of variables declaration//GEN-END:variables
 }

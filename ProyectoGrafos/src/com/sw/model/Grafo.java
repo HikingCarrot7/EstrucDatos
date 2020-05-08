@@ -2,6 +2,7 @@ package com.sw.model;
 
 import com.sw.model.exceptions.ArcoNoExistenteException;
 import com.sw.model.exceptions.GrafoLlenoException;
+import com.sw.model.exceptions.NoHayCoincidenciasException;
 import com.sw.model.exceptions.VerticeNoExistenteException;
 import com.sw.model.exceptions.VerticeYaExisteException;
 import java.util.ArrayList;
@@ -19,13 +20,15 @@ public abstract class Grafo<E>
 
     public abstract void nuevoVertice(E datoVertice) throws GrafoLlenoException, VerticeYaExisteException;
 
-    public abstract void eliminarVertice(E datoVertice) throws VerticeNoExistenteException;
+    public abstract int eliminarVertice(E datoVertice) throws VerticeNoExistenteException;
 
-    public abstract void nuevoArco(E inicio, E destino) throws VerticeNoExistenteException;
+    public abstract void nuevoArco(E origen, E destino) throws VerticeNoExistenteException;
 
-    public abstract void eliminarArco(E inicio, E destino) throws ArcoNoExistenteException, VerticeNoExistenteException;
+    public abstract void eliminarArco(E origen, E destino) throws ArcoNoExistenteException, VerticeNoExistenteException;
 
-    public abstract boolean sonAdyacentes(E inicio, E destino) throws VerticeNoExistenteException;
+    public abstract boolean sonAdyacentes(E origen, E destino) throws VerticeNoExistenteException;
+
+    public abstract int numeroVertice(E dato);
 
     public abstract ArrayList<E> recorridoAnchura();
 
@@ -33,16 +36,30 @@ public abstract class Grafo<E>
 
     public abstract Vertice<E>[] getVertices();
 
-    public abstract ArrayList<Arco> getArcos();
-
-    public boolean buscarAnchura(E dato)
+    public Arco getArco(E origen, E destino) throws VerticeNoExistenteException, ArcoNoExistenteException
     {
-        return recorridoAnchura().contains(dato);
+        if (sonAdyacentes(origen, destino))
+            return new Arco(numeroVertice(origen), numeroVertice(destino));
+
+        throw new ArcoNoExistenteException();
     }
 
-    public boolean buscarProfundidad(E dato)
+    public abstract ArrayList<Arco> getArcos();
+
+    public int buscarAnchura(E dato) throws NoHayCoincidenciasException
     {
-        return recorridoProfundidad().contains(dato);
+        if (recorridoAnchura().indexOf(dato) < 0)
+            throw new NoHayCoincidenciasException("No hay coincidencias para: " + dato);
+
+        return numeroVertice(dato);
+    }
+
+    public int buscarProfundidad(E dato) throws NoHayCoincidenciasException
+    {
+        if (recorridoProfundidad().indexOf(dato) < 0)
+            throw new NoHayCoincidenciasException("No hay coincidencias para: " + dato);
+
+        return numeroVertice(dato);
     }
 
     public boolean isEmpty()
