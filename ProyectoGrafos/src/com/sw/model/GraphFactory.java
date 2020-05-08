@@ -1,5 +1,7 @@
 package com.sw.model;
 
+import com.sw.controller.VistaController;
+
 /**
  *
  * @author Nicolás
@@ -16,7 +18,7 @@ public class GraphFactory implements Factory
     @Override
     public Grafo<String> createGraph(String tipo)
     {
-        return null;
+        return VistaController.GRAFO_MATRIZ_ADYACENCIA.equals(tipo) ? new GrafoMatrizAdy<>() : null;
     }
 
     public synchronized static GraphFactory getInstance()

@@ -12,7 +12,7 @@ public class VerticeYaExisteException extends RuntimeException
      */
     public VerticeYaExisteException()
     {
-        this("El nodo ya existe!");
+        this("El vértice ya existe!");
     }
 
     /**

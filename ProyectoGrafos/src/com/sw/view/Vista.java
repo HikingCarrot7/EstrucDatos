@@ -1,6 +1,7 @@
 package com.sw.view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -50,22 +51,22 @@ public class Vista extends JFrame
         panelGraficoGrafo = new JPanel();
         jPanel5 = new JPanel();
         jScrollPane2 = new JScrollPane();
-        jPanel6 = new JPanel();
+        panelRecorrido = new JPanel();
         jPanel7 = new JPanel();
-        jPanel8 = new JPanel();
+        panelPreparacion = new JPanel();
         jLabel14 = new JLabel();
         jRadioButton5 = new JRadioButton();
         jRadioButton6 = new JRadioButton();
-        jButton8 = new JButton();
-        jPanel1 = new JPanel();
+        btnGenerar = new JButton();
+        panelManipulacionGrafo = new JPanel();
         jLabel1 = new JLabel();
-        jTextField1 = new JTextField();
-        jButton1 = new JButton();
+        txtNuevoVertice = new JTextField();
+        btnCrearVertice = new JButton();
         jLabel2 = new JLabel();
-        jTextField2 = new JTextField();
-        jTextField3 = new JTextField();
+        txtCrearArcoFrom = new JTextField();
+        txtCrearArcoTo = new JTextField();
         jLabel3 = new JLabel();
-        jButton2 = new JButton();
+        btnCrearArco = new JButton();
         jSeparator1 = new JSeparator();
         jLabel4 = new JLabel();
         jLabel5 = new JLabel();
@@ -94,7 +95,7 @@ public class Vista extends JFrame
         jLabel13 = new JLabel();
         jRadioButton3 = new JRadioButton();
         jRadioButton4 = new JRadioButton();
-        jButton7 = new JButton();
+        btnRecorrerGrafo = new JButton();
         jPanel2 = new JPanel();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -114,6 +115,7 @@ public class Vista extends JFrame
         jPanel3.setBorder(BorderFactory.createTitledBorder("Grafo"));
         jPanel3.setLayout(new BorderLayout());
 
+        panelGraficoGrafo.setBackground(new Color(255, 255, 255));
         panelGraficoGrafo.setMinimumSize(new Dimension(0, 0));
         panelGraficoGrafo.setPreferredSize(new Dimension(0, 0));
         panelGraficoGrafo.setLayout(new BorderLayout());
@@ -126,10 +128,11 @@ public class Vista extends JFrame
         jPanel5.setBorder(BorderFactory.createTitledBorder("Recorrido"));
         jPanel5.setLayout(new BorderLayout());
 
-        jPanel6.setMinimumSize(new Dimension(0, 0));
-        jPanel6.setPreferredSize(new Dimension(0, 0));
-        jPanel6.setLayout(new BorderLayout());
-        jScrollPane2.setViewportView(jPanel6);
+        panelRecorrido.setBackground(new Color(255, 255, 255));
+        panelRecorrido.setMinimumSize(new Dimension(550, 550));
+        panelRecorrido.setPreferredSize(new Dimension(0, 0));
+        panelRecorrido.setLayout(new BorderLayout());
+        jScrollPane2.setViewportView(panelRecorrido);
 
         jPanel5.add(jScrollPane2, BorderLayout.CENTER);
 
@@ -140,8 +143,8 @@ public class Vista extends JFrame
         jPanel7.setBorder(BorderFactory.createTitledBorder("Entrada de los datos"));
         jPanel7.setLayout(new BorderLayout());
 
-        jPanel8.setBorder(BorderFactory.createTitledBorder("Preparación"));
-        jPanel8.setLayout(new GridBagLayout());
+        panelPreparacion.setBorder(BorderFactory.createTitledBorder("Preparación"));
+        panelPreparacion.setLayout(new GridBagLayout());
 
         jLabel14.setText("Generar grafo con:");
         gridBagConstraints = new GridBagConstraints();
@@ -151,41 +154,43 @@ public class Vista extends JFrame
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel8.add(jLabel14, gridBagConstraints);
+        panelPreparacion.add(jLabel14, gridBagConstraints);
 
         grupoCreacionGrafo.add(jRadioButton5);
         jRadioButton5.setSelected(true);
         jRadioButton5.setText("Matriz de adyacencia");
+        jRadioButton5.setActionCommand("matriz");
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel8.add(jRadioButton5, gridBagConstraints);
+        panelPreparacion.add(jRadioButton5, gridBagConstraints);
 
         grupoCreacionGrafo.add(jRadioButton6);
         jRadioButton6.setText("Lista de adyacencia");
+        jRadioButton6.setActionCommand("lista");
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel8.add(jRadioButton6, gridBagConstraints);
+        panelPreparacion.add(jRadioButton6, gridBagConstraints);
 
-        jButton8.setText("Generar");
+        btnGenerar.setText("Generar");
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel8.add(jButton8, gridBagConstraints);
+        panelPreparacion.add(btnGenerar, gridBagConstraints);
 
-        jPanel7.add(jPanel8, BorderLayout.NORTH);
+        jPanel7.add(panelPreparacion, BorderLayout.NORTH);
 
-        jPanel1.setBorder(BorderFactory.createTitledBorder("Manipulación del grafo"));
-        jPanel1.setLayout(new GridBagLayout());
+        panelManipulacionGrafo.setBorder(BorderFactory.createTitledBorder("Manipulación del grafo"));
+        panelManipulacionGrafo.setLayout(new GridBagLayout());
 
         jLabel1.setText("Crear vértice:");
         gridBagConstraints = new GridBagConstraints();
@@ -195,7 +200,7 @@ public class Vista extends JFrame
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel1.add(jLabel1, gridBagConstraints);
+        panelManipulacionGrafo.add(jLabel1, gridBagConstraints);
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -203,15 +208,15 @@ public class Vista extends JFrame
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel1.add(jTextField1, gridBagConstraints);
+        panelManipulacionGrafo.add(txtNuevoVertice, gridBagConstraints);
 
-        jButton1.setText("Crear vértice");
+        btnCrearVertice.setText("Crear vértice");
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel1.add(jButton1, gridBagConstraints);
+        panelManipulacionGrafo.add(btnCrearVertice, gridBagConstraints);
 
         jLabel2.setText("Crear arco:");
         gridBagConstraints = new GridBagConstraints();
@@ -221,21 +226,21 @@ public class Vista extends JFrame
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel1.add(jLabel2, gridBagConstraints);
+        panelManipulacionGrafo.add(jLabel2, gridBagConstraints);
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel1.add(jTextField2, gridBagConstraints);
+        panelManipulacionGrafo.add(txtCrearArcoFrom, gridBagConstraints);
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel1.add(jTextField3, gridBagConstraints);
+        panelManipulacionGrafo.add(txtCrearArcoTo, gridBagConstraints);
 
         jLabel3.setText("A:");
         gridBagConstraints = new GridBagConstraints();
@@ -243,29 +248,29 @@ public class Vista extends JFrame
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel1.add(jLabel3, gridBagConstraints);
+        panelManipulacionGrafo.add(jLabel3, gridBagConstraints);
 
-        jButton2.setText("Crear arco");
+        btnCrearArco.setText("Crear arco");
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel1.add(jButton2, gridBagConstraints);
+        panelManipulacionGrafo.add(btnCrearArco, gridBagConstraints);
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.gridwidth = 5;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(3, 0, 15, 0);
-        jPanel1.add(jSeparator1, gridBagConstraints);
+        panelManipulacionGrafo.add(jSeparator1, gridBagConstraints);
 
         jLabel4.setText("De:");
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel1.add(jLabel4, gridBagConstraints);
+        panelManipulacionGrafo.add(jLabel4, gridBagConstraints);
 
         jLabel5.setText("Eliminar vértice:");
         gridBagConstraints = new GridBagConstraints();
@@ -274,7 +279,7 @@ public class Vista extends JFrame
         gridBagConstraints.gridwidth = 5;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel1.add(jLabel5, gridBagConstraints);
+        panelManipulacionGrafo.add(jLabel5, gridBagConstraints);
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
@@ -282,7 +287,7 @@ public class Vista extends JFrame
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel1.add(jTextField4, gridBagConstraints);
+        panelManipulacionGrafo.add(jTextField4, gridBagConstraints);
 
         jButton3.setText("Eliminar vértice");
         gridBagConstraints = new GridBagConstraints();
@@ -290,7 +295,7 @@ public class Vista extends JFrame
         gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel1.add(jButton3, gridBagConstraints);
+        panelManipulacionGrafo.add(jButton3, gridBagConstraints);
 
         jLabel6.setText("Eliminar arco:");
         gridBagConstraints = new GridBagConstraints();
@@ -300,7 +305,7 @@ public class Vista extends JFrame
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel1.add(jLabel6, gridBagConstraints);
+        panelManipulacionGrafo.add(jLabel6, gridBagConstraints);
 
         jLabel7.setText("De:");
         gridBagConstraints = new GridBagConstraints();
@@ -308,7 +313,7 @@ public class Vista extends JFrame
         gridBagConstraints.gridy = 8;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel1.add(jLabel7, gridBagConstraints);
+        panelManipulacionGrafo.add(jLabel7, gridBagConstraints);
 
         jLabel8.setText("A:");
         gridBagConstraints = new GridBagConstraints();
@@ -316,21 +321,21 @@ public class Vista extends JFrame
         gridBagConstraints.gridy = 8;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel1.add(jLabel8, gridBagConstraints);
+        panelManipulacionGrafo.add(jLabel8, gridBagConstraints);
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 8;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel1.add(jTextField5, gridBagConstraints);
+        panelManipulacionGrafo.add(jTextField5, gridBagConstraints);
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 8;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel1.add(jTextField6, gridBagConstraints);
+        panelManipulacionGrafo.add(jTextField6, gridBagConstraints);
 
         jButton4.setText("Eliminar arco");
         gridBagConstraints = new GridBagConstraints();
@@ -338,14 +343,14 @@ public class Vista extends JFrame
         gridBagConstraints.gridy = 8;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel1.add(jButton4, gridBagConstraints);
+        panelManipulacionGrafo.add(jButton4, gridBagConstraints);
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 9;
         gridBagConstraints.gridwidth = 5;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(3, 0, 15, 0);
-        jPanel1.add(jSeparator2, gridBagConstraints);
+        panelManipulacionGrafo.add(jSeparator2, gridBagConstraints);
 
         jLabel9.setText("Revisar adyacencia:");
         gridBagConstraints = new GridBagConstraints();
@@ -355,35 +360,35 @@ public class Vista extends JFrame
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel1.add(jLabel9, gridBagConstraints);
+        panelManipulacionGrafo.add(jLabel9, gridBagConstraints);
 
         jLabel10.setText("De:");
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 11;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel1.add(jLabel10, gridBagConstraints);
+        panelManipulacionGrafo.add(jLabel10, gridBagConstraints);
 
         jLabel11.setText("A:");
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 11;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel1.add(jLabel11, gridBagConstraints);
+        panelManipulacionGrafo.add(jLabel11, gridBagConstraints);
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 11;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel1.add(jTextField7, gridBagConstraints);
+        panelManipulacionGrafo.add(jTextField7, gridBagConstraints);
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 11;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel1.add(jTextField8, gridBagConstraints);
+        panelManipulacionGrafo.add(jTextField8, gridBagConstraints);
 
         jButton5.setText("¿Adyacentes?");
         gridBagConstraints = new GridBagConstraints();
@@ -391,14 +396,14 @@ public class Vista extends JFrame
         gridBagConstraints.gridy = 11;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel1.add(jButton5, gridBagConstraints);
+        panelManipulacionGrafo.add(jButton5, gridBagConstraints);
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 12;
         gridBagConstraints.gridwidth = 5;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(3, 0, 15, 0);
-        jPanel1.add(jSeparator3, gridBagConstraints);
+        panelManipulacionGrafo.add(jSeparator3, gridBagConstraints);
 
         jLabel12.setText("Buscar un vértice por:");
         gridBagConstraints = new GridBagConstraints();
@@ -408,14 +413,14 @@ public class Vista extends JFrame
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel1.add(jLabel12, gridBagConstraints);
+        panelManipulacionGrafo.add(jLabel12, gridBagConstraints);
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 14;
         gridBagConstraints.gridwidth = 4;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel1.add(jTextField9, gridBagConstraints);
+        panelManipulacionGrafo.add(jTextField9, gridBagConstraints);
 
         jButton6.setText("Buscar");
         gridBagConstraints = new GridBagConstraints();
@@ -423,7 +428,7 @@ public class Vista extends JFrame
         gridBagConstraints.gridy = 14;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel1.add(jButton6, gridBagConstraints);
+        panelManipulacionGrafo.add(jButton6, gridBagConstraints);
 
         grupoBusqueda.add(jRadioButton1);
         jRadioButton1.setSelected(true);
@@ -434,7 +439,7 @@ public class Vista extends JFrame
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel1.add(jRadioButton1, gridBagConstraints);
+        panelManipulacionGrafo.add(jRadioButton1, gridBagConstraints);
 
         grupoBusqueda.add(jRadioButton2);
         jRadioButton2.setText("Profundidad");
@@ -444,14 +449,14 @@ public class Vista extends JFrame
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel1.add(jRadioButton2, gridBagConstraints);
+        panelManipulacionGrafo.add(jRadioButton2, gridBagConstraints);
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 15;
         gridBagConstraints.gridwidth = 5;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(3, 0, 15, 0);
-        jPanel1.add(jSeparator4, gridBagConstraints);
+        panelManipulacionGrafo.add(jSeparator4, gridBagConstraints);
 
         jLabel13.setText("Recorrer grafo por:");
         gridBagConstraints = new GridBagConstraints();
@@ -460,11 +465,12 @@ public class Vista extends JFrame
         gridBagConstraints.gridwidth = 5;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel1.add(jLabel13, gridBagConstraints);
+        panelManipulacionGrafo.add(jLabel13, gridBagConstraints);
 
         grupoRecorrido.add(jRadioButton3);
         jRadioButton3.setSelected(true);
         jRadioButton3.setText("Anchura");
+        jRadioButton3.setActionCommand("anchura");
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 17;
@@ -472,10 +478,11 @@ public class Vista extends JFrame
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel1.add(jRadioButton3, gridBagConstraints);
+        panelManipulacionGrafo.add(jRadioButton3, gridBagConstraints);
 
         grupoRecorrido.add(jRadioButton4);
         jRadioButton4.setText("Profundidad");
+        jRadioButton4.setActionCommand("profundidad");
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 17;
@@ -483,15 +490,15 @@ public class Vista extends JFrame
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel1.add(jRadioButton4, gridBagConstraints);
+        panelManipulacionGrafo.add(jRadioButton4, gridBagConstraints);
 
-        jButton7.setText("Recorrer");
+        btnRecorrerGrafo.setText("Recorrer");
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 17;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(3, 0, 0, 0);
-        jPanel1.add(jButton7, gridBagConstraints);
+        panelManipulacionGrafo.add(btnRecorrerGrafo, gridBagConstraints);
 
         GroupLayout jPanel2Layout = new GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -509,9 +516,9 @@ public class Vista extends JFrame
         gridBagConstraints.fill = GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.weighty = 0.1;
-        jPanel1.add(jPanel2, gridBagConstraints);
+        panelManipulacionGrafo.add(jPanel2, gridBagConstraints);
 
-        jPanel7.add(jPanel1, BorderLayout.CENTER);
+        jPanel7.add(panelManipulacionGrafo, BorderLayout.CENTER);
 
         jSplitPane1.setLeftComponent(jPanel7);
 
@@ -520,23 +527,88 @@ public class Vista extends JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public JButton getBtnCrearArco()
+    {
+        return btnCrearArco;
+    }
+
+    public JButton getBtnCrearVertice()
+    {
+        return btnCrearVertice;
+    }
+
+    public JButton getBtnGenerar()
+    {
+        return btnGenerar;
+    }
+
+    public JButton getBtnRecorrerGrafo()
+    {
+        return btnRecorrerGrafo;
+    }
+
+    public ButtonGroup getGrupoBusqueda()
+    {
+        return grupoBusqueda;
+    }
+
+    public ButtonGroup getGrupoCreacionGrafo()
+    {
+        return grupoCreacionGrafo;
+    }
+
+    public ButtonGroup getGrupoRecorrido()
+    {
+        return grupoRecorrido;
+    }
+
     public JPanel getPanelGraficoGrafo()
     {
         return panelGraficoGrafo;
     }
 
+    public JPanel getPanelManipulacionGrafo()
+    {
+        return panelManipulacionGrafo;
+    }
+
+    public JPanel getPanelRecorrido()
+    {
+        return panelRecorrido;
+    }
+
+    public JPanel getPanelPreparacion()
+    {
+        return panelPreparacion;
+    }
+
+    public JTextField getTxtCrearArcoFrom()
+    {
+        return txtCrearArcoFrom;
+    }
+
+    public JTextField getTxtCrearArcoTo()
+    {
+        return txtCrearArcoTo;
+    }
+
+    public JTextField getTxtNuevoVertice()
+    {
+        return txtNuevoVertice;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private JButton btnCrearArco;
+    private JButton btnCrearVertice;
+    private JButton btnGenerar;
+    private JButton btnRecorrerGrafo;
     private ButtonGroup grupoBusqueda;
     private ButtonGroup grupoCreacionGrafo;
     private ButtonGroup grupoRecorrido;
-    private JButton jButton1;
-    private JButton jButton2;
     private JButton jButton3;
     private JButton jButton4;
     private JButton jButton5;
     private JButton jButton6;
-    private JButton jButton7;
-    private JButton jButton8;
     private JLabel jLabel1;
     private JLabel jLabel10;
     private JLabel jLabel11;
@@ -551,13 +623,10 @@ public class Vista extends JFrame
     private JLabel jLabel7;
     private JLabel jLabel8;
     private JLabel jLabel9;
-    private JPanel jPanel1;
     private JPanel jPanel2;
     private JPanel jPanel3;
     private JPanel jPanel5;
-    private JPanel jPanel6;
     private JPanel jPanel7;
-    private JPanel jPanel8;
     private JRadioButton jRadioButton1;
     private JRadioButton jRadioButton2;
     private JRadioButton jRadioButton3;
@@ -572,9 +641,6 @@ public class Vista extends JFrame
     private JSeparator jSeparator4;
     private JSplitPane jSplitPane1;
     private JSplitPane jSplitPane2;
-    private JTextField jTextField1;
-    private JTextField jTextField2;
-    private JTextField jTextField3;
     private JTextField jTextField4;
     private JTextField jTextField5;
     private JTextField jTextField6;
@@ -582,5 +648,11 @@ public class Vista extends JFrame
     private JTextField jTextField8;
     private JTextField jTextField9;
     private JPanel panelGraficoGrafo;
+    private JPanel panelManipulacionGrafo;
+    private JPanel panelPreparacion;
+    private JPanel panelRecorrido;
+    private JTextField txtCrearArcoFrom;
+    private JTextField txtCrearArcoTo;
+    private JTextField txtNuevoVertice;
     // End of variables declaration//GEN-END:variables
 }

@@ -35,6 +35,7 @@ public class GraficoGrafo extends JPanel
     {
         this.grafo = grafo;
         this.coordenadas = new Point[Grafo.MAX_NUMERO_VERTICES];
+        setBackground(BACKGROUND_COLOR);
     }
 
     @Override
