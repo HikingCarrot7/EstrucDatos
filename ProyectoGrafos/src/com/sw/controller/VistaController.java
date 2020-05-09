@@ -241,7 +241,7 @@ public class VistaController
         this.graficoGrafo = new GraficoGrafo(grafo);
         vista.getPanelGraficoGrafo().add(graficoGrafo, BorderLayout.CENTER);
 
-        GraphMouseManager graphMouseManager = new GraphMouseManager(graficoGrafo);
+        GraphMouseController graphMouseManager = new GraphMouseController(graficoGrafo);
         graficoGrafo.addMouseListener(graphMouseManager);
         graficoGrafo.addMouseMotionListener(graphMouseManager);
         vista.getPanelGraficoGrafo().revalidate();

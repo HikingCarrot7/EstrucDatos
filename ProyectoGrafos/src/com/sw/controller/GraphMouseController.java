@@ -10,7 +10,7 @@ import java.awt.event.MouseEvent;
  *
  * @author Nicolás
  */
-public class GraphMouseManager extends MouseAdapter
+public class GraphMouseController extends MouseAdapter
 {
 
     private final GraficoGrafo grafico;
@@ -20,7 +20,7 @@ public class GraphMouseManager extends MouseAdapter
     private int offsetY;
     private boolean moviendoVertice;
 
-    public GraphMouseManager(GraficoGrafo grafico)
+    public GraphMouseController(GraficoGrafo grafico)
     {
         this.grafico = grafico;
     }

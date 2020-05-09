@@ -9,5 +9,4 @@ public interface Factory
 {
 
     public Grafo<String> createGraph(String tipo);
-
 }
