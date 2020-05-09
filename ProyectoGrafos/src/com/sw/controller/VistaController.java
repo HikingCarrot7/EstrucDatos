@@ -76,6 +76,7 @@ public class VistaController
         setUpTextField(vista.getTxtEliminarArcoTo(), vista.getBtnEliminarArco());
         setUpTextField(vista.getTxtAdyacenciaArcoFrom(), vista.getBtnChecarAdyacencia());
         setUpTextField(vista.getTxtAdyacenciaArcoTo(), vista.getBtnChecarAdyacencia());
+        setUpTextField(vista.getTxtVerticeBuscar(), vista.getBtnBuscar());
 
         setPanelEnabled(vista.getPanelManipulacionGrafo(), false);
     }
@@ -114,6 +115,8 @@ public class VistaController
         } catch (GrafoLlenoException | VerticeYaExisteException ex)
         {
             mostrarMensaje("Error!", ex.getMessage());
+            quitarMarcasGraficoGrafo();
+            graficoGrafo.repintarGrafico();
         }
     }
 
@@ -129,6 +132,8 @@ public class VistaController
         } catch (VerticeNoExistenteException ex)
         {
             mostrarMensaje("Error!", ex.getMessage());
+            quitarMarcasGraficoGrafo();
+            graficoGrafo.repintarGrafico();
         }
     }
 
@@ -160,6 +165,8 @@ public class VistaController
         } catch (ArcoNoExistenteException | VerticeNoExistenteException ex)
         {
             mostrarMensaje("Error!", ex.getMessage());
+            quitarMarcasGraficoGrafo();
+            graficoGrafo.repintarGrafico();
         }
     }
 
@@ -190,6 +197,7 @@ public class VistaController
         {
             mostrarMensaje("Error!", ex.getMessage());
             quitarMarcasGraficoGrafo();
+            graficoGrafo.repintarGrafico();
         }
     }
 
@@ -224,6 +232,7 @@ public class VistaController
         {
             mostrarMensaje("Error!", ex.getMessage());
             quitarMarcasGraficoGrafo();
+            graficoGrafo.repintarGrafico();
         }
     }
 
