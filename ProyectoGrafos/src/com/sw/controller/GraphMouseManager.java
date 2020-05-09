@@ -1,6 +1,6 @@
 package com.sw.controller;
 
-import static com.sw.model.Utilidades.distanciaEntreDosPuntos;
+import static com.sw.model.util.Utilidades.distanciaEntreDosPuntos;
 import com.sw.view.GraficoGrafo;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;

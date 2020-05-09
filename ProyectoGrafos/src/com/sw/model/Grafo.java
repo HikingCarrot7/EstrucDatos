@@ -15,8 +15,9 @@ import java.util.List;
 public abstract class Grafo<E>
 {
 
+    public final static int MAX_NUMERO_VERTICES = 50;
+
     protected int numeroVertices;
-    public final static int MAX_NUMERO_VERTICES = 20;
 
     public abstract void nuevoVertice(E datoVertice) throws GrafoLlenoException, VerticeYaExisteException;
 

@@ -131,7 +131,7 @@ public class GrafoListaAdy<E> extends Grafo<E>
     {
         VerticeAdy<E> vertice = new VerticeAdy<>(dato);
 
-        for (int i = 0; i < numeroVertices; i++)
+        for (int i = 0; i < getNumeroVertices(); i++)
             if (tablaAdy[i].equals(vertice))
                 return i;
 

@@ -14,7 +14,6 @@ import com.sw.view.GraficoRecorrido;
 import com.sw.view.Vista;
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -247,7 +246,7 @@ public class VistaController
         graficoGrafo.addMouseMotionListener(graphMouseManager);
         vista.getPanelGraficoGrafo().revalidate();
 
-        EventQueue.invokeLater(() ->
+        /*EventQueue.invokeLater(() ->
         {
             grafo.nuevoVertice("Nicolás");
             graficoGrafo.anadirVerticeAlGrafico(grafo.getNumeroVertices() - 1);
@@ -271,7 +270,7 @@ public class VistaController
             grafo.nuevoArco("Nicolás", "Juan");
             grafo.nuevoArco("Juan", "Emmanuel");
             grafo.nuevoArco("Eusebio", "Emmanuel");
-        });
+        });*/
     }
 
     private String getNuevoVertice()

@@ -2,7 +2,7 @@ package com.sw.view;
 
 import com.sw.model.Arco;
 import com.sw.model.Grafo;
-import static com.sw.model.Utilidades.aleatorio;
+import static com.sw.model.util.Utilidades.aleatorio;
 import com.sw.model.Vertice;
 import java.awt.BasicStroke;
 import java.awt.Color;
