@@ -178,7 +178,7 @@ public final class GraficoGrafo extends JPanel
         arcoMarcado = null;
     }
 
-    public Point[] getCoordenadas()
+    public Point[] getCoordenadasVertices()
     {
         return coordenadasVertices;
     }
@@ -258,9 +258,9 @@ public final class GraficoGrafo extends JPanel
 
         private int buscarCoordenadaMasAlejadaEnX()
         {
-            int xMasAlejado = graficoGrafo.getCoordenadas()[0].x;
+            int xMasAlejado = graficoGrafo.getCoordenadasVertices()[0].x;
 
-            for (Point coordenada : graficoGrafo.getCoordenadas())
+            for (Point coordenada : graficoGrafo.getCoordenadasVertices())
                 if (coordenada != null && xMasAlejado < coordenada.x)
                     xMasAlejado = coordenada.x;
 
@@ -269,9 +269,9 @@ public final class GraficoGrafo extends JPanel
 
         private int buscarCoordenadaMasAlejadaEnY()
         {
-            int yMasAlejado = graficoGrafo.getCoordenadas()[0].y;
+            int yMasAlejado = graficoGrafo.getCoordenadasVertices()[0].y;
 
-            for (Point coordenada : graficoGrafo.getCoordenadas())
+            for (Point coordenada : graficoGrafo.getCoordenadasVertices())
                 if (coordenada != null && yMasAlejado < coordenada.y)
                     yMasAlejado = coordenada.y;
 

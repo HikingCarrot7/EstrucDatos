@@ -34,10 +34,10 @@ public class GraphMouseManager extends MouseAdapter
             int nuevaCoordenadaY = e.getY() - offsetY;
 
             if (nuevaCoordenadaX - GraficoGrafo.RADIO_CIRCULO >= 0)
-                grafico.getCoordenadas()[nVertice].x = nuevaCoordenadaX;
+                grafico.getCoordenadasVertices()[nVertice].x = nuevaCoordenadaX;
 
             if (nuevaCoordenadaY - GraficoGrafo.RADIO_CIRCULO - 15 >= 0)
-                grafico.getCoordenadas()[nVertice].y = nuevaCoordenadaY;
+                grafico.getCoordenadasVertices()[nVertice].y = nuevaCoordenadaY;
 
             grafico.repintarGrafico();
         }
@@ -51,8 +51,8 @@ public class GraphMouseManager extends MouseAdapter
         if (nVertice >= 0)
         {
             moviendoVertice = true;
-            offsetX = e.getX() - grafico.getCoordenadas()[nVertice].x;
-            offsetY = e.getY() - grafico.getCoordenadas()[nVertice].y;
+            offsetX = e.getX() - grafico.getCoordenadasVertices()[nVertice].x;
+            offsetY = e.getY() - grafico.getCoordenadasVertices()[nVertice].y;
 
         } else
             moviendoVertice = false;
@@ -60,7 +60,7 @@ public class GraphMouseManager extends MouseAdapter
 
     private int verticePresionado(Point mouse)
     {
-        Point[] coordenadas = grafico.getCoordenadas();
+        Point[] coordenadas = grafico.getCoordenadasVertices();
 
         for (int i = 0; i < coordenadas.length; i++)
             if (coordenadas[i] != null && distanciaEntreDosPuntos(coordenadas[i], mouse) <= GraficoGrafo.RADIO_CIRCULO)
