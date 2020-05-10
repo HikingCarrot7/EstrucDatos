@@ -113,13 +113,10 @@
                             </columnConstraints>
                             <rowConstraints>
                                 <RowConstraints vgrow="NEVER" />
-                                <RowConstraints vgrow="NEVER" />
                             </rowConstraints>
                             <children>
-                                <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="Comparaciones:" />
-                                <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="Tiempo transcurrido:" GridPane.rowIndex="1" />
-                                <Label maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" />
-                                <Label fx:id="tiempoTranscurrido" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="Tiempo transcurrido:" />
+                                <Label fx:id="tiempoTranscurrido" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" />
                             </children>
                             <BorderPane.margin>
                                 <Insets left="5.0" right="5.0" top="5.0" />

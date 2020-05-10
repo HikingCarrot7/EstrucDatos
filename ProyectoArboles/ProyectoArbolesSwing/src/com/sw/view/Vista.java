@@ -98,9 +98,7 @@ public class Vista extends JFrame
         jPanel5 = new JPanel();
         btnBuscar = new JButton();
         jPanel6 = new JPanel();
-        jLabel2 = new JLabel();
         jLabel3 = new JLabel();
-        jLabel4 = new JLabel();
         tiempoTranscurrido = new JLabel();
         panelLateralDer = new JPanel();
         progressBar = new JProgressBar();
@@ -247,13 +245,6 @@ public class Vista extends JFrame
 
         jPanel6.setLayout(new GridBagLayout());
 
-        jLabel2.setHorizontalAlignment(SwingConstants.RIGHT);
-        jLabel2.setText("Comparaciones:");
-        gridBagConstraints = new GridBagConstraints();
-        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new Insets(3, 3, 3, 3);
-        jPanel6.add(jLabel2, gridBagConstraints);
-
         jLabel3.setHorizontalAlignment(SwingConstants.RIGHT);
         jLabel3.setText("Tiempo transcurrido:");
         gridBagConstraints = new GridBagConstraints();
@@ -262,11 +253,6 @@ public class Vista extends JFrame
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(3, 3, 3, 3);
         jPanel6.add(jLabel3, gridBagConstraints);
-        gridBagConstraints = new GridBagConstraints();
-        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 0.1;
-        gridBagConstraints.insets = new Insets(3, 3, 3, 3);
-        jPanel6.add(jLabel4, gridBagConstraints);
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -430,9 +416,7 @@ public class Vista extends JFrame
     private Box.Filler filler3;
     private ButtonGroup grupoRadioButtons;
     private JLabel jLabel1;
-    private JLabel jLabel2;
     private JLabel jLabel3;
-    private JLabel jLabel4;
     private JPanel jPanel1;
     private JPanel jPanel2;
     private JPanel jPanel3;

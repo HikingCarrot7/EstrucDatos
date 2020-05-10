@@ -21,7 +21,7 @@ public class FormatterPromedio extends NumberStringConverter
         {
             double number = Double.parseDouble(value);
 
-            if (number <= 0 || number >= 100)
+            if (number < 0 || number > 100)
                 throw new ParseException(value, 0);
 
             return number;

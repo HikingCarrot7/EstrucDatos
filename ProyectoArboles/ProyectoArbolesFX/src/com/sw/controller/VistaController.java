@@ -119,9 +119,6 @@ public class VistaController implements Initializable, Controller
         habilitarUI(false);
         progreso.setVisible(false);
 
-        txtRuta.setText("data/Egresados.csv");
-        txtNombre.setText("Emmanuel");
-
         txtPromedio.setTextFormatter(new TextFormatter<>(new FormatterPromedio()));
 
         txtNombre.disableProperty().bind(chbNombre.selectedProperty().not());
