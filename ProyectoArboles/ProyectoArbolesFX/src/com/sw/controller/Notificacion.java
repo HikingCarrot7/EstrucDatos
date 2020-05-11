@@ -6,6 +6,7 @@ import javafx.animation.PauseTransition;
 import javafx.animation.SequentialTransition;
 import javafx.animation.TranslateTransition;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -39,6 +40,7 @@ public class Notificacion extends BorderPane
 
         this.content = new Label(content);
         this.content.setWrapText(true);
+        this.content.setPadding(new Insets(2));
         this.close = new Button("X");
         this.close.setStyle("-fx-background-color: white;");
         this.close.setOnMouseEntered(e -> close.setStyle("-fx-background-color: tomato;"));

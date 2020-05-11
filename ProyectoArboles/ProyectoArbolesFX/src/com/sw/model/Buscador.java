@@ -40,6 +40,7 @@ public class Buscador
         if (profesionSeleccionada)
             if (buscarCoincidencias)
                 coincidenciasAcumuladas = buscarMasCoincidencias(arbolProfesiones, coincidenciasAcumuladas, profesion);
+
             else
             {
                 coincidenciasAcumuladas = new LinkedList<>(arbolProfesiones.buscar(profesion));

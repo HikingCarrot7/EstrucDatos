@@ -6,11 +6,12 @@ import com.sw.model.Comparador;
 import com.sw.model.Egresado;
 import com.sw.model.Factory;
 import com.sw.model.TreeFactory;
+import com.sw.model.dao.DAO;
+import com.sw.model.dao.Loader;
+import com.sw.model.exceptions.ArchivoExtranoException;
 import com.sw.model.exceptions.ItemNotFoundException;
 import com.sw.model.exceptions.NohayCoincidenciasException;
 import com.sw.model.exceptions.RutaInvalidaException;
-import com.sw.model.persistence.DAO;
-import com.sw.model.persistence.Loader;
 import com.sw.model.util.LinkedList;
 import java.awt.Toolkit;
 import java.io.File;
@@ -125,6 +126,8 @@ public class VistaController implements Initializable, Controller
         cmbProfesion.disableProperty().bind(chbProfesion.selectedProperty().not());
         txtPromedio.disableProperty().bind(chbPromedio.selectedProperty().not());
 
+        txtRuta.setText("data/Egresados2.csv");
+
         rbArbolBB.setId(ARBOL_BB);
         rbArbolAVL.setId(ARBOL_AVL);
         rbArbolB.setId(ARBOL_B);
@@ -194,7 +197,7 @@ public class VistaController implements Initializable, Controller
                                 arbolPromedios.insertar(i, egresados[i].getPromedio());
                             }
 
-                        } catch (RutaInvalidaException ex)
+                        } catch (RutaInvalidaException | ArchivoExtranoException ex)
                         {
                             btnGenerar.setDisable(false);
                             btnBuscarDirectorio.setDisable(false);

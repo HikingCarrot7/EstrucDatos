@@ -1,4 +1,4 @@
-package com.sw.model.persistence;
+package com.sw.model.dao;
 
 /**
  *

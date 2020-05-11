@@ -1,6 +1,7 @@
-package com.sw.model.persistence;
+package com.sw.model.dao;
 
 import com.sw.model.Egresado;
+import com.sw.model.exceptions.ArchivoExtranoException;
 import com.sw.model.exceptions.RutaInvalidaException;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -35,6 +36,10 @@ public class DAO implements Loader<ArrayList<Egresado>>
         } catch (IOException ex)
         {
             throw new RutaInvalidaException();
+
+        } catch (NullPointerException | NumberFormatException | IndexOutOfBoundsException ex)
+        {
+            throw new ArchivoExtranoException();
         }
     }
 

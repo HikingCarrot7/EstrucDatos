@@ -6,11 +6,12 @@ import com.sw.model.Comparador;
 import com.sw.model.Egresado;
 import com.sw.model.Factory;
 import com.sw.model.TreeFactory;
+import com.sw.model.dao.DAO;
+import com.sw.model.dao.Loader;
+import com.sw.model.exceptions.ArchivoExtranoException;
 import com.sw.model.exceptions.ItemNotFoundException;
 import com.sw.model.exceptions.NohayCoincidenciasException;
 import com.sw.model.exceptions.RutaInvalidaException;
-import com.sw.model.persistence.DAO;
-import com.sw.model.persistence.Loader;
 import com.sw.model.util.LinkedList;
 import com.sw.view.UIConstants;
 import com.sw.view.Vista;
@@ -151,7 +152,7 @@ public class VistaController implements UIConstants
                         arbolPromedios.insertar(i, egresados[i].getPromedio());
                     }
 
-                } catch (RutaInvalidaException ex)
+                } catch (RutaInvalidaException | ArchivoExtranoException ex)
                 {
                     setBtnBuscarDirectorioEnabled(true);
                     setBtnGenerarEnabled(true);
@@ -186,7 +187,6 @@ public class VistaController implements UIConstants
 
         } catch (InterruptedException | ExecutionException ex)
         {
-            ex.printStackTrace();
         }
     }
 
