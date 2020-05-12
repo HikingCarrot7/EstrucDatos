@@ -1,17 +1,9 @@
 package com.sw.controller;
 
-import com.sw.model.Arbol;
-import com.sw.model.Buscador;
-import com.sw.model.Comparador;
-import com.sw.model.Egresado;
-import com.sw.model.Factory;
-import com.sw.model.TreeFactory;
+import com.sw.model.*;
 import com.sw.model.dao.DAO;
 import com.sw.model.dao.Loader;
-import com.sw.model.exceptions.ArchivoExtranoException;
-import com.sw.model.exceptions.ItemNotFoundException;
-import com.sw.model.exceptions.NohayCoincidenciasException;
-import com.sw.model.exceptions.RutaInvalidaException;
+import com.sw.model.exceptions.*;
 import com.sw.model.util.LinkedList;
 import java.awt.Toolkit;
 import java.io.File;
@@ -82,9 +74,10 @@ public class VistaController implements Initializable, Controller
     private Arbol<LinkedList<Integer>, String> arbolProfesiones;
     private Arbol<LinkedList<Integer>, Double> arbolPromedios;
 
-    private Stage vista;
     private final SeleccionadorArchivos seleccionadorArchivos;
     private final Factory treeFactory;
+
+    private Stage vista;
     private Egresado[] egresados;
 
     public VistaController()
@@ -126,7 +119,7 @@ public class VistaController implements Initializable, Controller
         cmbProfesion.disableProperty().bind(chbProfesion.selectedProperty().not());
         txtPromedio.disableProperty().bind(chbPromedio.selectedProperty().not());
 
-        txtRuta.setText("data/Egresados2.csv");
+        txtRuta.setText("data/Egresados.csv");
 
         rbArbolBB.setId(ARBOL_BB);
         rbArbolAVL.setId(ARBOL_AVL);

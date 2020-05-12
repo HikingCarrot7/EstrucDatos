@@ -54,6 +54,7 @@ public class VistaController implements UIConstants
     private final Factory factory;
     private final ComboBoxManager comboBoxManager;
     private final TableManager tableManager;
+
     private Egresado[] egresados;
 
     public VistaController(Vista vista)
