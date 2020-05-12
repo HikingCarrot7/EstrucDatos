@@ -1,5 +1,6 @@
-package com.sw.model.arbol;
+package com.sw.model.arbolbb;
 
+import com.sw.model.arbol.Arbol;
 import com.sw.model.arbolbb.NodoBinario;
 import com.sw.model.util.LinkedList;
 

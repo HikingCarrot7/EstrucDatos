@@ -1,6 +1,5 @@
 package com.sw.model.arbolbb;
 
-import com.sw.model.arbol.ArbolBinario;
 import com.sw.model.Comparador;
 import com.sw.model.exceptions.ItemNotFoundException;
 import com.sw.model.util.LinkedList;
