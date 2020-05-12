@@ -1,5 +1,6 @@
 package com.sw.model.arbolb;
 
+import com.sw.model.Comparador;
 import com.sw.model.arbol.Arbol;
 import com.sw.model.exceptions.ItemNotFoundException;
 import com.sw.model.util.LinkedList;
@@ -22,17 +23,11 @@ public class ArbolB<L extends LinkedList<Integer>, I extends Comparable<I>> impl
     private int maxChildrenSize = maxKeySize + 1;
     private int size = 0;
 
-    public ArbolB()
-    {
+    private final Comparador<L, I> comparador;
 
-    }
-
-    public ArbolB(int order)
+    public ArbolB(Comparador<L, I> comparador)
     {
-        this.minKeySize = order / 2 - 1;
-        this.minChildrenSize = 1;
-        this.maxKeySize = order - 1;
-        this.maxChildrenSize = order;
+        this.comparador = comparador;
     }
 
     @Override

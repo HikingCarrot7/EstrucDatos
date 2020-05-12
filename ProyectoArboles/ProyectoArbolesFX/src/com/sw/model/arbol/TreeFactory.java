@@ -30,7 +30,7 @@ public class TreeFactory implements Factory
             case VistaController.ARBOL_AVL:
                 return new ArbolAVL<>(VistaController.COMPARADOR_POR_NOMBRE);
             case VistaController.ARBOL_B:
-                return new ArbolB<>();
+                return new ArbolB<>(VistaController.COMPARADOR_POR_NOMBRE);
             default:
                 throw new AssertionError();
         }
@@ -46,7 +46,7 @@ public class TreeFactory implements Factory
             case VistaController.ARBOL_AVL:
                 return new ArbolAVL<>(VistaController.COMPARADOR_POR_PROFESION);
             case VistaController.ARBOL_B:
-                return new ArbolB<>();
+                return new ArbolB<>(VistaController.COMPARADOR_POR_PROFESION);
             default:
                 throw new AssertionError();
         }
@@ -62,7 +62,7 @@ public class TreeFactory implements Factory
             case VistaController.ARBOL_AVL:
                 return new ArbolAVL<>(VistaController.COMPARADOR_POR_PROMEDIO);
             case VistaController.ARBOL_B:
-                return new ArbolB<>();
+                return new ArbolB<>(VistaController.COMPARADOR_POR_PROMEDIO);
             default:
                 throw new AssertionError();
         }
