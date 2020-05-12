@@ -1,5 +1,6 @@
 package com.sw.model;
 
+import com.sw.model.arbol.Arbol;
 import com.sw.model.exceptions.ItemNotFoundException;
 import com.sw.model.exceptions.NohayCoincidenciasException;
 import com.sw.model.util.LinkedList;

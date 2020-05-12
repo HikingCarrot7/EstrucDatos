@@ -12,7 +12,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.BorderPane?> 
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
@@ -23,7 +23,7 @@
     <top>
         <VBox BorderPane.alignment="CENTER">
             <children>
-                <GridPane hgap="10.0"> 
+                <GridPane hgap="10.0">
                     <columnConstraints>
                         <ColumnConstraints hgrow="NEVER" maxWidth="1.7976931348623157E308" />
                         <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" />

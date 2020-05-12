@@ -9,6 +9,7 @@ import javax.swing.JComboBox;
  *
  * @author Nicolás
  */
+@SuppressWarnings("unchecked")
 public class ComboBoxManager
 {
 
@@ -38,8 +39,7 @@ public class ComboBoxManager
 
     public void anadirElementosAlComboBox(JComboBox<?> comboBox, List<?> elementos)
     {
-        for (Object elemento : elementos)
-            anadirElemento(comboBox, elemento);
+        elementos.forEach(elemento -> anadirElemento(comboBox, elemento));
     }
 
     public void anadirElemento(JComboBox<?> comboBox, Object element)
@@ -58,7 +58,6 @@ public class ComboBoxManager
         comboBoxModel.removeAllElements();
     }
 
-    @SuppressWarnings("unchecked")
     public DefaultComboBoxModel<Object> getDefaultComboBoxModel(JComboBox<?> comboBox)
     {
         return (DefaultComboBoxModel<Object>) comboBox.getModel();

@@ -1,14 +1,14 @@
 package com.sw.controller;
 
-import com.sw.model.Arbol;
+import com.sw.model.arbol.Arbol;
 import com.sw.model.Buscador;
 import com.sw.model.Comparador;
 import com.sw.model.Egresado;
-import com.sw.model.Factory;
-import com.sw.model.TreeFactory;
+import com.sw.model.arbol.Factory;
+import com.sw.model.arbol.TreeFactory;
 import com.sw.model.dao.DAO;
 import com.sw.model.dao.Loader;
-import com.sw.model.exceptions.ArchivoExtranoException;
+import com.sw.model.exceptions.ArchivoRaroException;
 import com.sw.model.exceptions.ItemNotFoundException;
 import com.sw.model.exceptions.NohayCoincidenciasException;
 import com.sw.model.exceptions.RutaInvalidaException;
@@ -153,7 +153,7 @@ public class VistaController implements UIConstants
                         arbolPromedios.insertar(i, egresados[i].getPromedio());
                     }
 
-                } catch (RutaInvalidaException | ArchivoExtranoException ex)
+                } catch (RutaInvalidaException | ArchivoRaroException ex)
                 {
                     setBtnBuscarDirectorioEnabled(true);
                     setBtnGenerarEnabled(true);

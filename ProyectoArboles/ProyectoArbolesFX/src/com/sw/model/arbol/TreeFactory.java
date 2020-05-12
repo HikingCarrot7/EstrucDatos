@@ -1,4 +1,4 @@
-package com.sw.model;
+package com.sw.model.arbol;
 
 import com.sw.controller.VistaController;
 import com.sw.model.arbolavl.ArbolAVL;
