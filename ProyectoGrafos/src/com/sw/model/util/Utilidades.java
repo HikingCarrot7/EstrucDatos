@@ -9,7 +9,7 @@ import java.awt.Point;
 public class Utilidades
 {
 
-    public static int aleatorio(int minimo, int maximo)
+    public static int numeroAleatorio(int minimo, int maximo)
     {
         return (int) (Math.random() * ((maximo + 1) - minimo)) + minimo;
     }

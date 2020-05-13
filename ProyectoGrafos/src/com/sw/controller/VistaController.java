@@ -42,6 +42,7 @@ public class VistaController
     private final Factory graphFactory;
     private final GraficoRecorrido graficoRecorrido;
 
+    private GraphController graphController;
     private GraficoGrafo graficoGrafo;
     private Grafo<String> grafo;
 
@@ -106,7 +107,7 @@ public class VistaController
         try
         {
             grafo.nuevoVertice(getNuevoVertice());
-            graficoGrafo.anadirVerticeAlGrafico(grafo.getNumeroVertices() - 1);
+            graphController.anadirVerticeAlGrafico();
             graficoGrafo.repintarGrafico();
             graficoRecorrido.limpiarGrafico();
             quitarMarcasGraficoGrafo();
@@ -141,7 +142,7 @@ public class VistaController
         try
         {
             int nVertice = grafo.eliminarVertice(getVerticeAEliminar());
-            graficoGrafo.eliminarCoordenadasVertice(nVertice);
+            graphController.eliminarCoordenadasVertice(nVertice);
             graficoGrafo.repintarGrafico();
             graficoRecorrido.limpiarGrafico();
             quitarMarcasGraficoGrafo();
@@ -241,9 +242,7 @@ public class VistaController
         this.graficoGrafo = new GraficoGrafo(grafo);
         vista.getPanelGraficoGrafo().add(graficoGrafo, BorderLayout.CENTER);
 
-        GraphMouseController graphMouseManager = new GraphMouseController(graficoGrafo);
-        graficoGrafo.addMouseListener(graphMouseManager);
-        graficoGrafo.addMouseMotionListener(graphMouseManager);
+        graphController = new GraphController(grafo, graficoGrafo, graficoRecorrido);
         vista.getPanelGraficoGrafo().revalidate();
 
         /*EventQueue.invokeLater(() ->

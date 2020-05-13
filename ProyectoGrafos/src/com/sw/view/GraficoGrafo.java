@@ -2,7 +2,6 @@ package com.sw.view;
 
 import com.sw.model.Arco;
 import com.sw.model.Grafo;
-import static com.sw.model.util.Utilidades.aleatorio;
 import com.sw.model.Vertice;
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -16,6 +15,7 @@ import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.util.List;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -38,6 +38,7 @@ public final class GraficoGrafo extends JPanel
     private final Redimensionador redimensionador;
     private int idxVerticeMarcado;
     private Arco arcoMarcado;
+    private JTextField t;
 
     public GraficoGrafo(Grafo<?> grafo)
     {
@@ -47,6 +48,7 @@ public final class GraficoGrafo extends JPanel
         this.idxVerticeMarcado = -1;
         this.arcoMarcado = null;
         setBackground(BACKGROUND_COLOR);
+        setLayout(null);
     }
 
     @Override
@@ -116,28 +118,6 @@ public final class GraficoGrafo extends JPanel
         g.setStroke(new BasicStroke(2));
         g.drawLine(origen.x, origen.y, destino.x, destino.y);
         g.setColor(BACKGROUND_COLOR);
-    }
-
-    public void anadirVerticeAlGrafico(int numVertice)
-    {
-        coordenadasVertices[numVertice] = situarVertice();
-        repaint();
-    }
-
-    public void eliminarCoordenadasVertice(int numVertice)
-    {
-        for (int i = numVertice; i < grafo.getNumeroVertices(); i++)
-            coordenadasVertices[i] = coordenadasVertices[i + 1];
-
-        repaint();
-    }
-
-    private Point situarVertice()
-    {
-        Container topParent = getParent().getParent();
-        return new Point(
-                aleatorio(RADIO_CIRCULO + 15, topParent.getWidth() - RADIO_CIRCULO),
-                aleatorio(RADIO_CIRCULO + 15, topParent.getHeight() - RADIO_CIRCULO));
     }
 
     private void dibujarStringEnPunto(Graphics2D g, String text, Point p)
