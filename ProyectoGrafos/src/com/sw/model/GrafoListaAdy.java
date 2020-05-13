@@ -86,7 +86,7 @@ public class GrafoListaAdy<E> extends Grafo<E>
     @Override
     public void nuevoArco(E origen, E destino) throws VerticeNoExistenteException
     {
-        if (!sonAdyacentes(origen, destino))
+        if (!sonAdyacentes(origen, destino) && !origen.equals(destino))
         {
             int verticeOrigen = numeroVertice(origen);
             int verticeDestino = numeroVertice(destino);

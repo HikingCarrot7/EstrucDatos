@@ -15,7 +15,6 @@ import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.util.List;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 /**
  *
@@ -38,7 +37,10 @@ public final class GraficoGrafo extends JPanel
     private final Redimensionador redimensionador;
     private int idxVerticeMarcado;
     private Arco arcoMarcado;
-    private JTextField t;
+
+    private Point origenArcoIndicador;
+    private Point destinoArcoIndicador;
+    private boolean dibujarArcoIndicador;
 
     public GraficoGrafo(Grafo<?> grafo)
     {
@@ -60,6 +62,9 @@ public final class GraficoGrafo extends JPanel
 
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
+
+        if (dibujarArcoIndicador)
+            dibujarArco(g2d, origenArcoIndicador, destinoArcoIndicador, ARCO_COLOR);
 
         dibujarGrafo((Graphics2D) g);
 
@@ -151,6 +156,18 @@ public final class GraficoGrafo extends JPanel
     public void setArcoMarcado(Arco arcoMarcado)
     {
         this.arcoMarcado = arcoMarcado;
+    }
+
+    public void dibujarArcoIndicador(Point origen, Point destino)
+    {
+        origenArcoIndicador = origen;
+        destinoArcoIndicador = destino;
+        dibujarArcoIndicador = true;
+    }
+
+    public void quitarArcoIndicador()
+    {
+        dibujarArcoIndicador = false;
     }
 
     public void quitarArcoMarcado()
