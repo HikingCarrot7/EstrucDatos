@@ -31,6 +31,11 @@ public abstract class Grafo<E>
 
     public abstract int numeroVertice(E dato);
 
+    public boolean existeVertice(E dato)
+    {
+        return numeroVertice(dato) >= 0;
+    }
+
     public abstract List<E> recorridoAnchura();
 
     public abstract List<E> recorridoProfundidad();

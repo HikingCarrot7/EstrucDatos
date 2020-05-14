@@ -118,15 +118,12 @@ public class VistaController
         {
             grafo.nuevoVertice(getNuevoVertice());
             graphController.anadirVerticeAlGrafico();
-            graficoGrafo.repintarGrafico();
-            graficoRecorrido.limpiarGrafico();
-            quitarMarcasGraficoGrafo();
+            limpiarGraficos();
 
         } catch (GrafoLlenoException | VerticeYaExisteException ex)
         {
             mostrarMensaje("Error!", ex.getMessage());
-            quitarMarcasGraficoGrafo();
-            graficoGrafo.repintarGrafico();
+            limpiarGraficos();
         }
     }
 
@@ -135,15 +132,12 @@ public class VistaController
         try
         {
             grafo.nuevoArco(getCrearArcoFrom(), getCrearArcoTo());
-            graficoGrafo.repintarGrafico();
-            graficoRecorrido.limpiarGrafico();
-            quitarMarcasGraficoGrafo();
+            limpiarGraficos();
 
         } catch (VerticeNoExistenteException ex)
         {
             mostrarMensaje("Error!", ex.getMessage());
-            quitarMarcasGraficoGrafo();
-            graficoGrafo.repintarGrafico();
+            limpiarGraficos();
         }
     }
 
@@ -153,9 +147,7 @@ public class VistaController
         {
             int nVertice = grafo.eliminarVertice(getVerticeAEliminar());
             graphController.eliminarCoordenadasVertice(nVertice);
-            graficoGrafo.repintarGrafico();
-            graficoRecorrido.limpiarGrafico();
-            quitarMarcasGraficoGrafo();
+            limpiarGraficos();
 
         } catch (VerticeNoExistenteException ex)
         {
@@ -168,20 +160,19 @@ public class VistaController
         try
         {
             grafo.eliminarArco(getEliminarArcoFrom(), getEliminarArcoTo());
-            graficoGrafo.repintarGrafico();
-            graficoRecorrido.limpiarGrafico();
-            quitarMarcasGraficoGrafo();
+            limpiarGraficos();
 
         } catch (ArcoNoExistenteException | VerticeNoExistenteException ex)
         {
             mostrarMensaje("Error!", ex.getMessage());
-            quitarMarcasGraficoGrafo();
-            graficoGrafo.repintarGrafico();
+            limpiarGraficos();
         }
     }
 
     private void accionBtnBuscar(ActionEvent e)
     {
+        limpiarGraficos();
+
         try
         {
             switch (getRadioButtonSeleccionado(vista.getGrupoBusqueda()))
@@ -199,15 +190,11 @@ public class VistaController
             }
 
             mostrarMensaje("Encontrado!", "Se ha encontrado el vértice!");
-            graficoGrafo.repintarGrafico();
-            graficoRecorrido.limpiarGrafico();
-            graficoGrafo.quitarArcoMarcado();
 
         } catch (NoHayCoincidenciasException ex)
         {
             mostrarMensaje("Error!", ex.getMessage());
-            quitarMarcasGraficoGrafo();
-            graficoGrafo.repintarGrafico();
+            limpiarGraficos();
         }
     }
 
@@ -225,7 +212,7 @@ public class VistaController
                 throw new AssertionError();
         }
 
-        graficoRecorrido.repintarGrafico();
+        graficoRecorrido.repaint();
     }
 
     private void accionBtnChecarAdyacencia(ActionEvent e)
@@ -234,15 +221,13 @@ public class VistaController
         {
             Arco arco = grafo.getArco(getAdyacenciaArcoFrom(), getAdyacenciaArcoTo());
             graficoGrafo.setArcoMarcado(arco);
-            graficoGrafo.quitarVerticeMarcado();
-            graficoGrafo.repintarGrafico();
+            limpiarGraficos();
             mostrarMensaje("Enhorabuena!", "Los vértices son adyacentes!");
 
         } catch (ArcoNoExistenteException | VerticeNoExistenteException ex)
         {
             mostrarMensaje("Error!", ex.getMessage());
-            quitarMarcasGraficoGrafo();
-            graficoGrafo.repintarGrafico();
+            limpiarGraficos();
         }
     }
 
@@ -254,6 +239,7 @@ public class VistaController
 
         graphController = new GraphController(grafo, graficoGrafo, graficoRecorrido);
         vista.getPanelGraficoGrafo().revalidate();
+        graficoGrafo.requestFocus();
 
         /*EventQueue.invokeLater(() ->
         {
@@ -355,10 +341,12 @@ public class VistaController
         }
     }
 
-    private void quitarMarcasGraficoGrafo()
+    private void limpiarGraficos()
     {
         graficoGrafo.quitarVerticeMarcado();
         graficoGrafo.quitarArcoMarcado();
+        graficoGrafo.repaint();
+        graficoRecorrido.repaint();
     }
 
     private void mostrarMensaje(String titulo, String text)

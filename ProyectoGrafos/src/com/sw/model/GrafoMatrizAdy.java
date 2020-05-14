@@ -33,9 +33,7 @@ public class GrafoMatrizAdy<E> extends Grafo<E>
         if (getNumeroVertices() == MAX_NUMERO_VERTICES)
             throw new GrafoLlenoException();
 
-        boolean esta = numeroVertice(dato) >= 0;
-
-        if (esta)
+        if (existeVertice(dato))
             throw new VerticeYaExisteException();
 
         Vertice<E> v = new Vertice<>(dato);

@@ -195,11 +195,6 @@ public final class GraficoGrafo extends JPanel
         return coordenadasVertices;
     }
 
-    public void repintarGrafico()
-    {
-        EventQueue.invokeLater(this::repaint);
-    }
-
     private class Redimensionador
     {
 
