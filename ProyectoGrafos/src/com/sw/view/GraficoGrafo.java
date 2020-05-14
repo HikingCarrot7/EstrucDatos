@@ -23,7 +23,7 @@ import javax.swing.JPanel;
 public final class GraficoGrafo extends JPanel
 {
 
-    public static final int DIAMETRO_CIRCULO = 70;
+    public static final int DIAMETRO_CIRCULO = 60;
     public static final int RADIO_CIRCULO = DIAMETRO_CIRCULO / 2;
 
     private final Color BACKGROUND_COLOR = Color.WHITE;
@@ -66,6 +66,7 @@ public final class GraficoGrafo extends JPanel
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
 
+        //dibujarLimites(g2d);
         if (dibujarArcoIndicador)
             dibujarArco(g2d, origenArcoIndicador, destinoArcoIndicador, ARCO_COLOR);
 
@@ -75,6 +76,13 @@ public final class GraficoGrafo extends JPanel
             redimensionador.redimensionar();
 
         g.dispose();
+    }
+
+    private void dibujarLimites(Graphics2D g)
+    {
+        g.setColor(Color.BLACK);
+        g.drawRect(RADIO_CIRCULO, RADIO_CIRCULO, getWidth() - DIAMETRO_CIRCULO, getHeight() - DIAMETRO_CIRCULO);
+        g.setColor(BACKGROUND_COLOR);
     }
 
     private void dibujarGrafo(Graphics2D g)

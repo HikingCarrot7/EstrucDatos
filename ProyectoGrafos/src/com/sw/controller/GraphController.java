@@ -8,8 +8,6 @@ import com.sw.view.GraficoGrafo;
 import static com.sw.view.GraficoGrafo.RADIO_CIRCULO;
 import com.sw.view.GraficoRecorrido;
 import com.sw.view.UIConstants;
-import static com.sw.view.UIConstants.DELETE_ICON;
-import static com.sw.view.UIConstants.EDITAR_ICON;
 import java.awt.Container;
 import java.awt.EventQueue;
 import java.awt.Point;
@@ -188,6 +186,7 @@ public class GraphController implements UIConstants
     {
         int verticePresionado = verticePresionado(mousePosition);
         verticeSeleccionado = verticePresionado >= 0 ? verticePresionado : verticeSeleccionado;
+        graficoGrafo.requestFocus();
 
         mostrarPopupMenu();
 
