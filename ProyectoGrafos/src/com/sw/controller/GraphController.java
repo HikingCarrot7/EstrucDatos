@@ -188,6 +188,7 @@ public class GraphController implements UIConstants
                 Point coordenadasVerticePresionado = graficoGrafo.getCoordenadasVertices()[verticeOrigen];
                 graficoGrafo.dibujarArcoIndicador(coordenadasVerticePresionado, e.getPoint());
                 graficoGrafo.setVerticeOrigen(verticeOrigen);
+                graficoGrafo.repaint();
                 anadiendoArco = true;
             }
     }
@@ -219,7 +220,7 @@ public class GraphController implements UIConstants
             if (nuevaCoordenadaY - RADIO_CIRCULO >= 0)
                 graficoGrafo.getCoordenadasVertices()[nVerticeAMover].y = nuevaCoordenadaY;
 
-            graficoGrafo.repintarGrafico();
+            graficoGrafo.repaint();
         }
     }
 
@@ -277,7 +278,6 @@ public class GraphController implements UIConstants
         {
             Vertice<String> vertice = grafo.getVertices()[nVertice];
             vertice.setDato(nombreVertice.isEmpty() ? String.valueOf(nVertice) : nombreVertice);
-
         }
     }
 
@@ -316,6 +316,8 @@ public class GraphController implements UIConstants
 
     public void eliminarCoordenadasVertice(int numVertice)
     {
+        graficoGrafo.getCoordenadasVertices()[numVertice] = null;
+
         for (int i = numVertice; i < grafo.getNumeroVertices(); i++)
             graficoGrafo.getCoordenadasVertices()[i] = graficoGrafo.getCoordenadasVertices()[i + 1];
 
@@ -348,20 +350,23 @@ public class GraphController implements UIConstants
         graficoGrafo.quitarArcoMarcado();
     }
 
-    private void repintarEditorNombreVertice()
-    {
-        EventQueue.invokeLater(editorNombreVertice::repaint);
-    }
-
-    private void mostrarPopupMenu()
+    private boolean mostrarPopupMenu()
     {
         final Point mousePosition = graficoGrafo.getMousePosition();
+        final boolean debeMostrarsePopupMenu = !nombrandoVertice && !anadiendoArco && verticePresionado(mousePosition) >= 0;
 
         EventQueue.invokeLater(() ->
         {
-            popupMenu.setVisible(!nombrandoVertice && !anadiendoArco && verticePresionado(mousePosition) >= 0);
+            popupMenu.setVisible(debeMostrarsePopupMenu);
             repintarEditorNombreVertice();
         });
+
+        return debeMostrarsePopupMenu;
+    }
+
+    private void repintarEditorNombreVertice()
+    {
+        EventQueue.invokeLater(editorNombreVertice::repaint);
     }
 
     private int esClicDerecho()

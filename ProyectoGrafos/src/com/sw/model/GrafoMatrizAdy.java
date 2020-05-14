@@ -74,20 +74,21 @@ public class GrafoMatrizAdy<E> extends Grafo<E>
     private void eliminarFilaMatrizAdy(int numFila)
     {
         for (int j = 0; j < getNumeroVertices(); j++)
-            matrizAdy[numFila][j] = 0;
+            for (int i = numFila; i < getNumeroVertices() - 1; i++)
+                matrizAdy[i][j] = matrizAdy[i + 1][j];
 
-        for (int i = numFila; i < getNumeroVertices() - 1; i++)
-            matrizAdy[i] = matrizAdy[i + 1];
+        for (int j = 0; j < getNumeroVertices(); j++)
+            matrizAdy[getNumeroVertices() - 1][j] = 0;
     }
 
     private void eliminarColumnaMatrizAdy(int numColumna)
     {
-        for (int i = 0; i < getNumeroVertices(); i++)
-            matrizAdy[i][numColumna] = 0;
-
         for (int i = 0; i < getNumeroVertices() - 1; i++)
             for (int j = numColumna; j < getNumeroVertices() - 1; j++)
                 matrizAdy[i][j] = matrizAdy[i][j + 1];
+
+        for (int i = 0; i < getNumeroVertices(); i++)
+            matrizAdy[i][getNumeroVertices() - 1] = 0;
     }
 
     @Override
