@@ -29,6 +29,7 @@ public final class GraficoGrafo extends JPanel
     private final Color BACKGROUND_COLOR = Color.WHITE;
     private final Color CIRCLE_COLOR = Color.RED;
     private final Color MARKED_CIRCLE_COLOR = Color.DARK_GRAY;
+    private final Color ORIGEN_CIRCLE_COLOR = Color.BLUE;
     private final Color ARCO_COLOR = Color.BLACK;
     private final Color MARKED_ARCO_COLOR = Color.MAGENTA;
 
@@ -36,6 +37,7 @@ public final class GraficoGrafo extends JPanel
     private final Point[] coordenadasVertices;
     private final Redimensionador redimensionador;
     private int idxVerticeMarcado;
+    private int idxVerticeOrigen;
     private Arco arcoMarcado;
 
     private Point origenArcoIndicador;
@@ -48,6 +50,7 @@ public final class GraficoGrafo extends JPanel
         this.redimensionador = new Redimensionador(this);
         this.coordenadasVertices = new Point[Grafo.MAX_NUMERO_VERTICES];
         this.idxVerticeMarcado = -1;
+        this.idxVerticeOrigen = -1;
         this.arcoMarcado = null;
         setBackground(BACKGROUND_COLOR);
         setLayout(null);
@@ -87,8 +90,11 @@ public final class GraficoGrafo extends JPanel
         if (idxVerticeMarcado >= 0)
             dibujarVertice(g, vertices[idxVerticeMarcado], MARKED_CIRCLE_COLOR);
 
+        if (idxVerticeOrigen >= 0)
+            dibujarVertice(g, vertices[idxVerticeOrigen], ORIGEN_CIRCLE_COLOR);
+
         for (int i = 0; i < grafo.getNumeroVertices(); i++)
-            if (i != idxVerticeMarcado)
+            if (i != idxVerticeMarcado && i != idxVerticeOrigen)
                 dibujarVertice(g, vertices[i], CIRCLE_COLOR);
     }
 
@@ -112,8 +118,7 @@ public final class GraficoGrafo extends JPanel
     {
         g.setColor(Color.WHITE);
         dibujarStringEnPunto(g, contenido, coordenadaVertice.x, coordenadaVertice.y);
-        g.setColor(Color.BLACK);
-        dibujarStringEnPunto(g, String.valueOf(nVertice), coordenadaVertice.x, coordenadaVertice.y - RADIO_CIRCULO - 10);
+        dibujarStringEnPunto(g, String.valueOf(nVertice), coordenadaVertice.x, coordenadaVertice.y - RADIO_CIRCULO + 8);
         g.setColor(BACKGROUND_COLOR);
     }
 
@@ -150,12 +155,17 @@ public final class GraficoGrafo extends JPanel
 
     public void quitarVerticeMarcado()
     {
-        idxVerticeMarcado = -1;
+        this.idxVerticeMarcado = -1;
     }
 
-    public void setArcoMarcado(Arco arcoMarcado)
+    public void setVerticeOrigen(int idxVerticeOrigen)
     {
-        this.arcoMarcado = arcoMarcado;
+        this.idxVerticeOrigen = idxVerticeOrigen;
+    }
+
+    public void quitarVerticeOrigen()
+    {
+        this.idxVerticeOrigen = -1;
     }
 
     public void dibujarArcoIndicador(Point origen, Point destino)
@@ -163,6 +173,11 @@ public final class GraficoGrafo extends JPanel
         origenArcoIndicador = origen;
         destinoArcoIndicador = destino;
         dibujarArcoIndicador = true;
+    }
+
+    public void setArcoMarcado(Arco arcoMarcado)
+    {
+        this.arcoMarcado = arcoMarcado;
     }
 
     public void quitarArcoIndicador()

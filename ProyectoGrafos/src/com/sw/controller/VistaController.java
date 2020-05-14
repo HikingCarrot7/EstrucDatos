@@ -15,6 +15,8 @@ import com.sw.view.Vista;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Enumeration;
@@ -67,6 +69,14 @@ public class VistaController
 
         vista.getPanelRecorrido().add(graficoRecorrido, BorderLayout.CENTER);
         vista.getPanelRecorrido().revalidate();
+        vista.addComponentListener(new ComponentAdapter()
+        {
+            @Override
+            public void componentResized(ComponentEvent e)
+            {
+                vista.requestFocus();
+            }
+        });
 
         setUpTextField(vista.getTxtNuevoVertice(), vista.getBtnCrearVertice());
         setUpTextField(vista.getTxtCrearArcoFrom(), vista.getBtnCrearArco());

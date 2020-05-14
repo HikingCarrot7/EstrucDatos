@@ -11,6 +11,8 @@ import com.sw.view.UIConstants;
 import java.awt.Container;
 import java.awt.EventQueue;
 import java.awt.Point;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -39,6 +41,8 @@ public class GraphController implements UIConstants
 
     private int nVerticeAMover;
     private int verticeSeleccionado;
+    private int verticeOrigen;
+
     private int offsetX;
     private int offsetY;
 
@@ -76,8 +80,22 @@ public class GraphController implements UIConstants
             }
         });
 
-        popupMenu.add(new JMenuItem(new AccionEmergente("Editar nombre", EDITAR_ICON, e -> editarNombreVertice(verticeSeleccionado))));
-        popupMenu.add(new JMenuItem(new AccionEmergente("Eliminar vértice", DELETE_ICON, e -> eliminarVertice(verticeSeleccionado))));
+        editorNombreVertice.addFocusListener(new FocusAdapter()
+        {
+            @Override
+            public void focusLost(FocusEvent e)
+            {
+                manejarPerdidaFocoEditorNombreVertice();
+            }
+        });
+
+        popupMenu.add(new JMenuItem(new AccionEmergente("Editar nombre",
+                EDITAR_ICON,
+                e -> editarNombreVertice(verticeSeleccionado))));
+
+        popupMenu.add(new JMenuItem(new AccionEmergente("Eliminar vértice",
+                DELETE_ICON,
+                e -> eliminarVertice(verticeSeleccionado))));
 
         graficoGrafo.setComponentPopupMenu(popupMenu);
 
@@ -85,7 +103,7 @@ public class GraphController implements UIConstants
         {
             @Override public void popupMenuWillBecomeVisible(PopupMenuEvent e)
             {
-                debeMostrarsePopupMenu();
+                manejarClicDerecho(graficoGrafo.getMousePosition());
             }
         });
 
@@ -93,7 +111,7 @@ public class GraphController implements UIConstants
         {
             @Override public void mouseClicked(MouseEvent e)
             {
-                GraphController.this.mouseClicked(e);
+                GraphController.this.manejarClicIzquierdo(e);
             }
 
             @Override public void mousePressed(MouseEvent e)
@@ -114,29 +132,31 @@ public class GraphController implements UIConstants
                 GraphController.this.mouseMoved(e);
             }
         });
-
     }// </editor-fold>
 
-    private void mouseMoved(MouseEvent e)
+    private void manejarPerdidaFocoEditorNombreVertice()
     {
-        if (anadiendoArco)
-        {
-            Point coordenadasVerticePresionado = graficoGrafo.getCoordenadasVertices()[verticeSeleccionado];
-            graficoGrafo.dibujarArcoIndicador(coordenadasVerticePresionado, e.getPoint());
-            graficoGrafo.repaint();
-        }
+        quitarEditorNombreVertice();
+        nombrandoVertice = false;
     }
 
-    private void mouseClicked(MouseEvent e)
+    private void manejarClicDerecho(Point mousePosition)
     {
-        System.out.println("Hola");
-        if (e.getButton() == MouseEvent.BUTTON3)
-        {
-            if (!anadiendoArco)
-                verticeSeleccionado = verticePresionado(e.getPoint());
+        int verticePresionado = verticePresionado(mousePosition);
+        verticeSeleccionado = verticePresionado >= 0 ? verticePresionado : verticeSeleccionado;
 
+        mostrarPopupMenu();
+
+        if (anadiendoArco)
+            cancelarAnadirArco();
+    }
+
+    private void manejarClicIzquierdo(MouseEvent e)
+    {
+        if (e.getButton() == esClicDerecho())
             return;
-        }
+
+        int verticePresionado = verticePresionado(e.getPoint());
 
         if (nombrandoVertice)
         {
@@ -144,30 +164,30 @@ public class GraphController implements UIConstants
             quitarEditorNombreVertice();
             nombrandoVertice = false;
 
-        } else if (verticePresionado(e.getPoint()) < 0 && !anadiendoArco)
+        } else if (verticePresionado < 0 && !anadiendoArco)
         {
             anadirVertice(String.valueOf(grafo.getNumeroVertices()), e.getPoint());
             posicionarEditorNombreVertice(e.getPoint());
             verticeSeleccionado = grafo.getNumeroVertices() - 1;
             nombrandoVertice = true;
 
-        } else if (verticePresionado(e.getPoint()) >= 0)
+        } else if (verticePresionado >= 0)
             if (anadiendoArco)
             {
-                int verticePresionado = verticePresionado(e.getPoint());
+                int verticeDestino = verticePresionado;
 
-                String origen = grafo.getVertices()[verticeSeleccionado].getDato();
-                String destino = grafo.getVertices()[verticePresionado].getDato();
+                String origen = grafo.getVertices()[verticeOrigen].getDato();
+                String destino = grafo.getVertices()[verticeDestino].getDato();
 
-                verticeSeleccionado = verticePresionado;
                 anadirArco(origen, destino);
-                anadiendoArco = false;
+                cancelarAnadirArco();
 
             } else
             {
-                verticeSeleccionado = verticePresionado(e.getPoint());
-                Point coordenadasVerticePresionado = graficoGrafo.getCoordenadasVertices()[verticeSeleccionado];
+                verticeOrigen = verticePresionado;
+                Point coordenadasVerticePresionado = graficoGrafo.getCoordenadasVertices()[verticeOrigen];
                 graficoGrafo.dibujarArcoIndicador(coordenadasVerticePresionado, e.getPoint());
+                graficoGrafo.setVerticeOrigen(verticeOrigen);
                 anadiendoArco = true;
             }
     }
@@ -196,10 +216,20 @@ public class GraphController implements UIConstants
             if (nuevaCoordenadaX - RADIO_CIRCULO >= 0)
                 graficoGrafo.getCoordenadasVertices()[nVerticeAMover].x = nuevaCoordenadaX;
 
-            if (nuevaCoordenadaY - RADIO_CIRCULO - 15 >= 0)
+            if (nuevaCoordenadaY - RADIO_CIRCULO >= 0)
                 graficoGrafo.getCoordenadasVertices()[nVerticeAMover].y = nuevaCoordenadaY;
 
             graficoGrafo.repintarGrafico();
+        }
+    }
+
+    private void mouseMoved(MouseEvent e)
+    {
+        if (anadiendoArco)
+        {
+            Point coordenadasVerticeOrigen = graficoGrafo.getCoordenadasVertices()[verticeOrigen];
+            graficoGrafo.dibujarArcoIndicador(coordenadasVerticeOrigen, e.getPoint());
+            graficoGrafo.repaint();
         }
     }
 
@@ -229,8 +259,14 @@ public class GraphController implements UIConstants
     private void anadirArco(String origen, String destino)
     {
         grafo.nuevoArco(origen, destino);
+    }
+
+    private void cancelarAnadirArco()
+    {
         graficoGrafo.quitarArcoIndicador();
+        graficoGrafo.quitarVerticeOrigen();
         graficoGrafo.repaint();
+        anadiendoArco = false;
     }
 
     private void cambiarNombreVertice(int nVertice)
@@ -242,8 +278,7 @@ public class GraphController implements UIConstants
             Vertice<String> vertice = grafo.getVertices()[nVertice];
             vertice.setDato(nombreVertice.isEmpty() ? String.valueOf(nVertice) : nombreVertice);
 
-        } else
-            System.out.println("El vértice ya existe.");
+        }
     }
 
     private void posicionarEditorNombreVertice(Point point)
@@ -254,7 +289,7 @@ public class GraphController implements UIConstants
 
         editorNombreVertice.setVisible(true);
         editorNombreVertice.requestFocus();
-        EventQueue.invokeLater(editorNombreVertice::repaint);
+        repintarEditorNombreVertice();
     }
 
     private void quitarEditorNombreVertice()
@@ -307,16 +342,31 @@ public class GraphController implements UIConstants
         return -1;
     }
 
-    private void debeMostrarsePopupMenu()
-    {
-        final Point mousePosition = graficoGrafo.getMousePosition();
-        EventQueue.invokeLater(() -> popupMenu.setVisible(!nombrandoVertice && !anadiendoArco && verticePresionado(mousePosition) >= 0));
-    }
-
     private void quitarMarcasGraficoGrafo()
     {
         graficoGrafo.quitarVerticeMarcado();
         graficoGrafo.quitarArcoMarcado();
+    }
+
+    private void repintarEditorNombreVertice()
+    {
+        EventQueue.invokeLater(editorNombreVertice::repaint);
+    }
+
+    private void mostrarPopupMenu()
+    {
+        final Point mousePosition = graficoGrafo.getMousePosition();
+
+        EventQueue.invokeLater(() ->
+        {
+            popupMenu.setVisible(!nombrandoVertice && !anadiendoArco && verticePresionado(mousePosition) >= 0);
+            repintarEditorNombreVertice();
+        });
+    }
+
+    private int esClicDerecho()
+    {
+        return MouseEvent.BUTTON3;
     }
 
 }
