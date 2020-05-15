@@ -56,6 +56,7 @@ public class VistaController
         initComponents();
     }
 
+    // <editor-fold defaultstate="collapsed" desc="initComponents">
     private void initComponents()
     {
         vista.getBtnGenerar().addActionListener(this::accionBtnGenerarGrafo);
@@ -89,7 +90,7 @@ public class VistaController
         setUpTextField(vista.getTxtVerticeBuscar(), vista.getBtnBuscar());
 
         setPanelEnabled(vista.getPanelManipulacionGrafo(), false);
-    }
+    }// </editor-fold>
 
     private void setUpTextField(JTextField textField, JButton button)
     {
@@ -244,19 +245,19 @@ public class VistaController
         /*EventQueue.invokeLater(() ->
         {
             grafo.nuevoVertice("Nicolás");
-            graficoGrafo.anadirVerticeAlGrafico(grafo.getNumeroVertices() - 1);
+            graphController.anadirVerticeAlGrafico();
             grafo.nuevoVertice("Antonio");
-            graficoGrafo.anadirVerticeAlGrafico(grafo.getNumeroVertices() - 1);
+            graphController.anadirVerticeAlGrafico();
             grafo.nuevoVertice("Javier");
-            graficoGrafo.anadirVerticeAlGrafico(grafo.getNumeroVertices() - 1);
+            graphController.anadirVerticeAlGrafico();
             grafo.nuevoVertice("Carlos");
-            graficoGrafo.anadirVerticeAlGrafico(grafo.getNumeroVertices() - 1);
+            graphController.anadirVerticeAlGrafico();
             grafo.nuevoVertice("Juan");
-            graficoGrafo.anadirVerticeAlGrafico(grafo.getNumeroVertices() - 1);
+            graphController.anadirVerticeAlGrafico();
             grafo.nuevoVertice("Eusebio");
-            graficoGrafo.anadirVerticeAlGrafico(grafo.getNumeroVertices() - 1);
+            graphController.anadirVerticeAlGrafico();
             grafo.nuevoVertice("Emmanuel");
-            graficoGrafo.anadirVerticeAlGrafico(grafo.getNumeroVertices() - 1);
+            graphController.anadirVerticeAlGrafico();
 
             grafo.nuevoArco("Nicolás", "Antonio");
             grafo.nuevoArco("Nicolás", "Carlos");

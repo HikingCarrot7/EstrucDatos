@@ -224,10 +224,13 @@ public class GraphController implements UIConstants
 
         } else if (verticePresionado < 0 && !anadiendoArco)
         {
-            anadirVertice(getNombrePosibleVertice(verticePresionado), e.getPoint());
-            posicionarEditorNombreVertice(e.getPoint());
-            verticeSeleccionado = grafo.getNumeroVertices() - 1;
-            nombrandoVertice = true;
+            if (grafo.getNumeroVertices() < Grafo.MAX_NUMERO_VERTICES)
+            {
+                anadirVertice(getNombrePosibleVertice(verticePresionado), e.getPoint());
+                posicionarEditorNombreVertice(e.getPoint());
+                verticeSeleccionado = grafo.getNumeroVertices() - 1;
+                nombrandoVertice = true;
+            }
 
         } else if (verticePresionado >= 0)
             if (anadiendoArco)
