@@ -1,9 +1,9 @@
 package com.sw.controller;
 
-import com.sw.model.arbol.Arbol;
 import com.sw.model.Buscador;
 import com.sw.model.Comparador;
 import com.sw.model.Egresado;
+import com.sw.model.arbol.Arbol;
 import com.sw.model.arbol.Factory;
 import com.sw.model.arbol.TreeFactory;
 import com.sw.model.dao.DAO;
@@ -86,8 +86,6 @@ public class VistaController implements UIConstants
         setProgressBarVisible(false);
 
         vista.getTxtPromedio().setFormatterFactory(new PromedioFormatter());
-        vista.getTxtDireccion().setText("data/Egresados.csv");
-        vista.getTxtNombre().setText("Emmanuel");
 
         vista.getBtnBuscarDirectorio().addActionListener(this::accionBtnBuscarDirectorio);
         vista.getBtnGenerar().addActionListener(this::accionBtnGenerarArbol);

@@ -122,8 +122,6 @@ public class VistaController implements Initializable, Controller
         cmbProfesion.disableProperty().bind(chbProfesion.selectedProperty().not());
         txtPromedio.disableProperty().bind(chbPromedio.selectedProperty().not());
 
-        txtRuta.setText("data/Egresados.csv");
-
         rbArbolBB.setId(ARBOL_BB);
         rbArbolAVL.setId(ARBOL_AVL);
         rbArbolB.setId(ARBOL_B);
