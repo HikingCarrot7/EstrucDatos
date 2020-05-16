@@ -221,8 +221,8 @@ public class VistaController
         try
         {
             Arco arco = grafo.getArco(getAdyacenciaArcoFrom(), getAdyacenciaArcoTo());
-            graficoGrafo.setArcoMarcado(arco);
             limpiarGraficos();
+            graficoGrafo.setArcoMarcado(arco);
             mostrarMensaje("Enhorabuena!", "Los vértices son adyacentes!");
 
         } catch (ArcoNoExistenteException | VerticeNoExistenteException ex)
