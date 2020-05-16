@@ -13,6 +13,7 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.awt.geom.AffineTransform;
 import java.util.List;
 import javax.swing.JPanel;
 
@@ -32,6 +33,8 @@ public final class GraficoGrafo extends JPanel
     private final Color ORIGEN_CIRCLE_COLOR = Color.BLUE;
     private final Color ARCO_COLOR = Color.BLACK;
     private final Color MARKED_ARCO_COLOR = Color.MAGENTA;
+
+    private final int TRIANGLE_SIZE = 8;
 
     private final Grafo<?> grafo;
     private final Point[] coordenadasVertices;
@@ -66,9 +69,8 @@ public final class GraficoGrafo extends JPanel
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
 
-        //dibujarLimites(g2d);
         if (dibujarArcoIndicador)
-            dibujarArco(g2d, origenArcoIndicador, destinoArcoIndicador, ARCO_COLOR);
+            dibujarLinea(g2d, origenArcoIndicador, destinoArcoIndicador, ARCO_COLOR);
 
         dibujarGrafo((Graphics2D) g);
 
@@ -95,15 +97,14 @@ public final class GraficoGrafo extends JPanel
         if (arcoMarcado != null)
             dibujarArco(g, coordenadasVertices[arcoMarcado.getOrigen()], coordenadasVertices[arcoMarcado.getDestino()], MARKED_ARCO_COLOR);
 
+        for (int i = 0; i < grafo.getNumeroVertices(); i++)
+            dibujarVertice(g, vertices[i], CIRCLE_COLOR);
+
         if (idxVerticeMarcado >= 0)
             dibujarVertice(g, vertices[idxVerticeMarcado], MARKED_CIRCLE_COLOR);
 
         if (idxVerticeOrigen >= 0)
             dibujarVertice(g, vertices[idxVerticeOrigen], ORIGEN_CIRCLE_COLOR);
-
-        for (int i = 0; i < grafo.getNumeroVertices(); i++)
-            if (i != idxVerticeMarcado && i != idxVerticeOrigen)
-                dibujarVertice(g, vertices[i], CIRCLE_COLOR);
     }
 
     private void dibujarVertice(Graphics2D g, Vertice<?> vertice, Color colorVertice)
@@ -132,10 +133,48 @@ public final class GraficoGrafo extends JPanel
 
     private void dibujarArco(Graphics2D g, Point origen, Point destino, Color colorArco)
     {
+        dibujarLinea(g, origen, destino, colorArco);
         g.setColor(colorArco);
+        dibujarTriangulo(g, origen, destino);
+        dibujarTriangulo(g, destino, origen);
+        g.setColor(BACKGROUND_COLOR);
+    }
+
+    private void dibujarLinea(Graphics2D g, Point origen, Point destino, Color colorLinea)
+    {
+        g.setColor(colorLinea);
         g.setStroke(new BasicStroke(2));
         g.drawLine(origen.x, origen.y, destino.x, destino.y);
         g.setColor(BACKGROUND_COLOR);
+    }
+
+    private void dibujarTriangulo(Graphics2D g, Point origen, Point destino)
+    {
+        dibujarTriangulo(g, origen.x, origen.y, destino.x, destino.y);
+    }
+
+    private void dibujarTriangulo(Graphics2D g, int origenX, int origenY, int destinoX, int destinoY)
+    {
+        double dx = destinoX - origenX, dy = destinoY - origenY;
+        double angle = Math.atan2(dy, dx);
+        int len = (int) (Math.sqrt(dx * dx + dy * dy) - RADIO_CIRCULO);
+
+        AffineTransform originalTransform = g.getTransform();
+        AffineTransform at = AffineTransform.getTranslateInstance(origenX, origenY);
+        at.concatenate(AffineTransform.getRotateInstance(angle));
+        g.transform(at);
+
+        g.fillPolygon(new int[]
+        {
+            len, len - TRIANGLE_SIZE, len - TRIANGLE_SIZE, len
+
+        }, new int[]
+        {
+            0, -TRIANGLE_SIZE, TRIANGLE_SIZE, 0
+
+        }, 4);
+
+        g.setTransform(originalTransform);
     }
 
     private void dibujarStringEnPunto(Graphics2D g, String text, Point p)

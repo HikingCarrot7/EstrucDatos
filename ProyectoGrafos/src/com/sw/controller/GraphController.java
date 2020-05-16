@@ -242,7 +242,7 @@ public class GraphController implements UIConstants
                 limpiarGraficos();
                 cancelarAnadirArco();
 
-            } else
+            } else if (grafo.getNumeroVertices() > 1)
             {
                 verticeOrigen = verticePresionado;
                 Point coordenadasVerticePresionado = graficoGrafo.getCoordenadasVertices()[verticeOrigen];

@@ -90,7 +90,7 @@ public class VistaController
         setUpTextField(vista.getTxtVerticeBuscar(), vista.getBtnBuscar());
 
         setPanelEnabled(vista.getPanelManipulacionGrafo(), false);
-    }// </editor-fold>
+    }
 
     private void setUpTextField(JTextField textField, JButton button)
     {
@@ -103,8 +103,7 @@ public class VistaController
                     button.doClick();
             }
         });
-
-    }
+    }// </editor-fold>
 
     private void accionBtnGenerarGrafo(ActionEvent e)
     {
