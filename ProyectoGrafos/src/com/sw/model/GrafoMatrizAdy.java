@@ -193,8 +193,11 @@ public class GrafoMatrizAdy<E> extends Grafo<E>
         Deque<Vertice<E>> pila = new DequeList<>();
         List<Vertice<E>> verticesRecorridos = new ArrayList<>();
 
-        pila.insertLast(vertices[numeroVertice]);
-        verticesRecorridos.add(vertices[numeroVertice]);
+        if (!isEmpty())
+        {
+            pila.insertLast(vertices[numeroVertice]);
+            verticesRecorridos.add(vertices[numeroVertice]);
+        }
 
         return recorridoProfundidad(pila, verticesRecorridos, recorrido);
     }

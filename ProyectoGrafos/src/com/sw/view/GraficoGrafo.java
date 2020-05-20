@@ -155,9 +155,10 @@ public final class GraficoGrafo extends JPanel
 
     private void dibujarTriangulo(Graphics2D g, int origenX, int origenY, int destinoX, int destinoY)
     {
-        double dx = destinoX - origenX, dy = destinoY - origenY;
+        double dx = destinoX - origenX;
+        double dy = destinoY - origenY;
         double angle = Math.atan2(dy, dx);
-        int len = (int) (Math.sqrt(dx * dx + dy * dy) - RADIO_CIRCULO);
+        int distancia = (int) (Math.sqrt(dx * dx + dy * dy) - RADIO_CIRCULO);
 
         AffineTransform originalTransform = g.getTransform();
         AffineTransform at = AffineTransform.getTranslateInstance(origenX, origenY);
@@ -166,7 +167,7 @@ public final class GraficoGrafo extends JPanel
 
         g.fillPolygon(new int[]
         {
-            len, len - TRIANGLE_SIZE, len - TRIANGLE_SIZE, len
+            distancia, distancia - TRIANGLE_SIZE, distancia - TRIANGLE_SIZE, distancia
 
         }, new int[]
         {

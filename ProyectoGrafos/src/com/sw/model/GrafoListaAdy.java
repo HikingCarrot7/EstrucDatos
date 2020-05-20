@@ -190,8 +190,11 @@ public class GrafoListaAdy<E> extends Grafo<E>
         Deque<Vertice<E>> pila = new DequeList<>();
         List<Vertice<E>> verticesRecorridos = new ArrayList<>();
 
-        pila.insertLast(tablaAdy[numeroVertice]);
-        verticesRecorridos.add(tablaAdy[numeroVertice]);
+        if (!isEmpty())
+        {
+            pila.insertLast(tablaAdy[numeroVertice]);
+            verticesRecorridos.add(tablaAdy[numeroVertice]);
+        }
 
         return recorridoProfundidad(pila, verticesRecorridos, recorrido);
     }
