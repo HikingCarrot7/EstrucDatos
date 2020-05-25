@@ -9,8 +9,8 @@ import com.sw.model.exceptions.GrafoLlenoException;
 import com.sw.model.exceptions.NoHayCoincidenciasException;
 import com.sw.model.exceptions.VerticeNoExistenteException;
 import com.sw.model.exceptions.VerticeYaExisteException;
-import com.sw.view.GraficoGrafo;
-import com.sw.view.GraficoRecorrido;
+import com.sw.view.DibujadorGrafo;
+import com.sw.view.DibujadorRecorrido;
 import com.sw.view.Vista;
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -42,17 +42,17 @@ public class VistaController
 
     private final Vista vista;
     private final Factory graphFactory;
-    private final GraficoRecorrido graficoRecorrido;
+    private final DibujadorRecorrido dibujadorRecorrido;
 
     private GraphController graphController;
-    private GraficoGrafo graficoGrafo;
+    private DibujadorGrafo graficoGrafo;
     private Grafo<String> grafo;
 
     public VistaController(Vista vista)
     {
         this.vista = vista;
         this.graphFactory = GraphFactory.getInstance();
-        this.graficoRecorrido = GraficoRecorrido.getInstance();
+        this.dibujadorRecorrido = DibujadorRecorrido.getInstance();
         initComponents();
     }
 
@@ -68,7 +68,7 @@ public class VistaController
         vista.getBtnChecarAdyacencia().addActionListener(this::accionBtnChecarAdyacencia);
         vista.getBtnBuscar().addActionListener(this::accionBtnBuscar);
 
-        vista.getPanelRecorrido().add(graficoRecorrido, BorderLayout.CENTER);
+        vista.getPanelRecorrido().add(dibujadorRecorrido, BorderLayout.CENTER);
         vista.getPanelRecorrido().revalidate();
         vista.addComponentListener(new ComponentAdapter()
         {
@@ -203,16 +203,16 @@ public class VistaController
         switch (getRadioButtonSeleccionado(vista.getGrupoRecorrido()))
         {
             case ANCHURA:
-                graficoRecorrido.actualizarElementos(grafo.recorridoAnchura());
+                dibujadorRecorrido.actualizarElementos(grafo.recorridoAnchura());
                 break;
             case PROFUNDIDAD:
-                graficoRecorrido.actualizarElementos(grafo.recorridoProfundidad());
+                dibujadorRecorrido.actualizarElementos(grafo.recorridoProfundidad());
                 break;
             default:
                 throw new AssertionError();
         }
 
-        graficoRecorrido.repaint();
+        dibujadorRecorrido.repaint();
     }
 
     private void accionBtnChecarAdyacencia(ActionEvent e)
@@ -234,10 +234,10 @@ public class VistaController
     private void generarGrafo()
     {
         grafo = graphFactory.createGraph(getRadioButtonSeleccionado(vista.getGrupoCreacionGrafo()));
-        this.graficoGrafo = new GraficoGrafo(grafo);
+        this.graficoGrafo = new DibujadorGrafo(grafo);
         vista.getPanelGraficoGrafo().add(graficoGrafo, BorderLayout.CENTER);
 
-        graphController = new GraphController(grafo, graficoGrafo, graficoRecorrido);
+        graphController = new GraphController(grafo, graficoGrafo, dibujadorRecorrido);
         vista.getPanelGraficoGrafo().revalidate();
         graficoGrafo.requestFocus();
 
@@ -345,8 +345,9 @@ public class VistaController
     {
         graficoGrafo.quitarVerticeMarcado();
         graficoGrafo.quitarArcoMarcado();
+        dibujadorRecorrido.limpiarGrafico();
         graficoGrafo.repaint();
-        graficoRecorrido.repaint();
+        dibujadorRecorrido.repaint();
     }
 
     private void mostrarMensaje(String titulo, String text)

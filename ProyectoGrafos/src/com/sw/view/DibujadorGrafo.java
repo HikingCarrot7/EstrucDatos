@@ -21,7 +21,7 @@ import javax.swing.JPanel;
  *
  * @author Nicolás
  */
-public final class GraficoGrafo extends JPanel
+public final class DibujadorGrafo extends JPanel
 {
 
     public static final int DIAMETRO_CIRCULO = 60;
@@ -47,7 +47,7 @@ public final class GraficoGrafo extends JPanel
     private Point destinoArcoIndicador;
     private boolean dibujarArcoIndicador;
 
-    public GraficoGrafo(Grafo<?> grafo)
+    public DibujadorGrafo(Grafo<?> grafo)
     {
         this.grafo = grafo;
         this.redimensionador = new Redimensionador(this);
@@ -246,32 +246,29 @@ public final class GraficoGrafo extends JPanel
     private class Redimensionador
     {
 
-        private final GraficoGrafo graficoGrafo;
+        private final DibujadorGrafo graficoGrafo;
         private Container parent;
 
-        public Redimensionador(GraficoGrafo graficoGrafo)
+        public Redimensionador(DibujadorGrafo graficoGrafo)
         {
             this.graficoGrafo = graficoGrafo;
         }
 
         private void redimensionar()
         {
+            parent = graficoGrafo.getParent();
+
+            if (deboRedimensionarHorizontalmente())
+                redimensionarHorizontalmente();
+            else
+                normalizarDimensionHorizontalmente();
+
             EventQueue.invokeLater(() ->
             {
-                parent = graficoGrafo.getParent();
-
-                if (deboRedimensionarHorizontalmente())
-                    redimensionarHorizontalmente();
+                if (deboRedimensionarVerticalmente())
+                    redimensionarVerticalmente();
                 else
-                    normalizarDimensionHorizontalmente();
-
-                EventQueue.invokeLater(() ->
-                {
-                    if (deboRedimensionarVerticalmente())
-                        redimensionarVerticalmente();
-                    else
-                        normalizarDimensionVerticalmente();
-                });
+                    normalizarDimensionVerticalmente();
             });
         }
 

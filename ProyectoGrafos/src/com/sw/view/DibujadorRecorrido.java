@@ -3,7 +3,6 @@ package com.sw.view;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -18,10 +17,10 @@ import javax.swing.SwingUtilities;
  *
  * @author Nicolás
  */
-public final class GraficoRecorrido extends JPanel
+public final class DibujadorRecorrido extends JPanel
 {
 
-    private static GraficoRecorrido instance;
+    private static DibujadorRecorrido instance;
 
     private final int OFFSET_X = 25;
     private final int OFFSET_Y = 5;
@@ -33,11 +32,15 @@ public final class GraficoRecorrido extends JPanel
     private final int SEPARACION_POR_LINEA = 10;
 
     private final ArrayList<Object> elementos;
+    private final Redimensionador redimensionador;
+
     private Container topParent;
 
-    private GraficoRecorrido()
+    private DibujadorRecorrido()
     {
         elementos = new ArrayList<>();
+        redimensionador = new Redimensionador();
+
         setBackground(Color.WHITE);
     }
 
@@ -64,7 +67,7 @@ public final class GraficoRecorrido extends JPanel
     public void limpiarGrafico()
     {
         this.elementos.clear();
-        repintarGrafico();
+        repaint();
     }
 
     private void dibujarLista(Graphics2D g, FontMetrics fm)
@@ -74,10 +77,7 @@ public final class GraficoRecorrido extends JPanel
         final int MAX_ROWS = ((int) topParentSize.getHeight() - OFFSET_Y) / (SEPARACION_POR_LINEA + RECT_HEIGHT);
         int y = OFFSET_Y;
 
-        if (deboEstirarPanel(MAX_COLUMNS, MAX_ROWS))
-            estirarPanel(getNewHeight(MAX_COLUMNS));
-        else
-            normalizarPanel();
+        redimensionador.redimensionar(MAX_COLUMNS, MAX_ROWS);
 
         for (int i = 0, x = OFFSET_X; i < elementos.size(); i++, x += ITEM_TO_ITEM + RECT_WIDTH)
         {
@@ -97,34 +97,6 @@ public final class GraficoRecorrido extends JPanel
                     drawTriangle(g, x + RECT_WIDTH + ITEM_TO_ITEM, y + RECT_HEIGHT / 2, LADO_TRIANGULO);
                 }
         }
-
-    }
-
-    private boolean deboEstirarPanel(final int MAX_COLUMNS, final int MAX_ROWS)
-    {
-        return elementos.size() > MAX_COLUMNS * MAX_ROWS;
-    }
-
-    private int getNewHeight(final int MAX_COLUMNS)
-    {
-        return (int) (OFFSET_Y * 2 + (SEPARACION_POR_LINEA + RECT_HEIGHT) * (Math.ceil(elementos.size() / (double) MAX_COLUMNS))) - SEPARACION_POR_LINEA;
-    }
-
-    private void estirarPanel(int newHeight)
-    {
-        getParent().setPreferredSize(new Dimension(topParent.getWidth(), newHeight));
-        getParent().revalidate();
-    }
-
-    private void normalizarPanel()
-    {
-        getParent().setPreferredSize(topParent.getSize());
-        getParent().revalidate();
-    }
-
-    public void repintarGrafico()
-    {
-        EventQueue.invokeLater(this::repaint);
     }
 
     private void drawItem(Graphics2D g, FontMetrics fm, int x, int y, String item)
@@ -171,12 +143,47 @@ public final class GraficoRecorrido extends JPanel
         drawTriangle(g, OFFSET_X, y + SEPARACION_POR_LINEA + RECT_HEIGHT, LADO_TRIANGULO);
     }
 
-    public synchronized static GraficoRecorrido getInstance()
+    public synchronized static DibujadorRecorrido getInstance()
     {
         if (instance == null)
-            instance = new GraficoRecorrido();
+            instance = new DibujadorRecorrido();
 
         return instance;
+    }
+
+    private class Redimensionador
+    {
+
+        private void redimensionar(final int MAX_COLUMNS, final int MAX_ROWS)
+        {
+            if (deboEstirarPanel(MAX_COLUMNS, MAX_ROWS))
+                estirarPanel(getNewHeight(MAX_COLUMNS));
+            else
+                normalizarPanel();
+        }
+
+        private void estirarPanel(int newHeight)
+        {
+            getParent().setPreferredSize(new Dimension(topParent.getWidth(), newHeight));
+            getParent().revalidate();
+        }
+
+        private void normalizarPanel()
+        {
+            getParent().setPreferredSize(topParent.getSize());
+            getParent().revalidate();
+        }
+
+        private boolean deboEstirarPanel(final int MAX_COLUMNS, final int MAX_ROWS)
+        {
+            return elementos.size() > MAX_COLUMNS * MAX_ROWS;
+        }
+
+        private int getNewHeight(final int MAX_COLUMNS)
+        {
+            return (int) (OFFSET_Y * 2 + (SEPARACION_POR_LINEA + RECT_HEIGHT) * (Math.ceil(elementos.size() / (double) MAX_COLUMNS))) - SEPARACION_POR_LINEA;
+        }
+
     }
 
 }
