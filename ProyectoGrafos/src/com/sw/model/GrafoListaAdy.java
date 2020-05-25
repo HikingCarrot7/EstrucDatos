@@ -99,16 +99,14 @@ public class GrafoListaAdy<E> extends Grafo<E>
     @Override
     public void eliminarArco(E origen, E destino) throws ArcoNoExistenteException, VerticeNoExistenteException
     {
-        if (sonAdyacentes(origen, destino))
-        {
-            int verticeOrigen = numeroVertice(origen);
-            int verticeDestino = numeroVertice(destino);
-
-            for (int i = 0; i < getNumeroVertices(); i++)
-                tablaAdy[i].getListaAdy().removeIf(arco -> arco.equals(new Arco(verticeOrigen, verticeDestino)));
-
-        } else
+        if (!sonAdyacentes(origen, destino))
             throw new ArcoNoExistenteException();
+
+        int verticeOrigen = numeroVertice(origen);
+        int verticeDestino = numeroVertice(destino);
+
+        for (int i = 0; i < getNumeroVertices(); i++)
+            tablaAdy[i].getListaAdy().removeIf(arco -> arco.equals(new Arco(verticeOrigen, verticeDestino)));
     }
 
     @Override

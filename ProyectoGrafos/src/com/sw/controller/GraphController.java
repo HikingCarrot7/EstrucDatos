@@ -2,6 +2,7 @@ package com.sw.controller;
 
 import com.sw.model.Grafo;
 import com.sw.model.Vertice;
+import com.sw.model.exceptions.ArcoNoExistenteException;
 import static com.sw.model.util.Utilidades.distanciaEntreDosPuntos;
 import static com.sw.model.util.Utilidades.numeroAleatorio;
 import com.sw.view.DibujadorGrafo;
@@ -239,7 +240,6 @@ public class GraphController implements UIConstants
                 String destino = grafo.getVertices()[verticePresionado].getDato();
 
                 grafo.nuevoArco(origen, destino);
-                limpiarGraficos();
                 cancelarAnadirArco();
 
             } else if (grafo.getNumeroVertices() > 1)
@@ -258,20 +258,24 @@ public class GraphController implements UIConstants
         if (eliminandoArco)
         {
             if (verticePresionado >= 0)
-            {
-                String origen = grafo.getVertices()[verticeOrigen].getDato();
-                String destino = grafo.getVertices()[verticePresionado].getDato();
+                try
+                {
+                    String origen = grafo.getVertices()[verticeOrigen].getDato();
+                    String destino = grafo.getVertices()[verticePresionado].getDato();
 
-                grafo.eliminarArco(origen, destino);
-                limpiarGraficos();
-                cancelarEliminarArco();
-            }
+                    grafo.eliminarArco(origen, destino);
+                    cancelarEliminarArco();
+
+                } catch (ArcoNoExistenteException e)
+                {
+                    cancelarEliminarArco();
+                }
 
         } else
         {
+            limpiarGraficos();
             verticeOrigen = verticePresionado;
             dibujadorGrafo.setVerticeOrigen(verticeOrigen);
-            limpiarGraficos();
             eliminandoArco = true;
         }
     }
@@ -437,17 +441,6 @@ public class GraphController implements UIConstants
         return -1;
     }
 
-    private void limpiarGraficos()
-    {
-        dibujadorGrafo.quitarArcoIndicador();
-        dibujadorGrafo.quitarVerticeOrigen();
-        dibujadorGrafo.quitarVerticeMarcado();
-        dibujadorGrafo.quitarArcoMarcado();
-        dibujadorRecorrido.limpiarGrafico();
-        dibujadorGrafo.repaint();
-        dibujadorRecorrido.repaint();
-    }
-
     private boolean mostrarPopupMenu()
     {
         final Point mousePosition = dibujadorGrafo.getMousePosition();
@@ -462,16 +455,6 @@ public class GraphController implements UIConstants
         return debeMostrarsePopupMenu;
     }
 
-    private void repintarEditorNombreVertice()
-    {
-        EventQueue.invokeLater(editorNombreVertice::repaint);
-    }
-
-    private int esClicDerecho()
-    {
-        return MouseEvent.BUTTON3;
-    }
-
     private boolean fueraDeRango(Point mouse)
     {
         Container topParent = getTopParent();
@@ -481,6 +464,27 @@ public class GraphController implements UIConstants
                 return false;
 
         return true;
+    }
+
+    private void limpiarGraficos()
+    {
+        dibujadorGrafo.quitarArcoIndicador();
+        dibujadorGrafo.quitarVerticeOrigen();
+        dibujadorGrafo.quitarVerticeMarcado();
+        dibujadorGrafo.quitarArcoMarcado();
+        dibujadorRecorrido.limpiarGrafico();
+        dibujadorGrafo.repaint();
+        dibujadorRecorrido.repaint();
+    }
+
+    private void repintarEditorNombreVertice()
+    {
+        EventQueue.invokeLater(editorNombreVertice::repaint);
+    }
+
+    private int esClicDerecho()
+    {
+        return MouseEvent.BUTTON3;
     }
 
     private Container getTopParent()

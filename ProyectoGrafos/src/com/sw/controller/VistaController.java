@@ -1,9 +1,8 @@
 package com.sw.controller;
 
 import com.sw.model.Arco;
-import com.sw.model.Factory;
 import com.sw.model.Grafo;
-import com.sw.model.GraphFactory;
+import com.sw.model.GraphFactoryImp;
 import com.sw.model.exceptions.ArcoNoExistenteException;
 import com.sw.model.exceptions.GrafoLlenoException;
 import com.sw.model.exceptions.NoHayCoincidenciasException;
@@ -26,6 +25,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import com.sw.model.GraphFactory;
 
 /**
  *
@@ -41,7 +41,7 @@ public class VistaController
     public static final String PROFUNDIDAD = "profundidad";
 
     private final Vista vista;
-    private final Factory graphFactory;
+    private final GraphFactory graphFactory;
     private final DibujadorRecorrido dibujadorRecorrido;
 
     private GraphController graphController;
@@ -51,7 +51,7 @@ public class VistaController
     public VistaController(Vista vista)
     {
         this.vista = vista;
-        this.graphFactory = GraphFactory.getInstance();
+        this.graphFactory = GraphFactoryImp.getInstance();
         this.dibujadorRecorrido = DibujadorRecorrido.getInstance();
         initComponents();
     }

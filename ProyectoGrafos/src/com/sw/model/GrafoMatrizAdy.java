@@ -105,17 +105,14 @@ public class GrafoMatrizAdy<E> extends Grafo<E>
     @Override
     public void eliminarArco(E origen, E destino) throws ArcoNoExistenteException, VerticeNoExistenteException
     {
-        if (sonAdyacentes(origen, destino))
-        {
-            int verticeOrigen = numeroVertice(origen);
-            int verticeDestino = numeroVertice(destino);
+        if (!sonAdyacentes(origen, destino))
+            throw new ArcoNoExistenteException();
 
-            if (matrizAdy[verticeOrigen][verticeDestino] == 0)
-                throw new ArcoNoExistenteException();
+        int verticeOrigen = numeroVertice(origen);
+        int verticeDestino = numeroVertice(destino);
 
-            matrizAdy[verticeOrigen][verticeDestino] = 0;
-            matrizAdy[verticeDestino][verticeOrigen] = 0;
-        }
+        matrizAdy[verticeOrigen][verticeDestino] = 0;
+        matrizAdy[verticeDestino][verticeOrigen] = 0;
     }
 
     @Override
