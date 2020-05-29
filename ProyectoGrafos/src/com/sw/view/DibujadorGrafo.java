@@ -16,6 +16,7 @@ import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 import java.util.List;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -191,9 +192,9 @@ public final class DibujadorGrafo extends JPanel
 
     private Rectangle getStringBounds(Graphics2D g, String text)
     {
-        Rectangle r = g.getFontMetrics().getStringBounds(text, g).getBounds();
-        r.setSize(new Dimension((int) r.getWidth(), g.getFontMetrics().getAscent()));
-        return r;
+        return new Rectangle(new Dimension(
+                SwingUtilities.computeStringWidth(g.getFontMetrics(), text),
+                g.getFontMetrics().getAscent()));
     }
 
     public void setVerticeMarcado(int idxVerticeMarcado)
