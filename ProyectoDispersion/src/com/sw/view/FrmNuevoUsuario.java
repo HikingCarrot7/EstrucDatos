@@ -10,20 +10,19 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.WindowConstants;
 
 /**
  *
  * @author HikingCarrot7
  */
-public class FrmNuevoUsuario extends JFrame
+public class FrmNuevoUsuario extends JDialog
 {
 
     public FrmNuevoUsuario()
@@ -59,7 +58,6 @@ public class FrmNuevoUsuario extends JFrame
         jPasswordField1 = new JPasswordField();
         jPanel4 = new JPanel();
 
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registrar a un nuevo usuario");
         setMinimumSize(new Dimension(450, 300));
         setPreferredSize(new Dimension(450, 300));

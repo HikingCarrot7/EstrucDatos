@@ -1,6 +1,8 @@
 package com.sw.view;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JTable;
 
 /**
  *
@@ -26,11 +28,11 @@ public class VistaListadoUsuarios extends JFrame
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnAceptar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaListaContactos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Listado de contactos");
@@ -51,11 +53,11 @@ public class VistaListadoUsuarios extends JFrame
 
         jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
-        jButton1.setText("Aceptar");
-        jPanel3.add(jButton1);
+        btnAceptar.setText("Aceptar");
+        jPanel3.add(btnAceptar);
 
-        jButton2.setText("Cancelar");
-        jPanel3.add(jButton2);
+        btnCancelar.setText("Cancelar");
+        jPanel3.add(btnCancelar);
 
         jPanel1.add(jPanel3);
 
@@ -64,7 +66,7 @@ public class VistaListadoUsuarios extends JFrame
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Listar todos"));
         jPanel2.setLayout(new java.awt.BorderLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaListaContactos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
                 {null, null, null},
@@ -78,7 +80,7 @@ public class VistaListadoUsuarios extends JFrame
                 "Nombre", "Edad", "Correo electrónico"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaListaContactos);
 
         jPanel2.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
@@ -87,15 +89,30 @@ public class VistaListadoUsuarios extends JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public JButton getBtnAceptar()
+    {
+        return btnAceptar;
+    }
+
+    public JButton getBtnCancelar()
+    {
+        return btnCancelar;
+    }
+
+    public JTable getTablaListaContactos()
+    {
+        return tablaListaContactos;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnAceptar;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tablaListaContactos;
     // End of variables declaration//GEN-END:variables
 }

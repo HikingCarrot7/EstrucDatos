@@ -7,10 +7,12 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.Window;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -21,11 +23,12 @@ import javax.swing.WindowConstants;
  *
  * @author HikingCarrot7
  */
-public class VistaBuscarContacto extends javax.swing.JFrame
+public class VistaBuscarUsuario extends JDialog
 {
 
-    public VistaBuscarContacto()
+    public VistaBuscarUsuario(Window owner)
     {
+        super(owner);
         initComponents();
     }
 
@@ -49,10 +52,9 @@ public class VistaBuscarContacto extends javax.swing.JFrame
         jButton1 = new JButton();
         jButton2 = new JButton();
 
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Realizar búsqueda de un usuario");
         setMinimumSize(new Dimension(400, 150));
-        setPreferredSize(new Dimension(400, 150));
 
         jPanel3.setBorder(BorderFactory.createTitledBorder("Búsqueda"));
         jPanel3.setLayout(new GridBagLayout());
@@ -88,7 +90,7 @@ public class VistaBuscarContacto extends javax.swing.JFrame
 
         getContentPane().add(jPanel3, BorderLayout.CENTER);
 
-        jPanel2.setLayout(new GridLayout());
+        jPanel2.setLayout(new GridLayout(1, 0));
 
         jPanel5.setLayout(new FlowLayout(FlowLayout.LEFT));
 

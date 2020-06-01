@@ -1,6 +1,7 @@
 package com.sw.main;
 
-import com.sw.view.VistaDatosUsuario;
+import com.sw.controller.LoginController;
+import com.sw.view.Login;
 import java.awt.EventQueue;
 
 /**
@@ -14,9 +15,10 @@ public class Main
     {
         EventQueue.invokeLater(() ->
         {
-            VistaDatosUsuario vista = new VistaDatosUsuario();
-            vista.setVisible(true);
-            vista.setLocationRelativeTo(null);
+            Login login = new Login();
+            login.setVisible(true);
+            login.setLocationRelativeTo(null);
+            LoginController loginController = new LoginController(login);
         });
     }
 }

@@ -6,7 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -14,18 +14,14 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
-import javax.swing.WindowConstants;
 
 /**
  *
  * @author HikingCarrot7
  */
-public class VistaPrincipal extends JFrame
+public class VistaPrincipal extends JDialog
 {
 
-    /**
-     * Creates new form VistaPrincipal
-     */
     public VistaPrincipal()
     {
         initComponents();
@@ -44,17 +40,15 @@ public class VistaPrincipal extends JFrame
         jLabel2 = new JLabel();
         jMenuBar1 = new JMenuBar();
         jMenu1 = new JMenu();
-        jMenuItem1 = new JMenuItem();
-        jMenuItem2 = new JMenuItem();
+        mnItmListarTodosUsuarios = new JMenuItem();
+        mnItmListarMisContactos = new JMenuItem();
         jMenu2 = new JMenu();
-        jMenuItem3 = new JMenuItem();
-        jMenuItem4 = new JMenuItem();
-        jMenuItem5 = new JMenuItem();
+        mnItmBuscarUsuario = new JMenuItem();
+        mnItmEliminarContacto = new JMenuItem();
+        mnItmEliminarCuenta = new JMenuItem();
 
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menú principal");
         setMinimumSize(new Dimension(400, 200));
-        setPreferredSize(new Dimension(400, 200));
 
         jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
         jLabel1.setIcon(new ImageIcon(getClass().getResource("/com/sw/img/logo.png"))); // NOI18N
@@ -74,28 +68,28 @@ public class VistaPrincipal extends JFrame
 
         jMenu1.setText("Archivo");
 
-        jMenuItem1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T, InputEvent.CTRL_MASK));
-        jMenuItem1.setText("Listar todo");
-        jMenu1.add(jMenuItem1);
+        mnItmListarTodosUsuarios.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T, InputEvent.CTRL_MASK));
+        mnItmListarTodosUsuarios.setText("Listar todo");
+        jMenu1.add(mnItmListarTodosUsuarios);
 
-        jMenuItem2.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_MASK));
-        jMenuItem2.setText("Listar mis contactos");
-        jMenu1.add(jMenuItem2);
+        mnItmListarMisContactos.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_MASK));
+        mnItmListarMisContactos.setText("Listar mis contactos");
+        jMenu1.add(mnItmListarMisContactos);
 
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Edición");
 
-        jMenuItem3.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK));
-        jMenuItem3.setText("Buscar");
-        jMenu2.add(jMenuItem3);
+        mnItmBuscarUsuario.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK));
+        mnItmBuscarUsuario.setText("Buscar usuario");
+        jMenu2.add(mnItmBuscarUsuario);
 
-        jMenuItem4.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.CTRL_MASK));
-        jMenuItem4.setText("Eliminar contactos");
-        jMenu2.add(jMenuItem4);
+        mnItmEliminarContacto.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.CTRL_MASK));
+        mnItmEliminarContacto.setText("Eliminar contacto");
+        jMenu2.add(mnItmEliminarContacto);
 
-        jMenuItem5.setText("Eliminar cuenta");
-        jMenu2.add(jMenuItem5);
+        mnItmEliminarCuenta.setText("Eliminar cuenta");
+        jMenu2.add(mnItmEliminarCuenta);
 
         jMenuBar1.add(jMenu2);
 
@@ -104,17 +98,42 @@ public class VistaPrincipal extends JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public JMenuItem getMnItmBuscarUsuario()
+    {
+        return mnItmBuscarUsuario;
+    }
+
+    public JMenuItem getMnItmEliminarContacto()
+    {
+        return mnItmEliminarContacto;
+    }
+
+    public JMenuItem getMnItmEliminarCuenta()
+    {
+        return mnItmEliminarCuenta;
+    }
+
+    public JMenuItem getMnItmListarMisContactos()
+    {
+        return mnItmListarMisContactos;
+    }
+
+    public JMenuItem getMnItmListarTodosUsuarios()
+    {
+        return mnItmListarTodosUsuarios;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JLabel jLabel1;
     private JLabel jLabel2;
     private JMenu jMenu1;
     private JMenu jMenu2;
     private JMenuBar jMenuBar1;
-    private JMenuItem jMenuItem1;
-    private JMenuItem jMenuItem2;
-    private JMenuItem jMenuItem3;
-    private JMenuItem jMenuItem4;
-    private JMenuItem jMenuItem5;
     private JPanel jPanel1;
+    private JMenuItem mnItmBuscarUsuario;
+    private JMenuItem mnItmEliminarContacto;
+    private JMenuItem mnItmEliminarCuenta;
+    private JMenuItem mnItmListarMisContactos;
+    private JMenuItem mnItmListarTodosUsuarios;
     // End of variables declaration//GEN-END:variables
 }

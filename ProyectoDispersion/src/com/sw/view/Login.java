@@ -10,18 +10,21 @@ import java.awt.Insets;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 
 /**
  *
  * @author HikingCarrot7
  */
-public class Login extends javax.swing.JFrame
+public class Login extends JFrame
 {
 
     public Login()
@@ -39,13 +42,13 @@ public class Login extends javax.swing.JFrame
          */
         try
         {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
-                if ("Metal".equals(info.getName()))
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels())
+                if ("Windows".equals(info.getName()))
                 {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex)
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex)
         {
             System.out.println(ex.getMessage());
         }
@@ -67,8 +70,8 @@ public class Login extends javax.swing.JFrame
         jPanel6 = new JPanel();
         jLabel4 = new JLabel();
         jPanel5 = new JPanel();
-        jButton1 = new JButton();
-        jButton2 = new JButton();
+        btnEntrar = new JButton();
+        btnNuevo = new JButton();
         jPanel2 = new JPanel();
         jLabel1 = new JLabel();
         jTextField1 = new JTextField();
@@ -78,8 +81,8 @@ public class Login extends javax.swing.JFrame
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("Iniciar sesión");
-        setMinimumSize(new Dimension(400, 200));
-        setPreferredSize(new Dimension(400, 200));
+        setMinimumSize(new Dimension(410, 210));
+        setPreferredSize(new Dimension(410, 210));
 
         jPanel4.setLayout(new BorderLayout());
 
@@ -104,11 +107,11 @@ public class Login extends javax.swing.JFrame
 
         jPanel5.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
-        jButton1.setText("Entrar");
-        jPanel5.add(jButton1);
+        btnEntrar.setText("Entrar");
+        jPanel5.add(btnEntrar);
 
-        jButton2.setText("Nuevo");
-        jPanel5.add(jButton2);
+        btnNuevo.setText("Nuevo");
+        jPanel5.add(btnNuevo);
 
         jPanel1.add(jPanel5);
 
@@ -166,9 +169,19 @@ public class Login extends javax.swing.JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public JButton getBtnEntrar()
+    {
+        return btnEntrar;
+    }
+
+    public JButton getBtnNuevo()
+    {
+        return btnNuevo;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private JButton jButton1;
-    private JButton jButton2;
+    private JButton btnEntrar;
+    private JButton btnNuevo;
     private JLabel jLabel1;
     private JLabel jLabel2;
     private JLabel jLabel3;
