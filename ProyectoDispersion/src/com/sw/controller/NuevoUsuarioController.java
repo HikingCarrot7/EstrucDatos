@@ -1,6 +1,7 @@
 package com.sw.controller;
 
 import com.sw.model.Usuario;
+import com.sw.model.exceptions.CorreoNoDisponibleException;
 import com.sw.view.FrmNuevoUsuario;
 import java.awt.event.ActionEvent;
 
@@ -13,6 +14,7 @@ public class NuevoUsuarioController
 
     private final FrmNuevoUsuario frmNuevoUsuario;
     private final Usuario nuevoUsuario;
+    private final UserManager userManager;
 
     private boolean seAceptoNuevoUsuario;
 
@@ -20,6 +22,7 @@ public class NuevoUsuarioController
     {
         this.frmNuevoUsuario = frmNuevoUsuario;
         this.nuevoUsuario = nuevoUsuario;
+        this.userManager = UserManager.getInstance();
         initComponents();
     }
 
@@ -32,14 +35,24 @@ public class NuevoUsuarioController
 
     private void accionBtnGuardar(ActionEvent e)
     {
-        if (todosCamposValidos())
+        try
         {
-            seAceptoNuevoUsuario = true;
-            rellenarDatosNuevoUsuario();
-            quitarVentana();
+            if (todosCamposValidos())
+            {
+                if (userManager.existeCorreoRegistrado(getCorreo()))
+                    throw new CorreoNoDisponibleException();
 
-        } else
-            Alerta.mostrarError(frmNuevoUsuario, "Algún campo es incorrecto");
+                seAceptoNuevoUsuario = true;
+                rellenarDatosNuevoUsuario();
+                quitarVentana();
+
+            } else
+                Alerta.mostrarError(frmNuevoUsuario, "Algún campo es incorrecto");
+
+        } catch (CorreoNoDisponibleException ex)
+        {
+            Alerta.mostrarError(frmNuevoUsuario, ex.getMessage());
+        }
     }
 
     private void accionBtnCancelar(ActionEvent e)

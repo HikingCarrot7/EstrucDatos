@@ -23,14 +23,22 @@ public class UserManager
         return instance;
     }
 
+    private final DAO<ArrayList<Usuario>> dao;
+
     private UserManager()
     {
+        dao = new DAOUsuarios(DAO.RUTA_USUARIOS_REGISTRADOS);
+    }
 
+    public boolean existeCorreoRegistrado(String correo)
+    {
+        ArrayList<Usuario> usuarios = dao.getSavedObject();
+
+        return usuarios.stream().anyMatch(usuario -> (usuario.getCorreo().equals(correo)));
     }
 
     public Usuario getUsuario(String correo, String password) throws UsuarioNoExistenteException
     {
-        DAO<ArrayList<Usuario>> dao = new DAOUsuarios(DAO.RUTA_USUARIOS_REGISTRADOS);
         ArrayList<Usuario> usuarios = dao.getSavedObject();
 
         for (Usuario usuario : usuarios)
@@ -42,9 +50,15 @@ public class UserManager
 
     public void registrarNuevoUsuario(Usuario nuevoUsuario)
     {
-        DAO<ArrayList<Usuario>> dao = new DAOUsuarios(DAO.RUTA_USUARIOS_REGISTRADOS);
         ArrayList<Usuario> usuarios = dao.getSavedObject();
         usuarios.add(nuevoUsuario);
+        dao.saveObject(usuarios);
+    }
+
+    public void eliminarUsuario(Usuario usuario)
+    {
+        ArrayList<Usuario> usuarios = dao.getSavedObject();
+        usuarios.remove(usuario);
         dao.saveObject(usuarios);
     }
 
