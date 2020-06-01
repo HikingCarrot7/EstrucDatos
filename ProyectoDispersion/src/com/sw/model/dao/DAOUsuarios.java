@@ -1,31 +1,32 @@
 package com.sw.model.dao;
 
-import com.sw.model.hashtable.Hashtable;
+import com.sw.model.Usuario;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.ArrayList;
 
 /**
  *
  * @author HikingCarrot7
  */
 @SuppressWarnings("unchecked")
-public class DAOHashtable extends DAO<Hashtable<String, String>>
+public class DAOUsuarios extends DAO<ArrayList<Usuario>>
 {
 
-    public DAOHashtable(String ruta)
+    public DAOUsuarios(String ruta)
     {
         super(ruta);
     }
 
     @Override
-    public Hashtable<String, String> getSavedObject()
+    public ArrayList<Usuario> getSavedObject()
     {
         try
         {
             try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file)))
             {
-                return (Hashtable<String, String>) in.readObject();
+                return (ArrayList<Usuario>) in.readObject();
             }
 
         } catch (IOException | ClassNotFoundException ex)
@@ -33,7 +34,7 @@ public class DAOHashtable extends DAO<Hashtable<String, String>>
             System.out.println(ex.getMessage());
         }
 
-        return new Hashtable<>();
+        return new ArrayList<>();
     }
 
 }

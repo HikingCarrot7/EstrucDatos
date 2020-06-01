@@ -13,7 +13,8 @@ import java.io.ObjectOutputStream;
 public abstract class DAO<E>
 {
 
-    public static final String RUTA_HASHTABLE_DATA = "hashtable_data/hashtable_data.txt";
+    public static final String RUTA_HASHTABLE_DATA = "system_data/hashtable.txt";
+    public static final String RUTA_USUARIOS_REGISTRADOS = "system_data/usuarios.txt";
 
     protected final File file;
 

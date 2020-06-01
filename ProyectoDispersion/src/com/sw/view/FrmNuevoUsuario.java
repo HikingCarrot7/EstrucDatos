@@ -45,17 +45,17 @@ public class FrmNuevoUsuario extends JDialog
         jPanel6 = new JPanel();
         jLabel6 = new JLabel();
         jPanel5 = new JPanel();
-        jButton1 = new JButton();
-        jButton2 = new JButton();
+        btnGuardar = new JButton();
+        btnCancelar = new JButton();
         jPanel2 = new JPanel();
         jLabel1 = new JLabel();
-        jTextField1 = new JTextField();
+        txtNombre = new JTextField();
         jLabel2 = new JLabel();
-        jFormattedTextField1 = new JFormattedTextField();
+        txtEdad = new JFormattedTextField();
         jLabel3 = new JLabel();
-        jTextField2 = new JTextField();
+        txtCorreo = new JTextField();
         jLabel4 = new JLabel();
-        jPasswordField1 = new JPasswordField();
+        txtPassword = new JPasswordField();
         jPanel4 = new JPanel();
 
         setTitle("Registrar a un nuevo usuario");
@@ -86,11 +86,11 @@ public class FrmNuevoUsuario extends JDialog
 
         jPanel5.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
-        jButton1.setText("Guardar");
-        jPanel5.add(jButton1);
+        btnGuardar.setText("Guardar");
+        jPanel5.add(btnGuardar);
 
-        jButton2.setText("Cancelar");
-        jPanel5.add(jButton2);
+        btnCancelar.setText("Cancelar");
+        jPanel5.add(btnCancelar);
 
         jPanel1.add(jPanel5);
 
@@ -108,7 +108,7 @@ public class FrmNuevoUsuario extends JDialog
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(25, 5, 5, 35);
-        jPanel2.add(jTextField1, gridBagConstraints);
+        jPanel2.add(txtNombre, gridBagConstraints);
 
         jLabel2.setHorizontalAlignment(SwingConstants.RIGHT);
         jLabel2.setText("Edad:");
@@ -124,7 +124,7 @@ public class FrmNuevoUsuario extends JDialog
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(5, 5, 5, 35);
-        jPanel2.add(jFormattedTextField1, gridBagConstraints);
+        jPanel2.add(txtEdad, gridBagConstraints);
 
         jLabel3.setHorizontalAlignment(SwingConstants.RIGHT);
         jLabel3.setText("Correo electrónico:");
@@ -140,7 +140,7 @@ public class FrmNuevoUsuario extends JDialog
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(5, 5, 5, 35);
-        jPanel2.add(jTextField2, gridBagConstraints);
+        jPanel2.add(txtCorreo, gridBagConstraints);
 
         jLabel4.setHorizontalAlignment(SwingConstants.RIGHT);
         jLabel4.setText("Contraseña:");
@@ -156,7 +156,7 @@ public class FrmNuevoUsuario extends JDialog
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(5, 5, 5, 35);
-        jPanel2.add(jPasswordField1, gridBagConstraints);
+        jPanel2.add(txtPassword, gridBagConstraints);
 
         jPanel4.setLayout(new BorderLayout());
         gridBagConstraints = new GridBagConstraints();
@@ -172,10 +172,39 @@ public class FrmNuevoUsuario extends JDialog
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public JButton getBtnCancelar()
+    {
+        return btnCancelar;
+    }
+
+    public JButton getBtnGuardar()
+    {
+        return btnGuardar;
+    }
+
+    public JTextField getTxtCorreo()
+    {
+        return txtCorreo;
+    }
+
+    public JFormattedTextField getTxtEdad()
+    {
+        return txtEdad;
+    }
+
+    public JTextField getTxtNombre()
+    {
+        return txtNombre;
+    }
+
+    public JPasswordField getTxtPassword()
+    {
+        return txtPassword;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private JButton jButton1;
-    private JButton jButton2;
-    private JFormattedTextField jFormattedTextField1;
+    private JButton btnCancelar;
+    private JButton btnGuardar;
     private JLabel jLabel1;
     private JLabel jLabel2;
     private JLabel jLabel3;
@@ -188,8 +217,9 @@ public class FrmNuevoUsuario extends JDialog
     private JPanel jPanel4;
     private JPanel jPanel5;
     private JPanel jPanel6;
-    private JPasswordField jPasswordField1;
-    private JTextField jTextField1;
-    private JTextField jTextField2;
+    private JTextField txtCorreo;
+    private JFormattedTextField txtEdad;
+    private JTextField txtNombre;
+    private JPasswordField txtPassword;
     // End of variables declaration//GEN-END:variables
 }

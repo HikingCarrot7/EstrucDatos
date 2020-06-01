@@ -1,5 +1,6 @@
 package com.sw.model.dao;
 
+import com.sw.model.Usuario;
 import com.sw.model.arbolb.ArbolB;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -9,21 +10,23 @@ import java.io.ObjectInputStream;
  *
  * @author HikingCarrot7
  */
-public class DAOUsuario extends DAO<ArbolB<?>>
+@SuppressWarnings("unchecked")
+public class DAOContactosUsuario extends DAO<ArbolB<Usuario>>
 {
 
-    public DAOUsuario(String ruta)
+    public DAOContactosUsuario(String ruta)
     {
         super(ruta);
     }
 
-    @Override public ArbolB<?> getSavedObject()
+    @Override
+    public ArbolB<Usuario> getSavedObject()
     {
         try
         {
             try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file)))
             {
-                return (ArbolB<?>) in.readObject();
+                return (ArbolB<Usuario>) in.readObject();
             }
 
         } catch (IOException | ClassNotFoundException ex)

@@ -1,5 +1,7 @@
 package com.sw.controller;
 
+import com.sw.model.Usuario;
+import com.sw.model.exceptions.UsuarioNoExistenteException;
 import com.sw.view.FrmNuevoUsuario;
 import com.sw.view.Login;
 import com.sw.view.VistaPrincipal;
@@ -15,10 +17,12 @@ public class LoginController
 {
 
     private final Login login;
+    private final UserManager userManager;
 
     public LoginController(Login login)
     {
         this.login = login;
+        this.userManager = UserManager.getInstance();
         initComponents();
     }
 
@@ -30,19 +34,46 @@ public class LoginController
 
     private void accionBtnEntrar(ActionEvent e)
     {
-        VistaPrincipal vistaPrincipal = new VistaPrincipal();
-        new VistaPrincipalController(vistaPrincipal);
-        quitarLogin();
-        showDialogAndWait(vistaPrincipal);
-        emergerLogin();
+        try
+        {
+            Usuario usuario = userManager.getUsuario(getCorreo(), getPassword());
+
+            VistaPrincipal vistaPrincipal = new VistaPrincipal();
+            new VistaPrincipalController(vistaPrincipal, usuario);
+            quitarLogin();
+            showDialogAndWait(vistaPrincipal);
+            emergerLogin();
+
+        } catch (UsuarioNoExistenteException ex)
+        {
+            Alerta.mostrarError(login, ex.getMessage());
+        }
     }
 
     private void accionBtnNuevo(ActionEvent e)
     {
+        Usuario nuevoUsuario = new Usuario();
+
         FrmNuevoUsuario frmNuevoUsuario = new FrmNuevoUsuario();
+        NuevoUsuarioController nuevoUsuarioController = new NuevoUsuarioController(frmNuevoUsuario, nuevoUsuario);
+
         quitarLogin();
         showDialogAndWait(frmNuevoUsuario);
         emergerLogin();
+
+        if (nuevoUsuarioController.seAceptoNuevoUsuario())
+            userManager.registrarNuevoUsuario(nuevoUsuario);
+
+    }
+
+    private String getCorreo()
+    {
+        return login.getTxtCorreo().getText().trim();
+    }
+
+    private String getPassword()
+    {
+        return new String(login.getTxtPassword().getPassword()).trim();
     }
 
     private void showDialogAndWait(JDialog dialog)

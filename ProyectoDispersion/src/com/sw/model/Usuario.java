@@ -13,15 +13,19 @@ public class Usuario implements Serializable, Comparable<Usuario>
     private static final long serialVersionUID = 1L;
 
     private String nombreCompleto;
-    private String correoElectronico;
-    private String contrasena;
+    private String correo;
+    private String password;
     private int edad;
+
+    public Usuario()
+    {
+    }
 
     public Usuario(String nombreCompleto, String correoElectronico, String contrasena, int edad)
     {
         this.nombreCompleto = nombreCompleto;
-        this.correoElectronico = correoElectronico;
-        this.contrasena = contrasena;
+        this.correo = correoElectronico;
+        this.password = contrasena;
         this.edad = edad;
     }
 
@@ -35,24 +39,24 @@ public class Usuario implements Serializable, Comparable<Usuario>
         this.nombreCompleto = nombreCompleto;
     }
 
-    public String getCorreoElectronico()
+    public String getCorreo()
     {
-        return correoElectronico;
+        return correo;
     }
 
-    public void setCorreoElectronico(String correoElectronico)
+    public void setCorreo(String correo)
     {
-        this.correoElectronico = correoElectronico;
+        this.correo = correo;
     }
 
-    public String getContrasena()
+    public String getPassword()
     {
-        return contrasena;
+        return password;
     }
 
-    public void setContrasena(String contrasena)
+    public void setPassword(String password)
     {
-        this.contrasena = contrasena;
+        this.password = password;
     }
 
     public int getEdad()
@@ -70,8 +74,8 @@ public class Usuario implements Serializable, Comparable<Usuario>
     {
         int hash = 7;
         hash = 29 * hash + Objects.hashCode(this.nombreCompleto);
-        hash = 29 * hash + Objects.hashCode(this.correoElectronico);
-        hash = 29 * hash + Objects.hashCode(this.contrasena);
+        hash = 29 * hash + Objects.hashCode(this.correo);
+        hash = 29 * hash + Objects.hashCode(this.password);
         hash = 29 * hash + this.edad;
         return hash;
     }
@@ -96,10 +100,10 @@ public class Usuario implements Serializable, Comparable<Usuario>
         if (!Objects.equals(this.nombreCompleto, other.nombreCompleto))
             return false;
 
-        if (!Objects.equals(this.correoElectronico, other.correoElectronico))
+        if (!Objects.equals(this.correo, other.correo))
             return false;
 
-        return Objects.equals(this.contrasena, other.contrasena);
+        return Objects.equals(this.password, other.password);
     }
 
     @Override
@@ -111,7 +115,7 @@ public class Usuario implements Serializable, Comparable<Usuario>
     @Override
     public String toString()
     {
-        return "Usuario{" + "nombreCompleto=" + nombreCompleto + ", correoElectronico=" + correoElectronico + ", contrasena=" + contrasena + ", edad=" + edad + '}';
+        return "Usuario{" + "nombreCompleto=" + nombreCompleto + ", correoElectronico=" + correo + ", contrasena=" + password + ", edad=" + edad + '}';
     }
 
 }

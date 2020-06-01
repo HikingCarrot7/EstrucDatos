@@ -74,9 +74,9 @@ public class Login extends JFrame
         btnNuevo = new JButton();
         jPanel2 = new JPanel();
         jLabel1 = new JLabel();
-        jTextField1 = new JTextField();
+        txtCorreo = new JTextField();
         jLabel2 = new JLabel();
-        jPasswordField1 = new JPasswordField();
+        txtPassword = new JPasswordField();
         jPanel3 = new JPanel();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -120,7 +120,7 @@ public class Login extends JFrame
         jPanel2.setLayout(new GridBagLayout());
 
         jLabel1.setHorizontalAlignment(SwingConstants.RIGHT);
-        jLabel1.setText("Nombre:");
+        jLabel1.setText("Correo electrónico:");
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(20, 35, 5, 3);
@@ -129,7 +129,7 @@ public class Login extends JFrame
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(20, 0, 5, 35);
-        jPanel2.add(jTextField1, gridBagConstraints);
+        jPanel2.add(txtCorreo, gridBagConstraints);
 
         jLabel2.setHorizontalAlignment(SwingConstants.RIGHT);
         jLabel2.setText("Contraseña:");
@@ -145,7 +145,7 @@ public class Login extends JFrame
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(5, 0, 5, 35);
-        jPanel2.add(jPasswordField1, gridBagConstraints);
+        jPanel2.add(txtPassword, gridBagConstraints);
 
         GroupLayout jPanel3Layout = new GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -179,6 +179,16 @@ public class Login extends JFrame
         return btnNuevo;
     }
 
+    public JTextField getTxtCorreo()
+    {
+        return txtCorreo;
+    }
+
+    public JPasswordField getTxtPassword()
+    {
+        return txtPassword;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JButton btnEntrar;
     private JButton btnNuevo;
@@ -192,7 +202,7 @@ public class Login extends JFrame
     private JPanel jPanel4;
     private JPanel jPanel5;
     private JPanel jPanel6;
-    private JPasswordField jPasswordField1;
-    private JTextField jTextField1;
+    private JTextField txtCorreo;
+    private JPasswordField txtPassword;
     // End of variables declaration//GEN-END:variables
 }

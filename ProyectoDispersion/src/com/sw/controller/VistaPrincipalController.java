@@ -1,5 +1,6 @@
 package com.sw.controller;
 
+import com.sw.model.Usuario;
 import com.sw.view.VistaBuscarUsuario;
 import com.sw.view.VistaPrincipal;
 import java.awt.Dialog;
@@ -14,10 +15,12 @@ public class VistaPrincipalController
 {
 
     private final VistaPrincipal vistaPrincipal;
+    private final Usuario usuarioActual;
 
-    public VistaPrincipalController(VistaPrincipal vistaPrincipal)
+    public VistaPrincipalController(VistaPrincipal vistaPrincipal, Usuario usuarioActual)
     {
         this.vistaPrincipal = vistaPrincipal;
+        this.usuarioActual = usuarioActual;
         initComponents();
     }
 
