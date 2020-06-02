@@ -35,10 +35,8 @@ public class ListadoUsuariosController implements UIConstants
     {
         TableManager tableManager = TableManager.getInstance();
         JTable tabla = vistaListadoUsuarios.getTablaListaUsuarios();
+        tableManager.initTabla(tabla);
         tableManager.initTableSelectionBehavior(tabla);
-
-        for (int i = 0; i < tabla.getColumnCount(); i++)
-            tabla.getColumnModel().getColumn(i).setCellEditor(COLUMNA_NO_EDITABLE);
 
         usuariosAMostrar.forEach(user ->
         {

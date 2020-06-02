@@ -21,10 +21,10 @@ import javax.swing.WindowConstants;
  *
  * @author HikingCarrot7
  */
-public class VistaDatosUsuario extends JDialog
+public class VistaEliminarContacto extends JDialog
 {
 
-    public VistaDatosUsuario(Window owner)
+    public VistaEliminarContacto(Window owner)
     {
         super(owner);
         initComponents();
@@ -51,8 +51,7 @@ public class VistaDatosUsuario extends JDialog
         jPanel5 = new JPanel();
         jLabel7 = new JLabel();
         panelBotones = new JPanel();
-        btnAgregar = new JButton();
-        btnAgregarContactos = new JButton();
+        btnEliminar = new JButton();
         btnCancelar = new JButton();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -138,11 +137,8 @@ public class VistaDatosUsuario extends JDialog
 
         panelBotones.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
-        btnAgregar.setText("Agregar");
-        panelBotones.add(btnAgregar);
-
-        btnAgregarContactos.setText("Agregar contactos");
-        panelBotones.add(btnAgregarContactos);
+        btnEliminar.setText("Eliminar");
+        panelBotones.add(btnEliminar);
 
         btnCancelar.setText("Cancelar");
         panelBotones.add(btnCancelar);
@@ -157,14 +153,9 @@ public class VistaDatosUsuario extends JDialog
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public JButton getBtnAgregar()
+    public JButton getBtnEliminar()
     {
-        return btnAgregar;
-    }
-
-    public JButton getBtnAgregarContactos()
-    {
-        return btnAgregarContactos;
+        return btnEliminar;
     }
 
     public JButton getBtnCancelar()
@@ -193,9 +184,8 @@ public class VistaDatosUsuario extends JDialog
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private JButton btnAgregar;
-    private JButton btnAgregarContactos;
     private JButton btnCancelar;
+    private JButton btnEliminar;
     private JLabel jLabel1;
     private JLabel jLabel3;
     private JLabel jLabel5;

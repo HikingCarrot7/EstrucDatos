@@ -7,9 +7,7 @@ import com.sw.model.exceptions.CorreoNoDisponibleException;
 import com.sw.model.exceptions.UsuarioNoExistenteException;
 import com.sw.view.FrmNuevoUsuario;
 import com.sw.view.VistaSelecRuta;
-import java.awt.Dialog;
 import java.awt.event.ActionEvent;
-import javax.swing.JDialog;
 
 /**
  *
@@ -78,7 +76,7 @@ public class NuevoUsuarioController
     {
         VistaSelecRuta vistaSelecRuta = new VistaSelecRuta(frmNuevoUsuario);
         SelecRutaController selecRutaController = new SelecRutaController(vistaSelecRuta);
-        showDialogAndWait(vistaSelecRuta);
+        Util.showDialogAndWait(frmNuevoUsuario, vistaSelecRuta);
 
         if (selecRutaController.seInsertoUnaRutaValida())
         {
@@ -136,13 +134,6 @@ public class NuevoUsuarioController
                 || getEdad().isEmpty()
                 || getCorreo().isEmpty()
                 || getPassword().isEmpty());
-    }
-
-    private void showDialogAndWait(JDialog dialog)
-    {
-        dialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
-        dialog.setLocationRelativeTo(frmNuevoUsuario);
-        dialog.setVisible(true);
     }
 
     private void quitarVentana()

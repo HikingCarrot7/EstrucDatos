@@ -1,5 +1,7 @@
 package com.sw.controller;
 
+import com.sw.view.UIConstants;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -10,12 +12,13 @@ import javax.swing.JTable;
 import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
  * @author Nicolás
  */
-public class TableManager
+public class TableManager implements UIConstants
 {
 
     private static TableManager instance;
@@ -31,6 +34,20 @@ public class TableManager
     private TableManager()
     {
 
+    }
+
+    public void initTabla(JTable table)
+    {
+        table.setDefaultRenderer(Object.class, MY_TABLE_CELL_RENDERER);
+        JTableHeader jTableHeader = table.getTableHeader();
+        jTableHeader.setDefaultRenderer(MY_TABLE_HEADER_RENDERER);
+        jTableHeader.setReorderingAllowed(false);
+        table.setTableHeader(jTableHeader);
+        table.setDefaultEditor(Object.class, TABLA_NO_EDITABLE);
+        table.setGridColor(new Color(237, 237, 237));
+        table.setRowSelectionAllowed(true);
+        table.setRowHeight(20);
+        table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
     }
 
     public void quitarCabeceraTabla(JTable table)

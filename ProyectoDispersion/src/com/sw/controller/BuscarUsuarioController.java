@@ -6,9 +6,7 @@ import com.sw.model.Usuario;
 import com.sw.model.exceptions.UsuarioNoExistenteException;
 import com.sw.view.VistaBuscarUsuario;
 import com.sw.view.VistaDatosUsuario;
-import java.awt.Dialog;
 import java.awt.event.ActionEvent;
-import javax.swing.JDialog;
 
 /**
  *
@@ -44,7 +42,7 @@ public class BuscarUsuarioController
 
             VistaDatosUsuario vistaDatosUsuario = new VistaDatosUsuario(vistaBuscarUsuario);
             new DatosUsuarioController(vistaDatosUsuario, usuario, mismoUsuario);
-            showDialogAndWait(vistaDatosUsuario);
+            Util.showDialogAndWait(vistaBuscarUsuario, vistaDatosUsuario);
 
         } catch (UsuarioNoExistenteException ex)
         {
@@ -55,13 +53,6 @@ public class BuscarUsuarioController
     private void accionBtnCancelar(ActionEvent e)
     {
         quitarVentana();
-    }
-
-    private void showDialogAndWait(JDialog dialog)
-    {
-        dialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
-        dialog.setLocationRelativeTo(vistaBuscarUsuario);
-        dialog.setVisible(true);
     }
 
     private String getCorreo()

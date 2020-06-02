@@ -4,6 +4,7 @@ import com.sw.model.arbolb.ArbolB;
 import com.sw.model.dao.DAO;
 import com.sw.model.dao.DAOContactosUsuario;
 import com.sw.model.exceptions.ArbolVacioException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -48,12 +49,20 @@ public class CRUDContactosUsuario
         daoContactosUsuario.saveObject(misContactos);
     }
 
-    public List<Usuario> getContactosUsuario(String correo) throws ArbolVacioException
+    public List<Usuario> getContactosUsuario(String correo)
     {
         String rutaContactos = crudRuta.getRuta(correo);
         DAO<ArbolB<Usuario>> daoContactosUsuario = new DAOContactosUsuario(rutaContactos);
         ArbolB<Usuario> contactos = daoContactosUsuario.getSavedObject();
-        return contactos.enlistarElementos();
+
+        try
+        {
+            return contactos.enlistarElementos();
+
+        } catch (ArbolVacioException e)
+        {
+            return new ArrayList<>();
+        }
     }
 
 }

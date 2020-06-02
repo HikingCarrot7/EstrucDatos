@@ -3,9 +3,10 @@ package com.sw.controller;
 import com.sw.model.CRUDContactosUsuario;
 import com.sw.model.Sesion;
 import com.sw.model.Usuario;
-import com.sw.model.exceptions.ArbolVacioException;
 import com.sw.view.VistaDatosUsuario;
+import com.sw.view.VistaListadoUsuarios;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,6 +45,8 @@ public class DatosUsuarioController
 
         else
             validarSiEsContactoAnadido();
+
+        habilitarBtnAgregarContactos(!contactosQueNoTengoAnadido().isEmpty());
     }
 
     private void accionBtnAgregar(ActionEvent e)
@@ -55,7 +58,26 @@ public class DatosUsuarioController
 
     private void accionBtnAgregarContactos(ActionEvent e)
     {
+        List<Usuario> contactosQueNoTengoAnadido = contactosQueNoTengoAnadido();
 
+        switch (Alerta.mostrarConfirmacion(vistaDatosUsuario,
+                "Confirmación", "Se agregarán " + contactosQueNoTengoAnadido.size() + " contacto(s)",
+                new Object[]
+                {
+                    "Ver contactos", "Ok", "Cancelar"
+                }))
+        {
+            case 0:
+                VistaListadoUsuarios vistaListadoUsuarios = new VistaListadoUsuarios(vistaDatosUsuario);
+                new ListadoUsuariosController(vistaListadoUsuarios, contactosQueNoTengoAnadido, "Contactos que se añadirán");
+                Util.showDialogAndWait(vistaDatosUsuario, vistaListadoUsuarios);
+                accionBtnAgregarContactos(e);
+                break;
+            case 1:
+                crudContactosUsuario.anadirContactosAUsuario(sesion.getCorreoUsuarioActual(), contactosQueNoTengoAnadido);
+                habilitarBtnAgregarContactos(false);
+                break;
+        }
     }
 
     private void accionBtnEliminarDeMisContactos(ActionEvent e)
@@ -65,34 +87,50 @@ public class DatosUsuarioController
 
     private void accionBtnCancelar(ActionEvent e)
     {
-
+        quitarVentana();
     }
 
     private void validarSiEsContactoAnadido()
     {
-        try
-        {
-            List<Usuario> misContactos = crudContactosUsuario.getContactosUsuario(sesion.getCorreoUsuarioActual());
+        List<Usuario> misContactos = crudContactosUsuario.getContactosUsuario(sesion.getCorreoUsuarioActual());
 
-            habilitarBtnAgregar(!misContactos
-                    .stream()
-                    .anyMatch(user -> user.getCorreo().equals(usuarioAMostrarDatos.getCorreo())));
+        habilitarBtnAgregar(!misContactos
+                .stream()
+                .anyMatch(user -> user.getCorreo().equals(usuarioAMostrarDatos.getCorreo())));
+    }
 
-        } catch (ArbolVacioException e)
-        {
-            habilitarBtnAgregar(true);
-        }
+    private List<Usuario> contactosQueNoTengoAnadido()
+    {
+        List<Usuario> misContactos = crudContactosUsuario.getContactosUsuario(sesion.getCorreoUsuarioActual());
+        List<Usuario> contactosUsuarioMostrado = crudContactosUsuario.getContactosUsuario(usuarioAMostrarDatos.getCorreo());
+        List<Usuario> contactosQueNoTengoAnadido = new ArrayList<>();
+
+        contactosUsuarioMostrado.stream()
+                .filter(usuario -> !(misContactos.contains(usuario) || usuario.getCorreo().equals(sesion.getCorreoUsuarioActual())))
+                .forEachOrdered(contactosQueNoTengoAnadido::add);
+
+        return contactosQueNoTengoAnadido;
     }
 
     private void activarBotonesPrimarios(boolean activar)
     {
         habilitarBtnAgregar(activar);
-        vistaDatosUsuario.getBtnAgregarContactos().setEnabled(activar);
+        habilitarBtnAgregarContactos(activar);
     }
 
     private void habilitarBtnAgregar(boolean habilitar)
     {
         vistaDatosUsuario.getBtnAgregar().setEnabled(habilitar);
+    }
+
+    private void habilitarBtnAgregarContactos(boolean habilitar)
+    {
+        vistaDatosUsuario.getBtnAgregarContactos().setEnabled(habilitar);
+    }
+
+    private void quitarVentana()
+    {
+        vistaDatosUsuario.dispose();
     }
 
 }

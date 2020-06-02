@@ -17,7 +17,12 @@ public class Alerta
 
     public static boolean mostrarConfirmacion(Component parentComponent, String title, String text)
     {
-        return JOptionPane.showConfirmDialog(parentComponent, text, title, JOptionPane.OK_CANCEL_OPTION) == 0;
+        return JOptionPane.showConfirmDialog(parentComponent, text, title, JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION;
+    }
+
+    public static int mostrarConfirmacion(Component parentComponent, String title, String text, Object[] options)
+    {
+        return JOptionPane.showOptionDialog(parentComponent, text, title, JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, null);
     }
 
     public static void mostrarMensaje(Component parentComponent, String title, String text)

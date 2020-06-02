@@ -7,11 +7,10 @@ import com.sw.model.exceptions.UsuarioNoExistenteException;
 import com.sw.view.FrmNuevoUsuario;
 import com.sw.view.Login;
 import com.sw.view.VistaPrincipal;
-import java.awt.Dialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import javax.swing.JDialog;
+import java.awt.event.WindowListener;
 
 /**
  *
@@ -19,6 +18,14 @@ import javax.swing.JDialog;
  */
 public class LoginController
 {
+
+    private final WindowListener ACCION_VENTANA_PRINCIPAL_CERRADA = new WindowAdapter()
+    {
+        @Override public void windowClosing(WindowEvent e)
+        {
+            emergerLogin();
+        }
+    };
 
     private final Login login;
     private final CRUDUser crudUser;
@@ -46,7 +53,8 @@ public class LoginController
             sesion.setUsuarioActual(usuario);
 
             VistaPrincipal vistaPrincipal = new VistaPrincipal();
-            new VistaPrincipalController(vistaPrincipal);
+            VistaPrincipalController vistaPrincipalController = new VistaPrincipalController(vistaPrincipal);
+            vistaPrincipalController.addObserver((o, a) -> emergerLogin());
             quitarLogin();
             mostrarVistaPrincipal(vistaPrincipal);
 
@@ -62,7 +70,7 @@ public class LoginController
 
         FrmNuevoUsuario frmNuevoUsuario = new FrmNuevoUsuario();
         NuevoUsuarioController nuevoUsuarioController = new NuevoUsuarioController(frmNuevoUsuario, nuevoUsuario);
-        showDialogAndWait(frmNuevoUsuario);
+        Util.showDialogAndWait(login, frmNuevoUsuario);
 
         if (nuevoUsuarioController.seAceptoNuevoUsuario())
             crudUser.registrarUsuario(nuevoUsuario);
@@ -78,24 +86,12 @@ public class LoginController
         return new String(login.getTxtPassword().getPassword()).trim();
     }
 
-    private void showDialogAndWait(JDialog dialog)
-    {
-        dialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
-        dialog.setLocationRelativeTo(login);
-        dialog.setVisible(true);
-    }
-
     private void mostrarVistaPrincipal(VistaPrincipal vistaPrincipal)
     {
         vistaPrincipal.setLocationRelativeTo(null);
         vistaPrincipal.setVisible(true);
-        vistaPrincipal.addWindowListener(new WindowAdapter()
-        {
-            @Override public void windowClosing(WindowEvent e)
-            {
-                emergerLogin();
-            }
-        });
+        vistaPrincipal.removeWindowListener(ACCION_VENTANA_PRINCIPAL_CERRADA);
+        vistaPrincipal.addWindowListener(ACCION_VENTANA_PRINCIPAL_CERRADA);
     }
 
     private void quitarLogin()

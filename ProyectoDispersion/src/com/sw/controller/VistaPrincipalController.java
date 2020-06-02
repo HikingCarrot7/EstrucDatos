@@ -7,15 +7,14 @@ import com.sw.model.exceptions.ArbolVacioException;
 import com.sw.view.VistaBuscarUsuario;
 import com.sw.view.VistaListadoUsuarios;
 import com.sw.view.VistaPrincipal;
-import java.awt.Dialog;
 import java.awt.event.ActionEvent;
-import javax.swing.JDialog;
+import java.util.Observable;
 
 /**
  *
  * @author HikingCarrot7
  */
-public class VistaPrincipalController
+public class VistaPrincipalController extends Observable
 {
 
     private final VistaPrincipal vistaPrincipal;
@@ -34,27 +33,36 @@ public class VistaPrincipalController
 
     private void initComponents()
     {
-        vistaPrincipal.getMnItmListarTodosUsuarios().addActionListener(this::accionMnItmListarTodosUsuarios);
-        vistaPrincipal.getMnItmListarMisContactos().addActionListener(this::accionMnItmListarMisContactos);
+        vistaPrincipal.getBtnMostrarTodosUsuarios().addActionListener(this::accionBtnMostrarTodosUsuarios);
+        vistaPrincipal.getMnItmListarTodosUsuarios().addActionListener(this::accionBtnMostrarTodosUsuarios);
 
-        vistaPrincipal.getMnItmBuscarUsuario().addActionListener(this::accionMnItmBuscarUsuario);
-        vistaPrincipal.getMnItmEliminarContacto().addActionListener(this::accionMnItmEliminarContacto);
-        vistaPrincipal.getMnItmEliminarCuenta().addActionListener(this::accionMnItmEliminarCuenta);
+        vistaPrincipal.getBtnListarMisContactos().addActionListener(this::accionBtnListarMisContactos);
+        vistaPrincipal.getMnItmListarMisContactos().addActionListener(this::accionBtnListarMisContactos);
 
+        vistaPrincipal.getBtnBuscarUsuario().addActionListener(this::accionBtnBuscarUsuario);
+        vistaPrincipal.getMnItmBuscarUsuario().addActionListener(this::accionBtnBuscarUsuario);
+
+        vistaPrincipal.getBtnEliminarContacto().addActionListener(this::accionBtnEliminarCuenta);
+        vistaPrincipal.getMnItmEliminarContacto().addActionListener(this::accionBtnEliminarContacto);
+
+        vistaPrincipal.getBtnEliminarCuenta().addActionListener(this::accionBtnEliminarCuenta);
+        vistaPrincipal.getMnItmEliminarCuenta().addActionListener(this::accionBtnEliminarCuenta);
+
+        vistaPrincipal.getBtnCerrarSesion().addActionListener(e -> quitarVentana());
         vistaPrincipal.setTitle("Bienvenido: " + sesion.getUsuarioActual().getNombreCompleto());
     }
 
-    private void accionMnItmListarTodosUsuarios(ActionEvent e)
+    private void accionBtnMostrarTodosUsuarios(ActionEvent e)
     {
         VistaListadoUsuarios vistaListadoUsuarios = new VistaListadoUsuarios(vistaPrincipal);
         new ListadoUsuariosController(vistaListadoUsuarios,
                 crudUser.getTodosLosUsuarios(),
                 "Usuarios registrados en el sistema");
 
-        showDialogAndWait(vistaListadoUsuarios);
+        Util.showDialogAndWait(vistaPrincipal, vistaListadoUsuarios);
     }
 
-    private void accionMnItmListarMisContactos(ActionEvent e)
+    private void accionBtnListarMisContactos(ActionEvent e)
     {
         try
         {
@@ -63,38 +71,38 @@ public class VistaPrincipalController
                     crudContactosUsers.getContactosUsuario(sesion.getCorreoUsuarioActual()),
                     "Sus contactos agregados");
 
-            showDialogAndWait(vistaListadoUsuarios);
+            Util.showDialogAndWait(vistaPrincipal, vistaListadoUsuarios);
 
         } catch (ArbolVacioException ex)
         {
             if (Alerta.mostrarConfirmacion(vistaPrincipal, "No tienes contactos",
                     "Aún no tienes contactos añadidos, ¿deseas añadir alguno?"))
-                accionMnItmBuscarUsuario(e);
+                accionBtnBuscarUsuario(e);
         }
     }
 
-    private void accionMnItmBuscarUsuario(ActionEvent e)
+    private void accionBtnBuscarUsuario(ActionEvent e)
     {
         VistaBuscarUsuario vistaBuscarUsuario = new VistaBuscarUsuario(vistaPrincipal);
         new BuscarUsuarioController(vistaBuscarUsuario);
-        showDialogAndWait(vistaBuscarUsuario);
+        Util.showDialogAndWait(vistaPrincipal, vistaBuscarUsuario);
     }
 
-    private void accionMnItmEliminarContacto(ActionEvent e)
+    private void accionBtnEliminarContacto(ActionEvent e)
     {
 
     }
 
-    private void accionMnItmEliminarCuenta(ActionEvent e)
+    private void accionBtnEliminarCuenta(ActionEvent e)
     {
 
     }
 
-    private void showDialogAndWait(JDialog dialog)
+    private void quitarVentana()
     {
-        dialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
-        dialog.setLocationRelativeTo(vistaPrincipal);
-        dialog.setVisible(true);
+        setChanged();
+        notifyObservers();
+        vistaPrincipal.setVisible(false);
     }
 
 }

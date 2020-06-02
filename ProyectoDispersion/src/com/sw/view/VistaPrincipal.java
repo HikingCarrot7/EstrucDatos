@@ -1,11 +1,15 @@
 package com.sw.view;
 
 import java.awt.BorderLayout;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -36,9 +40,17 @@ public class VistaPrincipal extends JFrame
     private void initComponents()
     {
 
+        jPanel2 = new JPanel();
         jLabel1 = new JLabel();
+        jPanel3 = new JPanel();
+        btnBuscarUsuario = new JButton();
+        btnVerUsuariosRegistrados = new JButton();
+        btnVerContactos = new JButton();
+        btnEditarCuenta = new JButton();
+        btnEliminarContacto = new JButton();
+        btnEliminarCuenta = new JButton();
         jPanel1 = new JPanel();
-        jLabel2 = new JLabel();
+        btnCerrarSesion = new JButton();
         jMenuBar1 = new JMenuBar();
         jMenu1 = new JMenu();
         mnItmListarTodosUsuarios = new JMenuItem();
@@ -50,22 +62,87 @@ public class VistaPrincipal extends JFrame
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Menú principal");
-        setMinimumSize(new Dimension(600, 335));
-        setPreferredSize(new Dimension(600, 335));
+        setMinimumSize(new Dimension(675, 420));
+        setPreferredSize(new Dimension(675, 420));
+
+        jPanel2.setLayout(new BorderLayout());
 
         jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
         jLabel1.setIcon(new ImageIcon(getClass().getResource("/com/sw/img/logo.png"))); // NOI18N
         jLabel1.setToolTipText("");
-        getContentPane().add(jLabel1, BorderLayout.CENTER);
+        jPanel2.add(jLabel1, BorderLayout.NORTH);
 
-        jPanel1.setLayout(new FlowLayout(FlowLayout.LEFT));
+        jPanel3.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
+        jPanel3.setLayout(new GridLayout(2, 3, 15, 15));
 
-        jLabel2.setHorizontalAlignment(SwingConstants.CENTER);
-        jLabel2.setIcon(new ImageIcon(getClass().getResource("/com/sw/img/logo_fmat.png"))); // NOI18N
-        jLabel2.setText("Powered by:");
-        jLabel2.setToolTipText("Terraria 1.4");
-        jLabel2.setHorizontalTextPosition(SwingConstants.LEFT);
-        jPanel1.add(jLabel2);
+        btnBuscarUsuario.setIcon(new ImageIcon(getClass().getResource("/com/sw/img/buscar.png"))); // NOI18N
+        btnBuscarUsuario.setText("Buscar usuario");
+        btnBuscarUsuario.setContentAreaFilled(false);
+        btnBuscarUsuario.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnBuscarUsuario.setFocusPainted(false);
+        btnBuscarUsuario.setHorizontalTextPosition(SwingConstants.CENTER);
+        btnBuscarUsuario.setRolloverIcon(new ImageIcon(getClass().getResource("/com/sw/img/buscar_rollover.png"))); // NOI18N
+        btnBuscarUsuario.setVerticalTextPosition(SwingConstants.BOTTOM);
+        jPanel3.add(btnBuscarUsuario);
+
+        btnVerUsuariosRegistrados.setIcon(new ImageIcon(getClass().getResource("/com/sw/img/ver_todos_usuarios.png"))); // NOI18N
+        btnVerUsuariosRegistrados.setText("Ver usuarios registrados");
+        btnVerUsuariosRegistrados.setContentAreaFilled(false);
+        btnVerUsuariosRegistrados.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnVerUsuariosRegistrados.setFocusPainted(false);
+        btnVerUsuariosRegistrados.setHorizontalTextPosition(SwingConstants.CENTER);
+        btnVerUsuariosRegistrados.setRolloverIcon(new ImageIcon(getClass().getResource("/com/sw/img/ver_todos_usuarios_rollover.png"))); // NOI18N
+        btnVerUsuariosRegistrados.setVerticalTextPosition(SwingConstants.BOTTOM);
+        jPanel3.add(btnVerUsuariosRegistrados);
+
+        btnVerContactos.setIcon(new ImageIcon(getClass().getResource("/com/sw/img/contactos.png"))); // NOI18N
+        btnVerContactos.setText("Ver contactos");
+        btnVerContactos.setContentAreaFilled(false);
+        btnVerContactos.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnVerContactos.setFocusPainted(false);
+        btnVerContactos.setHorizontalTextPosition(SwingConstants.CENTER);
+        btnVerContactos.setRolloverIcon(new ImageIcon(getClass().getResource("/com/sw/img/contactos_rollover.png"))); // NOI18N
+        btnVerContactos.setVerticalTextPosition(SwingConstants.BOTTOM);
+        jPanel3.add(btnVerContactos);
+
+        btnEditarCuenta.setIcon(new ImageIcon(getClass().getResource("/com/sw/img/editar_perfil.png"))); // NOI18N
+        btnEditarCuenta.setText("Editar cuenta");
+        btnEditarCuenta.setContentAreaFilled(false);
+        btnEditarCuenta.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnEditarCuenta.setFocusPainted(false);
+        btnEditarCuenta.setHorizontalTextPosition(SwingConstants.CENTER);
+        btnEditarCuenta.setRolloverIcon(new ImageIcon(getClass().getResource("/com/sw/img/editar_perfil_rollover.png"))); // NOI18N
+        btnEditarCuenta.setVerticalTextPosition(SwingConstants.BOTTOM);
+        jPanel3.add(btnEditarCuenta);
+
+        btnEliminarContacto.setIcon(new ImageIcon(getClass().getResource("/com/sw/img/eliminar_contacto.png"))); // NOI18N
+        btnEliminarContacto.setText("Eliminar contacto");
+        btnEliminarContacto.setContentAreaFilled(false);
+        btnEliminarContacto.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnEliminarContacto.setFocusPainted(false);
+        btnEliminarContacto.setHorizontalTextPosition(SwingConstants.CENTER);
+        btnEliminarContacto.setRolloverIcon(new ImageIcon(getClass().getResource("/com/sw/img/eliminar_contacto_rollover.png"))); // NOI18N
+        btnEliminarContacto.setVerticalTextPosition(SwingConstants.BOTTOM);
+        jPanel3.add(btnEliminarContacto);
+
+        btnEliminarCuenta.setIcon(new ImageIcon(getClass().getResource("/com/sw/img/eliminar_cuenta.png"))); // NOI18N
+        btnEliminarCuenta.setText("Eliminar mi cuenta");
+        btnEliminarCuenta.setContentAreaFilled(false);
+        btnEliminarCuenta.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnEliminarCuenta.setFocusPainted(false);
+        btnEliminarCuenta.setHorizontalTextPosition(SwingConstants.CENTER);
+        btnEliminarCuenta.setRolloverIcon(new ImageIcon(getClass().getResource("/com/sw/img/eliminar_cuenta_rollover.png"))); // NOI18N
+        btnEliminarCuenta.setVerticalTextPosition(SwingConstants.BOTTOM);
+        jPanel3.add(btnEliminarCuenta);
+
+        jPanel2.add(jPanel3, BorderLayout.CENTER);
+
+        getContentPane().add(jPanel2, BorderLayout.CENTER);
+
+        jPanel1.setLayout(new FlowLayout(FlowLayout.RIGHT));
+
+        btnCerrarSesion.setText("Cerrar sesión");
+        jPanel1.add(btnCerrarSesion);
 
         getContentPane().add(jPanel1, BorderLayout.PAGE_END);
 
@@ -126,13 +203,56 @@ public class VistaPrincipal extends JFrame
         return mnItmListarTodosUsuarios;
     }
 
+    public JButton getBtnBuscarUsuario()
+    {
+        return btnBuscarUsuario;
+    }
+
+    public JButton getBtnEditarCuenta()
+    {
+        return btnEditarCuenta;
+    }
+
+    public JButton getBtnEliminarContacto()
+    {
+        return btnEliminarContacto;
+    }
+
+    public JButton getBtnEliminarCuenta()
+    {
+        return btnEliminarCuenta;
+    }
+
+    public JButton getBtnListarMisContactos()
+    {
+        return btnVerContactos;
+    }
+
+    public JButton getBtnMostrarTodosUsuarios()
+    {
+        return btnVerUsuariosRegistrados;
+    }
+
+    public JButton getBtnCerrarSesion()
+    {
+        return btnCerrarSesion;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private JButton btnBuscarUsuario;
+    private JButton btnCerrarSesion;
+    private JButton btnEditarCuenta;
+    private JButton btnEliminarContacto;
+    private JButton btnEliminarCuenta;
+    private JButton btnVerContactos;
+    private JButton btnVerUsuariosRegistrados;
     private JLabel jLabel1;
-    private JLabel jLabel2;
     private JMenu jMenu1;
     private JMenu jMenu2;
     private JMenuBar jMenuBar1;
     private JPanel jPanel1;
+    private JPanel jPanel2;
+    private JPanel jPanel3;
     private JMenuItem mnItmBuscarUsuario;
     private JMenuItem mnItmEliminarContacto;
     private JMenuItem mnItmEliminarCuenta;
