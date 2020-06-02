@@ -16,6 +16,12 @@ public abstract class DAO<E>
     public static final String RUTA_HASHTABLE_DATA = "system_data/hashtable.txt";
     public static final String RUTA_USUARIOS_REGISTRADOS = "system_data/usuarios.txt";
 
+    public static boolean esRutaValida(String ruta)
+    {
+        File file = new File(ruta);
+        return file.exists();
+    }
+
     protected final File file;
 
     public DAO(String ruta)

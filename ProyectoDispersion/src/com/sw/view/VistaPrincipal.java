@@ -6,7 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
-import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -14,12 +14,13 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 
 /**
  *
  * @author HikingCarrot7
  */
-public class VistaPrincipal extends JDialog
+public class VistaPrincipal extends JFrame
 {
 
     public VistaPrincipal()
@@ -47,8 +48,10 @@ public class VistaPrincipal extends JDialog
         mnItmEliminarContacto = new JMenuItem();
         mnItmEliminarCuenta = new JMenuItem();
 
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Menú principal");
-        setMinimumSize(new Dimension(400, 200));
+        setMinimumSize(new Dimension(600, 335));
+        setPreferredSize(new Dimension(600, 335));
 
         jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
         jLabel1.setIcon(new ImageIcon(getClass().getResource("/com/sw/img/logo.png"))); // NOI18N

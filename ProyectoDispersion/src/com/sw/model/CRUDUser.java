@@ -1,6 +1,5 @@
-package com.sw.controller;
+package com.sw.model;
 
-import com.sw.model.Usuario;
 import com.sw.model.dao.DAO;
 import com.sw.model.dao.DAOUsuarios;
 import com.sw.model.exceptions.UsuarioNoExistenteException;
@@ -10,22 +9,22 @@ import java.util.ArrayList;
  *
  * @author HikingCarrot7
  */
-public class UserManager
+public class CRUDUser
 {
 
-    private static UserManager instance;
+    private static CRUDUser instance;
 
-    public static synchronized UserManager getInstance()
+    public static synchronized CRUDUser getInstance()
     {
         if (instance == null)
-            instance = new UserManager();
+            instance = new CRUDUser();
 
         return instance;
     }
 
     private final DAO<ArrayList<Usuario>> dao;
 
-    private UserManager()
+    private CRUDUser()
     {
         dao = new DAOUsuarios(DAO.RUTA_USUARIOS_REGISTRADOS);
     }
@@ -46,6 +45,11 @@ public class UserManager
                 return usuario;
 
         throw new UsuarioNoExistenteException();
+    }
+
+    public ArrayList<Usuario> getTodosLosUsuarios()
+    {
+        return dao.getSavedObject();
     }
 
     public void registrarNuevoUsuario(Usuario nuevoUsuario)

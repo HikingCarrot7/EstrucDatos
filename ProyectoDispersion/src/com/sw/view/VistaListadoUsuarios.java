@@ -1,18 +1,31 @@
 package com.sw.view;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.Window;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author HikingCarrot7
  */
-public class VistaListadoUsuarios extends JFrame
+public class VistaListadoUsuarios extends JDialog
 {
 
-    public VistaListadoUsuarios()
+    public VistaListadoUsuarios(Window owner)
     {
+        super(owner);
         initComponents();
     }
 
@@ -24,67 +37,58 @@ public class VistaListadoUsuarios extends JFrame
     private void initComponents()
     {
 
-        jPanel1 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        btnAceptar = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tablaListaContactos = new javax.swing.JTable();
+        jPanel1 = new JPanel();
+        jPanel4 = new JPanel();
+        jLabel1 = new JLabel();
+        jPanel3 = new JPanel();
+        btnAceptar = new JButton();
+        panelTitulo = new JPanel();
+        jScrollPane1 = new JScrollPane();
+        tablaListaUsuarios = new JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Listado de contactos");
-        setMinimumSize(new java.awt.Dimension(450, 320));
-        setPreferredSize(new java.awt.Dimension(450, 320));
+        setMinimumSize(new Dimension(450, 325));
+        setPreferredSize(new Dimension(450, 325));
 
-        jPanel1.setLayout(new java.awt.GridLayout(1, 0));
+        jPanel1.setLayout(new GridLayout(1, 0));
 
-        jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        jPanel4.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/sw/img/logo_fmat.png"))); // NOI18N
+        jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
+        jLabel1.setIcon(new ImageIcon(getClass().getResource("/com/sw/img/logo_fmat.png"))); // NOI18N
         jLabel1.setText("Powered by:");
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jLabel1.setHorizontalTextPosition(SwingConstants.LEFT);
         jPanel4.add(jLabel1);
 
         jPanel1.add(jPanel4);
 
-        jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+        jPanel3.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
         btnAceptar.setText("Aceptar");
         jPanel3.add(btnAceptar);
 
-        btnCancelar.setText("Cancelar");
-        jPanel3.add(btnCancelar);
-
         jPanel1.add(jPanel3);
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.SOUTH);
+        getContentPane().add(jPanel1, BorderLayout.SOUTH);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Listar todos"));
-        jPanel2.setLayout(new java.awt.BorderLayout());
+        panelTitulo.setBorder(BorderFactory.createTitledBorder("Usuarios registrados"));
+        panelTitulo.setLayout(new BorderLayout());
 
-        tablaListaContactos.setModel(new javax.swing.table.DefaultTableModel(
+        tablaListaUsuarios.setModel(new DefaultTableModel(
             new Object [][]
             {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String []
             {
                 "Nombre", "Edad", "Correo electrónico"
             }
         ));
-        jScrollPane1.setViewportView(tablaListaContactos);
+        jScrollPane1.setViewportView(tablaListaUsuarios);
 
-        jPanel2.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        panelTitulo.add(jScrollPane1, BorderLayout.CENTER);
 
-        getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
+        getContentPane().add(panelTitulo, BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -94,25 +98,24 @@ public class VistaListadoUsuarios extends JFrame
         return btnAceptar;
     }
 
-    public JButton getBtnCancelar()
+    public JPanel getPanelTitulo()
     {
-        return btnCancelar;
+        return panelTitulo;
     }
 
-    public JTable getTablaListaContactos()
+    public JTable getTablaListaUsuarios()
     {
-        return tablaListaContactos;
+        return tablaListaUsuarios;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAceptar;
-    private javax.swing.JButton btnCancelar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tablaListaContactos;
+    private JButton btnAceptar;
+    private JLabel jLabel1;
+    private JPanel jPanel1;
+    private JPanel jPanel3;
+    private JPanel jPanel4;
+    private JScrollPane jScrollPane1;
+    private JPanel panelTitulo;
+    private JTable tablaListaUsuarios;
     // End of variables declaration//GEN-END:variables
 }

@@ -7,11 +7,12 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.Window;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -22,11 +23,12 @@ import javax.swing.WindowConstants;
  *
  * @author HikingCarrot7
  */
-public class VistaSelecRuta extends JFrame
+public class VistaSelecRuta extends JDialog
 {
 
-    public VistaSelecRuta()
+    public VistaSelecRuta(Window owner)
     {
+        super(owner);
         initComponents();
     }
 
@@ -43,16 +45,16 @@ public class VistaSelecRuta extends JFrame
         jPanel5 = new JPanel();
         jLabel2 = new JLabel();
         jPanel3 = new JPanel();
-        jButton1 = new JButton();
-        jButton2 = new JButton();
+        btnAceptar = new JButton();
+        btnCancelar = new JButton();
         jPanel2 = new JPanel();
         jLabel1 = new JLabel();
-        jTextField1 = new JTextField();
-        jButton3 = new JButton();
+        txtRuta = new JTextField();
+        btnSeleccionarRuta = new JButton();
         jPanel4 = new JPanel();
 
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Seleccionar la ruta para almacenar el contacto");
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Ruta para almacenar sus futuros contactos");
         setMinimumSize(new Dimension(450, 160));
         setPreferredSize(new Dimension(450, 160));
 
@@ -71,11 +73,11 @@ public class VistaSelecRuta extends JFrame
 
         jPanel3.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
-        jButton1.setText("Aceptar");
-        jPanel3.add(jButton1);
+        btnAceptar.setText("Aceptar");
+        jPanel3.add(btnAceptar);
 
-        jButton2.setText("Cancelar");
-        jPanel3.add(jButton2);
+        btnCancelar.setText("Cancelar");
+        jPanel3.add(btnCancelar);
 
         jPanel1.add(jPanel3);
 
@@ -93,13 +95,13 @@ public class VistaSelecRuta extends JFrame
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(5, 5, 5, 5);
-        jPanel2.add(jTextField1, gridBagConstraints);
+        jPanel2.add(txtRuta, gridBagConstraints);
 
-        jButton3.setText("Seleccionar");
+        btnSeleccionarRuta.setText("Seleccionar");
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(5, 5, 5, 35);
-        jPanel2.add(jButton3, gridBagConstraints);
+        jPanel2.add(btnSeleccionarRuta, gridBagConstraints);
 
         GroupLayout jPanel4Layout = new GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -123,10 +125,30 @@ public class VistaSelecRuta extends JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public JButton getBtnAceptar()
+    {
+        return btnAceptar;
+    }
+
+    public JButton getBtnCancelar()
+    {
+        return btnCancelar;
+    }
+
+    public JButton getBtnSeleccionarRuta()
+    {
+        return btnSeleccionarRuta;
+    }
+
+    public JTextField getTxtRuta()
+    {
+        return txtRuta;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private JButton jButton1;
-    private JButton jButton2;
-    private JButton jButton3;
+    private JButton btnAceptar;
+    private JButton btnCancelar;
+    private JButton btnSeleccionarRuta;
     private JLabel jLabel1;
     private JLabel jLabel2;
     private JPanel jPanel1;
@@ -134,6 +156,6 @@ public class VistaSelecRuta extends JFrame
     private JPanel jPanel3;
     private JPanel jPanel4;
     private JPanel jPanel5;
-    private JTextField jTextField1;
+    private JTextField txtRuta;
     // End of variables declaration//GEN-END:variables
 }

@@ -8,6 +8,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -40,6 +41,7 @@ public class FrmNuevoUsuario extends JDialog
         GridBagConstraints gridBagConstraints;
 
         jPanel3 = new JPanel();
+        jPanel7 = new JPanel();
         jLabel5 = new JLabel();
         jPanel1 = new JPanel();
         jPanel6 = new JPanel();
@@ -64,10 +66,14 @@ public class FrmNuevoUsuario extends JDialog
 
         jPanel3.setLayout(new BorderLayout());
 
+        jPanel7.setBorder(BorderFactory.createEmptyBorder(5, 1, 5, 1));
+
         jLabel5.setFont(new Font("Tahoma", 0, 36)); // NOI18N
         jLabel5.setHorizontalAlignment(SwingConstants.CENTER);
         jLabel5.setText("Nuevo usuario");
-        jPanel3.add(jLabel5, BorderLayout.CENTER);
+        jPanel7.add(jLabel5);
+
+        jPanel3.add(jPanel7, BorderLayout.PAGE_START);
 
         getContentPane().add(jPanel3, BorderLayout.NORTH);
 
@@ -102,12 +108,12 @@ public class FrmNuevoUsuario extends JDialog
         jLabel1.setText("Nombre:");
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new Insets(25, 35, 5, 5);
+        gridBagConstraints.insets = new Insets(15, 35, 5, 5);
         jPanel2.add(jLabel1, gridBagConstraints);
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
-        gridBagConstraints.insets = new Insets(25, 5, 5, 35);
+        gridBagConstraints.insets = new Insets(15, 5, 5, 35);
         jPanel2.add(txtNombre, gridBagConstraints);
 
         jLabel2.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -217,6 +223,7 @@ public class FrmNuevoUsuario extends JDialog
     private JPanel jPanel4;
     private JPanel jPanel5;
     private JPanel jPanel6;
+    private JPanel jPanel7;
     private JTextField txtCorreo;
     private JFormattedTextField txtEdad;
     private JTextField txtNombre;

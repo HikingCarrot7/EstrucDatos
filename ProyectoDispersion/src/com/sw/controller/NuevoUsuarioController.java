@@ -1,9 +1,14 @@
 package com.sw.controller;
 
+import com.sw.model.CRUDRuta;
+import com.sw.model.CRUDUser;
 import com.sw.model.Usuario;
 import com.sw.model.exceptions.CorreoNoDisponibleException;
 import com.sw.view.FrmNuevoUsuario;
+import com.sw.view.VistaSelecRuta;
+import java.awt.Dialog;
 import java.awt.event.ActionEvent;
+import javax.swing.JDialog;
 
 /**
  *
@@ -14,7 +19,8 @@ public class NuevoUsuarioController
 
     private final FrmNuevoUsuario frmNuevoUsuario;
     private final Usuario nuevoUsuario;
-    private final UserManager userManager;
+    private final CRUDUser crudUser;
+    private final CRUDRuta crudRuta;
 
     private boolean seAceptoNuevoUsuario;
 
@@ -22,7 +28,9 @@ public class NuevoUsuarioController
     {
         this.frmNuevoUsuario = frmNuevoUsuario;
         this.nuevoUsuario = nuevoUsuario;
-        this.userManager = UserManager.getInstance();
+        this.crudUser = CRUDUser.getInstance();
+        this.crudRuta = CRUDRuta.getInstance();
+
         initComponents();
     }
 
@@ -39,12 +47,15 @@ public class NuevoUsuarioController
         {
             if (todosCamposValidos())
             {
-                if (userManager.existeCorreoRegistrado(getCorreo()))
+                if (crudUser.existeCorreoRegistrado(getCorreo()))
                     throw new CorreoNoDisponibleException();
 
-                seAceptoNuevoUsuario = true;
-                rellenarDatosNuevoUsuario();
-                quitarVentana();
+                if (solicitarRuta())
+                {
+                    seAceptoNuevoUsuario = true;
+                    rellenarDatosNuevoUsuario();
+                    quitarVentana();
+                }
 
             } else
                 Alerta.mostrarError(frmNuevoUsuario, "Algún campo es incorrecto");
@@ -57,8 +68,25 @@ public class NuevoUsuarioController
 
     private void accionBtnCancelar(ActionEvent e)
     {
-        if (Alerta.mostrarConfirmacion(frmNuevoUsuario, "¿Está seguro?", "Se borrarán todos los elementos ingresados en el formulario."))
+        if (Alerta.mostrarConfirmacion(frmNuevoUsuario, "¿Está seguro?",
+                "Se borrarán todos los elementos ingresados en el formulario."))
             quitarVentana();
+    }
+
+    private boolean solicitarRuta()
+    {
+        VistaSelecRuta vistaSelecRuta = new VistaSelecRuta(frmNuevoUsuario);
+        SelecRutaController selecRutaController = new SelecRutaController(vistaSelecRuta);
+        showDialogAndWait(vistaSelecRuta);
+
+        if (selecRutaController.seInsertoUnaRutaValida())
+        {
+            crudRuta.guardarRuta(getCorreo(),
+                    selecRutaController.getRutaSeleccionada() + String.format("/%s.txt", getCorreo()));
+            return true;
+        }
+
+        return false;
     }
 
     private void rellenarDatosNuevoUsuario()
@@ -95,6 +123,13 @@ public class NuevoUsuarioController
                 || getEdad().isEmpty()
                 || getCorreo().isEmpty()
                 || getPassword().isEmpty());
+    }
+
+    private void showDialogAndWait(JDialog dialog)
+    {
+        dialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+        dialog.setLocationRelativeTo(frmNuevoUsuario);
+        dialog.setVisible(true);
     }
 
     private void quitarVentana()

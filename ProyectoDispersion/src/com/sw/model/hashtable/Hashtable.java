@@ -13,14 +13,12 @@ public class Hashtable<K, V> extends HashMap<K, V>
 
     private static final long serialVersionUID = 1L;
 
-    @Override
-    public V put(K key, V value)
+    public V insertar(K key, V value)
     {
         return super.put(key, value);
     }
 
-    @Override
-    public V get(Object key)
+    public V obtenerValue(Object key)
     {
         return super.get(key);
     }
