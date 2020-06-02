@@ -1,6 +1,7 @@
 package com.sw.controller;
 
 import com.sw.model.CRUDUser;
+import com.sw.model.Sesion;
 import com.sw.model.Usuario;
 import com.sw.model.exceptions.UsuarioNoExistenteException;
 import com.sw.view.FrmNuevoUsuario;
@@ -20,12 +21,14 @@ public class LoginController
 {
 
     private final Login login;
-    private final CRUDUser userManager;
+    private final CRUDUser crudUser;
+    private final Sesion sesion;
 
     public LoginController(Login login)
     {
         this.login = login;
-        this.userManager = CRUDUser.getInstance();
+        this.crudUser = CRUDUser.getInstance();
+        this.sesion = Sesion.getInstance();
         initComponents();
     }
 
@@ -39,10 +42,11 @@ public class LoginController
     {
         try
         {
-            Usuario usuario = userManager.getUsuario(getCorreo(), getPassword());
+            Usuario usuario = crudUser.getUsuario(getCorreo(), getPassword());
+            sesion.setUsuarioActual(usuario);
 
             VistaPrincipal vistaPrincipal = new VistaPrincipal();
-            new VistaPrincipalController(vistaPrincipal, usuario);
+            new VistaPrincipalController(vistaPrincipal);
             quitarLogin();
             mostrarVistaPrincipal(vistaPrincipal);
 
@@ -61,7 +65,7 @@ public class LoginController
         showDialogAndWait(frmNuevoUsuario);
 
         if (nuevoUsuarioController.seAceptoNuevoUsuario())
-            userManager.registrarNuevoUsuario(nuevoUsuario);
+            crudUser.registrarUsuario(nuevoUsuario);
     }
 
     private String getCorreo()
@@ -87,8 +91,7 @@ public class LoginController
         vistaPrincipal.setVisible(true);
         vistaPrincipal.addWindowListener(new WindowAdapter()
         {
-            @Override
-            public void windowClosing(WindowEvent e)
+            @Override public void windowClosing(WindowEvent e)
             {
                 emergerLogin();
             }

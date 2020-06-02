@@ -29,16 +29,27 @@ public class CRUDUser
         dao = new DAOUsuarios(DAO.RUTA_USUARIOS_REGISTRADOS);
     }
 
-    public boolean existeCorreoRegistrado(String correo)
+    public void registrarUsuario(Usuario nuevoUsuario)
     {
         ArrayList<Usuario> usuarios = dao.getSavedObject();
+        usuarios.add(nuevoUsuario);
+        dao.saveObject(usuarios);
+    }
 
-        return usuarios.stream().anyMatch(usuario -> (usuario.getCorreo().equals(correo)));
+    public Usuario getUsuario(String correo) throws UsuarioNoExistenteException
+    {
+        ArrayList<Usuario> usuarios = getTodosLosUsuarios();
+
+        for (Usuario usuario : usuarios)
+            if (usuario.getCorreo().equals(correo))
+                return usuario;
+
+        throw new UsuarioNoExistenteException();
     }
 
     public Usuario getUsuario(String correo, String password) throws UsuarioNoExistenteException
     {
-        ArrayList<Usuario> usuarios = dao.getSavedObject();
+        ArrayList<Usuario> usuarios = getTodosLosUsuarios();
 
         for (Usuario usuario : usuarios)
             if (usuario.getCorreo().equals(correo) && usuario.getPassword().equals(password))
@@ -50,13 +61,6 @@ public class CRUDUser
     public ArrayList<Usuario> getTodosLosUsuarios()
     {
         return dao.getSavedObject();
-    }
-
-    public void registrarNuevoUsuario(Usuario nuevoUsuario)
-    {
-        ArrayList<Usuario> usuarios = dao.getSavedObject();
-        usuarios.add(nuevoUsuario);
-        dao.saveObject(usuarios);
     }
 
     public void eliminarUsuario(Usuario usuario)

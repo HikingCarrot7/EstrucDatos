@@ -20,4 +20,9 @@ public class Alerta
         return JOptionPane.showConfirmDialog(parentComponent, text, title, JOptionPane.OK_CANCEL_OPTION) == 0;
     }
 
+    public static void mostrarMensaje(Component parentComponent, String title, String text)
+    {
+        JOptionPane.showMessageDialog(parentComponent, text, title, JOptionPane.INFORMATION_MESSAGE);
+    }
+
 }

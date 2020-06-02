@@ -4,6 +4,7 @@ import com.sw.model.CRUDRuta;
 import com.sw.model.CRUDUser;
 import com.sw.model.Usuario;
 import com.sw.model.exceptions.CorreoNoDisponibleException;
+import com.sw.model.exceptions.UsuarioNoExistenteException;
 import com.sw.view.FrmNuevoUsuario;
 import com.sw.view.VistaSelecRuta;
 import java.awt.Dialog;
@@ -47,7 +48,7 @@ public class NuevoUsuarioController
         {
             if (todosCamposValidos())
             {
-                if (crudUser.existeCorreoRegistrado(getCorreo()))
+                if (existeCorreoRegistrado(getCorreo()))
                     throw new CorreoNoDisponibleException();
 
                 if (solicitarRuta())
@@ -87,6 +88,18 @@ public class NuevoUsuarioController
         }
 
         return false;
+    }
+
+    private boolean existeCorreoRegistrado(String correo)
+    {
+        try
+        {
+            return crudUser.getUsuario(correo) != null;
+
+        } catch (UsuarioNoExistenteException e)
+        {
+            return false;
+        }
     }
 
     private void rellenarDatosNuevoUsuario()

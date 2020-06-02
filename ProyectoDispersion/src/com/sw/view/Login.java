@@ -48,6 +48,7 @@ public class Login extends JFrame
                     UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
+
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex)
         {
             System.out.println(ex.getMessage());

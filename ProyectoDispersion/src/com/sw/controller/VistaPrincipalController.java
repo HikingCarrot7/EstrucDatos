@@ -1,7 +1,9 @@
 package com.sw.controller;
 
+import com.sw.model.CRUDContactosUsuario;
 import com.sw.model.CRUDUser;
-import com.sw.model.Usuario;
+import com.sw.model.Sesion;
+import com.sw.model.exceptions.ArbolVacioException;
 import com.sw.view.VistaBuscarUsuario;
 import com.sw.view.VistaListadoUsuarios;
 import com.sw.view.VistaPrincipal;
@@ -17,14 +19,16 @@ public class VistaPrincipalController
 {
 
     private final VistaPrincipal vistaPrincipal;
-    private final Usuario usuarioActual;
     private final CRUDUser crudUser;
+    private final CRUDContactosUsuario crudContactosUsers;
+    private final Sesion sesion;
 
-    public VistaPrincipalController(VistaPrincipal vistaPrincipal, Usuario usuarioActual)
+    public VistaPrincipalController(VistaPrincipal vistaPrincipal)
     {
         this.vistaPrincipal = vistaPrincipal;
-        this.usuarioActual = usuarioActual;
         this.crudUser = CRUDUser.getInstance();
+        this.crudContactosUsers = CRUDContactosUsuario.getInstance();
+        this.sesion = Sesion.getInstance();
         initComponents();
     }
 
@@ -37,7 +41,7 @@ public class VistaPrincipalController
         vistaPrincipal.getMnItmEliminarContacto().addActionListener(this::accionMnItmEliminarContacto);
         vistaPrincipal.getMnItmEliminarCuenta().addActionListener(this::accionMnItmEliminarCuenta);
 
-        vistaPrincipal.setTitle("Bienvenido: " + usuarioActual.getNombreCompleto());
+        vistaPrincipal.setTitle("Bienvenido: " + sesion.getUsuarioActual().getNombreCompleto());
     }
 
     private void accionMnItmListarTodosUsuarios(ActionEvent e)
@@ -52,12 +56,27 @@ public class VistaPrincipalController
 
     private void accionMnItmListarMisContactos(ActionEvent e)
     {
+        try
+        {
+            VistaListadoUsuarios vistaListadoUsuarios = new VistaListadoUsuarios(vistaPrincipal);
+            new ListadoUsuariosController(vistaListadoUsuarios,
+                    crudContactosUsers.getContactosUsuario(sesion.getCorreoUsuarioActual()),
+                    "Sus contactos agregados");
 
+            showDialogAndWait(vistaListadoUsuarios);
+
+        } catch (ArbolVacioException ex)
+        {
+            if (Alerta.mostrarConfirmacion(vistaPrincipal, "No tienes contactos",
+                    "Aún no tienes contactos añadidos, ¿deseas añadir alguno?"))
+                accionMnItmBuscarUsuario(e);
+        }
     }
 
     private void accionMnItmBuscarUsuario(ActionEvent e)
     {
         VistaBuscarUsuario vistaBuscarUsuario = new VistaBuscarUsuario(vistaPrincipal);
+        new BuscarUsuarioController(vistaBuscarUsuario);
         showDialogAndWait(vistaBuscarUsuario);
     }
 

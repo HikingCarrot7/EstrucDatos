@@ -1,14 +1,32 @@
 package com.sw.view;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.Window;
+import javax.swing.BorderFactory;
+import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
+
 /**
  *
  * @author HikingCarrot7
  */
-public class VistaDatosUsuario extends javax.swing.JFrame
+public class VistaDatosUsuario extends JDialog
 {
 
-    public VistaDatosUsuario()
+    public VistaDatosUsuario(Window owner)
     {
+        super(owner);
         initComponents();
     }
 
@@ -19,143 +37,171 @@ public class VistaDatosUsuario extends javax.swing.JFrame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents()
     {
-        java.awt.GridBagConstraints gridBagConstraints;
+        GridBagConstraints gridBagConstraints;
 
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jPanel2 = new JPanel();
+        jLabel1 = new JLabel();
+        lblNombre = new JLabel();
+        jLabel3 = new JLabel();
+        lblEdad = new JLabel();
+        jLabel5 = new JLabel();
+        lblCorreo = new JLabel();
+        jPanel3 = new JPanel();
+        jPanel1 = new JPanel();
+        jPanel5 = new JPanel();
+        jLabel7 = new JLabel();
+        jPanel4 = new JPanel();
+        btnAgregar = new JButton();
+        btnAgregarContactos = new JButton();
+        btnCancelar = new JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Datos encontrados del usuario");
-        setMinimumSize(new java.awt.Dimension(530, 250));
-        setPreferredSize(new java.awt.Dimension(530, 250));
+        setMinimumSize(new Dimension(530, 235));
+        setPreferredSize(new Dimension(530, 235));
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos del usuario"));
-        jPanel2.setLayout(new java.awt.GridBagLayout());
+        jPanel2.setBorder(BorderFactory.createTitledBorder("Datos del usuario"));
+        jPanel2.setLayout(new GridBagLayout());
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel1.setHorizontalAlignment(SwingConstants.RIGHT);
         jLabel1.setText("Nombre:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(20, 35, 5, 5);
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new Insets(20, 35, 5, 5);
         jPanel2.add(jLabel1, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
-        gridBagConstraints.insets = new java.awt.Insets(20, 5, 5, 35);
-        jPanel2.add(jLabel2, gridBagConstraints);
+        gridBagConstraints.insets = new Insets(20, 5, 5, 35);
+        jPanel2.add(lblNombre, gridBagConstraints);
 
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel3.setHorizontalAlignment(SwingConstants.RIGHT);
         jLabel3.setText("Edad:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(5, 35, 5, 5);
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new Insets(5, 35, 5, 5);
         jPanel2.add(jLabel3, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 35);
-        jPanel2.add(jLabel4, gridBagConstraints);
+        gridBagConstraints.insets = new Insets(5, 5, 5, 35);
+        jPanel2.add(lblEdad, gridBagConstraints);
 
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel5.setHorizontalAlignment(SwingConstants.RIGHT);
         jLabel5.setText("Correo electrónico:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(5, 35, 5, 5);
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new Insets(5, 35, 5, 5);
         jPanel2.add(jLabel5, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 35);
-        jPanel2.add(jLabel6, gridBagConstraints);
+        gridBagConstraints.insets = new Insets(5, 5, 5, 35);
+        jPanel2.add(lblCorreo, gridBagConstraints);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        GroupLayout jPanel3Layout = new GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanel3Layout.setHorizontalGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGap(0, 518, Short.MAX_VALUE)
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 107, Short.MAX_VALUE)
+        jPanel3Layout.setVerticalGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGap(0, 87, Short.MAX_VALUE)
         );
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.fill = GridBagConstraints.BOTH;
         gridBagConstraints.weighty = 0.1;
         jPanel2.add(jPanel3, gridBagConstraints);
 
-        getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
+        getContentPane().add(jPanel2, BorderLayout.CENTER);
 
-        jPanel1.setLayout(new java.awt.GridBagLayout());
+        jPanel1.setLayout(new GridBagLayout());
 
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/sw/img/logo_fmat.png"))); // NOI18N
+        jLabel7.setHorizontalAlignment(SwingConstants.CENTER);
+        jLabel7.setIcon(new ImageIcon(getClass().getResource("/com/sw/img/logo_fmat.png"))); // NOI18N
         jLabel7.setText("Powered by:");
-        jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jLabel7.setHorizontalTextPosition(SwingConstants.LEFT);
         jPanel5.add(jLabel7);
 
-        jPanel1.add(jPanel5, new java.awt.GridBagConstraints());
+        jPanel1.add(jPanel5, new GridBagConstraints());
 
-        jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+        jPanel4.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
-        jButton1.setText("Agregar");
-        jPanel4.add(jButton1);
+        btnAgregar.setText("Agregar");
+        jPanel4.add(btnAgregar);
 
-        jButton2.setText("Agregar contactos");
-        jPanel4.add(jButton2);
+        btnAgregarContactos.setText("Agregar contactos");
+        jPanel4.add(btnAgregarContactos);
 
-        jButton3.setText("Cancelar");
-        jPanel4.add(jButton3);
+        btnCancelar.setText("Cancelar");
+        jPanel4.add(btnCancelar);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         jPanel1.add(jPanel4, gridBagConstraints);
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.SOUTH);
+        getContentPane().add(jPanel1, BorderLayout.SOUTH);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public JButton getBtnAgregar()
+    {
+        return btnAgregar;
+    }
+
+    public JButton getBtnAgregarContactos()
+    {
+        return btnAgregarContactos;
+    }
+
+    public JButton getBtnCancelar()
+    {
+        return btnCancelar;
+    }
+
+    public JLabel getLblCorreo()
+    {
+        return lblCorreo;
+    }
+
+    public JLabel getLblEdad()
+    {
+        return lblEdad;
+    }
+
+    public JLabel getLblNombre()
+    {
+        return lblNombre;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
+    private JButton btnAgregar;
+    private JButton btnAgregarContactos;
+    private JButton btnCancelar;
+    private JLabel jLabel1;
+    private JLabel jLabel3;
+    private JLabel jLabel5;
+    private JLabel jLabel7;
+    private JPanel jPanel1;
+    private JPanel jPanel2;
+    private JPanel jPanel3;
+    private JPanel jPanel4;
+    private JPanel jPanel5;
+    private JLabel lblCorreo;
+    private JLabel lblEdad;
+    private JLabel lblNombre;
     // End of variables declaration//GEN-END:variables
 }

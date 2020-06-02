@@ -43,14 +43,14 @@ public class VistaBuscarUsuario extends JDialog
 
         jPanel3 = new JPanel();
         jLabel2 = new JLabel();
-        jTextField1 = new JTextField();
+        txtCorreo = new JTextField();
         jPanel6 = new JPanel();
+        btnBuscar = new JButton();
         jPanel2 = new JPanel();
         jPanel5 = new JPanel();
         jLabel1 = new JLabel();
         jPanel4 = new JPanel();
-        jButton1 = new JButton();
-        jButton2 = new JButton();
+        btnCancelar = new JButton();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Realizar búsqueda de un usuario");
@@ -62,13 +62,13 @@ public class VistaBuscarUsuario extends JDialog
         jLabel2.setText("Correo electrónico:");
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new Insets(5, 35, 5, 5);
+        gridBagConstraints.insets = new Insets(5, 20, 5, 5);
         jPanel3.add(jLabel2, gridBagConstraints);
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
-        gridBagConstraints.insets = new Insets(5, 5, 5, 35);
-        jPanel3.add(jTextField1, gridBagConstraints);
+        gridBagConstraints.insets = new Insets(5, 5, 5, 5);
+        jPanel3.add(txtCorreo, gridBagConstraints);
 
         GroupLayout jPanel6Layout = new GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -76,17 +76,23 @@ public class VistaBuscarUsuario extends JDialog
             .addGap(0, 378, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(jPanel6Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 54, Short.MAX_VALUE)
+            .addGap(0, 51, Short.MAX_VALUE)
         );
 
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = GridBagConstraints.BOTH;
         gridBagConstraints.weighty = 0.1;
         gridBagConstraints.insets = new Insets(5, 5, 5, 5);
         jPanel3.add(jPanel6, gridBagConstraints);
+
+        btnBuscar.setText("Buscar");
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new Insets(5, 5, 5, 20);
+        jPanel3.add(btnBuscar, gridBagConstraints);
 
         getContentPane().add(jPanel3, BorderLayout.CENTER);
 
@@ -104,11 +110,8 @@ public class VistaBuscarUsuario extends JDialog
 
         jPanel4.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
-        jButton1.setText("Aceptar");
-        jPanel4.add(jButton1);
-
-        jButton2.setText("Cancelar");
-        jPanel4.add(jButton2);
+        btnCancelar.setText("Cancelar");
+        jPanel4.add(btnCancelar);
 
         jPanel2.add(jPanel4);
 
@@ -117,9 +120,24 @@ public class VistaBuscarUsuario extends JDialog
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public JButton getBtnBuscar()
+    {
+        return btnBuscar;
+    }
+
+    public JButton getBtnCancelar()
+    {
+        return btnCancelar;
+    }
+
+    public JTextField getTxtCorreo()
+    {
+        return txtCorreo;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private JButton jButton1;
-    private JButton jButton2;
+    private JButton btnBuscar;
+    private JButton btnCancelar;
     private JLabel jLabel1;
     private JLabel jLabel2;
     private JPanel jPanel2;
@@ -127,6 +145,6 @@ public class VistaBuscarUsuario extends JDialog
     private JPanel jPanel4;
     private JPanel jPanel5;
     private JPanel jPanel6;
-    private JTextField jTextField1;
+    private JTextField txtCorreo;
     // End of variables declaration//GEN-END:variables
 }

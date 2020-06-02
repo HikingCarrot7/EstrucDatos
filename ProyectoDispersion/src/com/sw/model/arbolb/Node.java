@@ -1,5 +1,6 @@
 package com.sw.model.arbolb;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -8,16 +9,28 @@ import java.util.Comparator;
  * @author HikingCarrot7
  * @param <T>
  */
-public class Node<T extends Comparable<? super T>>
+@SuppressWarnings("unchecked")
+public class Node<T extends Comparable<? super T>> implements Serializable
 {
+
+    private static final long serialVersionUID = 1L;
 
     private Key<T>[] keys = null;
     private int keysSize = 0;
     private Node<T>[] children = null;
     private int childrenSize = 0;
-    private Comparator<Node<T>> comparator = (Node<T> nodo1, Node<T> nodo2) -> nodo1.getKey(0).getElemento().compareTo(nodo2.getKey(0).getElemento());
+    private Comparator<Node<T>> comparator = new Comparador();
 
     private Node<T> parent = null;
+
+    public Node(Node<T> parent, int maxKeySize, int maxChildrenSize)
+    {
+        this.parent = parent;
+        this.keys = new Key[maxKeySize + 1];
+        this.keysSize = 0;
+        this.children = new Node[maxChildrenSize + 1];
+        this.childrenSize = 0;
+    }
 
     public Node<T> getParent()
     {
@@ -79,15 +92,6 @@ public class Node<T extends Comparable<? super T>>
         return comparator;
     }
 
-    public Node(Node<T> parent, int maxKeySize, int maxChildrenSize)
-    {
-        this.parent = parent;
-        this.keys = new Key[maxKeySize + 1];
-        this.keysSize = 0;
-        this.children = new Node[maxChildrenSize + 1];
-        this.childrenSize = 0;
-    }
-
     public Key<T> getKey(int index)
     {
         return keys[index];
@@ -98,14 +102,13 @@ public class Node<T extends Comparable<? super T>>
         for (int i = 0; i < keysSize; i++)
             if (keys[i].equals(value))
                 return i;
+
         return -1;
     }
 
     public void addKey(Key<T> value)
     {
-
         keys[keysSize++] = value;
-
         Arrays.sort(keys, 0, keysSize);
     }
 
@@ -113,8 +116,10 @@ public class Node<T extends Comparable<? super T>>
     {
         Key<T> removed = null;
         boolean found = false;
+
         if (keysSize == 0)
             return null;
+
         for (int i = 0; i < keysSize; i++)
             if (keys[i].equals(value))
             {
@@ -122,7 +127,6 @@ public class Node<T extends Comparable<? super T>>
                 removed = keys[i];
 
             } else if (found)
-                // shift the rest of the keys down
                 keys[i - 1] = keys[i];
 
         if (found)
@@ -138,10 +142,11 @@ public class Node<T extends Comparable<? super T>>
     {
         if (index >= keysSize)
             return null;
+
         Key<T> value = keys[index];
         for (int i = index + 1; i < keysSize; i++)
-            // shift the rest of the keys down
             keys[i - 1] = keys[i];
+
         keysSize--;
         keys[keysSize] = null;
         return value;
@@ -156,6 +161,7 @@ public class Node<T extends Comparable<? super T>>
     {
         if (index >= childrenSize)
             return null;
+
         return children[index];
     }
 
@@ -164,6 +170,7 @@ public class Node<T extends Comparable<? super T>>
         for (int i = 0; i < childrenSize; i++)
             if (children[i].equals(child))
                 return i;
+
         return -1;
     }
 
@@ -178,11 +185,14 @@ public class Node<T extends Comparable<? super T>>
     public boolean removeChild(Node<T> child)
     {
         boolean found = false;
+
         if (childrenSize == 0)
             return found;
+
         for (int i = 0; i < childrenSize; i++)
             if (children[i].equals(child))
                 found = true;
+
             else if (found)
                 // shift the rest of the keys down
                 children[i - 1] = children[i];
@@ -191,6 +201,7 @@ public class Node<T extends Comparable<? super T>>
             childrenSize--;
             children[childrenSize] = null;
         }
+
         return found;
     }
 
@@ -198,11 +209,13 @@ public class Node<T extends Comparable<? super T>>
     {
         if (index >= childrenSize)
             return null;
+
         Node<T> value = children[index];
         children[index] = null;
+
         for (int i = index + 1; i < childrenSize; i++)
-            // shift the rest of the keys down
             children[i - 1] = children[i];
+
         childrenSize--;
         children[childrenSize] = null;
         return value;
@@ -222,25 +235,31 @@ public class Node<T extends Comparable<? super T>>
         StringBuilder builder = new StringBuilder();
 
         builder.append("keys=[");
+
         for (int i = 0; i < numberOfKeys(); i++)
         {
             Key value = getKey(i);
             builder.append(value);
+
             if (i < numberOfKeys() - 1)
                 builder.append(", ");
         }
+
         builder.append("]\n");
 
         if (parent != null)
         {
             builder.append("parent=[");
+
             for (int i = 0; i < parent.numberOfKeys(); i++)
             {
                 Key value = parent.getKey(i);
                 builder.append(value);
+
                 if (i < parent.numberOfKeys() - 1)
                     builder.append(", ");
             }
+
             builder.append("]\n");
         }
 
@@ -249,4 +268,16 @@ public class Node<T extends Comparable<? super T>>
 
         return builder.toString();
     }
+
+    private class Comparador implements Comparator<Node<T>>, Serializable
+    {
+
+        private static final long serialVersionUID = 1L;
+
+        @Override public int compare(Node<T> nodo1, Node<T> nodo2)
+        {
+            return nodo1.getKey(0).getElemento().compareTo(nodo2.getKey(0).getElemento());
+        }
+    }
+
 }

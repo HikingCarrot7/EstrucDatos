@@ -35,4 +35,10 @@ public class CRUDRuta
         dao.saveObject(hashtable);
     }
 
+    public String getRuta(String correo)
+    {
+        Hashtable<String, String> hashtable = dao.getSavedObject();
+        return hashtable.get(correo);
+    }
+
 }

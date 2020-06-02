@@ -4,7 +4,7 @@ import com.sw.model.Usuario;
 import com.sw.view.UIConstants;
 import com.sw.view.VistaListadoUsuarios;
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JTable;
 
@@ -17,13 +17,13 @@ public class ListadoUsuariosController implements UIConstants
 
     private final VistaListadoUsuarios vistaListadoUsuarios;
 
-    public ListadoUsuariosController(VistaListadoUsuarios vistaListadoUsuarios, ArrayList<Usuario> usuariosAMostrar, String title)
+    public ListadoUsuariosController(VistaListadoUsuarios vistaListadoUsuarios, List<Usuario> usuariosAMostrar, String title)
     {
         this.vistaListadoUsuarios = vistaListadoUsuarios;
         initComponents(usuariosAMostrar, title);
     }
 
-    private void initComponents(ArrayList<Usuario> usuariosAMostrar, String title)
+    private void initComponents(List<Usuario> usuariosAMostrar, String title)
     {
         vistaListadoUsuarios.getPanelTitulo().setBorder(BorderFactory.createTitledBorder(title));
         vistaListadoUsuarios.getBtnAceptar().addActionListener(this::accionBtnAceptar);
@@ -31,7 +31,7 @@ public class ListadoUsuariosController implements UIConstants
         initTabla(usuariosAMostrar);
     }
 
-    private void initTabla(ArrayList<Usuario> usuariosAMostrar)
+    private void initTabla(List<Usuario> usuariosAMostrar)
     {
         TableManager tableManager = TableManager.getInstance();
         JTable tabla = vistaListadoUsuarios.getTablaListaUsuarios();
