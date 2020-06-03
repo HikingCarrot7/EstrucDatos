@@ -73,7 +73,7 @@ public class LoginController
         Utils.showDialogAndWait(login, frmNuevoUsuario);
 
         if (nuevoUsuarioController.seAceptoNuevoUsuario())
-            crudUser.registrarUsuario(nuevoUsuario);
+            crudUser.anadirUsuario(nuevoUsuario);
     }
 
     private String getCorreo()

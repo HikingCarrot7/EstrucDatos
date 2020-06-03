@@ -23,6 +23,11 @@ public class Hashtable<K, V> extends HashMap<K, V>
         return super.get(key);
     }
 
+    public V eliminar(Object key)
+    {
+        return super.remove(key);
+    }
+
     @Override
     public int size()
     {

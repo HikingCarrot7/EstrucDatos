@@ -1,5 +1,6 @@
 package com.sw.model;
 
+import com.sw.model.arbolb.BTreeComparable;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -7,7 +8,7 @@ import java.util.Objects;
  *
  * @author HikingCarrot7
  */
-public class Usuario implements Serializable, Comparable<Usuario>
+public class Usuario implements Serializable, BTreeComparable
 {
 
     private static final long serialVersionUID = 1L;
@@ -19,6 +20,7 @@ public class Usuario implements Serializable, Comparable<Usuario>
 
     public Usuario()
     {
+
     }
 
     public Usuario(String nombreCompleto, String correo, String contrasena, int edad)
@@ -101,15 +103,15 @@ public class Usuario implements Serializable, Comparable<Usuario>
     }
 
     @Override
-    public int compareTo(Usuario o)
-    {
-        return getCorreo().compareTo(o.getCorreo());
-    }
-
-    @Override
     public String toString()
     {
         return "Usuario{" + "nombreCompleto=" + nombreCompleto + ", correo=" + correo + ", contrasena=" + password + ", edad=" + edad + '}';
+    }
+
+    @Override
+    public int compareTo(BTreeComparable other)
+    {
+        return getCorreo().compareTo(((Usuario) other).getCorreo());
     }
 
 }

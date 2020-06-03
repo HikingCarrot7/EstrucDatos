@@ -42,7 +42,7 @@ public class VistaPrincipal extends JFrame
 
         jPanel2 = new JPanel();
         jLabel1 = new JLabel();
-        jPanel3 = new JPanel();
+        panelBotones = new JPanel();
         btnBuscarUsuario = new JButton();
         btnVerUsuariosRegistrados = new JButton();
         btnVerContactos = new JButton();
@@ -52,10 +52,10 @@ public class VistaPrincipal extends JFrame
         jPanel1 = new JPanel();
         btnCerrarSesion = new JButton();
         jMenuBar1 = new JMenuBar();
-        jMenu1 = new JMenu();
+        mnArchivo = new JMenu();
         mnItmListarTodosUsuarios = new JMenuItem();
         mnItmListarMisContactos = new JMenuItem();
-        jMenu2 = new JMenu();
+        mnEdicion = new JMenu();
         mnItmBuscarUsuario = new JMenuItem();
         mnItmEliminarContacto = new JMenuItem();
         mnItmEliminarCuenta = new JMenuItem();
@@ -72,8 +72,8 @@ public class VistaPrincipal extends JFrame
         jLabel1.setToolTipText("");
         jPanel2.add(jLabel1, BorderLayout.NORTH);
 
-        jPanel3.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
-        jPanel3.setLayout(new GridLayout(2, 3, 15, 15));
+        panelBotones.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
+        panelBotones.setLayout(new GridLayout(2, 3, 15, 15));
 
         btnBuscarUsuario.setIcon(new ImageIcon(getClass().getResource("/com/sw/img/buscar.png"))); // NOI18N
         btnBuscarUsuario.setText("Buscar usuario");
@@ -83,7 +83,7 @@ public class VistaPrincipal extends JFrame
         btnBuscarUsuario.setHorizontalTextPosition(SwingConstants.CENTER);
         btnBuscarUsuario.setRolloverIcon(new ImageIcon(getClass().getResource("/com/sw/img/buscar_rollover.png"))); // NOI18N
         btnBuscarUsuario.setVerticalTextPosition(SwingConstants.BOTTOM);
-        jPanel3.add(btnBuscarUsuario);
+        panelBotones.add(btnBuscarUsuario);
 
         btnVerUsuariosRegistrados.setIcon(new ImageIcon(getClass().getResource("/com/sw/img/ver_todos_usuarios.png"))); // NOI18N
         btnVerUsuariosRegistrados.setText("Ver usuarios registrados");
@@ -93,7 +93,7 @@ public class VistaPrincipal extends JFrame
         btnVerUsuariosRegistrados.setHorizontalTextPosition(SwingConstants.CENTER);
         btnVerUsuariosRegistrados.setRolloverIcon(new ImageIcon(getClass().getResource("/com/sw/img/ver_todos_usuarios_rollover.png"))); // NOI18N
         btnVerUsuariosRegistrados.setVerticalTextPosition(SwingConstants.BOTTOM);
-        jPanel3.add(btnVerUsuariosRegistrados);
+        panelBotones.add(btnVerUsuariosRegistrados);
 
         btnVerContactos.setIcon(new ImageIcon(getClass().getResource("/com/sw/img/contactos.png"))); // NOI18N
         btnVerContactos.setText("Ver contactos");
@@ -103,7 +103,7 @@ public class VistaPrincipal extends JFrame
         btnVerContactos.setHorizontalTextPosition(SwingConstants.CENTER);
         btnVerContactos.setRolloverIcon(new ImageIcon(getClass().getResource("/com/sw/img/contactos_rollover.png"))); // NOI18N
         btnVerContactos.setVerticalTextPosition(SwingConstants.BOTTOM);
-        jPanel3.add(btnVerContactos);
+        panelBotones.add(btnVerContactos);
 
         btnEditarCuenta.setIcon(new ImageIcon(getClass().getResource("/com/sw/img/editar_perfil.png"))); // NOI18N
         btnEditarCuenta.setText("Editar cuenta");
@@ -113,7 +113,7 @@ public class VistaPrincipal extends JFrame
         btnEditarCuenta.setHorizontalTextPosition(SwingConstants.CENTER);
         btnEditarCuenta.setRolloverIcon(new ImageIcon(getClass().getResource("/com/sw/img/editar_perfil_rollover.png"))); // NOI18N
         btnEditarCuenta.setVerticalTextPosition(SwingConstants.BOTTOM);
-        jPanel3.add(btnEditarCuenta);
+        panelBotones.add(btnEditarCuenta);
 
         btnEliminarContacto.setIcon(new ImageIcon(getClass().getResource("/com/sw/img/eliminar_contacto.png"))); // NOI18N
         btnEliminarContacto.setText("Eliminar contacto");
@@ -123,7 +123,7 @@ public class VistaPrincipal extends JFrame
         btnEliminarContacto.setHorizontalTextPosition(SwingConstants.CENTER);
         btnEliminarContacto.setRolloverIcon(new ImageIcon(getClass().getResource("/com/sw/img/eliminar_contacto_rollover.png"))); // NOI18N
         btnEliminarContacto.setVerticalTextPosition(SwingConstants.BOTTOM);
-        jPanel3.add(btnEliminarContacto);
+        panelBotones.add(btnEliminarContacto);
 
         btnEliminarCuenta.setIcon(new ImageIcon(getClass().getResource("/com/sw/img/eliminar_cuenta.png"))); // NOI18N
         btnEliminarCuenta.setText("Eliminar mi cuenta");
@@ -133,9 +133,9 @@ public class VistaPrincipal extends JFrame
         btnEliminarCuenta.setHorizontalTextPosition(SwingConstants.CENTER);
         btnEliminarCuenta.setRolloverIcon(new ImageIcon(getClass().getResource("/com/sw/img/eliminar_cuenta_rollover.png"))); // NOI18N
         btnEliminarCuenta.setVerticalTextPosition(SwingConstants.BOTTOM);
-        jPanel3.add(btnEliminarCuenta);
+        panelBotones.add(btnEliminarCuenta);
 
-        jPanel2.add(jPanel3, BorderLayout.CENTER);
+        jPanel2.add(panelBotones, BorderLayout.CENTER);
 
         getContentPane().add(jPanel2, BorderLayout.CENTER);
 
@@ -146,32 +146,32 @@ public class VistaPrincipal extends JFrame
 
         getContentPane().add(jPanel1, BorderLayout.PAGE_END);
 
-        jMenu1.setText("Archivo");
+        mnArchivo.setText("Archivo");
 
         mnItmListarTodosUsuarios.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T, InputEvent.CTRL_MASK));
         mnItmListarTodosUsuarios.setText("Listar todo");
-        jMenu1.add(mnItmListarTodosUsuarios);
+        mnArchivo.add(mnItmListarTodosUsuarios);
 
         mnItmListarMisContactos.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_MASK));
         mnItmListarMisContactos.setText("Listar mis contactos");
-        jMenu1.add(mnItmListarMisContactos);
+        mnArchivo.add(mnItmListarMisContactos);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(mnArchivo);
 
-        jMenu2.setText("Edición");
+        mnEdicion.setText("Edición");
 
         mnItmBuscarUsuario.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK));
         mnItmBuscarUsuario.setText("Buscar usuario");
-        jMenu2.add(mnItmBuscarUsuario);
+        mnEdicion.add(mnItmBuscarUsuario);
 
         mnItmEliminarContacto.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.CTRL_MASK));
         mnItmEliminarContacto.setText("Eliminar contacto");
-        jMenu2.add(mnItmEliminarContacto);
+        mnEdicion.add(mnItmEliminarContacto);
 
         mnItmEliminarCuenta.setText("Eliminar cuenta");
-        jMenu2.add(mnItmEliminarCuenta);
+        mnEdicion.add(mnItmEliminarCuenta);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(mnEdicion);
 
         setJMenuBar(jMenuBar1);
 
@@ -238,6 +238,21 @@ public class VistaPrincipal extends JFrame
         return btnCerrarSesion;
     }
 
+    public JMenu getMnArchivo()
+    {
+        return mnArchivo;
+    }
+
+    public JMenu getMnEdicion()
+    {
+        return mnEdicion;
+    }
+
+    public JPanel getPanelBotones()
+    {
+        return panelBotones;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JButton btnBuscarUsuario;
     private JButton btnCerrarSesion;
@@ -247,16 +262,16 @@ public class VistaPrincipal extends JFrame
     private JButton btnVerContactos;
     private JButton btnVerUsuariosRegistrados;
     private JLabel jLabel1;
-    private JMenu jMenu1;
-    private JMenu jMenu2;
     private JMenuBar jMenuBar1;
     private JPanel jPanel1;
     private JPanel jPanel2;
-    private JPanel jPanel3;
+    private JMenu mnArchivo;
+    private JMenu mnEdicion;
     private JMenuItem mnItmBuscarUsuario;
     private JMenuItem mnItmEliminarContacto;
     private JMenuItem mnItmEliminarCuenta;
     private JMenuItem mnItmListarMisContactos;
     private JMenuItem mnItmListarTodosUsuarios;
+    private JPanel panelBotones;
     // End of variables declaration//GEN-END:variables
 }

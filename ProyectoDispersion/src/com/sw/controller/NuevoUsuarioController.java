@@ -80,7 +80,7 @@ public class NuevoUsuarioController
 
         if (selecRutaController.seInsertoUnaRutaValida())
         {
-            crudRuta.guardarRuta(getCorreo(),
+            crudRuta.anadirRuta(getCorreo(),
                     selecRutaController.getRutaSeleccionada() + String.format("/%s.txt", getCorreo()));
             return true;
         }

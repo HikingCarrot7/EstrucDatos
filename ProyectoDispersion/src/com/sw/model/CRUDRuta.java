@@ -28,17 +28,33 @@ public class CRUDRuta
         dao = new DAOHashtable(DAO.RUTA_HASHTABLE_DATA);
     }
 
-    public void guardarRuta(String correo, String ruta)
+    public void anadirRuta(String correoUsuario, String ruta)
     {
         Hashtable<String, String> hashtable = dao.getSavedObject();
-        hashtable.insertar(correo, ruta);
+        hashtable.insertar(correoUsuario, ruta);
         dao.saveObject(hashtable);
     }
 
-    public String getRuta(String correo)
+    public String getRuta(String correoUsuario)
     {
         Hashtable<String, String> hashtable = dao.getSavedObject();
-        return hashtable.get(correo);
+        return hashtable.get(correoUsuario);
+    }
+
+    public void actualizarRuta(String correoUsuario, String nuevaRuta)
+    {
+
+    }
+
+    public void eliminarRuta(String correoUsuario)
+    {
+        Hashtable<String, String> hashtable = dao.getSavedObject();
+        String rutaArchivo = hashtable.obtenerValue(correoUsuario);
+
+        DAO.eliminarArchivo(rutaArchivo);
+
+        hashtable.remove(correoUsuario);
+        dao.saveObject(hashtable);
     }
 
 }

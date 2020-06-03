@@ -5,13 +5,14 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author HikingCarrot7
  */
 @SuppressWarnings("unchecked")
-public class DAOUsuarios extends DAO<ArrayList<Usuario>>
+public class DAOUsuarios extends DAO<List<Usuario>>
 {
 
     public DAOUsuarios(String ruta)
@@ -20,7 +21,7 @@ public class DAOUsuarios extends DAO<ArrayList<Usuario>>
     }
 
     @Override
-    public ArrayList<Usuario> getSavedObject()
+    public List<Usuario> getSavedObject()
     {
         try
         {

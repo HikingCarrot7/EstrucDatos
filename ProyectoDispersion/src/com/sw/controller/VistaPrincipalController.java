@@ -1,6 +1,7 @@
 package com.sw.controller;
 
 import com.sw.model.CRUDContactosUsuario;
+import com.sw.model.CRUDRuta;
 import com.sw.model.CRUDUser;
 import com.sw.model.Sesion;
 import com.sw.model.Usuario;
@@ -9,9 +10,18 @@ import com.sw.view.VistaBuscarUsuario;
 import com.sw.view.VistaEliminarContacto;
 import com.sw.view.VistaListadoUsuarios;
 import com.sw.view.VistaPrincipal;
+import com.sw.view.VistaProgreso;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
+import java.beans.PropertyChangeEvent;
 import java.util.List;
 import java.util.Observable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import javax.swing.JPanel;
+import javax.swing.SwingWorker;
 
 /**
  *
@@ -21,14 +31,16 @@ public class VistaPrincipalController extends Observable
 {
 
     private final VistaPrincipal vistaPrincipal;
-    private final CRUDUser crudUser;
+    private final CRUDUser crudUsuarios;
+    private final CRUDRuta crudRuta;
     private final CRUDContactosUsuario crudContactosUsers;
     private final Sesion sesion;
 
     public VistaPrincipalController(VistaPrincipal vistaPrincipal)
     {
         this.vistaPrincipal = vistaPrincipal;
-        this.crudUser = CRUDUser.getInstance();
+        this.crudUsuarios = CRUDUser.getInstance();
+        this.crudRuta = CRUDRuta.getInstance();
         this.crudContactosUsers = CRUDContactosUsuario.getInstance();
         this.sesion = Sesion.getInstance();
         initComponents();
@@ -51,15 +63,16 @@ public class VistaPrincipalController extends Observable
         vistaPrincipal.getBtnEliminarCuenta().addActionListener(this::accionBtnEliminarCuenta);
         vistaPrincipal.getMnItmEliminarCuenta().addActionListener(this::accionBtnEliminarCuenta);
 
-        vistaPrincipal.getBtnCerrarSesion().addActionListener(e -> quitarVentana());
+        vistaPrincipal.getBtnCerrarSesion().addActionListener(e -> quitarVistaPrincipal());
         vistaPrincipal.setTitle("Bienvenido: " + sesion.getUsuarioActual().getNombreCompleto());
+        habilitarMenuPrincipal(true);
     }
 
     private void accionBtnMostrarTodosUsuarios(ActionEvent e)
     {
         VistaListadoUsuarios vistaListadoUsuarios = new VistaListadoUsuarios(vistaPrincipal);
         new ListadoUsuariosController(vistaListadoUsuarios,
-                crudUser.getTodosLosUsuarios(),
+                crudUsuarios.getTodosLosUsuarios(),
                 "Usuarios registrados en el sistema");
 
         Utils.showDialogAndWait(vistaPrincipal, vistaListadoUsuarios);
@@ -117,13 +130,88 @@ public class VistaPrincipalController extends Observable
     private void accionBtnEliminarCuenta(ActionEvent e)
     {
 
+        if (Alerta.mostrarConfirmacion(vistaPrincipal, "¿Está seguro?",
+                "¿Está seguro que quiere eliminar su perfil? Toda su información se perderá"))
+        {
+            SwingWorker<Long, Long> backgroundTask = new SwingWorker<Long, Long>()
+            {
+                @Override protected Long doInBackground() throws Exception
+                {
+                    long before = System.currentTimeMillis();
+
+                    habilitarMenuPrincipal(false);
+                    VistaProgreso vistaProgreso = new VistaProgreso(vistaPrincipal);
+                    Utils.showDialog(vistaPrincipal, vistaProgreso);
+
+                    Usuario usuarioActual = sesion.getUsuarioActual();
+                    List<Usuario> usuarios = crudUsuarios.getTodosLosUsuarios();
+
+                    usuarios.remove(usuarioActual);
+                    crudRuta.eliminarRuta(usuarioActual.getCorreo());
+                    usuarios.forEach(user -> crudContactosUsers.eliminarContactoUsuario(user.getCorreo(), usuarioActual));
+
+                    crudUsuarios.actualizarUsuarios(usuarios);
+
+                    Utils.quitarDialog(vistaProgreso);
+                    quitarVistaPrincipal();
+
+                    return System.currentTimeMillis() - before;
+                }
+            };
+
+            backgroundTask.addPropertyChangeListener(this::esperarEliminacionDeMiPerfil);
+            ejecutarTareaEnSegundoPlano(backgroundTask);
+        }
     }
 
-    private void quitarVentana()
+    private void esperarEliminacionDeMiPerfil(PropertyChangeEvent e)
+    {
+        try
+        {
+            if (e.getNewValue() == SwingWorker.StateValue.DONE)
+                System.out.println(((Future<?>) e.getSource()).get() + " ms");
+
+        } catch (InterruptedException | ExecutionException ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    private void ejecutarTareaEnSegundoPlano(Runnable tarea)
+    {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        executorService.submit(tarea);
+        executorService.shutdown();
+    }
+
+    private void quitarVistaPrincipal()
     {
         setChanged();
         notifyObservers();
         vistaPrincipal.setVisible(false);
+    }
+
+    private void habilitarMenuPrincipal(boolean habilitar)
+    {
+        setPanelEnabled(vistaPrincipal.getPanelBotones(), habilitar);
+        vistaPrincipal.getBtnCerrarSesion().setEnabled(habilitar);
+        vistaPrincipal.getMnArchivo().setEnabled(habilitar);
+        vistaPrincipal.getMnEdicion().setEnabled(habilitar);
+    }
+
+    private void setPanelEnabled(JPanel panel, boolean isEnabled)
+    {
+        panel.setEnabled(isEnabled);
+
+        Component[] components = panel.getComponents();
+
+        for (Component component : components)
+        {
+            if (component instanceof JPanel)
+                setPanelEnabled((JPanel) component, isEnabled);
+
+            component.setEnabled(isEnabled);
+        }
     }
 
 }

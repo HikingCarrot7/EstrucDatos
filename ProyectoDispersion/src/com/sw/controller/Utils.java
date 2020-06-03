@@ -18,4 +18,15 @@ public class Utils
         dialog.setVisible(true);
     }
 
+    public static void showDialog(Window relativeTo, JDialog dialog)
+    {
+        dialog.setLocationRelativeTo(relativeTo);
+        dialog.setVisible(true);
+    }
+
+    public static void quitarDialog(JDialog dialog)
+    {
+        dialog.dispose();
+    }
+
 }

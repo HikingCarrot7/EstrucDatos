@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  *
@@ -20,6 +22,18 @@ public abstract class DAO<E>
     {
         File file = new File(ruta);
         return file.exists();
+    }
+
+    public static void eliminarArchivo(String ruta)
+    {
+        try
+        {
+            Files.delete(Paths.get(ruta));
+
+        } catch (IOException ex)
+        {
+            System.out.println(ex.getMessage());
+        }
     }
 
     protected final File file;

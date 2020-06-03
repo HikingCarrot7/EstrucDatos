@@ -75,10 +75,9 @@ public class EliminarContactoController implements UIConstants
                 usuariosAEliminar.add(contactosUsuario.get(i));
 
             crudContactosUsuario.eliminarContactosUsuario(sesion.getCorreoUsuarioActual(), usuariosAEliminar);
-            actualizarTabla();
-            habilitarBtnEliminar(false);
-            tableManager.limpiarSeleccion(table);
             Alerta.mostrarMensaje(vistaEliminarContacto, "Completado", "Se han eliminado los contactos.");
+            habilitarBtnEliminar(false);
+            actualizarTabla();
 
         } else
             tableManager.seleccionarFilas(table, idxSeleccionados);
@@ -93,9 +92,17 @@ public class EliminarContactoController implements UIConstants
     private void actualizarTabla()
     {
         List<Usuario> contactosUsuario = crudContactosUsuario.getContactosUsuario(sesion.getCorreoUsuarioActual());
+
+        if (contactosUsuario.isEmpty())
+        {
+            quitarVentana();
+            return;
+        }
+
         JTable table = vistaEliminarContacto.getTablaListaContactos();
         tableManager.vaciarTabla(table);
         rellenarTabla(table, contactosUsuario);
+        tableManager.limpiarSeleccion(table);
     }
 
     private void rellenarTabla(JTable table, List<Usuario> contactos)

@@ -1,10 +1,8 @@
 package com.sw.model;
 
-import com.sw.model.arbolb.ArbolB;
+import com.sw.model.arbolb.BTree;
 import com.sw.model.dao.DAO;
 import com.sw.model.dao.DAOContactosUsuario;
-import com.sw.model.exceptions.ArbolVacioException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,8 +32,8 @@ public class CRUDContactosUsuario
     public void anadirContactoAUsuario(String correoUsuario, Usuario contacto)
     {
         String rutaContactos = crudRuta.getRuta(correoUsuario);
-        DAO<ArbolB<Usuario>> daoContactosUsuario = new DAOContactosUsuario(rutaContactos);
-        ArbolB<Usuario> misContactos = daoContactosUsuario.getSavedObject();
+        DAO<BTree> daoContactosUsuario = new DAOContactosUsuario(rutaContactos);
+        BTree misContactos = daoContactosUsuario.getSavedObject();
         misContactos.add(contacto);
         daoContactosUsuario.saveObject(misContactos);
     }
@@ -43,8 +41,8 @@ public class CRUDContactosUsuario
     public void anadirContactosAUsuario(String correoUsuario, List<Usuario> contactos)
     {
         String rutaContactos = crudRuta.getRuta(correoUsuario);
-        DAO<ArbolB<Usuario>> daoContactosUsuario = new DAOContactosUsuario(rutaContactos);
-        ArbolB<Usuario> misContactos = daoContactosUsuario.getSavedObject();
+        DAO<BTree> daoContactosUsuario = new DAOContactosUsuario(rutaContactos);
+        BTree misContactos = daoContactosUsuario.getSavedObject();
         contactos.forEach(misContactos::add);
         daoContactosUsuario.saveObject(misContactos);
     }
@@ -52,24 +50,16 @@ public class CRUDContactosUsuario
     public List<Usuario> getContactosUsuario(String correoUsuario)
     {
         String rutaContactos = crudRuta.getRuta(correoUsuario);
-        DAO<ArbolB<Usuario>> daoContactosUsuario = new DAOContactosUsuario(rutaContactos);
-        ArbolB<Usuario> contactos = daoContactosUsuario.getSavedObject();
-
-        try
-        {
-            return contactos.enlistarElementos();
-
-        } catch (ArbolVacioException e)
-        {
-            return new ArrayList<>();
-        }
+        DAO<BTree> daoContactosUsuario = new DAOContactosUsuario(rutaContactos);
+        BTree contactos = daoContactosUsuario.getSavedObject();
+        return contactos.getItems();
     }
 
     public void eliminarContactoUsuario(String correoUsuario, Usuario contactoAEliminar)
     {
         String rutaContactos = crudRuta.getRuta(correoUsuario);
-        DAO<ArbolB<Usuario>> daoContactosUsuario = new DAOContactosUsuario(rutaContactos);
-        ArbolB<Usuario> contactos = daoContactosUsuario.getSavedObject();
+        DAO<BTree> daoContactosUsuario = new DAOContactosUsuario(rutaContactos);
+        BTree contactos = daoContactosUsuario.getSavedObject();
 
         contactos.remove(contactoAEliminar);
 
@@ -79,8 +69,8 @@ public class CRUDContactosUsuario
     public void eliminarContactosUsuario(String correoUsuario, List<Usuario> contactosAEliminar)
     {
         String rutaContactos = crudRuta.getRuta(correoUsuario);
-        DAO<ArbolB<Usuario>> daoContactosUsuario = new DAOContactosUsuario(rutaContactos);
-        ArbolB<Usuario> contactos = daoContactosUsuario.getSavedObject();
+        DAO<BTree> daoContactosUsuario = new DAOContactosUsuario(rutaContactos);
+        BTree contactos = daoContactosUsuario.getSavedObject();
 
         contactosAEliminar.forEach(contactos::remove);
 
