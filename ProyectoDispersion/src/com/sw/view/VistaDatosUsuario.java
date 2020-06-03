@@ -8,8 +8,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Window;
 import javax.swing.BorderFactory;
-import javax.swing.GroupLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -39,6 +37,9 @@ public class VistaDatosUsuario extends JDialog
     {
         GridBagConstraints gridBagConstraints;
 
+        jPanel4 = new JPanel();
+        jPanel6 = new JPanel();
+        lblGenero = new JLabel();
         jPanel2 = new JPanel();
         jLabel1 = new JLabel();
         lblNombre = new JLabel();
@@ -46,10 +47,8 @@ public class VistaDatosUsuario extends JDialog
         lblEdad = new JLabel();
         jLabel5 = new JLabel();
         lblCorreo = new JLabel();
-        jPanel3 = new JPanel();
         jPanel1 = new JPanel();
         jPanel5 = new JPanel();
-        jLabel7 = new JLabel();
         panelBotones = new JPanel();
         btnAgregar = new JButton();
         btnAgregarContactos = new JButton();
@@ -57,22 +56,34 @@ public class VistaDatosUsuario extends JDialog
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Datos encontrados del usuario");
-        setMinimumSize(new Dimension(530, 235));
-        setPreferredSize(new Dimension(530, 235));
+        setMinimumSize(new Dimension(540, 300));
+        setPreferredSize(new Dimension(540, 300));
 
-        jPanel2.setBorder(BorderFactory.createTitledBorder("Datos del usuario"));
+        jPanel4.setBorder(BorderFactory.createTitledBorder("Datos de usuario"));
+        jPanel4.setLayout(new GridBagLayout());
+
+        jPanel6.setLayout(new BorderLayout());
+        jPanel6.add(lblGenero, BorderLayout.LINE_END);
+
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = GridBagConstraints.BOTH;
+        gridBagConstraints.weighty = 0.1;
+        jPanel4.add(jPanel6, gridBagConstraints);
+
         jPanel2.setLayout(new GridBagLayout());
 
         jLabel1.setHorizontalAlignment(SwingConstants.RIGHT);
         jLabel1.setText("Nombre:");
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new Insets(20, 35, 5, 5);
+        gridBagConstraints.insets = new Insets(20, 35, 10, 5);
         jPanel2.add(jLabel1, gridBagConstraints);
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
-        gridBagConstraints.insets = new Insets(20, 5, 5, 35);
+        gridBagConstraints.insets = new Insets(20, 5, 10, 35);
         jPanel2.add(lblNombre, gridBagConstraints);
 
         jLabel3.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -81,14 +92,14 @@ public class VistaDatosUsuario extends JDialog
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new Insets(5, 35, 5, 5);
+        gridBagConstraints.insets = new Insets(10, 35, 10, 5);
         jPanel2.add(jLabel3, gridBagConstraints);
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
-        gridBagConstraints.insets = new Insets(5, 5, 5, 35);
+        gridBagConstraints.insets = new Insets(10, 5, 10, 35);
         jPanel2.add(lblEdad, gridBagConstraints);
 
         jLabel5.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -97,43 +108,27 @@ public class VistaDatosUsuario extends JDialog
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new Insets(5, 35, 5, 5);
+        gridBagConstraints.insets = new Insets(10, 35, 10, 5);
         jPanel2.add(jLabel5, gridBagConstraints);
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
-        gridBagConstraints.insets = new Insets(5, 5, 5, 35);
+        gridBagConstraints.insets = new Insets(10, 5, 10, 35);
         jPanel2.add(lblCorreo, gridBagConstraints);
-
-        GroupLayout jPanel3Layout = new GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 518, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 87, Short.MAX_VALUE)
-        );
 
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 0.1;
         gridBagConstraints.weighty = 0.1;
-        jPanel2.add(jPanel3, gridBagConstraints);
+        jPanel4.add(jPanel2, gridBagConstraints);
 
-        getContentPane().add(jPanel2, BorderLayout.CENTER);
+        getContentPane().add(jPanel4, BorderLayout.CENTER);
 
         jPanel1.setLayout(new GridBagLayout());
-
-        jLabel7.setHorizontalAlignment(SwingConstants.CENTER);
-        jLabel7.setIcon(new ImageIcon(getClass().getResource("/com/sw/img/logo_fmat.png"))); // NOI18N
-        jLabel7.setText("Powered by:");
-        jLabel7.setHorizontalTextPosition(SwingConstants.LEFT);
-        jPanel5.add(jLabel7);
-
         jPanel1.add(jPanel5, new GridBagConstraints());
 
         panelBotones.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -192,6 +187,11 @@ public class VistaDatosUsuario extends JDialog
         return panelBotones;
     }
 
+    public JLabel getLblGenero()
+    {
+        return lblGenero;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JButton btnAgregar;
     private JButton btnAgregarContactos;
@@ -199,13 +199,14 @@ public class VistaDatosUsuario extends JDialog
     private JLabel jLabel1;
     private JLabel jLabel3;
     private JLabel jLabel5;
-    private JLabel jLabel7;
     private JPanel jPanel1;
     private JPanel jPanel2;
-    private JPanel jPanel3;
+    private JPanel jPanel4;
     private JPanel jPanel5;
+    private JPanel jPanel6;
     private JLabel lblCorreo;
     private JLabel lblEdad;
+    private JLabel lblGenero;
     private JLabel lblNombre;
     private JPanel panelBotones;
     // End of variables declaration//GEN-END:variables

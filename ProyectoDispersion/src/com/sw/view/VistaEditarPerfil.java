@@ -8,6 +8,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.Window;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
@@ -25,11 +26,12 @@ import javax.swing.SwingConstants;
  *
  * @author HikingCarrot7
  */
-public class FrmNuevoUsuario extends JDialog
+public class VistaEditarPerfil extends JDialog
 {
 
-    public FrmNuevoUsuario()
+    public VistaEditarPerfil(Window owner)
     {
+        super(owner);
         initComponents();
     }
 
@@ -46,6 +48,7 @@ public class FrmNuevoUsuario extends JDialog
         jPanel3 = new JPanel();
         jPanel7 = new JPanel();
         jLabel5 = new JLabel();
+        jPanel9 = new JPanel();
         jPanel2 = new JPanel();
         jLabel1 = new JLabel();
         txtNombre = new JTextField();
@@ -61,6 +64,10 @@ public class FrmNuevoUsuario extends JDialog
         filler1 = new Box.Filler(new Dimension(10, 0), new Dimension(10, 0), new Dimension(10, 32767));
         jRadioButton2 = new JRadioButton();
         jLabel6 = new JLabel();
+        jPanel10 = new JPanel();
+        jLabel7 = new JLabel();
+        jTextField1 = new JTextField();
+        jButton1 = new JButton();
         jPanel1 = new JPanel();
         jPanel6 = new JPanel();
         jPanel5 = new JPanel();
@@ -68,8 +75,8 @@ public class FrmNuevoUsuario extends JDialog
         btnCancelar = new JButton();
 
         setTitle("Registrar a un nuevo usuario");
-        setMinimumSize(new Dimension(480, 330));
-        setPreferredSize(new Dimension(480, 330));
+        setMinimumSize(new Dimension(530, 380));
+        setPreferredSize(new Dimension(530, 380));
 
         jPanel3.setLayout(new BorderLayout());
 
@@ -77,13 +84,16 @@ public class FrmNuevoUsuario extends JDialog
 
         jLabel5.setFont(new Font("Tahoma", 0, 36)); // NOI18N
         jLabel5.setHorizontalAlignment(SwingConstants.CENTER);
-        jLabel5.setText("Nuevo usuario");
+        jLabel5.setText("Editar perfil");
         jPanel7.add(jLabel5);
 
         jPanel3.add(jPanel7, BorderLayout.PAGE_START);
 
         getContentPane().add(jPanel3, BorderLayout.NORTH);
 
+        jPanel9.setLayout(new BorderLayout());
+
+        jPanel2.setBorder(BorderFactory.createTitledBorder("Datos personales"));
         jPanel2.setLayout(new GridBagLayout());
 
         jLabel1.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -186,7 +196,30 @@ public class FrmNuevoUsuario extends JDialog
         gridBagConstraints.insets = new Insets(5, 35, 5, 5);
         jPanel2.add(jLabel6, gridBagConstraints);
 
-        getContentPane().add(jPanel2, BorderLayout.CENTER);
+        jPanel9.add(jPanel2, BorderLayout.CENTER);
+
+        jPanel10.setBorder(BorderFactory.createTitledBorder("Ubicación de mis contactos"));
+        jPanel10.setLayout(new GridBagLayout());
+
+        jLabel7.setText("Ubicación:");
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new Insets(5, 35, 5, 5);
+        jPanel10.add(jLabel7, gridBagConstraints);
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new Insets(5, 5, 5, 5);
+        jPanel10.add(jTextField1, gridBagConstraints);
+
+        jButton1.setText("Cambiar");
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.insets = new Insets(5, 5, 5, 35);
+        jPanel10.add(jButton1, gridBagConstraints);
+
+        jPanel9.add(jPanel10, BorderLayout.SOUTH);
+
+        getContentPane().add(jPanel9, BorderLayout.CENTER);
 
         jPanel1.setLayout(new GridLayout(1, 0));
 
@@ -248,13 +281,16 @@ public class FrmNuevoUsuario extends JDialog
     private JButton btnGuardar;
     private Box.Filler filler1;
     private ButtonGroup generoGrupo;
+    private JButton jButton1;
     private JLabel jLabel1;
     private JLabel jLabel2;
     private JLabel jLabel3;
     private JLabel jLabel4;
     private JLabel jLabel5;
     private JLabel jLabel6;
+    private JLabel jLabel7;
     private JPanel jPanel1;
+    private JPanel jPanel10;
     private JPanel jPanel2;
     private JPanel jPanel3;
     private JPanel jPanel4;
@@ -262,8 +298,10 @@ public class FrmNuevoUsuario extends JDialog
     private JPanel jPanel6;
     private JPanel jPanel7;
     private JPanel jPanel8;
+    private JPanel jPanel9;
     private JRadioButton jRadioButton1;
     private JRadioButton jRadioButton2;
+    private JTextField jTextField1;
     private JTextField txtCorreo;
     private JFormattedTextField txtEdad;
     private JTextField txtNombre;

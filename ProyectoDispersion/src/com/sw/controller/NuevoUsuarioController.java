@@ -8,6 +8,8 @@ import com.sw.model.exceptions.UsuarioNoExistenteException;
 import com.sw.view.FrmNuevoUsuario;
 import com.sw.view.VistaSelecRuta;
 import java.awt.event.ActionEvent;
+import java.util.Enumeration;
+import javax.swing.AbstractButton;
 
 /**
  *
@@ -106,6 +108,7 @@ public class NuevoUsuarioController
         nuevoUsuario.setEdad(Integer.parseInt(getEdad()));
         nuevoUsuario.setCorreo(getCorreo());
         nuevoUsuario.setPassword(getPassword());
+        nuevoUsuario.setGenero(getGeneroSeleccionado());
     }
 
     private String getNombre()
@@ -136,6 +139,11 @@ public class NuevoUsuarioController
                 || getPassword().isEmpty());
     }
 
+    private boolean getGeneroSeleccionado()
+    {
+        return getBotonSeleccionado().equals("Hombre") ? Usuario.HOMBRE : Usuario.MUJER;
+    }
+
     private void quitarVentana()
     {
         frmNuevoUsuario.dispose();
@@ -144,6 +152,19 @@ public class NuevoUsuarioController
     public boolean seAceptoNuevoUsuario()
     {
         return seAceptoNuevoUsuario;
+    }
+
+    private String getBotonSeleccionado()
+    {
+        for (Enumeration<AbstractButton> buttons = frmNuevoUsuario.getGeneroGrupo().getElements(); buttons.hasMoreElements();)
+        {
+            AbstractButton button = buttons.nextElement();
+
+            if (button.isSelected())
+                return button.getActionCommand();
+        }
+
+        return null;
     }
 
 }

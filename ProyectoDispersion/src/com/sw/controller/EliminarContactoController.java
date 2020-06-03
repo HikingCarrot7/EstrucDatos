@@ -47,6 +47,7 @@ public class EliminarContactoController implements UIConstants
         List<Usuario> contactos = crudContactosUsuario.getContactosUsuario(sesion.getCorreoUsuarioActual());
         tableManager.initTabla(tabla);
         tableManager.initTableSelectionBehavior(tabla, e -> habilitarBtnEliminar(false));
+        tabla.getColumnModel().getColumn(0).setCellRenderer(COLUMNA_NOMBRE_USUARIO_RENDERER);
 
         tabla.getSelectionModel().addListSelectionListener(e ->
         {
@@ -109,7 +110,7 @@ public class EliminarContactoController implements UIConstants
     {
         contactos.forEach(user -> tableManager.addFila(table, new Object[]
         {
-            user.getNombreCompleto(), user.getEdad(), user.getCorreo()
+            user, user.getEdad(), user.getCorreo()
         }));
     }
 

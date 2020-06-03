@@ -10,13 +10,11 @@ import java.awt.Insets;
 import java.awt.Window;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
 /**
@@ -48,7 +46,6 @@ public class VistaBuscarUsuario extends JDialog
         btnBuscar = new JButton();
         jPanel2 = new JPanel();
         jPanel5 = new JPanel();
-        jLabel1 = new JLabel();
         jPanel4 = new JPanel();
         btnCancelar = new JButton();
 
@@ -99,13 +96,6 @@ public class VistaBuscarUsuario extends JDialog
         jPanel2.setLayout(new GridLayout(1, 0));
 
         jPanel5.setLayout(new FlowLayout(FlowLayout.LEFT));
-
-        jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
-        jLabel1.setIcon(new ImageIcon(getClass().getResource("/com/sw/img/logo_fmat.png"))); // NOI18N
-        jLabel1.setText("Powered by:");
-        jLabel1.setHorizontalTextPosition(SwingConstants.LEFT);
-        jPanel5.add(jLabel1);
-
         jPanel2.add(jPanel5);
 
         jPanel4.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -138,7 +128,6 @@ public class VistaBuscarUsuario extends JDialog
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JButton btnBuscar;
     private JButton btnCancelar;
-    private JLabel jLabel1;
     private JLabel jLabel2;
     private JPanel jPanel2;
     private JPanel jPanel3;

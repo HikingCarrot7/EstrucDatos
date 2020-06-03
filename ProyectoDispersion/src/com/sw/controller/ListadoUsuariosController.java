@@ -37,14 +37,12 @@ public class ListadoUsuariosController implements UIConstants
         JTable tabla = vistaListadoUsuarios.getTablaListaUsuarios();
         tableManager.initTabla(tabla);
         tableManager.initTableSelectionBehavior(tabla);
+        tabla.getColumnModel().getColumn(0).setCellRenderer(COLUMNA_NOMBRE_USUARIO_RENDERER);
 
-        usuariosAMostrar.forEach(user ->
+        usuariosAMostrar.forEach(user -> tableManager.addFila(tabla, new Object[]
         {
-            tableManager.addFila(tabla, new Object[]
-            {
-                user.getNombreCompleto(), user.getEdad(), user.getCorreo()
-            });
-        });
+            user, user.getEdad(), user.getCorreo()
+        }));
     }
 
     private void accionBtnAceptar(ActionEvent e)

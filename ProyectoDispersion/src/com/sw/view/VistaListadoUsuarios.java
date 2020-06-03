@@ -6,14 +6,11 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Window;
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -39,7 +36,6 @@ public class VistaListadoUsuarios extends JDialog
 
         jPanel1 = new JPanel();
         jPanel4 = new JPanel();
-        jLabel1 = new JLabel();
         jPanel3 = new JPanel();
         btnAceptar = new JButton();
         panelTitulo = new JPanel();
@@ -53,13 +49,6 @@ public class VistaListadoUsuarios extends JDialog
         jPanel1.setLayout(new GridLayout(1, 0));
 
         jPanel4.setLayout(new FlowLayout(FlowLayout.LEFT));
-
-        jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
-        jLabel1.setIcon(new ImageIcon(getClass().getResource("/com/sw/img/logo_fmat.png"))); // NOI18N
-        jLabel1.setText("Powered by:");
-        jLabel1.setHorizontalTextPosition(SwingConstants.LEFT);
-        jPanel4.add(jLabel1);
-
         jPanel1.add(jPanel4);
 
         jPanel3.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -110,7 +99,6 @@ public class VistaListadoUsuarios extends JDialog
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JButton btnAceptar;
-    private JLabel jLabel1;
     private JPanel jPanel1;
     private JPanel jPanel3;
     private JPanel jPanel4;

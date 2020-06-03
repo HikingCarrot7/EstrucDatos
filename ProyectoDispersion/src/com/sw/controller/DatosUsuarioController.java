@@ -3,6 +3,7 @@ package com.sw.controller;
 import com.sw.model.CRUDContactosUsuario;
 import com.sw.model.Sesion;
 import com.sw.model.Usuario;
+import com.sw.view.UIConstants;
 import com.sw.view.VistaDatosUsuario;
 import com.sw.view.VistaListadoUsuarios;
 import java.awt.event.ActionEvent;
@@ -13,7 +14,7 @@ import java.util.List;
  *
  * @author HikingCarrot7
  */
-public class DatosUsuarioController
+public class DatosUsuarioController implements UIConstants
 {
 
     private final VistaDatosUsuario vistaDatosUsuario;
@@ -39,6 +40,7 @@ public class DatosUsuarioController
         vistaDatosUsuario.getLblNombre().setText(usuarioAMostrarDatos.getNombreCompleto());
         vistaDatosUsuario.getLblEdad().setText(String.valueOf(usuarioAMostrarDatos.getEdad()));
         vistaDatosUsuario.getLblCorreo().setText(usuarioAMostrarDatos.getCorreo());
+        vistaDatosUsuario.getLblGenero().setIcon(usuarioAMostrarDatos.getGenero() == Usuario.HOMBRE ? MALE_IMAGE : FEMALE_IMAGE);
 
         if (mismoUsuario)
             activarBotonesPrimarios(false);

@@ -7,19 +7,17 @@ import com.sw.model.Sesion;
 import com.sw.model.Usuario;
 import com.sw.model.exceptions.NoTengoContactosException;
 import com.sw.view.VistaBuscarUsuario;
+import com.sw.view.VistaEditarPerfil;
 import com.sw.view.VistaEliminarContacto;
 import com.sw.view.VistaListadoUsuarios;
 import com.sw.view.VistaPrincipal;
 import com.sw.view.VistaProgreso;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
-import java.beans.PropertyChangeEvent;
 import java.util.List;
 import java.util.Observable;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 import javax.swing.JPanel;
 import javax.swing.SwingWorker;
 
@@ -62,6 +60,8 @@ public class VistaPrincipalController extends Observable
 
         vistaPrincipal.getBtnEliminarCuenta().addActionListener(this::accionBtnEliminarCuenta);
         vistaPrincipal.getMnItmEliminarCuenta().addActionListener(this::accionBtnEliminarCuenta);
+
+        vistaPrincipal.getBtnEditarPerfil().addActionListener(this::accionBtnEditarPerfil);
 
         vistaPrincipal.getBtnCerrarSesion().addActionListener(e -> quitarVistaPrincipal());
         vistaPrincipal.setTitle("Bienvenido: " + sesion.getUsuarioActual().getNombreCompleto());
@@ -159,22 +159,14 @@ public class VistaPrincipalController extends Observable
                 }
             };
 
-            backgroundTask.addPropertyChangeListener(this::esperarEliminacionDeMiPerfil);
             ejecutarTareaEnSegundoPlano(backgroundTask);
         }
     }
 
-    private void esperarEliminacionDeMiPerfil(PropertyChangeEvent e)
+    private void accionBtnEditarPerfil(ActionEvent e)
     {
-        try
-        {
-            if (e.getNewValue() == SwingWorker.StateValue.DONE)
-                System.out.println(((Future<?>) e.getSource()).get() + " ms");
-
-        } catch (InterruptedException | ExecutionException ex)
-        {
-            System.out.println(ex.getMessage());
-        }
+        VistaEditarPerfil vistaEditarPerfil = new VistaEditarPerfil(vistaPrincipal);
+        Utils.showDialog(vistaPrincipal, vistaEditarPerfil);
     }
 
     private void ejecutarTareaEnSegundoPlano(Runnable tarea)

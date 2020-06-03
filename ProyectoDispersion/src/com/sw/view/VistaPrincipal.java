@@ -208,7 +208,7 @@ public class VistaPrincipal extends JFrame
         return btnBuscarUsuario;
     }
 
-    public JButton getBtnEditarCuenta()
+    public JButton getBtnEditarPerfil()
     {
         return btnEditarCuenta;
     }

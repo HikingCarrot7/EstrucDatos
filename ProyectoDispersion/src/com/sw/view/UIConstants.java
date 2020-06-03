@@ -1,5 +1,6 @@
 package com.sw.view;
 
+import com.sw.model.Usuario;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -7,6 +8,8 @@ import java.awt.Font;
 import java.util.EventObject;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultCellEditor;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -36,6 +39,12 @@ public interface UIConstants
     public Border LIST_HIGHLIGHT_BORDER = (Border) UIManager.get("List.focusCellHighlightBorder");
     public Border TABLE_HIGHLIGHT_BORDER = (Border) UIManager.get("List.focusCellHighlightBorder");
 
+    public Icon MALE_IMAGE = new ImageIcon(UIConstants.class.getClass().getResource("/com/sw/img/male.png"));
+    public Icon FEMALE_IMAGE = new ImageIcon(UIConstants.class.getClass().getResource("/com/sw/img/female.png"));
+
+    public Icon MALE_ICON = new ImageIcon(UIConstants.class.getClass().getResource("/com/sw/img/male_icon.png"));
+    public Icon FEMALE_ICON = new ImageIcon(UIConstants.class.getClass().getResource("/com/sw/img/female_icon.png"));
+
     public TableCellRenderer MY_TABLE_HEADER_RENDERER = (table, value, isSelected, hasFocus, row, column) ->
     {
         final Color BACKGROUND_COLOR = new Color(70, 160, 190);
@@ -62,7 +71,7 @@ public interface UIConstants
             final Color SELECTED_BACKGROUND_COLOR = BACKGROUND_COLOR.darker();
 
             JLabel label = new JLabel(String.valueOf(value));
-            label.setHorizontalAlignment(SwingConstants.CENTER);
+            label.setHorizontalAlignment(SwingConstants.LEFT);
             label.setFont(new Font("Tahoma", Font.PLAIN, 13));
             label.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.WHITE));
             label.setOpaque(true);
@@ -139,6 +148,33 @@ public interface UIConstants
 
         if (hasFocus)
             label.setBorder(TABLE_HIGHLIGHT_BORDER);
+
+        return label;
+    };
+
+    public TableCellRenderer COLUMNA_NOMBRE_USUARIO_RENDERER = (table, value, isSelected, hasFocus, row, column) ->
+    {
+        final Color BACKGROUND_COLOR = new Color(200, 228, 235);
+        final Color SELECTED_BACKGROUND_COLOR = BACKGROUND_COLOR.darker();
+
+        Usuario user = (Usuario) value;
+        JLabel label = new JLabel(user.getNombreCompleto());
+        label.setIcon(user.getGenero() == Usuario.HOMBRE ? MALE_ICON : FEMALE_ICON);
+        label.setHorizontalAlignment(SwingConstants.LEFT);
+        label.setFont(new Font("Tahoma", Font.PLAIN, 13));
+        label.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.WHITE));
+        label.setOpaque(true);
+
+        if (!isSelected)
+        {
+            label.setBackground(row % 2 == 0 ? BACKGROUND_COLOR : Color.WHITE);
+            label.setForeground(Color.BLACK);
+
+        } else
+        {
+            label.setBackground(SELECTED_BACKGROUND_COLOR);
+            label.setForeground(Color.WHITE);
+        }
 
         return label;
     };

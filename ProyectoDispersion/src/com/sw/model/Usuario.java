@@ -13,22 +13,27 @@ public class Usuario implements Serializable, BTreeComparable
 
     private static final long serialVersionUID = 1L;
 
+    public static final boolean HOMBRE = true;
+    public static final boolean MUJER = false;
+
     private String nombreCompleto;
     private String correo;
     private String password;
     private int edad;
+    private boolean genero;
 
     public Usuario()
     {
 
     }
 
-    public Usuario(String nombreCompleto, String correo, String contrasena, int edad)
+    public Usuario(String nombreCompleto, String correo, String contrasena, int edad, boolean genero)
     {
         this.nombreCompleto = nombreCompleto;
         this.correo = correo;
         this.password = contrasena;
         this.edad = edad;
+        this.genero = genero;
     }
 
     public String getNombreCompleto()
@@ -69,6 +74,16 @@ public class Usuario implements Serializable, BTreeComparable
     public void setEdad(int edad)
     {
         this.edad = edad;
+    }
+
+    public boolean getGenero()
+    {
+        return genero;
+    }
+
+    public void setGenero(boolean genero)
+    {
+        this.genero = genero;
     }
 
     @Override
