@@ -16,7 +16,7 @@ public class Usuario implements Serializable, BTreeComparable
     public static final boolean HOMBRE = true;
     public static final boolean MUJER = false;
 
-    private String nombreCompleto;
+    private String nombre;
     private String correo;
     private String password;
     private int edad;
@@ -27,23 +27,23 @@ public class Usuario implements Serializable, BTreeComparable
 
     }
 
-    public Usuario(String nombreCompleto, String correo, String contrasena, int edad, boolean genero)
+    public Usuario(String nombre, String correo, String contrasena, int edad, boolean genero)
     {
-        this.nombreCompleto = nombreCompleto;
+        this.nombre = nombre;
         this.correo = correo;
         this.password = contrasena;
         this.edad = edad;
         this.genero = genero;
     }
 
-    public String getNombreCompleto()
+    public String getNombre()
     {
-        return nombreCompleto;
+        return nombre;
     }
 
-    public void setNombreCompleto(String nombreCompleto)
+    public void setNombre(String nombreCompleto)
     {
-        this.nombreCompleto = nombreCompleto;
+        this.nombre = nombreCompleto;
     }
 
     public String getCorreo()
@@ -90,7 +90,7 @@ public class Usuario implements Serializable, BTreeComparable
     public int hashCode()
     {
         int hash = 7;
-        hash = 29 * hash + Objects.hashCode(this.nombreCompleto);
+        hash = 29 * hash + Objects.hashCode(this.nombre);
         hash = 29 * hash + Objects.hashCode(this.correo);
         hash = 29 * hash + Objects.hashCode(this.password);
         hash = 29 * hash + this.edad;
@@ -120,7 +120,7 @@ public class Usuario implements Serializable, BTreeComparable
     @Override
     public String toString()
     {
-        return "Usuario{" + "nombreCompleto=" + nombreCompleto + ", correo=" + correo + ", contrasena=" + password + ", edad=" + edad + '}';
+        return "Usuario{" + "nombreCompleto=" + nombre + ", correo=" + correo + ", contrasena=" + password + ", edad=" + edad + '}';
     }
 
     @Override

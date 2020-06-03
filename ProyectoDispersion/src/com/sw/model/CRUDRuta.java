@@ -43,7 +43,18 @@ public class CRUDRuta
 
     public void actualizarRuta(String correoUsuario, String nuevaRuta)
     {
+        Hashtable<String, String> hashtable = dao.getSavedObject();
+        hashtable.eliminar(correoUsuario);
+        hashtable.insertar(correoUsuario, nuevaRuta);
+        dao.saveObject(hashtable);
+    }
 
+    public void actualizarRuta(String correoUsuarioViejo, String correoUsuarioNuevo, String nuevaRuta)
+    {
+        Hashtable<String, String> hashtable = dao.getSavedObject();
+        hashtable.eliminar(correoUsuarioViejo);
+        hashtable.insertar(correoUsuarioNuevo, nuevaRuta);
+        dao.saveObject(hashtable);
     }
 
     public void eliminarRuta(String correoUsuario)
@@ -53,7 +64,7 @@ public class CRUDRuta
 
         DAO.eliminarArchivo(rutaArchivo);
 
-        hashtable.remove(correoUsuario);
+        hashtable.eliminar(correoUsuario);
         dao.saveObject(hashtable);
     }
 

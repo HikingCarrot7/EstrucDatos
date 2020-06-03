@@ -8,7 +8,7 @@ import javax.swing.JDialog;
  *
  * @author HikingCarrot7
  */
-public class Utils
+public class DialogUtils
 {
 
     public static void showDialogAndWait(Window relativeTo, JDialog dialog)
@@ -26,7 +26,8 @@ public class Utils
 
     public static void quitarDialog(JDialog dialog)
     {
-        dialog.dispose();
+        if (dialog != null)
+            dialog.dispose();
     }
 
 }

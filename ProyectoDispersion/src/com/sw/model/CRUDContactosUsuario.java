@@ -55,6 +55,34 @@ public class CRUDContactosUsuario
         return contactos.getItems();
     }
 
+    public void actualizarContactoUsuario(String correoUsuario, Usuario contactoViejosDatos, Usuario contactoNuevosDatos)
+    {
+        String rutaContactos = crudRuta.getRuta(correoUsuario);
+        DAO<BTree> daoContactosUsuario = new DAOContactosUsuario(rutaContactos);
+        BTree contactos = daoContactosUsuario.getSavedObject();
+
+        try
+        {
+            Usuario user = (Usuario) contactos.find(contactoViejosDatos);
+
+            if (user != null)
+            {
+                user.setNombre(contactoNuevosDatos.getNombre());
+                user.setEdad(contactoNuevosDatos.getEdad());
+                user.setGenero(contactoNuevosDatos.getGenero());
+                user.setCorreo(contactoNuevosDatos.getCorreo());
+                user.setPassword(contactoNuevosDatos.getPassword());
+            }
+
+            daoContactosUsuario.saveObject(contactos);
+
+        } catch (IllegalStateException | IndexOutOfBoundsException e)
+        {
+            System.out.println("Hubo algún error en el árbol.");
+            System.out.println(e.getMessage());
+        }
+    }
+
     public void eliminarContactoUsuario(String correoUsuario, Usuario contactoAEliminar)
     {
         String rutaContactos = crudRuta.getRuta(correoUsuario);

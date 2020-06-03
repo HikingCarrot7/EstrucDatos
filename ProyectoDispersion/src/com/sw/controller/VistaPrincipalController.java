@@ -12,13 +12,11 @@ import com.sw.view.VistaEliminarContacto;
 import com.sw.view.VistaListadoUsuarios;
 import com.sw.view.VistaPrincipal;
 import com.sw.view.VistaProgreso;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
+import java.beans.PropertyChangeEvent;
 import java.util.List;
 import java.util.Observable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import javax.swing.JPanel;
+import java.util.concurrent.ExecutionException;
 import javax.swing.SwingWorker;
 
 /**
@@ -32,6 +30,8 @@ public class VistaPrincipalController extends Observable
     private final CRUDUser crudUsuarios;
     private final CRUDRuta crudRuta;
     private final CRUDContactosUsuario crudContactosUsers;
+
+    private VistaProgreso vistaProgreso;
     private final Sesion sesion;
 
     public VistaPrincipalController(VistaPrincipal vistaPrincipal)
@@ -64,7 +64,7 @@ public class VistaPrincipalController extends Observable
         vistaPrincipal.getBtnEditarPerfil().addActionListener(this::accionBtnEditarPerfil);
 
         vistaPrincipal.getBtnCerrarSesion().addActionListener(e -> quitarVistaPrincipal());
-        vistaPrincipal.setTitle("Bienvenido: " + sesion.getUsuarioActual().getNombreCompleto());
+        modificarTitulo("Bienvenido: " + sesion.getUsuarioActual().getNombre());
         habilitarMenuPrincipal(true);
     }
 
@@ -75,7 +75,7 @@ public class VistaPrincipalController extends Observable
                 crudUsuarios.getTodosLosUsuarios(),
                 "Usuarios registrados en el sistema");
 
-        Utils.showDialogAndWait(vistaPrincipal, vistaListadoUsuarios);
+        DialogUtils.showDialogAndWait(vistaPrincipal, vistaListadoUsuarios);
     }
 
     private void accionBtnListarMisContactos(ActionEvent e)
@@ -89,7 +89,7 @@ public class VistaPrincipalController extends Observable
 
             VistaListadoUsuarios vistaListadoUsuarios = new VistaListadoUsuarios(vistaPrincipal);
             new ListadoUsuariosController(vistaListadoUsuarios, contactos, "Sus contactos agregados");
-            Utils.showDialogAndWait(vistaPrincipal, vistaListadoUsuarios);
+            DialogUtils.showDialogAndWait(vistaPrincipal, vistaListadoUsuarios);
 
         } catch (NoTengoContactosException ex)
         {
@@ -103,7 +103,7 @@ public class VistaPrincipalController extends Observable
     {
         VistaBuscarUsuario vistaBuscarUsuario = new VistaBuscarUsuario(vistaPrincipal);
         new BuscarUsuarioController(vistaBuscarUsuario);
-        Utils.showDialogAndWait(vistaPrincipal, vistaBuscarUsuario);
+        DialogUtils.showDialogAndWait(vistaPrincipal, vistaBuscarUsuario);
     }
 
     private void accionBtnEliminarContacto(ActionEvent e)
@@ -117,7 +117,7 @@ public class VistaPrincipalController extends Observable
 
             VistaEliminarContacto vistaEliminarContacto = new VistaEliminarContacto(vistaPrincipal);
             new EliminarContactoController(vistaEliminarContacto);
-            Utils.showDialogAndWait(vistaPrincipal, vistaEliminarContacto);
+            DialogUtils.showDialogAndWait(vistaPrincipal, vistaEliminarContacto);
 
         } catch (NoTengoContactosException ex)
         {
@@ -140,8 +140,8 @@ public class VistaPrincipalController extends Observable
                     long before = System.currentTimeMillis();
 
                     habilitarMenuPrincipal(false);
-                    VistaProgreso vistaProgreso = new VistaProgreso(vistaPrincipal);
-                    Utils.showDialog(vistaPrincipal, vistaProgreso);
+                    vistaProgreso = new VistaProgreso(vistaPrincipal);
+                    DialogUtils.showDialog(vistaPrincipal, vistaProgreso);
 
                     Usuario usuarioActual = sesion.getUsuarioActual();
                     List<Usuario> usuarios = crudUsuarios.getTodosLosUsuarios();
@@ -152,28 +152,38 @@ public class VistaPrincipalController extends Observable
 
                     crudUsuarios.actualizarUsuarios(usuarios);
 
-                    Utils.quitarDialog(vistaProgreso);
+                    DialogUtils.quitarDialog(vistaProgreso);
                     quitarVistaPrincipal();
 
                     return System.currentTimeMillis() - before;
                 }
             };
 
-            ejecutarTareaEnSegundoPlano(backgroundTask);
+            backgroundTask.addPropertyChangeListener(this::esperarEliminacionDeMiPerfil);
+            SwingUtils.ejecutarTareaEnSegundoPlano(backgroundTask);
         }
     }
 
     private void accionBtnEditarPerfil(ActionEvent e)
     {
         VistaEditarPerfil vistaEditarPerfil = new VistaEditarPerfil(vistaPrincipal);
-        Utils.showDialog(vistaPrincipal, vistaEditarPerfil);
+        EditarPerfilController editarPerfilController = new EditarPerfilController(vistaEditarPerfil, sesion.getUsuarioActual());
+        editarPerfilController.addObserver((o, a) -> modificarTitulo("Bienvenido: " + sesion.getUsuarioActual().getNombre()));
+        DialogUtils.showDialogAndWait(vistaPrincipal, vistaEditarPerfil);
     }
 
-    private void ejecutarTareaEnSegundoPlano(Runnable tarea)
+    public void esperarEliminacionDeMiPerfil(PropertyChangeEvent e)
     {
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        executorService.submit(tarea);
-        executorService.shutdown();
+        try
+        {
+            if (e.getNewValue() == SwingWorker.StateValue.DONE)
+                System.out.println(((SwingWorker<?, ?>) e.getSource()).get() + " milisegundos.");
+
+        } catch (InterruptedException | ExecutionException ex)
+        {
+            DialogUtils.quitarDialog(vistaProgreso);
+            habilitarMenuPrincipal(true);
+        }
     }
 
     private void quitarVistaPrincipal()
@@ -185,25 +195,15 @@ public class VistaPrincipalController extends Observable
 
     private void habilitarMenuPrincipal(boolean habilitar)
     {
-        setPanelEnabled(vistaPrincipal.getPanelBotones(), habilitar);
+        SwingUtils.setPanelEnabled(vistaPrincipal.getPanelBotones(), habilitar);
         vistaPrincipal.getBtnCerrarSesion().setEnabled(habilitar);
         vistaPrincipal.getMnArchivo().setEnabled(habilitar);
         vistaPrincipal.getMnEdicion().setEnabled(habilitar);
     }
 
-    private void setPanelEnabled(JPanel panel, boolean isEnabled)
+    private void modificarTitulo(String title)
     {
-        panel.setEnabled(isEnabled);
-
-        Component[] components = panel.getComponents();
-
-        for (Component component : components)
-        {
-            if (component instanceof JPanel)
-                setPanelEnabled((JPanel) component, isEnabled);
-
-            component.setEnabled(isEnabled);
-        }
+        vistaPrincipal.setTitle(title);
     }
 
 }

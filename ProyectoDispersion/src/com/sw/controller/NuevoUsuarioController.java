@@ -4,12 +4,11 @@ import com.sw.model.CRUDRuta;
 import com.sw.model.CRUDUser;
 import com.sw.model.Usuario;
 import com.sw.model.exceptions.CorreoNoDisponibleException;
+import com.sw.model.exceptions.DatosInvalidosException;
 import com.sw.model.exceptions.UsuarioNoExistenteException;
 import com.sw.view.FrmNuevoUsuario;
 import com.sw.view.VistaSelecRuta;
 import java.awt.event.ActionEvent;
-import java.util.Enumeration;
-import javax.swing.AbstractButton;
 
 /**
  *
@@ -46,22 +45,20 @@ public class NuevoUsuarioController
     {
         try
         {
-            if (todosCamposValidos())
+            if (!todosCamposValidos())
+                throw new DatosInvalidosException();
+
+            if (existeCorreoRegistrado(getCorreo()))
+                throw new CorreoNoDisponibleException();
+
+            if (solicitarRuta())
             {
-                if (existeCorreoRegistrado(getCorreo()))
-                    throw new CorreoNoDisponibleException();
+                seAceptoNuevoUsuario = true;
+                rellenarDatosNuevoUsuario();
+                quitarVentana();
+            }
 
-                if (solicitarRuta())
-                {
-                    seAceptoNuevoUsuario = true;
-                    rellenarDatosNuevoUsuario();
-                    quitarVentana();
-                }
-
-            } else
-                Alerta.mostrarError(frmNuevoUsuario, "Algún campo es incorrecto");
-
-        } catch (CorreoNoDisponibleException ex)
+        } catch (CorreoNoDisponibleException | DatosInvalidosException ex)
         {
             Alerta.mostrarError(frmNuevoUsuario, ex.getMessage());
         }
@@ -78,7 +75,7 @@ public class NuevoUsuarioController
     {
         VistaSelecRuta vistaSelecRuta = new VistaSelecRuta(frmNuevoUsuario);
         SelecRutaController selecRutaController = new SelecRutaController(vistaSelecRuta);
-        Utils.showDialogAndWait(frmNuevoUsuario, vistaSelecRuta);
+        DialogUtils.showDialogAndWait(frmNuevoUsuario, vistaSelecRuta);
 
         if (selecRutaController.seInsertoUnaRutaValida())
         {
@@ -104,7 +101,7 @@ public class NuevoUsuarioController
 
     private void rellenarDatosNuevoUsuario()
     {
-        nuevoUsuario.setNombreCompleto(getNombre());
+        nuevoUsuario.setNombre(getNombre());
         nuevoUsuario.setEdad(Integer.parseInt(getEdad()));
         nuevoUsuario.setCorreo(getCorreo());
         nuevoUsuario.setPassword(getPassword());
@@ -119,6 +116,12 @@ public class NuevoUsuarioController
     private String getEdad()
     {
         return frmNuevoUsuario.getTxtEdad().getText().trim();
+    }
+
+    private boolean getGeneroSeleccionado()
+    {
+        return SwingUtils.getBotonSeleccionado(frmNuevoUsuario.getGeneroGrupo())
+                .equals("Hombre") ? Usuario.HOMBRE : Usuario.MUJER;
     }
 
     private String getCorreo()
@@ -139,11 +142,6 @@ public class NuevoUsuarioController
                 || getPassword().isEmpty());
     }
 
-    private boolean getGeneroSeleccionado()
-    {
-        return getBotonSeleccionado().equals("Hombre") ? Usuario.HOMBRE : Usuario.MUJER;
-    }
-
     private void quitarVentana()
     {
         frmNuevoUsuario.dispose();
@@ -152,19 +150,6 @@ public class NuevoUsuarioController
     public boolean seAceptoNuevoUsuario()
     {
         return seAceptoNuevoUsuario;
-    }
-
-    private String getBotonSeleccionado()
-    {
-        for (Enumeration<AbstractButton> buttons = frmNuevoUsuario.getGeneroGrupo().getElements(); buttons.hasMoreElements();)
-        {
-            AbstractButton button = buttons.nextElement();
-
-            if (button.isSelected())
-                return button.getActionCommand();
-        }
-
-        return null;
     }
 
 }

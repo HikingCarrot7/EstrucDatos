@@ -37,7 +37,7 @@ public class DatosUsuarioController implements UIConstants
         vistaDatosUsuario.getBtnAgregarContactos().addActionListener(this::accionBtnAgregarContactos);
         vistaDatosUsuario.getBtnCancelar().addActionListener(this::accionBtnCancelar);
 
-        vistaDatosUsuario.getLblNombre().setText(usuarioAMostrarDatos.getNombreCompleto());
+        vistaDatosUsuario.getLblNombre().setText(usuarioAMostrarDatos.getNombre());
         vistaDatosUsuario.getLblEdad().setText(String.valueOf(usuarioAMostrarDatos.getEdad()));
         vistaDatosUsuario.getLblCorreo().setText(usuarioAMostrarDatos.getCorreo());
         vistaDatosUsuario.getLblGenero().setIcon(usuarioAMostrarDatos.getGenero() == Usuario.HOMBRE ? MALE_IMAGE : FEMALE_IMAGE);
@@ -55,7 +55,7 @@ public class DatosUsuarioController implements UIConstants
     {
         crudContactosUsuario.anadirContactoAUsuario(sesion.getCorreoUsuarioActual(), usuarioAMostrarDatos);
         habilitarBtnAgregar(false);
-        Alerta.mostrarMensaje(vistaDatosUsuario, "Contacto añadido!", "Se ha añadido a tus contactos: " + usuarioAMostrarDatos.getNombreCompleto());
+        Alerta.mostrarMensaje(vistaDatosUsuario, "Contacto añadido!", "Se ha añadido a tus contactos: " + usuarioAMostrarDatos.getNombre());
     }
 
     private void accionBtnAgregarContactos(ActionEvent e)
@@ -72,7 +72,7 @@ public class DatosUsuarioController implements UIConstants
             case 0:
                 VistaListadoUsuarios vistaListadoUsuarios = new VistaListadoUsuarios(vistaDatosUsuario);
                 new ListadoUsuariosController(vistaListadoUsuarios, contactosQueNoTengoAnadido, "Contactos que se añadirán");
-                Utils.showDialogAndWait(vistaDatosUsuario, vistaListadoUsuarios);
+                DialogUtils.showDialogAndWait(vistaDatosUsuario, vistaListadoUsuarios);
                 accionBtnAgregarContactos(e);
                 break;
             case 1:

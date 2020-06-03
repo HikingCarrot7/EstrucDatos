@@ -63,6 +63,24 @@ public class CRUDUser
         return dao.getSavedObject();
     }
 
+    public void actualizarUsuario(Usuario usuarioViejosDatos, Usuario usuarioNuevosDatos)
+    {
+        List<Usuario> usuarios = getTodosLosUsuarios();
+
+        for (Usuario user : usuarios)
+            if (user.equals(usuarioViejosDatos))
+            {
+                user.setNombre(usuarioNuevosDatos.getNombre());
+                user.setEdad(usuarioNuevosDatos.getEdad());
+                user.setGenero(usuarioNuevosDatos.getGenero());
+                user.setCorreo(usuarioNuevosDatos.getCorreo());
+                user.setPassword(usuarioNuevosDatos.getPassword());
+                break;
+            }
+
+        dao.saveObject(usuarios);
+    }
+
     public void actualizarUsuarios(List<Usuario> usuarios)
     {
         dao.saveObject(usuarios);

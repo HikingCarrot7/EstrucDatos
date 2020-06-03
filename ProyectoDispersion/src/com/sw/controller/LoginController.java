@@ -70,7 +70,7 @@ public class LoginController
 
         FrmNuevoUsuario frmNuevoUsuario = new FrmNuevoUsuario();
         NuevoUsuarioController nuevoUsuarioController = new NuevoUsuarioController(frmNuevoUsuario, nuevoUsuario);
-        Utils.showDialogAndWait(login, frmNuevoUsuario);
+        DialogUtils.showDialogAndWait(login, frmNuevoUsuario);
 
         if (nuevoUsuarioController.seAceptoNuevoUsuario())
             crudUser.anadirUsuario(nuevoUsuario);

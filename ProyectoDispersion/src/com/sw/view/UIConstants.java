@@ -158,7 +158,7 @@ public interface UIConstants
         final Color SELECTED_BACKGROUND_COLOR = BACKGROUND_COLOR.darker();
 
         Usuario user = (Usuario) value;
-        JLabel label = new JLabel(user.getNombreCompleto());
+        JLabel label = new JLabel(user.getNombre());
         label.setIcon(user.getGenero() == Usuario.HOMBRE ? MALE_ICON : FEMALE_ICON);
         label.setHorizontalAlignment(SwingConstants.LEFT);
         label.setFont(new Font("Tahoma", Font.PLAIN, 13));

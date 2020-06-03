@@ -49,7 +49,7 @@ public class VistaEditarPerfil extends JDialog
         jPanel7 = new JPanel();
         jLabel5 = new JLabel();
         jPanel9 = new JPanel();
-        jPanel2 = new JPanel();
+        panelDatosPersonales = new JPanel();
         jLabel1 = new JLabel();
         txtNombre = new JTextField();
         jLabel2 = new JLabel();
@@ -60,14 +60,14 @@ public class VistaEditarPerfil extends JDialog
         txtPassword = new JPasswordField();
         jPanel4 = new JPanel();
         jPanel8 = new JPanel();
-        jRadioButton1 = new JRadioButton();
+        rdBtnHombre = new JRadioButton();
         filler1 = new Box.Filler(new Dimension(10, 0), new Dimension(10, 0), new Dimension(10, 32767));
-        jRadioButton2 = new JRadioButton();
+        rdBtnMujer = new JRadioButton();
         jLabel6 = new JLabel();
-        jPanel10 = new JPanel();
+        panelUbicacion = new JPanel();
         jLabel7 = new JLabel();
-        jTextField1 = new JTextField();
-        jButton1 = new JButton();
+        txtRuta = new JTextField();
+        btnCambiarRuta = new JButton();
         jPanel1 = new JPanel();
         jPanel6 = new JPanel();
         jPanel5 = new JPanel();
@@ -93,20 +93,20 @@ public class VistaEditarPerfil extends JDialog
 
         jPanel9.setLayout(new BorderLayout());
 
-        jPanel2.setBorder(BorderFactory.createTitledBorder("Datos personales"));
-        jPanel2.setLayout(new GridBagLayout());
+        panelDatosPersonales.setBorder(BorderFactory.createTitledBorder("Datos personales"));
+        panelDatosPersonales.setLayout(new GridBagLayout());
 
         jLabel1.setHorizontalAlignment(SwingConstants.RIGHT);
         jLabel1.setText("Nombre:");
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(15, 35, 5, 5);
-        jPanel2.add(jLabel1, gridBagConstraints);
+        panelDatosPersonales.add(jLabel1, gridBagConstraints);
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(15, 5, 5, 35);
-        jPanel2.add(txtNombre, gridBagConstraints);
+        panelDatosPersonales.add(txtNombre, gridBagConstraints);
 
         jLabel2.setHorizontalAlignment(SwingConstants.RIGHT);
         jLabel2.setText("Edad:");
@@ -115,14 +115,14 @@ public class VistaEditarPerfil extends JDialog
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(5, 35, 5, 5);
-        jPanel2.add(jLabel2, gridBagConstraints);
+        panelDatosPersonales.add(jLabel2, gridBagConstraints);
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(5, 5, 5, 35);
-        jPanel2.add(txtEdad, gridBagConstraints);
+        panelDatosPersonales.add(txtEdad, gridBagConstraints);
 
         jLabel3.setHorizontalAlignment(SwingConstants.RIGHT);
         jLabel3.setText("Correo electrónico:");
@@ -131,14 +131,14 @@ public class VistaEditarPerfil extends JDialog
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(5, 35, 5, 5);
-        jPanel2.add(jLabel3, gridBagConstraints);
+        panelDatosPersonales.add(jLabel3, gridBagConstraints);
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(5, 5, 5, 35);
-        jPanel2.add(txtCorreo, gridBagConstraints);
+        panelDatosPersonales.add(txtCorreo, gridBagConstraints);
 
         jLabel4.setHorizontalAlignment(SwingConstants.RIGHT);
         jLabel4.setText("Contraseña:");
@@ -147,14 +147,14 @@ public class VistaEditarPerfil extends JDialog
         gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(5, 35, 5, 5);
-        jPanel2.add(jLabel4, gridBagConstraints);
+        panelDatosPersonales.add(jLabel4, gridBagConstraints);
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(5, 5, 5, 35);
-        jPanel2.add(txtPassword, gridBagConstraints);
+        panelDatosPersonales.add(txtPassword, gridBagConstraints);
 
         jPanel4.setLayout(new BorderLayout());
         gridBagConstraints = new GridBagConstraints();
@@ -163,21 +163,21 @@ public class VistaEditarPerfil extends JDialog
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = GridBagConstraints.BOTH;
         gridBagConstraints.weighty = 0.1;
-        jPanel2.add(jPanel4, gridBagConstraints);
+        panelDatosPersonales.add(jPanel4, gridBagConstraints);
 
         FlowLayout flowLayout1 = new FlowLayout(FlowLayout.LEFT, 0, 0);
         flowLayout1.setAlignOnBaseline(true);
         jPanel8.setLayout(flowLayout1);
 
-        generoGrupo.add(jRadioButton1);
-        jRadioButton1.setSelected(true);
-        jRadioButton1.setText("Hombre");
-        jPanel8.add(jRadioButton1);
+        generoGrupo.add(rdBtnHombre);
+        rdBtnHombre.setSelected(true);
+        rdBtnHombre.setText("Hombre");
+        jPanel8.add(rdBtnHombre);
         jPanel8.add(filler1);
 
-        generoGrupo.add(jRadioButton2);
-        jRadioButton2.setText("Mujer");
-        jPanel8.add(jRadioButton2);
+        generoGrupo.add(rdBtnMujer);
+        rdBtnMujer.setText("Mujer");
+        jPanel8.add(rdBtnMujer);
 
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -185,7 +185,7 @@ public class VistaEditarPerfil extends JDialog
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(5, 5, 5, 35);
-        jPanel2.add(jPanel8, gridBagConstraints);
+        panelDatosPersonales.add(jPanel8, gridBagConstraints);
 
         jLabel6.setHorizontalAlignment(SwingConstants.RIGHT);
         jLabel6.setText("Género:");
@@ -194,30 +194,30 @@ public class VistaEditarPerfil extends JDialog
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(5, 35, 5, 5);
-        jPanel2.add(jLabel6, gridBagConstraints);
+        panelDatosPersonales.add(jLabel6, gridBagConstraints);
 
-        jPanel9.add(jPanel2, BorderLayout.CENTER);
+        jPanel9.add(panelDatosPersonales, BorderLayout.CENTER);
 
-        jPanel10.setBorder(BorderFactory.createTitledBorder("Ubicación de mis contactos"));
-        jPanel10.setLayout(new GridBagLayout());
+        panelUbicacion.setBorder(BorderFactory.createTitledBorder("Ubicación de mis contactos"));
+        panelUbicacion.setLayout(new GridBagLayout());
 
         jLabel7.setText("Ubicación:");
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new Insets(5, 35, 5, 5);
-        jPanel10.add(jLabel7, gridBagConstraints);
+        panelUbicacion.add(jLabel7, gridBagConstraints);
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new Insets(5, 5, 5, 5);
-        jPanel10.add(jTextField1, gridBagConstraints);
+        panelUbicacion.add(txtRuta, gridBagConstraints);
 
-        jButton1.setText("Cambiar");
+        btnCambiarRuta.setText("Cambiar");
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.insets = new Insets(5, 5, 5, 35);
-        jPanel10.add(jButton1, gridBagConstraints);
+        panelUbicacion.add(btnCambiarRuta, gridBagConstraints);
 
-        jPanel9.add(jPanel10, BorderLayout.SOUTH);
+        jPanel9.add(panelUbicacion, BorderLayout.SOUTH);
 
         getContentPane().add(jPanel9, BorderLayout.CENTER);
 
@@ -240,6 +240,11 @@ public class VistaEditarPerfil extends JDialog
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    public JButton getBtnCambiarRuta()
+    {
+        return btnCambiarRuta;
+    }
 
     public JButton getBtnCancelar()
     {
@@ -271,17 +276,42 @@ public class VistaEditarPerfil extends JDialog
         return txtPassword;
     }
 
+    public JTextField getTxtRuta()
+    {
+        return txtRuta;
+    }
+
     public ButtonGroup getGeneroGrupo()
     {
         return generoGrupo;
     }
 
+    public JRadioButton getRdBtnHombre()
+    {
+        return rdBtnHombre;
+    }
+
+    public JRadioButton getRdBtnMujer()
+    {
+        return rdBtnMujer;
+    }
+
+    public JPanel getPanelDatosPersonales()
+    {
+        return panelDatosPersonales;
+    }
+
+    public JPanel getPanelUbicacion()
+    {
+        return panelUbicacion;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private JButton btnCambiarRuta;
     private JButton btnCancelar;
     private JButton btnGuardar;
     private Box.Filler filler1;
     private ButtonGroup generoGrupo;
-    private JButton jButton1;
     private JLabel jLabel1;
     private JLabel jLabel2;
     private JLabel jLabel3;
@@ -290,8 +320,6 @@ public class VistaEditarPerfil extends JDialog
     private JLabel jLabel6;
     private JLabel jLabel7;
     private JPanel jPanel1;
-    private JPanel jPanel10;
-    private JPanel jPanel2;
     private JPanel jPanel3;
     private JPanel jPanel4;
     private JPanel jPanel5;
@@ -299,12 +327,14 @@ public class VistaEditarPerfil extends JDialog
     private JPanel jPanel7;
     private JPanel jPanel8;
     private JPanel jPanel9;
-    private JRadioButton jRadioButton1;
-    private JRadioButton jRadioButton2;
-    private JTextField jTextField1;
+    private JPanel panelDatosPersonales;
+    private JPanel panelUbicacion;
+    private JRadioButton rdBtnHombre;
+    private JRadioButton rdBtnMujer;
     private JTextField txtCorreo;
     private JFormattedTextField txtEdad;
     private JTextField txtNombre;
     private JPasswordField txtPassword;
+    private JTextField txtRuta;
     // End of variables declaration//GEN-END:variables
 }
