@@ -3,6 +3,7 @@ package com.sw.controller;
 import com.sw.view.UIConstants;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
@@ -45,8 +46,8 @@ public class TableManager implements UIConstants
         table.setTableHeader(jTableHeader);
         table.setDefaultEditor(Object.class, TABLA_NO_EDITABLE);
         table.setGridColor(new Color(237, 237, 237));
-        table.setRowSelectionAllowed(true);
         table.setRowHeight(20);
+        table.setRowSelectionAllowed(true);
         table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
     }
 
@@ -62,16 +63,27 @@ public class TableManager implements UIConstants
 
     public void initTableSelectionBehavior(JTable table)
     {
+        initTableSelectionBehavior(table, (ActionListener) null);
+    }
+
+    public void initTableSelectionBehavior(JTable table, ActionListener action)
+    {
         initTableSelectionBehavior(table, new FocusAdapter()
         {
             @Override public void focusLost(FocusEvent e)
             {
                 table.clearSelection();
             }
-        });
+
+        }, action);
     }
 
     public void initTableSelectionBehavior(JTable table, FocusListener focusListener)
+    {
+        initTableSelectionBehavior(table, focusListener, null);
+    }
+
+    public void initTableSelectionBehavior(JTable table, FocusListener focusListener, ActionListener action)
     {
         table.addFocusListener(focusListener);
 
@@ -81,23 +93,26 @@ public class TableManager implements UIConstants
             @Override public void actionPerformed(ActionEvent e)
             {
                 table.getSelectionModel().clearSelection();
+
+                if (action != null)
+                    action.actionPerformed(e);
             }
         });
     }
 
-    public void establecerFilas(JTable table, Object[][] elementos)
+    public void setFilas(JTable table, Object[][] elementos)
     {
         vaciarTabla(table);
-        anadirFilas(table, elementos);
+        addFilas(table, elementos);
     }
 
-    public void anadirFila(JTable table, Object[] fila)
+    public void addFila(JTable table, Object[] fila)
     {
         DefaultTableModel tableModel = getDefaultTableModel(table);
         tableModel.addRow(fila);
     }
 
-    public void anadirFilas(JTable table, Object[][] filas)
+    public void addFilas(JTable table, Object[][] filas)
     {
         DefaultTableModel tableModel = getDefaultTableModel(table);
 
@@ -135,6 +150,12 @@ public class TableManager implements UIConstants
         listSelectionModel.addSelectionInterval(fila, fila);
     }
 
+    public void seleccionarFilas(JTable table, int[] indices)
+    {
+        for (int i : indices)
+            table.getSelectionModel().addSelectionInterval(i, i);
+    }
+
     public int getRowClicked(JTable table, double y)
     {
         return (int) (y / table.getRowHeight());
@@ -143,6 +164,18 @@ public class TableManager implements UIConstants
     public void limpiarSeleccion(JTable table)
     {
         table.getSelectionModel().clearSelection();
+    }
+
+    public void selecionarUltimaFila(JTable table)
+    {
+        table.clearSelection();
+        int lastIndex = table.getModel().getRowCount() - 1;
+        table.getSelectionModel().setSelectionInterval(lastIndex, lastIndex);
+    }
+
+    public int[] getFilasSeleccionadas(JTable table)
+    {
+        return table.getSelectedRows();
     }
 
     public DefaultTableModel getDefaultTableModel(JTable table)

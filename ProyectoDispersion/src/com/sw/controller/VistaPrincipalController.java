@@ -3,11 +3,14 @@ package com.sw.controller;
 import com.sw.model.CRUDContactosUsuario;
 import com.sw.model.CRUDUser;
 import com.sw.model.Sesion;
-import com.sw.model.exceptions.ArbolVacioException;
+import com.sw.model.Usuario;
+import com.sw.model.exceptions.NoTengoContactosException;
 import com.sw.view.VistaBuscarUsuario;
+import com.sw.view.VistaEliminarContacto;
 import com.sw.view.VistaListadoUsuarios;
 import com.sw.view.VistaPrincipal;
 import java.awt.event.ActionEvent;
+import java.util.List;
 import java.util.Observable;
 
 /**
@@ -42,7 +45,7 @@ public class VistaPrincipalController extends Observable
         vistaPrincipal.getBtnBuscarUsuario().addActionListener(this::accionBtnBuscarUsuario);
         vistaPrincipal.getMnItmBuscarUsuario().addActionListener(this::accionBtnBuscarUsuario);
 
-        vistaPrincipal.getBtnEliminarContacto().addActionListener(this::accionBtnEliminarCuenta);
+        vistaPrincipal.getBtnEliminarContacto().addActionListener(this::accionBtnEliminarContacto);
         vistaPrincipal.getMnItmEliminarContacto().addActionListener(this::accionBtnEliminarContacto);
 
         vistaPrincipal.getBtnEliminarCuenta().addActionListener(this::accionBtnEliminarCuenta);
@@ -59,21 +62,23 @@ public class VistaPrincipalController extends Observable
                 crudUser.getTodosLosUsuarios(),
                 "Usuarios registrados en el sistema");
 
-        Util.showDialogAndWait(vistaPrincipal, vistaListadoUsuarios);
+        Utils.showDialogAndWait(vistaPrincipal, vistaListadoUsuarios);
     }
 
     private void accionBtnListarMisContactos(ActionEvent e)
     {
         try
         {
+            List<Usuario> contactos = crudContactosUsers.getContactosUsuario(sesion.getCorreoUsuarioActual());
+
+            if (contactos.isEmpty())
+                throw new NoTengoContactosException();
+
             VistaListadoUsuarios vistaListadoUsuarios = new VistaListadoUsuarios(vistaPrincipal);
-            new ListadoUsuariosController(vistaListadoUsuarios,
-                    crudContactosUsers.getContactosUsuario(sesion.getCorreoUsuarioActual()),
-                    "Sus contactos agregados");
+            new ListadoUsuariosController(vistaListadoUsuarios, contactos, "Sus contactos agregados");
+            Utils.showDialogAndWait(vistaPrincipal, vistaListadoUsuarios);
 
-            Util.showDialogAndWait(vistaPrincipal, vistaListadoUsuarios);
-
-        } catch (ArbolVacioException ex)
+        } catch (NoTengoContactosException ex)
         {
             if (Alerta.mostrarConfirmacion(vistaPrincipal, "No tienes contactos",
                     "Aún no tienes contactos añadidos, ¿deseas añadir alguno?"))
@@ -85,12 +90,28 @@ public class VistaPrincipalController extends Observable
     {
         VistaBuscarUsuario vistaBuscarUsuario = new VistaBuscarUsuario(vistaPrincipal);
         new BuscarUsuarioController(vistaBuscarUsuario);
-        Util.showDialogAndWait(vistaPrincipal, vistaBuscarUsuario);
+        Utils.showDialogAndWait(vistaPrincipal, vistaBuscarUsuario);
     }
 
     private void accionBtnEliminarContacto(ActionEvent e)
     {
+        try
+        {
+            List<Usuario> contactos = crudContactosUsers.getContactosUsuario(sesion.getCorreoUsuarioActual());
 
+            if (contactos.isEmpty())
+                throw new NoTengoContactosException();
+
+            VistaEliminarContacto vistaEliminarContacto = new VistaEliminarContacto(vistaPrincipal);
+            new EliminarContactoController(vistaEliminarContacto);
+            Utils.showDialogAndWait(vistaPrincipal, vistaEliminarContacto);
+
+        } catch (NoTengoContactosException ex)
+        {
+            if (Alerta.mostrarConfirmacion(vistaPrincipal, "No tienes contactos",
+                    "Aún no tienes contactos añadidos, ¿deseas añadir alguno?"))
+                accionBtnBuscarUsuario(e);
+        }
     }
 
     private void accionBtnEliminarCuenta(ActionEvent e)

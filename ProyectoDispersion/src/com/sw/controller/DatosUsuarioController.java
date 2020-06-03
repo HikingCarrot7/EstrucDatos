@@ -70,7 +70,7 @@ public class DatosUsuarioController
             case 0:
                 VistaListadoUsuarios vistaListadoUsuarios = new VistaListadoUsuarios(vistaDatosUsuario);
                 new ListadoUsuariosController(vistaListadoUsuarios, contactosQueNoTengoAnadido, "Contactos que se añadirán");
-                Util.showDialogAndWait(vistaDatosUsuario, vistaListadoUsuarios);
+                Utils.showDialogAndWait(vistaDatosUsuario, vistaListadoUsuarios);
                 accionBtnAgregarContactos(e);
                 break;
             case 1:

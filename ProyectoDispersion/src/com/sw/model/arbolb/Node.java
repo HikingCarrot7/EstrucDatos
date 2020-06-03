@@ -194,8 +194,8 @@ public class Node<T extends Comparable<? super T>> implements Serializable
                 found = true;
 
             else if (found)
-                // shift the rest of the keys down
                 children[i - 1] = children[i];
+
         if (found)
         {
             childrenSize--;
@@ -253,7 +253,7 @@ public class Node<T extends Comparable<? super T>> implements Serializable
 
             for (int i = 0; i < parent.numberOfKeys(); i++)
             {
-                Key value = parent.getKey(i);
+                Key<T> value = parent.getKey(i);
                 builder.append(value);
 
                 if (i < parent.numberOfKeys() - 1)

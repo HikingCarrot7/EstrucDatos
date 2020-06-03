@@ -49,9 +49,9 @@ public class CRUDContactosUsuario
         daoContactosUsuario.saveObject(misContactos);
     }
 
-    public List<Usuario> getContactosUsuario(String correo)
+    public List<Usuario> getContactosUsuario(String correoUsuario)
     {
-        String rutaContactos = crudRuta.getRuta(correo);
+        String rutaContactos = crudRuta.getRuta(correoUsuario);
         DAO<ArbolB<Usuario>> daoContactosUsuario = new DAOContactosUsuario(rutaContactos);
         ArbolB<Usuario> contactos = daoContactosUsuario.getSavedObject();
 
@@ -63,6 +63,28 @@ public class CRUDContactosUsuario
         {
             return new ArrayList<>();
         }
+    }
+
+    public void eliminarContactoUsuario(String correoUsuario, Usuario contactoAEliminar)
+    {
+        String rutaContactos = crudRuta.getRuta(correoUsuario);
+        DAO<ArbolB<Usuario>> daoContactosUsuario = new DAOContactosUsuario(rutaContactos);
+        ArbolB<Usuario> contactos = daoContactosUsuario.getSavedObject();
+
+        contactos.remove(contactoAEliminar);
+
+        daoContactosUsuario.saveObject(contactos);
+    }
+
+    public void eliminarContactosUsuario(String correoUsuario, List<Usuario> contactosAEliminar)
+    {
+        String rutaContactos = crudRuta.getRuta(correoUsuario);
+        DAO<ArbolB<Usuario>> daoContactosUsuario = new DAOContactosUsuario(rutaContactos);
+        ArbolB<Usuario> contactos = daoContactosUsuario.getSavedObject();
+
+        contactosAEliminar.forEach(contactos::remove);
+
+        daoContactosUsuario.saveObject(contactos);
     }
 
 }

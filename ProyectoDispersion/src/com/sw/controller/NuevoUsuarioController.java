@@ -35,7 +35,7 @@ public class NuevoUsuarioController
 
     private void initComponents()
     {
-        frmNuevoUsuario.getTxtEdad().setFormatterFactory(new EdadFormatter());
+        frmNuevoUsuario.getTxtEdad().setFormatterFactory(new IntegerFormatter());
         frmNuevoUsuario.getBtnGuardar().addActionListener(this::accionBtnGuardar);
         frmNuevoUsuario.getBtnCancelar().addActionListener(this::accionBtnCancelar);
     }
@@ -76,7 +76,7 @@ public class NuevoUsuarioController
     {
         VistaSelecRuta vistaSelecRuta = new VistaSelecRuta(frmNuevoUsuario);
         SelecRutaController selecRutaController = new SelecRutaController(vistaSelecRuta);
-        Util.showDialogAndWait(frmNuevoUsuario, vistaSelecRuta);
+        Utils.showDialogAndWait(frmNuevoUsuario, vistaSelecRuta);
 
         if (selecRutaController.seInsertoUnaRutaValida())
         {

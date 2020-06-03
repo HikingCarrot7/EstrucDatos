@@ -42,7 +42,7 @@ public class BuscarUsuarioController
 
             VistaDatosUsuario vistaDatosUsuario = new VistaDatosUsuario(vistaBuscarUsuario);
             new DatosUsuarioController(vistaDatosUsuario, usuario, mismoUsuario);
-            Util.showDialogAndWait(vistaBuscarUsuario, vistaDatosUsuario);
+            Utils.showDialogAndWait(vistaBuscarUsuario, vistaDatosUsuario);
 
         } catch (UsuarioNoExistenteException ex)
         {

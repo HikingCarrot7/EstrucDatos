@@ -3,43 +3,85 @@ package com.sw.controller;
 import com.sw.model.CRUDContactosUsuario;
 import com.sw.model.Sesion;
 import com.sw.model.Usuario;
+import com.sw.view.UIConstants;
 import com.sw.view.VistaEliminarContacto;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JTable;
 
 /**
  *
  * @author HikingCarrot7
  */
-public class EliminarContactoController
+public class EliminarContactoController implements UIConstants
 {
 
-    private final VistaEliminarContacto vistaDatosUsuario;
-    private final Usuario usuarioAMostrarDatos;
+    private final VistaEliminarContacto vistaEliminarContacto;
     private final CRUDContactosUsuario crudContactosUsuario;
     private final Sesion sesion;
+    private final TableManager tableManager;
 
-    public EliminarContactoController(VistaEliminarContacto vistaDatosUsuario, Usuario usuarioAMostrarDatos, boolean mismoUsuario)
+    private int[] idxSeleccionados;
+
+    public EliminarContactoController(VistaEliminarContacto vistaDatosUsuario)
     {
-        this.vistaDatosUsuario = vistaDatosUsuario;
-        this.usuarioAMostrarDatos = usuarioAMostrarDatos;
+        this.vistaEliminarContacto = vistaDatosUsuario;
         this.crudContactosUsuario = CRUDContactosUsuario.getInstance();
         this.sesion = Sesion.getInstance();
-        initComponents(mismoUsuario);
+        this.tableManager = TableManager.getInstance();
+        initComponents();
     }
 
-    private void initComponents(boolean mismoUsuario)
+    private void initComponents()
     {
-        vistaDatosUsuario.getBtnCancelar().addActionListener(this::accionBtnCancelar);
+        vistaEliminarContacto.getBtnEliminar().addActionListener(this::accionBtnEliminarDeMisContactos);
+        vistaEliminarContacto.getBtnCancelar().addActionListener(this::accionBtnCancelar);
+        habilitarBtnEliminar(false);
+        initTabla();
+    }
 
-        vistaDatosUsuario.getLblNombre().setText(usuarioAMostrarDatos.getNombreCompleto());
-        vistaDatosUsuario.getLblEdad().setText(String.valueOf(usuarioAMostrarDatos.getEdad()));
-        vistaDatosUsuario.getLblCorreo().setText(usuarioAMostrarDatos.getCorreo());
+    private void initTabla()
+    {
+        JTable tabla = vistaEliminarContacto.getTablaListaContactos();
+        List<Usuario> contactos = crudContactosUsuario.getContactosUsuario(sesion.getCorreoUsuarioActual());
+        tableManager.initTabla(tabla);
+        tableManager.initTableSelectionBehavior(tabla, e -> habilitarBtnEliminar(false));
 
-        habilitarBtnEliminar(!mismoUsuario);
+        tabla.getSelectionModel().addListSelectionListener(e ->
+        {
+            int[] indices = tableManager.getFilasSeleccionadas(tabla);
+
+            if (indices.length != 0)
+                idxSeleccionados = indices;
+
+            habilitarBtnEliminar(true);
+        });
+
+        rellenarTabla(tabla, contactos);
     }
 
     private void accionBtnEliminarDeMisContactos(ActionEvent e)
     {
+        JTable table = vistaEliminarContacto.getTablaListaContactos();
+
+        if (Alerta.mostrarConfirmacion(vistaEliminarContacto, "Confirmación",
+                "Está apunto de eliminar " + idxSeleccionados.length + " contacto(s)."))
+        {
+            List<Usuario> usuariosAEliminar = new ArrayList<>();
+            List<Usuario> contactosUsuario = crudContactosUsuario.getContactosUsuario(sesion.getCorreoUsuarioActual());
+
+            for (int i : idxSeleccionados)
+                usuariosAEliminar.add(contactosUsuario.get(i));
+
+            crudContactosUsuario.eliminarContactosUsuario(sesion.getCorreoUsuarioActual(), usuariosAEliminar);
+            actualizarTabla();
+            habilitarBtnEliminar(false);
+            tableManager.limpiarSeleccion(table);
+            Alerta.mostrarMensaje(vistaEliminarContacto, "Completado", "Se han eliminado los contactos.");
+
+        } else
+            tableManager.seleccionarFilas(table, idxSeleccionados);
 
     }
 
@@ -48,13 +90,29 @@ public class EliminarContactoController
         quitarVentana();
     }
 
+    private void actualizarTabla()
+    {
+        List<Usuario> contactosUsuario = crudContactosUsuario.getContactosUsuario(sesion.getCorreoUsuarioActual());
+        JTable table = vistaEliminarContacto.getTablaListaContactos();
+        tableManager.vaciarTabla(table);
+        rellenarTabla(table, contactosUsuario);
+    }
+
+    private void rellenarTabla(JTable table, List<Usuario> contactos)
+    {
+        contactos.forEach(user -> tableManager.addFila(table, new Object[]
+        {
+            user.getNombreCompleto(), user.getEdad(), user.getCorreo()
+        }));
+    }
+
     private void habilitarBtnEliminar(boolean habilitar)
     {
-        vistaDatosUsuario.getBtnEliminar().setEnabled(habilitar);
+        vistaEliminarContacto.getBtnEliminar().setEnabled(habilitar);
     }
 
     private void quitarVentana()
     {
-        vistaDatosUsuario.dispose();
+        vistaEliminarContacto.dispose();
     }
 }

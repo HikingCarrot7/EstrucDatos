@@ -40,7 +40,7 @@ public class ListadoUsuariosController implements UIConstants
 
         usuariosAMostrar.forEach(user ->
         {
-            tableManager.anadirFila(vistaListadoUsuarios.getTablaListaUsuarios(), new Object[]
+            tableManager.addFila(tabla, new Object[]
             {
                 user.getNombreCompleto(), user.getEdad(), user.getCorreo()
             });

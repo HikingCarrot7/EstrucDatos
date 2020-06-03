@@ -21,10 +21,10 @@ public class Usuario implements Serializable, Comparable<Usuario>
     {
     }
 
-    public Usuario(String nombreCompleto, String correoElectronico, String contrasena, int edad)
+    public Usuario(String nombreCompleto, String correo, String contrasena, int edad)
     {
         this.nombreCompleto = nombreCompleto;
-        this.correo = correoElectronico;
+        this.correo = correo;
         this.password = contrasena;
         this.edad = edad;
     }
@@ -97,25 +97,19 @@ public class Usuario implements Serializable, Comparable<Usuario>
         if (this.edad != other.edad)
             return false;
 
-        if (!Objects.equals(this.nombreCompleto, other.nombreCompleto))
-            return false;
-
-        if (!Objects.equals(this.correo, other.correo))
-            return false;
-
-        return Objects.equals(this.password, other.password);
+        return this.correo.equals(other.correo);
     }
 
     @Override
     public int compareTo(Usuario o)
     {
-        return getNombreCompleto().compareTo(o.getNombreCompleto());
+        return getCorreo().compareTo(o.getCorreo());
     }
 
     @Override
     public String toString()
     {
-        return "Usuario{" + "nombreCompleto=" + nombreCompleto + ", correoElectronico=" + correo + ", contrasena=" + password + ", edad=" + edad + '}';
+        return "Usuario{" + "nombreCompleto=" + nombreCompleto + ", correo=" + correo + ", contrasena=" + password + ", edad=" + edad + '}';
     }
 
 }

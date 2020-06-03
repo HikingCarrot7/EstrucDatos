@@ -8,7 +8,7 @@ import javax.swing.JDialog;
  *
  * @author HikingCarrot7
  */
-public class Util
+public class Utils
 {
 
     public static void showDialogAndWait(Window relativeTo, JDialog dialog)

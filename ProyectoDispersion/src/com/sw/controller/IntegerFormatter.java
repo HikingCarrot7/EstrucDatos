@@ -8,7 +8,7 @@ import javax.swing.JFormattedTextField;
  *
  * @author HikingCarrot7
  */
-public class EdadFormatter extends JFormattedTextField.AbstractFormatterFactory
+public class IntegerFormatter extends JFormattedTextField.AbstractFormatterFactory
 {
 
     @Override

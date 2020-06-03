@@ -193,12 +193,7 @@ public class ArbolB<T extends Comparable<? super T>> implements Serializable
      */
     public Key<T> remove(T value)
     {
-        Key<T> removed = null;
-        Node<T> node = this.getNode(value);
-
-        removed = remove(value, node);
-
-        return removed;
+        return remove(value, getNode(value));
     }
 
     /**
@@ -213,22 +208,20 @@ public class ArbolB<T extends Comparable<? super T>> implements Serializable
         if (node == null)
             return null;
 
-        Key<T> removed = null;
         int index = node.indexOf(value);
-        removed = node.removeKey(value);
+        Key<T> removed = node.removeKey(value);
 
         if (node.numberOfChildren() == 0)
         {
-            // leaf node
             if (node.getParent() != null && node.numberOfKeys() < minKeySize)
                 this.combined(node);
 
             else if (node.getParent() == null && node.numberOfKeys() == 0)
-                // Removing root node with no keys or children
                 root = null;
+
         } else
         {
-            // internal node
+            // internal node.
             Node<T> lesser = node.getChild(index);
             Node<T> greatest = this.getGreatestNode(lesser);
             Key<T> replaceValue = this.removeGreatestValue(greatest);
@@ -242,7 +235,6 @@ public class ArbolB<T extends Comparable<? super T>> implements Serializable
         }
 
         size--;
-
         return removed;
     }
 
@@ -289,6 +281,7 @@ public class ArbolB<T extends Comparable<? super T>> implements Serializable
     private Node<T> getNode(T value)
     {
         Node<T> node = root;
+
         while (node != null)
         {
             Key<T> lesser = node.getKey(0);
@@ -296,6 +289,7 @@ public class ArbolB<T extends Comparable<? super T>> implements Serializable
             {
                 if (node.numberOfChildren() > 0)
                     node = node.getChild(0);
+
                 else
                     node = null;
 
@@ -310,6 +304,7 @@ public class ArbolB<T extends Comparable<? super T>> implements Serializable
             {
                 if (node.numberOfChildren() > numberOfKeys)
                     node = node.getChild(numberOfKeys);
+
                 else
                     node = null;
 
