@@ -1,11 +1,12 @@
 package com.sw.controller;
 
+import com.sw.model.CRUDContactosUsuario;
 import com.sw.model.CRUDRuta;
 import com.sw.model.CRUDUser;
 import com.sw.model.Usuario;
-import com.sw.model.dao.DAO;
 import com.sw.model.exceptions.CorreoNoDisponibleException;
 import com.sw.model.exceptions.DatosInvalidosException;
+import com.sw.model.exceptions.RutaInvalidaException;
 import com.sw.model.exceptions.UsuarioNoExistenteException;
 import com.sw.view.FrmNuevoUsuario;
 import com.sw.view.VistaSelecRuta;
@@ -19,19 +20,16 @@ public class NuevoUsuarioController
 {
 
     private final FrmNuevoUsuario frmNuevoUsuario;
-    private final Usuario nuevoUsuario;
+    private final CRUDContactosUsuario crudContactosUser;
     private final CRUDUser crudUser;
     private final CRUDRuta crudRuta;
 
-    private boolean seAceptoNuevoUsuario;
-
-    public NuevoUsuarioController(FrmNuevoUsuario frmNuevoUsuario, Usuario nuevoUsuario)
+    public NuevoUsuarioController(FrmNuevoUsuario frmNuevoUsuario)
     {
         this.frmNuevoUsuario = frmNuevoUsuario;
-        this.nuevoUsuario = nuevoUsuario;
         this.crudUser = CRUDUser.getInstance();
         this.crudRuta = CRUDRuta.getInstance();
-
+        this.crudContactosUser = CRUDContactosUsuario.getInstance();
         initComponents();
     }
 
@@ -52,15 +50,14 @@ public class NuevoUsuarioController
             if (existeCorreoRegistrado(getCorreo()))
                 throw new CorreoNoDisponibleException();
 
-            if (solicitarRuta())
-            {
-                eliminarArchivoContactoSiExiste();
-                seAceptoNuevoUsuario = true;
-                rellenarDatosNuevoUsuario();
-                quitarVentana();
-            }
+            String rutaAlmacenarMisContactos = solicitarRutaAAlmacenarMisContactos();
 
-        } catch (CorreoNoDisponibleException | DatosInvalidosException ex)
+            crudRuta.anadirRuta(getCorreo(), rutaAlmacenarMisContactos);
+            crudContactosUser.crearArbolContactos(getCorreo());
+            crudUser.anadirUsuario(getNuevoUsuario());
+            DialogUtils.quitarDialog(frmNuevoUsuario);
+
+        } catch (CorreoNoDisponibleException | DatosInvalidosException | RutaInvalidaException ex)
         {
             Alerta.mostrarError(frmNuevoUsuario, ex.getMessage());
         }
@@ -70,23 +67,19 @@ public class NuevoUsuarioController
     {
         if (Alerta.mostrarConfirmacion(frmNuevoUsuario, "¿Está seguro?",
                 "Se borrarán todos los elementos ingresados en el formulario."))
-            quitarVentana();
+            DialogUtils.quitarDialog(frmNuevoUsuario);
     }
 
-    private boolean solicitarRuta()
+    private String solicitarRutaAAlmacenarMisContactos() throws RutaInvalidaException
     {
         VistaSelecRuta vistaSelecRuta = new VistaSelecRuta(frmNuevoUsuario);
         SelecRutaController selecRutaController = new SelecRutaController(vistaSelecRuta);
         DialogUtils.showDialogAndWait(frmNuevoUsuario, vistaSelecRuta);
 
         if (selecRutaController.seInsertoUnaRutaValida())
-        {
-            crudRuta.anadirRuta(getCorreo(),
-                    selecRutaController.getRutaSeleccionada() + String.format("/%s.txt", getCorreo()));
-            return true;
-        }
+            return selecRutaController.getRutaSeleccionada() + String.format("%s%s.txt", System.getProperty("file.separator"), getCorreo());
 
-        return false;
+        throw new RutaInvalidaException();
     }
 
     private boolean existeCorreoRegistrado(String correo)
@@ -101,19 +94,13 @@ public class NuevoUsuarioController
         }
     }
 
-    private void eliminarArchivoContactoSiExiste()
+    private Usuario getNuevoUsuario()
     {
-        String rutaContactos = crudRuta.getRuta(getCorreo());
-        DAO.eliminarArchivo(rutaContactos);
-    }
-
-    private void rellenarDatosNuevoUsuario()
-    {
-        nuevoUsuario.setNombre(getNombre());
-        nuevoUsuario.setEdad(Integer.parseInt(getEdad()));
-        nuevoUsuario.setCorreo(getCorreo());
-        nuevoUsuario.setPassword(getPassword());
-        nuevoUsuario.setGenero(getGeneroSeleccionado());
+        return new Usuario(getNombre(),
+                getCorreo(),
+                getPassword(),
+                Integer.parseInt(getEdad()),
+                getGeneroSeleccionado());
     }
 
     private String getNombre()
@@ -148,16 +135,6 @@ public class NuevoUsuarioController
                 || getEdad().isEmpty()
                 || getCorreo().isEmpty()
                 || getPassword().isEmpty());
-    }
-
-    private void quitarVentana()
-    {
-        frmNuevoUsuario.dispose();
-    }
-
-    public boolean seAceptoNuevoUsuario()
-    {
-        return seAceptoNuevoUsuario;
     }
 
 }

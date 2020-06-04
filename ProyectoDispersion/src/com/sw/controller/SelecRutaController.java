@@ -44,30 +44,25 @@ public class SelecRutaController
         if (DAO.esRutaValida(getRutaSeleccionada()))
         {
             rutaValida = true;
-            quitarVentana();
+            DialogUtils.quitarDialog(vistaSelecRuta);
 
         } else if (Alerta.mostrarConfirmacion(vistaSelecRuta, "Ruta inválida.",
                 "La ruta no es válida, ¿desea usar la ruta por defecto?"))
         {
             vistaSelecRuta.getTxtRuta().setText("system_data/contactos");
             rutaValida = true;
-            quitarVentana();
+            DialogUtils.quitarDialog(vistaSelecRuta);
         }
     }
 
     private void accionBtnCancelar(ActionEvent e)
     {
-        quitarVentana();
+        DialogUtils.quitarDialog(vistaSelecRuta);
     }
 
     public String getRutaSeleccionada()
     {
         return vistaSelecRuta.getTxtRuta().getText().trim();
-    }
-
-    private void quitarVentana()
-    {
-        vistaSelecRuta.dispose();
     }
 
     public boolean seInsertoUnaRutaValida()

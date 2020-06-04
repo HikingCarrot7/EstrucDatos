@@ -53,15 +53,15 @@ public class VistaPrincipal extends JFrame
         jPanel1 = new JPanel();
         btnCerrarSesion = new JButton();
         jMenuBar1 = new JMenuBar();
-        mnArchivo = new JMenu();
+        mnPerfil = new JMenu();
         mnItmEditarPerfil = new JMenuItem();
         jSeparator1 = new JPopupMenu.Separator();
         mnItmEliminarCuenta = new JMenuItem();
-        jMenu1 = new JMenu();
+        mnContactos = new JMenu();
         mnItmListarMisContactos = new JMenuItem();
         jSeparator2 = new JPopupMenu.Separator();
         mnItmEliminarContacto = new JMenuItem();
-        mnEdicion = new JMenu();
+        mnSocial = new JMenu();
         mnItmListarTodosUsuarios = new JMenuItem();
         mnItmBuscarUsuario = new JMenuItem();
 
@@ -151,42 +151,42 @@ public class VistaPrincipal extends JFrame
 
         getContentPane().add(jPanel1, BorderLayout.PAGE_END);
 
-        mnArchivo.setText("Perfil");
+        mnPerfil.setText("Perfil");
 
         mnItmEditarPerfil.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.CTRL_MASK));
         mnItmEditarPerfil.setText("Editar mi perfil");
-        mnArchivo.add(mnItmEditarPerfil);
-        mnArchivo.add(jSeparator1);
+        mnPerfil.add(mnItmEditarPerfil);
+        mnPerfil.add(jSeparator1);
 
         mnItmEliminarCuenta.setText("Eliminar cuenta");
-        mnArchivo.add(mnItmEliminarCuenta);
+        mnPerfil.add(mnItmEliminarCuenta);
 
-        jMenuBar1.add(mnArchivo);
+        jMenuBar1.add(mnPerfil);
 
-        jMenu1.setText("Contactos");
+        mnContactos.setText("Contactos");
 
         mnItmListarMisContactos.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_MASK));
         mnItmListarMisContactos.setText("Listar mis contactos");
-        jMenu1.add(mnItmListarMisContactos);
-        jMenu1.add(jSeparator2);
+        mnContactos.add(mnItmListarMisContactos);
+        mnContactos.add(jSeparator2);
 
         mnItmEliminarContacto.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.CTRL_MASK));
         mnItmEliminarContacto.setText("Eliminar contacto");
-        jMenu1.add(mnItmEliminarContacto);
+        mnContactos.add(mnItmEliminarContacto);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(mnContactos);
 
-        mnEdicion.setText("Social");
+        mnSocial.setText("Social");
 
         mnItmListarTodosUsuarios.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T, InputEvent.CTRL_MASK));
         mnItmListarTodosUsuarios.setText("Listar todo");
-        mnEdicion.add(mnItmListarTodosUsuarios);
+        mnSocial.add(mnItmListarTodosUsuarios);
 
         mnItmBuscarUsuario.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK));
         mnItmBuscarUsuario.setText("Buscar usuario");
-        mnEdicion.add(mnItmBuscarUsuario);
+        mnSocial.add(mnItmBuscarUsuario);
 
-        jMenuBar1.add(mnEdicion);
+        jMenuBar1.add(mnSocial);
 
         setJMenuBar(jMenuBar1);
 
@@ -258,14 +258,19 @@ public class VistaPrincipal extends JFrame
         return btnCerrarSesion;
     }
 
-    public JMenu getMnArchivo()
+    public JMenu getMnPerfil()
     {
-        return mnArchivo;
+        return mnPerfil;
     }
 
-    public JMenu getMnEdicion()
+    public JMenu getMnSocial()
     {
-        return mnEdicion;
+        return mnSocial;
+    }
+
+    public JMenu getMnContactos()
+    {
+        return mnContactos;
     }
 
     public JPanel getPanelBotones()
@@ -282,20 +287,20 @@ public class VistaPrincipal extends JFrame
     private JButton btnVerContactos;
     private JButton btnVerUsuariosRegistrados;
     private JLabel jLabel1;
-    private JMenu jMenu1;
     private JMenuBar jMenuBar1;
     private JPanel jPanel1;
     private JPanel jPanel2;
     private JPopupMenu.Separator jSeparator1;
     private JPopupMenu.Separator jSeparator2;
-    private JMenu mnArchivo;
-    private JMenu mnEdicion;
+    private JMenu mnContactos;
     private JMenuItem mnItmBuscarUsuario;
     private JMenuItem mnItmEditarPerfil;
     private JMenuItem mnItmEliminarContacto;
     private JMenuItem mnItmEliminarCuenta;
     private JMenuItem mnItmListarMisContactos;
     private JMenuItem mnItmListarTodosUsuarios;
+    private JMenu mnPerfil;
+    private JMenu mnSocial;
     private JPanel panelBotones;
     // End of variables declaration//GEN-END:variables
 }

@@ -22,18 +22,18 @@ public class CRUDUser
         return instance;
     }
 
-    private final DAO<List<Usuario>> dao;
+    private final DAO<List<Usuario>> daoContactosUsuario;
 
     private CRUDUser()
     {
-        dao = new DAOUsuarios(DAO.RUTA_USUARIOS_REGISTRADOS);
+        daoContactosUsuario = new DAOUsuarios(DAO.RUTA_USUARIOS_REGISTRADOS);
     }
 
     public void anadirUsuario(Usuario nuevoUsuario)
     {
-        List<Usuario> usuarios = dao.getSavedObject();
+        List<Usuario> usuarios = getTodosLosUsuarios();
         usuarios.add(nuevoUsuario);
-        dao.saveObject(usuarios);
+        daoContactosUsuario.saveObject(usuarios);
     }
 
     public Usuario getUsuario(String correo) throws UsuarioNoExistenteException
@@ -60,7 +60,7 @@ public class CRUDUser
 
     public List<Usuario> getTodosLosUsuarios()
     {
-        return dao.getSavedObject();
+        return daoContactosUsuario.getSavedObject();
     }
 
     public void actualizarUsuario(Usuario usuarioViejosDatos, Usuario usuarioNuevosDatos)
@@ -78,19 +78,19 @@ public class CRUDUser
                 break;
             }
 
-        dao.saveObject(usuarios);
+        daoContactosUsuario.saveObject(usuarios);
     }
 
     public void actualizarUsuarios(List<Usuario> usuarios)
     {
-        dao.saveObject(usuarios);
+        daoContactosUsuario.saveObject(usuarios);
     }
 
     public void eliminarUsuario(Usuario usuario)
     {
-        List<Usuario> usuarios = dao.getSavedObject();
+        List<Usuario> usuarios = getTodosLosUsuarios();
         usuarios.remove(usuario);
-        dao.saveObject(usuarios);
+        daoContactosUsuario.saveObject(usuarios);
     }
 
 }

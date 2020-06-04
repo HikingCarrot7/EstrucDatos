@@ -199,8 +199,9 @@ public class VistaPrincipalController extends Observable
     {
         SwingUtils.setPanelEnabled(vistaPrincipal.getPanelBotones(), habilitar);
         vistaPrincipal.getBtnCerrarSesion().setEnabled(habilitar);
-        vistaPrincipal.getMnArchivo().setEnabled(habilitar);
-        vistaPrincipal.getMnEdicion().setEnabled(habilitar);
+        vistaPrincipal.getMnPerfil().setEnabled(habilitar);
+        vistaPrincipal.getMnSocial().setEnabled(habilitar);
+        vistaPrincipal.getMnContactos().setEnabled(habilitar);
     }
 
     private void modificarTitulo(String title)

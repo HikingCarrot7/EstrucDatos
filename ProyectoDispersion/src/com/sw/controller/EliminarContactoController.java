@@ -87,7 +87,7 @@ public class EliminarContactoController implements UIConstants
 
     private void accionBtnCancelar(ActionEvent e)
     {
-        quitarVentana();
+        DialogUtils.quitarDialog(vistaEliminarContacto);
     }
 
     private void actualizarTabla()
@@ -96,7 +96,7 @@ public class EliminarContactoController implements UIConstants
 
         if (contactosUsuario.isEmpty())
         {
-            quitarVentana();
+            DialogUtils.quitarDialog(vistaEliminarContacto);
             return;
         }
 
@@ -119,8 +119,4 @@ public class EliminarContactoController implements UIConstants
         vistaEliminarContacto.getBtnEliminar().setEnabled(habilitar);
     }
 
-    private void quitarVentana()
-    {
-        vistaEliminarContacto.dispose();
-    }
 }

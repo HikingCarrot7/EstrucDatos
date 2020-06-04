@@ -41,7 +41,7 @@ public class BuscarUsuarioController
             boolean mismoUsuario = usuario.getCorreo().equals(sesion.getCorreoUsuarioActual());
 
             VistaDatosUsuario vistaDatosUsuario = new VistaDatosUsuario(vistaBuscarUsuario);
-            new DatosUsuarioController(vistaDatosUsuario, usuario, mismoUsuario);
+            new VerDatosUsuarioController(vistaDatosUsuario, usuario, mismoUsuario);
             DialogUtils.showDialogAndWait(vistaBuscarUsuario, vistaDatosUsuario);
 
         } catch (UsuarioNoExistenteException ex)
@@ -52,17 +52,12 @@ public class BuscarUsuarioController
 
     private void accionBtnCancelar(ActionEvent e)
     {
-        quitarVentana();
+        DialogUtils.quitarDialog(vistaBuscarUsuario);
     }
 
     private String getCorreo()
     {
         return vistaBuscarUsuario.getTxtCorreo().getText().trim();
-    }
-
-    private void quitarVentana()
-    {
-        vistaBuscarUsuario.dispose();
     }
 
 }

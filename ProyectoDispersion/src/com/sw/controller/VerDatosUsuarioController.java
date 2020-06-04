@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author HikingCarrot7
  */
-public class DatosUsuarioController implements UIConstants
+public class VerDatosUsuarioController implements UIConstants
 {
 
     private final VistaDatosUsuario vistaDatosUsuario;
@@ -22,7 +22,7 @@ public class DatosUsuarioController implements UIConstants
     private final CRUDContactosUsuario crudContactosUsuario;
     private final Sesion sesion;
 
-    public DatosUsuarioController(VistaDatosUsuario vistaDatosUsuario, Usuario usuarioAMostrarDatos, boolean mismoUsuario)
+    public VerDatosUsuarioController(VistaDatosUsuario vistaDatosUsuario, Usuario usuarioAMostrarDatos, boolean mismoUsuario)
     {
         this.vistaDatosUsuario = vistaDatosUsuario;
         this.usuarioAMostrarDatos = usuarioAMostrarDatos;
@@ -82,14 +82,9 @@ public class DatosUsuarioController implements UIConstants
         }
     }
 
-    private void accionBtnEliminarDeMisContactos(ActionEvent e)
-    {
-
-    }
-
     private void accionBtnCancelar(ActionEvent e)
     {
-        quitarVentana();
+        DialogUtils.quitarDialog(vistaDatosUsuario);
     }
 
     private void validarSiEsContactoAnadido()
@@ -128,11 +123,6 @@ public class DatosUsuarioController implements UIConstants
     private void habilitarBtnAgregarContactos(boolean habilitar)
     {
         vistaDatosUsuario.getBtnAgregarContactos().setEnabled(habilitar);
-    }
-
-    private void quitarVentana()
-    {
-        vistaDatosUsuario.dispose();
     }
 
 }

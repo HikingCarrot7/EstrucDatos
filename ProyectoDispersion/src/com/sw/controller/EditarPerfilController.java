@@ -62,7 +62,7 @@ public class EditarPerfilController extends Observable
         vistaEditarPerfil.getRdBtnMujer().setSelected(usuarioAEditar.getGenero() == Usuario.MUJER);
         vistaEditarPerfil.getTxtCorreo().setText(usuarioAEditar.getCorreo());
         vistaEditarPerfil.getTxtPassword().setText(usuarioAEditar.getPassword());
-        setRuta(crudRuta.getRuta(usuarioAEditar.getCorreo()));
+        vistaEditarPerfil.getTxtRuta().setText(DAO.getParent(crudRuta.getRuta(usuarioAEditar.getCorreo())));
     }
 
     private void accionBtnGuardar(ActionEvent e)
@@ -200,11 +200,6 @@ public class EditarPerfilController extends Observable
     private String getNuevaRuta()
     {
         return vistaEditarPerfil.getTxtRuta().getText().trim();
-    }
-
-    private void setRuta(String ruta)
-    {
-        vistaEditarPerfil.getTxtRuta().setText(new File(ruta).getParent());
     }
 
     private void habilitarFormulario(boolean habilitar)

@@ -23,7 +23,7 @@ public class LoginController
     {
         @Override public void windowClosing(WindowEvent e)
         {
-            emergerLogin();
+            mostrarLogin(true);
         }
     };
 
@@ -54,8 +54,8 @@ public class LoginController
 
             VistaPrincipal vistaPrincipal = new VistaPrincipal();
             VistaPrincipalController vistaPrincipalController = new VistaPrincipalController(vistaPrincipal);
-            vistaPrincipalController.addObserver((o, a) -> emergerLogin());
-            quitarLogin();
+            vistaPrincipalController.addObserver((o, a) -> mostrarLogin(true));
+            mostrarLogin(false);
             mostrarVistaPrincipal(vistaPrincipal);
 
         } catch (UsuarioNoExistenteException ex)
@@ -66,14 +66,9 @@ public class LoginController
 
     private void accionBtnNuevo(ActionEvent e)
     {
-        Usuario nuevoUsuario = new Usuario();
-
         FrmNuevoUsuario frmNuevoUsuario = new FrmNuevoUsuario();
-        NuevoUsuarioController nuevoUsuarioController = new NuevoUsuarioController(frmNuevoUsuario, nuevoUsuario);
+        new NuevoUsuarioController(frmNuevoUsuario);
         DialogUtils.showDialogAndWait(login, frmNuevoUsuario);
-
-        if (nuevoUsuarioController.seAceptoNuevoUsuario())
-            crudUser.anadirUsuario(nuevoUsuario);
     }
 
     private String getCorreo()
@@ -94,14 +89,9 @@ public class LoginController
         vistaPrincipal.addWindowListener(ACCION_VENTANA_PRINCIPAL_CERRADA);
     }
 
-    private void quitarLogin()
+    private void mostrarLogin(boolean mostrar)
     {
-        login.setVisible(false);
-    }
-
-    private void emergerLogin()
-    {
-        login.setVisible(true);
+        login.setVisible(mostrar);
     }
 
 }

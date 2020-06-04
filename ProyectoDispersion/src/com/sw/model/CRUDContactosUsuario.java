@@ -29,6 +29,13 @@ public class CRUDContactosUsuario
         crudRuta = CRUDRuta.getInstance();
     }
 
+    public void crearArbolContactos(String correoUsuario)
+    {
+        String rutaContactos = crudRuta.getRuta(correoUsuario);
+        DAO<BTree> daoContactosUsuario = new DAOContactosUsuario(rutaContactos);
+        daoContactosUsuario.saveObject(new BTree(3));
+    }
+
     public void anadirContactoAUsuario(String correoUsuario, Usuario contacto)
     {
         String rutaContactos = crudRuta.getRuta(correoUsuario);

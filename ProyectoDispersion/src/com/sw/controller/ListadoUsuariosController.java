@@ -47,12 +47,7 @@ public class ListadoUsuariosController implements UIConstants
 
     private void accionBtnAceptar(ActionEvent e)
     {
-        quitarVentana();
-    }
-
-    private void quitarVentana()
-    {
-        vistaListadoUsuarios.dispose();
+        DialogUtils.quitarDialog(vistaListadoUsuarios);
     }
 
 }
