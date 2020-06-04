@@ -11,6 +11,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -42,6 +43,7 @@ public class VistaListadoUsuarios extends JDialog
         jScrollPane1 = new JScrollPane();
         tablaListaUsuarios = new JTable();
 
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Listado de usuarios");
         setMinimumSize(new Dimension(450, 325));
         setPreferredSize(new Dimension(450, 325));

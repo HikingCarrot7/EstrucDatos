@@ -10,6 +10,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 
 /**
  *
@@ -36,6 +37,7 @@ public class VistaProgreso extends JDialog
         jLabel1 = new JLabel();
         jProgressBar1 = new JProgressBar();
 
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new Dimension(300, 95));
         setUndecorated(true);
         setPreferredSize(new Dimension(300, 95));

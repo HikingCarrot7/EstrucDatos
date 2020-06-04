@@ -21,6 +21,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 
 /**
  *
@@ -74,6 +75,7 @@ public class VistaEditarPerfil extends JDialog
         btnGuardar = new JButton();
         btnCancelar = new JButton();
 
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registrar a un nuevo usuario");
         setMinimumSize(new Dimension(530, 450));
         setPreferredSize(new Dimension(530, 450));

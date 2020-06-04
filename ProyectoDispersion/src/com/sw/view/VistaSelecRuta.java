@@ -37,30 +37,30 @@ public class VistaSelecRuta extends JDialog
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents()
     {
-        java.awt.GridBagConstraints gridBagConstraints;
+        GridBagConstraints gridBagConstraints;
 
-        jPanel1 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        btnAceptar = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        txtRuta = new javax.swing.JTextField();
-        btnSeleccionarRuta = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
+        jPanel1 = new JPanel();
+        jPanel5 = new JPanel();
+        jPanel3 = new JPanel();
+        btnAceptar = new JButton();
+        btnCancelar = new JButton();
+        jPanel2 = new JPanel();
+        jLabel1 = new JLabel();
+        txtRuta = new JTextField();
+        btnSeleccionarRuta = new JButton();
+        jPanel4 = new JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Ruta para almacenar sus futuros contactos");
-        setMinimumSize(new java.awt.Dimension(450, 160));
-        setPreferredSize(new java.awt.Dimension(450, 160));
+        setMinimumSize(new Dimension(450, 160));
+        setPreferredSize(new Dimension(450, 160));
 
-        jPanel1.setLayout(new java.awt.GridLayout(1, 0));
+        jPanel1.setLayout(new GridLayout(1, 0));
 
-        jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        jPanel5.setLayout(new FlowLayout(FlowLayout.LEFT));
         jPanel1.add(jPanel5);
 
-        jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+        jPanel3.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
         btnAceptar.setText("Aceptar");
         jPanel3.add(btnAceptar);
@@ -70,48 +70,46 @@ public class VistaSelecRuta extends JDialog
 
         jPanel1.add(jPanel3);
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_END);
+        getContentPane().add(jPanel1, BorderLayout.PAGE_END);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Seleccionar ruta..."));
-        jPanel2.setLayout(new java.awt.GridBagLayout());
+        jPanel2.setBorder(BorderFactory.createTitledBorder("Seleccionar ruta..."));
+        jPanel2.setLayout(new GridBagLayout());
 
         jLabel1.setText("Ruta:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(5, 35, 5, 5);
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new Insets(5, 35, 5, 5);
         jPanel2.add(jLabel1, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 0.1;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        gridBagConstraints.insets = new Insets(5, 5, 5, 5);
         jPanel2.add(txtRuta, gridBagConstraints);
 
         btnSeleccionarRuta.setText("Seleccionar");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 35);
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new Insets(5, 5, 5, 35);
         jPanel2.add(btnSeleccionarRuta, gridBagConstraints);
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        GroupLayout jPanel4Layout = new GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanel4Layout.setHorizontalGroup(jPanel4Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanel4Layout.setVerticalGroup(jPanel4Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.fill = GridBagConstraints.BOTH;
         gridBagConstraints.weighty = 0.1;
         jPanel2.add(jPanel4, gridBagConstraints);
 
-        getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
+        getContentPane().add(jPanel2, BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -137,15 +135,15 @@ public class VistaSelecRuta extends JDialog
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAceptar;
-    private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnSeleccionarRuta;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JTextField txtRuta;
+    private JButton btnAceptar;
+    private JButton btnCancelar;
+    private JButton btnSeleccionarRuta;
+    private JLabel jLabel1;
+    private JPanel jPanel1;
+    private JPanel jPanel2;
+    private JPanel jPanel3;
+    private JPanel jPanel4;
+    private JPanel jPanel5;
+    private JTextField txtRuta;
     // End of variables declaration//GEN-END:variables
 }
