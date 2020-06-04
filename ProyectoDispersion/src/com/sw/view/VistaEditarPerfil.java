@@ -75,8 +75,8 @@ public class VistaEditarPerfil extends JDialog
         btnCancelar = new JButton();
 
         setTitle("Registrar a un nuevo usuario");
-        setMinimumSize(new Dimension(530, 380));
-        setPreferredSize(new Dimension(530, 380));
+        setMinimumSize(new Dimension(530, 450));
+        setPreferredSize(new Dimension(530, 450));
 
         jPanel3.setLayout(new BorderLayout());
 

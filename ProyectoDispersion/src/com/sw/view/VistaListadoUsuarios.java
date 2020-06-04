@@ -42,7 +42,7 @@ public class VistaListadoUsuarios extends JDialog
         jScrollPane1 = new JScrollPane();
         tablaListaUsuarios = new JTable();
 
-        setTitle("Listado de contactos");
+        setTitle("Listado de usuarios");
         setMinimumSize(new Dimension(450, 325));
         setPreferredSize(new Dimension(450, 325));
 

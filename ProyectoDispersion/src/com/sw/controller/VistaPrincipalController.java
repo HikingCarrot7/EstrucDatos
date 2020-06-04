@@ -61,6 +61,7 @@ public class VistaPrincipalController extends Observable
         vistaPrincipal.getBtnEliminarCuenta().addActionListener(this::accionBtnEliminarCuenta);
         vistaPrincipal.getMnItmEliminarCuenta().addActionListener(this::accionBtnEliminarCuenta);
 
+        vistaPrincipal.getMnItmEditarPerfil().addActionListener(this::accionBtnEditarPerfil);
         vistaPrincipal.getBtnEditarPerfil().addActionListener(this::accionBtnEditarPerfil);
 
         vistaPrincipal.getBtnCerrarSesion().addActionListener(e -> quitarVistaPrincipal());
