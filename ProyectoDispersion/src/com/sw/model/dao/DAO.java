@@ -28,6 +28,11 @@ public abstract class DAO<E>
         file.delete();
     }
 
+    public static String getParent(String ruta)
+    {
+        return new File(ruta).getParent();
+    }
+
     protected final File file;
 
     public DAO(String ruta)
@@ -47,12 +52,9 @@ public abstract class DAO<E>
 
     public void saveObject(E object)
     {
-        try
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file)))
         {
-            try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file)))
-            {
-                out.writeObject(object);
-            }
+            out.writeObject(object);
 
         } catch (IOException ex)
         {

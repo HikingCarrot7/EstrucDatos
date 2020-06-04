@@ -89,7 +89,7 @@ public class EditarPerfilController extends Observable
                     DialogUtils.showDialog(vistaEditarPerfil, vistaProgreso);
 
                     crudUser.actualizarUsuario(usuarioAEditar, getDatosNuevoUsuario());
-                    crudRuta.actualizarRuta(usuarioAEditar.getCorreo(), getCorreo(), getNuevaRuta() + String.format("/%s.txt", getCorreo()));
+                    crudRuta.actualizarRuta(usuarioAEditar, getCorreo(), getNuevaRuta() + String.format("/%s.txt", getCorreo()));
 
                     List<Usuario> usuarios = crudUser.getTodosLosUsuarios();
 
@@ -135,7 +135,14 @@ public class EditarPerfilController extends Observable
 
     private void accionBtnCambiarRuta(ActionEvent e)
     {
+        SeleccionadorDirectorios seleccionadorDirectorios = SeleccionadorDirectorios.getInstance();
 
+        File ruta = seleccionadorDirectorios.seleccionarDirectorio(vistaEditarPerfil,
+                "Seleccione la ruta...",
+                new File(DAO.getParent(crudRuta.getRuta(usuarioAEditar.getCorreo()))));
+
+        if (ruta != null)
+            vistaEditarPerfil.getTxtRuta().setText(ruta.getAbsolutePath());
     }
 
     private void accionBtnCancelar(ActionEvent e)

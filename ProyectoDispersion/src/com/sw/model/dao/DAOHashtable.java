@@ -21,12 +21,9 @@ public class DAOHashtable extends DAO<Hashtable<String, String>>
     @Override
     public Hashtable<String, String> getSavedObject()
     {
-        try
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file)))
         {
-            try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file)))
-            {
-                return (Hashtable<String, String>) in.readObject();
-            }
+            return (Hashtable<String, String>) in.readObject();
 
         } catch (IOException | ClassNotFoundException ex)
         {

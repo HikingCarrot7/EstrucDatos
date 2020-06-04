@@ -46,16 +46,22 @@ public class SeleccionadorDirectorios
         return null;
     }
 
-    public File seleccionarDirectorio(Window owner, String title)
+    public File seleccionarDirectorio(Window owner, String title, File location)
     {
         JFileChooser chooser = new JFileChooser();
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        chooser.setCurrentDirectory(location);
         int option = chooser.showOpenDialog(owner);
 
         if (option == JFileChooser.APPROVE_OPTION)
             return chooser.getSelectedFile();
 
         return null;
+    }
+
+    public File seleccionarDirectorio(Window owner, String title)
+    {
+        return seleccionarDirectorio(owner, title, ultimoArchivoSeleccionado);
     }
 
     public File getUltimoArchivoSeleccionado()

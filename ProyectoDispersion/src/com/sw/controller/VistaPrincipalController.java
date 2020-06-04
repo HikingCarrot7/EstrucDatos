@@ -181,6 +181,7 @@ public class VistaPrincipalController extends Observable
 
         } catch (InterruptedException | ExecutionException ex)
         {
+            ex.printStackTrace();
             DialogUtils.quitarDialog(vistaProgreso);
             habilitarMenuPrincipal(true);
         }

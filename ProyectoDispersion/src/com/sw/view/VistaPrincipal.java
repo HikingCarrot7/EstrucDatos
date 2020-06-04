@@ -106,7 +106,7 @@ public class VistaPrincipal extends JFrame
         panelBotones.add(btnVerContactos);
 
         btnEditarCuenta.setIcon(new ImageIcon(getClass().getResource("/com/sw/img/editar_perfil.png"))); // NOI18N
-        btnEditarCuenta.setText("Editar cuenta");
+        btnEditarCuenta.setText("Editar mi perfil");
         btnEditarCuenta.setContentAreaFilled(false);
         btnEditarCuenta.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnEditarCuenta.setFocusPainted(false);

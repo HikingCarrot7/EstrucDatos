@@ -3,6 +3,7 @@ package com.sw.controller;
 import com.sw.model.CRUDRuta;
 import com.sw.model.CRUDUser;
 import com.sw.model.Usuario;
+import com.sw.model.dao.DAO;
 import com.sw.model.exceptions.CorreoNoDisponibleException;
 import com.sw.model.exceptions.DatosInvalidosException;
 import com.sw.model.exceptions.UsuarioNoExistenteException;
@@ -53,6 +54,7 @@ public class NuevoUsuarioController
 
             if (solicitarRuta())
             {
+                eliminarArchivoContactoSiExiste();
                 seAceptoNuevoUsuario = true;
                 rellenarDatosNuevoUsuario();
                 quitarVentana();
@@ -97,6 +99,12 @@ public class NuevoUsuarioController
         {
             return false;
         }
+    }
+
+    private void eliminarArchivoContactoSiExiste()
+    {
+        String rutaContactos = crudRuta.getRuta(getCorreo());
+        DAO.eliminarArchivo(rutaContactos);
     }
 
     private void rellenarDatosNuevoUsuario()

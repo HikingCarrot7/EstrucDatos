@@ -21,12 +21,9 @@ public class DAOContactosUsuario extends DAO<BTree>
     @Override
     public BTree getSavedObject()
     {
-        try
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file)))
         {
-            try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file)))
-            {
-                return (BTree) in.readObject();
-            }
+            return (BTree) in.readObject();
 
         } catch (IOException | ClassNotFoundException ex)
         {

@@ -191,7 +191,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/com/sw/img/editar_perfil.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Editar cuenta"/>
+                <Property name="text" type="java.lang.String" value="Editar mi perfil"/>
                 <Property name="contentAreaFilled" type="boolean" value="false"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Hand Cursor"/>

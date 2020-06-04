@@ -23,12 +23,9 @@ public class DAOUsuarios extends DAO<List<Usuario>>
     @Override
     public List<Usuario> getSavedObject()
     {
-        try
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file)))
         {
-            try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file)))
-            {
-                return (ArrayList<Usuario>) in.readObject();
-            }
+            return (List<Usuario>) in.readObject();
 
         } catch (IOException | ClassNotFoundException ex)
         {

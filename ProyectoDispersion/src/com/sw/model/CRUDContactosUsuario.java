@@ -55,6 +55,13 @@ public class CRUDContactosUsuario
         return contactos.getItems();
     }
 
+    public BTree getArbolContactosUsuario(String correoUsuario)
+    {
+        String rutaContactos = crudRuta.getRuta(correoUsuario);
+        DAO<BTree> daoContactosUsuario = new DAOContactosUsuario(rutaContactos);
+        return daoContactosUsuario.getSavedObject();
+    }
+
     public void actualizarContactoUsuario(String correoUsuario, Usuario contactoViejosDatos, Usuario contactoNuevosDatos)
     {
         String rutaContactos = crudRuta.getRuta(correoUsuario);
