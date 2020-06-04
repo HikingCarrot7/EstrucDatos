@@ -23,7 +23,7 @@ public class IntegerFormatter extends JFormattedTextField.AbstractFormatterFacto
                 {
                     double edad = Integer.parseInt(text);
 
-                    if (edad < 0 || edad > 200)
+                    if (edad <= 0 || edad > 200)
                         throw new ParseException(text, 0);
 
                     return edad;

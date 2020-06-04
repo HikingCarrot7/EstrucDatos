@@ -34,4 +34,10 @@ public class Hashtable<K, V> extends HashMap<K, V>
         return super.size();
     }
 
+    @Override
+    public boolean isEmpty()
+    {
+        return super.isEmpty();
+    }
+
 }

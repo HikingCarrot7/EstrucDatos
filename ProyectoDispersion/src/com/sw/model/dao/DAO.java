@@ -22,6 +22,12 @@ public abstract class DAO<E>
         return file.exists();
     }
 
+    public static boolean existeArchivo(String ruta)
+    {
+        File file = new File(ruta);
+        return file.exists();
+    }
+
     public static void eliminarArchivo(String ruta)
     {
         File file = new File(ruta);
