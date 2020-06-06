@@ -1,6 +1,6 @@
 package com.sw.main;
 
-import com.sw.controller.Alerta;
+import com.sw.controller.util.Alerta;
 import com.sw.controller.LauncherManager;
 import com.sw.controller.LoginController;
 import com.sw.model.exceptions.InicializacionIncorrectaException;

@@ -1,4 +1,4 @@
-package com.sw.controller;
+package com.sw.controller.util;
 
 import java.awt.Toolkit;
 import java.text.ParseException;

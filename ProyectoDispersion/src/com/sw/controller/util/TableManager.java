@@ -1,4 +1,4 @@
-package com.sw.controller;
+package com.sw.controller.util;
 
 import com.sw.view.UIConstants;
 import java.awt.Color;

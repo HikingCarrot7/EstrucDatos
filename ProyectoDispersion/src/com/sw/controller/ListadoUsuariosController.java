@@ -1,5 +1,7 @@
 package com.sw.controller;
 
+import com.sw.controller.util.DialogUtils;
+import com.sw.controller.util.TableManager;
 import com.sw.model.Usuario;
 import com.sw.view.UIConstants;
 import com.sw.view.VistaListadoUsuarios;
