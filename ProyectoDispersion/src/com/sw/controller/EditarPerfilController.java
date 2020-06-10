@@ -93,7 +93,7 @@ public class EditarPerfilController extends Observable
                     DialogUtils.showDialog(vistaEditarPerfil, vistaProgreso);
 
                     crudUser.actualizarUsuario(usuarioAEditar, getDatosNuevoUsuario());
-                    crudRuta.actualizarRuta(usuarioAEditar, getCorreo(), getNuevaRuta() + String.format("/%s.txt", getCorreo()));
+                    crudRuta.actualizarRuta(usuarioAEditar, getCorreo(), getNuevaRuta() + String.format("%s%s.txt", DAO.getSystemFileSeparator(), getCorreo()));
 
                     List<Usuario> usuarios = crudUser.getTodosLosUsuarios();
 

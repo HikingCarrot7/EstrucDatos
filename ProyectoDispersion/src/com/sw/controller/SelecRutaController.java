@@ -30,7 +30,7 @@ public class SelecRutaController
         vistaSelecRuta.getBtnAceptar().addActionListener(this::accionBtnAceptar);
         vistaSelecRuta.getBtnCancelar().addActionListener(this::accionBtnCancelar);
 
-        vistaSelecRuta.getTxtRuta().setText("system_data/contactos");
+        vistaSelecRuta.getTxtRuta().setText(String.format("system_data%scontactos", DAO.getSystemFileSeparator()));
     }
 
     private void accionBtnSeleccionarRuta(ActionEvent e)
@@ -52,7 +52,7 @@ public class SelecRutaController
         } else if (Alerta.mostrarConfirmacion(vistaSelecRuta, "Ruta inválida.",
                 "La ruta no es válida, ¿desea usar la ruta por defecto?"))
         {
-            vistaSelecRuta.getTxtRuta().setText("system_data/contactos");
+            vistaSelecRuta.getTxtRuta().setText(String.format("system_data%scontactos", DAO.getSystemFileSeparator()));
             rutaValida = true;
             DialogUtils.quitarDialog(vistaSelecRuta);
         }

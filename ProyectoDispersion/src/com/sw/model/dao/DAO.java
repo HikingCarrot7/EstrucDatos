@@ -39,6 +39,11 @@ public abstract class DAO<E>
         return new File(ruta).getParent();
     }
 
+    public static String getSystemFileSeparator()
+    {
+        return System.getProperty("file.separator");
+    }
+
     protected final File file;
 
     public DAO(String ruta)

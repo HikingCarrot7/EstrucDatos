@@ -8,6 +8,7 @@ import com.sw.model.CRUDContactosUsuario;
 import com.sw.model.CRUDRuta;
 import com.sw.model.CRUDUser;
 import com.sw.model.Usuario;
+import com.sw.model.dao.DAO;
 import com.sw.model.exceptions.CorreoNoDisponibleException;
 import com.sw.model.exceptions.DatosInvalidosException;
 import com.sw.model.exceptions.RutaInvalidaException;
@@ -81,7 +82,7 @@ public class NuevoUsuarioController
         DialogUtils.showDialogAndWait(frmNuevoUsuario, vistaSelecRuta);
 
         if (selecRutaController.seInsertoUnaRutaValida())
-            return selecRutaController.getRutaSeleccionada() + String.format("%s%s.txt", System.getProperty("file.separator"), getCorreo());
+            return selecRutaController.getRutaSeleccionada() + String.format("%s%s.txt", DAO.getSystemFileSeparator(), getCorreo());
 
         throw new RutaInvalidaException();
     }
