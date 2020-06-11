@@ -1,8 +1,8 @@
 package com.sw.main;
 
-import com.sw.controller.util.Alerta;
 import com.sw.controller.LauncherManager;
 import com.sw.controller.LoginController;
+import com.sw.controller.util.Alerta;
 import com.sw.model.exceptions.InicializacionIncorrectaException;
 import com.sw.view.Login;
 import java.awt.EventQueue;
@@ -25,17 +25,16 @@ public class Main
          */
         try
         {
-            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels())
-                if ("Windows".equals(info.getName()))
-                {
-                    UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex)
         {
             System.out.println(ex.getMessage());
         }
+        //</editor-fold>
+
+        //<editor-fold defaultstate="collapsed" desc=" Revisar Sistema operativo. ">
+        LauncherManager.revisarSO();
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc=" Revisar archivos del sistema. ">

@@ -1,5 +1,6 @@
 package com.sw.controller;
 
+import com.sw.controller.util.Alerta;
 import com.sw.model.CRUDRuta;
 import com.sw.model.CRUDUser;
 import com.sw.model.Usuario;
@@ -34,7 +35,7 @@ public class LauncherManager
             if (usuariosRegistrados.isEmpty() && !hashtable.isEmpty())
                 throw new InicializacionIncorrectaException();
 
-            usuariosRegistrados.forEach(u -> hashtable.obtenerValue(u.getCorreo()));
+            usuariosRegistrados.forEach(u -> hashtable.get(u.getCorreo()));
 
         } catch (InicializacionIncorrectaException | NullPointerException e)
         {
@@ -45,6 +46,14 @@ public class LauncherManager
             throw new InicializacionIncorrectaException();
         }
 
+    }
+
+    public static void revisarSO()
+    {
+        String os = System.getProperty("os.name").toLowerCase();
+
+        if (os.contains("nix") || os.contains("nux") || os.contains("aix"))
+            Alerta.mostrarMensaje(null, "Se ha detectado un ambiente LINUX...", "Es posible que algunas ventanas no se visualicen de manera correcta!");
     }
 
 }

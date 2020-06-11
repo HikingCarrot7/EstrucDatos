@@ -27,11 +27,11 @@ public class Usuario implements Serializable, BTreeComparable
 
     }
 
-    public Usuario(String nombre, String correo, String contrasena, int edad, boolean genero)
+    public Usuario(String nombre, String correo, String password, int edad, boolean genero)
     {
         this.nombre = nombre;
         this.correo = correo;
-        this.password = contrasena;
+        this.password = password;
         this.edad = edad;
         this.genero = genero;
     }

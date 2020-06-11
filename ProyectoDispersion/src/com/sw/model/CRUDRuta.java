@@ -33,40 +33,40 @@ public class CRUDRuta
     public void anadirRuta(String correoUsuario, String ruta)
     {
         Hashtable<String, String> hashtable = daoHashtable.getSavedObject();
-        hashtable.insertar(correoUsuario, ruta);
+        hashtable.put(correoUsuario, ruta);
         daoHashtable.saveObject(hashtable);
     }
 
     public String getRuta(String correoUsuario)
     {
         Hashtable<String, String> hashtable = daoHashtable.getSavedObject();
-        return hashtable.obtenerValue(correoUsuario);
+        return hashtable.get(correoUsuario);
     }
 
     public void actualizarRuta(Usuario usuarioViejo, String correoUsuarioNuevo, String nuevaRuta)
     {
         Hashtable<String, String> hashtable = daoHashtable.getSavedObject();
 
-        String rutaVieja = hashtable.obtenerValue(usuarioViejo.getCorreo());
+        String rutaVieja = hashtable.get(usuarioViejo.getCorreo());
         BTree contactos = CRUDContactosUsuario.getInstance().getArbolContactosUsuario(usuarioViejo.getCorreo());
         DAO.eliminarArchivo(rutaVieja);
 
         DAOContactosUsuario daoContactosUser = new DAOContactosUsuario(nuevaRuta);
         daoContactosUser.saveObject(contactos);
 
-        hashtable.eliminar(usuarioViejo.getCorreo());
-        hashtable.insertar(correoUsuarioNuevo, nuevaRuta);
+        hashtable.remove(usuarioViejo.getCorreo());
+        hashtable.put(correoUsuarioNuevo, nuevaRuta);
         daoHashtable.saveObject(hashtable);
     }
 
     public void eliminarRuta(String correoUsuario)
     {
         Hashtable<String, String> hashtable = daoHashtable.getSavedObject();
-        String rutaArchivo = hashtable.obtenerValue(correoUsuario);
+        String rutaArchivo = hashtable.get(correoUsuario);
 
         DAO.eliminarArchivo(rutaArchivo);
 
-        hashtable.eliminar(correoUsuario);
+        hashtable.remove(correoUsuario);
         daoHashtable.saveObject(hashtable);
     }
 
